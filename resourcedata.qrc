@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/TODO">
+        <file>tmp/TODO_List.txt</file>
+    </qresource>
+</RCC>
