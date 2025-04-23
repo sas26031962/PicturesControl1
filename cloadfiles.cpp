@@ -172,3 +172,37 @@ QStringList cLoadFiles::loadStringListFromFile(const QString& fileName)
     }
     return list;
 }
+
+bool cLoadFiles::searchNamePattern(const QString& pattern)
+{
+    QRegularExpression re(pattern);
+
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    // Читаем значения из INI-файла
+
+    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
+    cIniFile::Groups->clear();//Очистка результата
+
+    int iCount = 0;// Очистка счётчика найденных объектов
+    //ui->listWidgetOther->clear();
+    QListIterator<QString> readIt(TotalGroups);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        //qDebug() << qsSection;
+        bool match = re.match(qsSection.toLower()).hasMatch();
+        if(match)
+        {
+            iCount++;
+            cIniFile::Groups->append(qsSection);
+            qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
+            //ui->listWidgetOther->addItem(qsSection);
+        }
+    }
+    //---
+    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern1StringListFilePath, *cIniFile::Groups);
+    //---
+    return x;
+}

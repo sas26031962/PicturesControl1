@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QTextStream>
+#include <QRegularExpression>
 
 #include "cimportfiles.h"
 #include "cinifile.h"
@@ -18,6 +19,7 @@ public:
     static bool execLoadFilesByConditionOrYes(QStringList yes);
     static bool saveStringListToFile(const QString& fileName, const QStringList& list);
     static QStringList loadStringListFromFile(const QString& fileName);
+    static bool searchNamePattern(const QString& pattern);
 
 };
 

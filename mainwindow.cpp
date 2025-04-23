@@ -660,17 +660,21 @@ bool MainWindow::loadHashTagListSubject()
 {
 
 #ifdef HOME_STORAGE
-    filePathSubject = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу
+    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу
+    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
+    fileNameHashTag = "HashTagListSubjectPhotos.txt";
     qDebug() << "HOME_STORAGE";
 #else
-    filePathSubject = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу
+    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу
+    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
+    fileNameHashTag = "HashTagListSubjectShips.txt";
     qDebug() << "WORK_STORAGE";
 #endif
 
-    QFile file(filePathSubject);
+    QFile file(filePathHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathSubject;
+        qDebug() << "Error: Could not open file: " << filePathHashTag;
         return false;
     }
 
@@ -698,17 +702,21 @@ bool MainWindow::loadHashTagListPlace()
 {
 
 #ifdef HOME_STORAGE
-    filePathSubject = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу
+    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу
+    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
+    fileNameHashTag = "HashTagListPlacesPhotos.txt";
     qDebug() << "HOME_STORAGE";
 #else
-    filePathSubject = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу
+    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу
+    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
+    fileNameHashTag = "HashTagListPlacesShips.txt";
     qDebug() << "WORK_STORAGE";
 #endif
 
-    QFile file(filePathSubject);
+    QFile file(filePathHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathSubject;
+        qDebug() << "Error: Could not open file: " << filePathHashTag;
         return false;
     }
 
@@ -735,22 +743,26 @@ bool MainWindow::loadHashTagListTheame()
 {
 
 #ifdef HOME_STORAGE
-    filePathSubject = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой
+    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой
+    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
+    fileNameHashTag = "HashTagListTheamsPhotos.txt";
     qDebug() << "HOME_STORAGE";
 #else
-    filePathSubject = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь прямой
+    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь прямой
+    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
+    fileNameHashTag = "HashTagListSubjectShips.txt";
     qDebug() << "WORK_STORAGE";
 #endif
 
-    QFile file(filePathSubject);
+    QFile file(filePathHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathSubject;
+        qDebug() << "Error: Could not open file: " << filePathHashTag;
         return false;
     }
     else
     {
-        qDebug() << "File: " << filePathSubject << " is loaded!";
+        qDebug() << "File: " << filePathHashTag << " is loaded!";
     }
 
     QTextStream in(&file);
@@ -776,22 +788,26 @@ bool MainWindow::loadHashTagListProperty()
 {
 
 #ifdef HOME_STORAGE
-    filePathSubject = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой
+    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой
+    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
+    fileNameHashTag = "HashTagListTheamsPhotos.txt";
     qDebug() << "HOME_STORAGE";
 #else
-    filePathSubject = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой
+    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой
+    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
+    fileNameHashTag = "HashTagListTheamsShips.txt";
     qDebug() << "WORK_STORAGE";
 #endif
 
-    QFile file(filePathSubject);
+    QFile file(filePathHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathSubject;
+        qDebug() << "Error: Could not open file: " << filePathHashTag;
         return false;
     }
     else
     {
-        qDebug() << "File: " << filePathSubject << " is loaded!";
+        qDebug() << "File: " << filePathHashTag << " is loaded!";
     }
 
     QTextStream in(&file);
@@ -1957,41 +1973,35 @@ void MainWindow::execActionSearchOrYes()
 
 //=============================================================================
 
+//
+// Отобразить содержимое списка cIniFile::Groups в элементе ui->listWidgetOther
+//
+void MainWindow::showGroupsList()
+{
+    ui->listWidgetOther->clear();
+    QListIterator<QString> readIt(*cIniFile::Groups);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        ui->listWidgetOther->addItem(qsSection);
+    }
+}
+
+//=============================================================================
+
 void MainWindow::execActionSearchNamePattern1()
 {
     QString s = "execActionSearchNamePattern1()";
     QString pattern = "^20[0-9]{6}_[0-9]{6}";
-    QRegularExpression re(pattern);
 
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    bool x = cLoadFiles::searchNamePattern(pattern);
 
-    // Читаем значения из INI-файла
+    showGroupsList();
 
-    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
-    cIniFile::Groups->clear();//Очистка результата
-
-    int iCount = 0;// Очистка счётчика найденных объектов
-    ui->listWidgetOther->clear();
-    QListIterator<QString> readIt(TotalGroups);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-        //qDebug() << qsSection;
-        bool match = re.match(qsSection.toLower()).hasMatch();
-        if(match)
-        {
-            iCount++;
-            cIniFile::Groups->append(qsSection);
-            qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
-            ui->listWidgetOther->addItem(qsSection);
-        }
-    }
-    //---
-    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern1StringListFilePath, *cIniFile::Groups);
     //---
     s += ": iCount=";
-    s += QString::number(iCount);
+    s += QString::number(cIniFile::Groups->count());
+    //---
     if(x)
     {
         s += "pattern1StringList stored in file";
@@ -2007,43 +2017,18 @@ void MainWindow::execActionSearchNamePattern2()
 {
     QString s = "execActionSearchNamePattern2()";
     QString pattern = "^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}";
-    QRegularExpression re(pattern);
 
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    bool x = cLoadFiles::searchNamePattern(pattern);
 
-    // Читаем значения из INI-файла
+    showGroupsList();
 
-    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
-    cIniFile::Groups->clear();//Очистка результата
-
-    int iCount = 0;// Очистка счётчика найденных объектов
-    ui->listWidgetOther->clear();
-    QListIterator<QString> readIt(TotalGroups);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-        //qDebug() << qsSection;
-        bool match = re.match(qsSection.toLower()).hasMatch();
-        if(match)
-        {
-            iCount++;
-            cIniFile::Groups->append(qsSection);
-            qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
-            ui->listWidgetOther->addItem(qsSection);
-        }
-    }
-
-    s += ": iCount=";
-    s += QString::number(iCount);
-    //---
-    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern2StringListFilePath, *cIniFile::Groups);
     //---
     s += ": iCount=";
-    s += QString::number(iCount);
+    s += QString::number(cIniFile::Groups->count());
+    //---
     if(x)
     {
-        s += "pattern2StringList stored in file";
+        s += "pattern1StringList stored in file";
     }
     //---
     emit execShowExecStatus(s);

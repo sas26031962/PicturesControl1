@@ -78,10 +78,15 @@ private:
 
     void loadRemovedSectionsList();
     void saveRemovedSectionsList();
+    void showGroupsList();
 
 public:
     //Атрибуты
-    QString filePathSubject;
+    QString filePathHashTag;// Путь к файлу для загрузки параметров
+    QString fileNameHashTag;// Имя файла для загрузки параметров
+
+    QString filePathRoot;// Путь к папке с исполняемым файлом (programm)
+
     //Конструкторы, деструкторы
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
