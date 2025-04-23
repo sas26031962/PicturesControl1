@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\cinifile.o
+./release\crecord.o
+./release\fmview.o
+./release\cimportfiles.o
+./release\cdrawfiles.o
+./release\cloadfiles.o
+./release\qrc_resourcedata.o
+./release\moc_mainwindow.o
+./release\moc_fmview.o
+);
