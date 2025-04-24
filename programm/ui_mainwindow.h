@@ -75,6 +75,7 @@ public:
     QProgressBar *progressBarNavigation;
     QSpinBox *spinBoxIndex;
     QPushButton *pushButtonGotoIndex;
+    QPushButton *pushButtonRemove;
     QLabel *labelIncomingListCaption;
     QTableView *tableViewCurrent;
     QGroupBox *groupBoxEdit;
@@ -203,10 +204,13 @@ public:
         progressBarNavigation->setValue(24);
         spinBoxIndex = new QSpinBox(groupBoxControl);
         spinBoxIndex->setObjectName(QStringLiteral("spinBoxIndex"));
-        spinBoxIndex->setGeometry(QRect(21, 50, 111, 26));
+        spinBoxIndex->setGeometry(QRect(82, 50, 111, 26));
         pushButtonGotoIndex = new QPushButton(groupBoxControl);
         pushButtonGotoIndex->setObjectName(QStringLiteral("pushButtonGotoIndex"));
-        pushButtonGotoIndex->setGeometry(QRect(140, 50, 81, 25));
+        pushButtonGotoIndex->setGeometry(QRect(10, 50, 55, 25));
+        pushButtonRemove = new QPushButton(groupBoxControl);
+        pushButtonRemove->setObjectName(QStringLiteral("pushButtonRemove"));
+        pushButtonRemove->setGeometry(QRect(210, 50, 55, 25));
         labelIncomingListCaption = new QLabel(centralWidget);
         labelIncomingListCaption->setObjectName(QStringLiteral("labelIncomingListCaption"));
         labelIncomingListCaption->setGeometry(QRect(10, 10, 221, 20));
@@ -408,7 +412,8 @@ public:
         pushButtonEnd->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
         pushButtonEnd->setText(QApplication::translate("MainWindow", ">|", 0));
-        pushButtonGotoIndex->setText(QApplication::translate("MainWindow", "Goto index", 0));
+        pushButtonGotoIndex->setText(QApplication::translate("MainWindow", "Goto", 0));
+        pushButtonRemove->setText(QApplication::translate("MainWindow", "Remove", 0));
         labelIncomingListCaption->setText(QApplication::translate("MainWindow", "Incoming tag", 0));
         groupBoxEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
         pushButtonLoad->setText(QApplication::translate("MainWindow", "Load", 0));

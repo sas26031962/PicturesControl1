@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     progressBarNavigation = ui->progressBarNavigation;
     SpinBoxIndex = ui->spinBoxIndex;
 
-    ui->pushButtonGotoIndex->setVisible(false);//РЕЖИМ АДМИНИСТРАТОРА
+    ui->pushButtonGotoIndex->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
     ui->pushButtonLoad->setVisible(false);//РЕЖИМ АДМИНИСТРАТОРА
 
     connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRemoveBin, SIGNAL(triggered()), this, SLOT( execActionRemoveBin()));
     connect(ui->actionRemove3gp, SIGNAL(triggered()), this, SLOT( execActionRemove3gp()));
     connect(ui->actionRemoveSection, SIGNAL(triggered()), this, SLOT( execActionRemoveSection()));
+
+    connect(ui->pushButtonRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
 
     connect(ui->actionRotateCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
     connect(ui->actionRotateCCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));

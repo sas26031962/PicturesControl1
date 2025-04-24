@@ -106,7 +106,7 @@
     <widget class="QSpinBox" name="spinBoxIndex">
      <property name="geometry">
       <rect>
-       <x>21</x>
+       <x>82</x>
        <y>50</y>
        <width>111</width>
        <height>26</height>
@@ -116,14 +116,27 @@
     <widget class="QPushButton" name="pushButtonGotoIndex">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>10</x>
        <y>50</y>
-       <width>81</width>
+       <width>55</width>
        <height>25</height>
       </rect>
      </property>
      <property name="text">
-      <string>Goto index</string>
+      <string>Goto</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonRemove">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>50</y>
+       <width>55</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Remove</string>
      </property>
     </widget>
    </widget>

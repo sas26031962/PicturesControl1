@@ -43,7 +43,9 @@ void cImportFiles::execImport(QProgressBar * bar)
     for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
      {
         iCurrentIndexGlobal.fetch_add(1, std::memory_order_relaxed);
-        bar->setValue(iCurrentIndexGlobal.load(std::memory_order_relaxed));
+        int id = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+        bar->setValue(id);
+
 
         const cRecord rec = *it;
 
@@ -81,37 +83,36 @@ void cImportFiles::execImport(QProgressBar * bar)
         }
         else
         {
-            //qDebug() << "Id=" << iCurrentIndexGlobal;
+        //qDebug() << "Id=" << iCurrentIndexGlobal;
 
-            //Фрагмент для обработки файлов изображений
-            QImage image(path);//name
-            if(image.isNull())
-            {
-                IsError = true;
-            }
-            else
-            {
-                width = image.width();
-                height = image.height();
+        //Фрагмент для обработки файлов изображений
+        QImage image(path);//name
+        if(image.isNull())
+        {
+            IsError = true;
+        }
+        else
+        {
+            width = image.width();
+            height = image.height();
             }
         }
 
-            int id = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-            settings.beginGroup(groupName);
-            settings.setValue("Id", id);
-            settings.setValue("name", name);
-            settings.setValue("path", PathWithoutName);
-            settings.setValue("size", size);
-            if(IsError)
-            {
-                settings.setValue("error", true);
-            }
-            else
-            {
-                settings.setValue("width", width);
-                settings.setValue("height", height);
-            }
-            settings.endGroup();
+        settings.beginGroup(groupName);
+        settings.setValue("Id", id);
+        settings.setValue("name", name);
+        settings.setValue("path", PathWithoutName);
+        settings.setValue("size", size);
+        if(IsError)
+        {
+            settings.setValue("error", true);
+        }
+        else
+        {
+            settings.setValue("width", width);
+            settings.setValue("height", height);
+        }
+        settings.endGroup();
 
     }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
 
