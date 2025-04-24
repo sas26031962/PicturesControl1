@@ -3,6 +3,7 @@ IsRotated
 Document
 Archive
 ForDeleting
+new
 Unknown
 
 

@@ -586,8 +586,6 @@ void MainWindow::execActionImportInitial()
         return;
     }
 
-    //--- Импорт данных в конфигурационный файл ---
-
     cImportFiles::execImport(progressBarProcess);
 
     emit execShowExecStatus("File import complete!");

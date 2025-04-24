@@ -33,12 +33,18 @@ cImportFiles::cImportFiles()
 void cImportFiles::execImport(QProgressBar * bar)
 {
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    QStringList Groups = settings.childGroups();//Загрузка полного списка групп
+
     //---Добавление идентификационной секции
     cImportFiles::MaxIndexValue = cRecord::RecordList->count();
     cIniFile::IniFile.addInitalSection(cImportFiles::MaxIndexValue);
     bar->setRange(1, cImportFiles::MaxIndexValue);
     bar->setValue(0);
     iCurrentIndexGlobal.store(0);
+
+    int iAddedFilesCounter = 0;
+    int iSkippedFilesCounter = 0;
 
     for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
      {
@@ -98,25 +104,41 @@ void cImportFiles::execImport(QProgressBar * bar)
             }
         }
 
-        settings.beginGroup(groupName);
-        settings.setValue("Id", id);
-        settings.setValue("name", name);
-        settings.setValue("path", PathWithoutName);
-        settings.setValue("size", size);
-        if(IsError)
+        //Добавление записи в конфигурационный файл, если её там нет
+        if(!Groups.contains(groupName))
         {
-            settings.setValue("error", true);
+            qDebug() << "###Add section:" << groupName;
+            iAddedFilesCounter++;
+
+            settings.beginGroup(groupName);
+            settings.setValue("Id", id);
+            settings.setValue("name", name);
+            settings.setValue("path", PathWithoutName);
+            settings.setValue("size", size);
+            settings.setValue("new", true);//Признак новой записи
+            if(IsError)
+            {
+                settings.setValue("error", true);
+            }
+            else
+            {
+                settings.setValue("width", width);
+                settings.setValue("height", height);
+            }
+            settings.endGroup();
         }
         else
         {
-            settings.setValue("width", width);
-            settings.setValue("height", height);
+            iSkippedFilesCounter++;
+
+            qDebug() << "Skip existing section:" << groupName;
         }
-        settings.endGroup();
 
     }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
 
     settings.sync();
+
+    qDebug() << "Result: added files counter=" << iAddedFilesCounter <<" skiped files couner=" << iSkippedFilesCounter;
 
 }//End of bool cImportFiles::execImport()
 
