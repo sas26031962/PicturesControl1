@@ -163,10 +163,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
 
-    connect(ui->actionSearchNamePattern1, SIGNAL(triggered()), this, SLOT( execActionSearchNamePattern1()));
-    connect(ui->actionSearchNamePattern2, SIGNAL(triggered()), this, SLOT( execActionSearchNamePattern2()));
-    connect(ui->actionSearchNamePattern, SIGNAL(triggered()), this, SLOT( execActionSearchNamePattern()));
-    connect(ui->pushButtonSearchPattern, SIGNAL(pressed()), this, SLOT( execActionSearchNamePattern()));
+    connect(ui->actionSearchNamePattern1, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern1);
+    connect(ui->actionSearchNamePattern2, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern2);
+    connect(ui->actionSearchNamePattern, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern);
+    connect(ui->pushButtonSearchPattern, &QPushButton::pressed, this, &MainWindow::execActionSearchNamePattern);
+
     connect(ui->actionSearchNamePattensIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatternsIntersection()));
 
     connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
@@ -176,6 +177,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->listWidgetSearch, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSearchItemClicked()));
 
     connect(ui->comboBoxPatterns, SIGNAL(currentIndexChanged(int)), this, SLOT(execComboBoxCurrentIndexChanged(int)));
+    //connect(ui->comboBoxPatterns, &QComboBox::currentIndexChanged, this, &MainWindow::execComboBoxCurrentIndexChanged);
+    //connect(ui->comboBoxPatterns, &QComboBox::editTextChanged, [](auto text){
+    //    qDebug() << "Current text=" << text;
+    //});
 
     //ui->labelMain->setText("Exec 'Load' option for get file name list");
 

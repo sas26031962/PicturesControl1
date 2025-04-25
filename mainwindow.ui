@@ -725,7 +725,7 @@
   </action>
   <action name="actionSearchNamePattern">
    <property name="text">
-    <string>SearchNamePattern3</string>
+    <string>SearchNamePattern</string>
    </property>
   </action>
  </widget>

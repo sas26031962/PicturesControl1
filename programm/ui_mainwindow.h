@@ -416,7 +416,7 @@ public:
         actionSearchNamePattern1->setText(QApplication::translate("MainWindow", "SearchNamePattern1", 0));
         actionSearchNamePattern2->setText(QApplication::translate("MainWindow", "SearchNamePattern2", 0));
         actionSearchNamePattensIntersection->setText(QApplication::translate("MainWindow", "SearchNamePattensIntersection", 0));
-        actionSearchNamePattern->setText(QApplication::translate("MainWindow", "SearchNamePattern3", 0));
+        actionSearchNamePattern->setText(QApplication::translate("MainWindow", "SearchNamePattern", 0));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", 0));
 #ifndef QT_NO_TOOLTIP
         pushButtonBegin->setToolTip(QString());
