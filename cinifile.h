@@ -19,7 +19,7 @@
  *
  *****************************************************************************/
 
-#define HOME_STORAGE YES
+//#define HOME_STORAGE YES
 
 //-----------------------------------------------------------------------------
 //Глобальные переменные
@@ -46,6 +46,7 @@ public:
 
     static QString pattern1StringListFilePath;
     static QString pattern2StringListFilePath;
+    static QString pattern3StringListFilePath;
 
     static cIniFile IniFile;
 

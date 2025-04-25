@@ -177,6 +177,8 @@ bool cLoadFiles::searchNamePattern(const QString& pattern)
 {
     QRegularExpression re(pattern);
 
+    qDebug() << "Search pattern:" << pattern;
+
     // Создаем объект QSettings с указанием формата INI и пути к файлу
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
 

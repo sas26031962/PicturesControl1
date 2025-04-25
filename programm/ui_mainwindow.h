@@ -66,6 +66,7 @@ public:
     QAction *actionSearchNamePattern1;
     QAction *actionSearchNamePattern2;
     QAction *actionSearchNamePattensIntersection;
+    QAction *actionSearchNamePattern;
     QWidget *centralWidget;
     QGroupBox *groupBoxControl;
     QPushButton *pushButtonBegin;
@@ -103,6 +104,9 @@ public:
     QPushButton *pushButtonSearchOrYes;
     QWidget *tab_5;
     QListWidget *listWidgetOther;
+    QGroupBox *groupBoxPattern;
+    QLineEdit *lineEditPattern;
+    QPushButton *pushButtonSearchPattern;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuSelect_image;
@@ -181,6 +185,8 @@ public:
         actionSearchNamePattern2->setObjectName(QStringLiteral("actionSearchNamePattern2"));
         actionSearchNamePattensIntersection = new QAction(MainWindow);
         actionSearchNamePattensIntersection->setObjectName(QStringLiteral("actionSearchNamePattensIntersection"));
+        actionSearchNamePattern = new QAction(MainWindow);
+        actionSearchNamePattern->setObjectName(QStringLiteral("actionSearchNamePattern"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBoxControl = new QGroupBox(centralWidget);
@@ -231,7 +237,7 @@ public:
         pushButtonMemo->setGeometry(QRect(400, 20, 31, 23));
         groupBoxRotate = new QGroupBox(centralWidget);
         groupBoxRotate->setObjectName(QStringLiteral("groupBoxRotate"));
-        groupBoxRotate->setGeometry(QRect(330, 380, 261, 51));
+        groupBoxRotate->setGeometry(QRect(290, 380, 301, 51));
         pushButtonRotateCCW = new QPushButton(groupBoxRotate);
         pushButtonRotateCCW->setObjectName(QStringLiteral("pushButtonRotateCCW"));
         pushButtonRotateCCW->setGeometry(QRect(93, 20, 75, 23));
@@ -296,6 +302,15 @@ public:
         listWidgetOther->setObjectName(QStringLiteral("listWidgetOther"));
         listWidgetOther->setGeometry(QRect(10, 10, 261, 291));
         tabWidget->addTab(tab_5, QString());
+        groupBoxPattern = new QGroupBox(centralWidget);
+        groupBoxPattern->setObjectName(QStringLiteral("groupBoxPattern"));
+        groupBoxPattern->setGeometry(QRect(290, 430, 301, 41));
+        lineEditPattern = new QLineEdit(groupBoxPattern);
+        lineEditPattern->setObjectName(QStringLiteral("lineEditPattern"));
+        lineEditPattern->setGeometry(QRect(10, 14, 221, 21));
+        pushButtonSearchPattern = new QPushButton(groupBoxPattern);
+        pushButtonSearchPattern->setObjectName(QStringLiteral("pushButtonSearchPattern"));
+        pushButtonSearchPattern->setGeometry(QRect(240, 14, 51, 21));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -350,6 +365,7 @@ public:
         menuSearch->addAction(actionSearchOrYes);
         menuSearch->addAction(actionSearchNamePattern1);
         menuSearch->addAction(actionSearchNamePattern2);
+        menuSearch->addAction(actionSearchNamePattern);
         menuSearch->addAction(actionSearchNamePattensIntersection);
 
         retranslateUi(MainWindow);
@@ -395,6 +411,7 @@ public:
         actionSearchNamePattern1->setText(QApplication::translate("MainWindow", "SearchNamePattern1", 0));
         actionSearchNamePattern2->setText(QApplication::translate("MainWindow", "SearchNamePattern2", 0));
         actionSearchNamePattensIntersection->setText(QApplication::translate("MainWindow", "SearchNamePattensIntersection", 0));
+        actionSearchNamePattern->setText(QApplication::translate("MainWindow", "SearchNamePattern3", 0));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", 0));
 #ifndef QT_NO_TOOLTIP
         pushButtonBegin->setToolTip(QString());
@@ -442,6 +459,8 @@ public:
         pushButtonSearchOrYes->setText(QApplication::translate("MainWindow", "Search OR YES", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Search", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Other", 0));
+        groupBoxPattern->setTitle(QApplication::translate("MainWindow", "Pattern", 0));
+        pushButtonSearchPattern->setText(QApplication::translate("MainWindow", "Search", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuSelect_image->setTitle(QApplication::translate("MainWindow", "Select image", 0));
         menuForms->setTitle(QApplication::translate("MainWindow", "Forms", 0));

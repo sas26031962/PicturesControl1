@@ -129,6 +129,7 @@ private slots:
     void execActionSearchOrYes();
     void execActionSearchNamePattern1();
     void execActionSearchNamePattern2();
+    void execActionSearchNamePattern();
     void execActionSearchNamePatternsIntersection();
 
     void execActionRemoveMovie();

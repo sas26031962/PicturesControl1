@@ -156,8 +156,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSearchRotated, SIGNAL(triggered()), this, SLOT( execActionSearchRotated()));
 
+    ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
+
     connect(ui->actionSearchNamePattern1, SIGNAL(triggered()), this, SLOT( execActionSearchNamePattern1()));
     connect(ui->actionSearchNamePattern2, SIGNAL(triggered()), this, SLOT( execActionSearchNamePattern2()));
+    connect(ui->actionSearchNamePattern, SIGNAL(triggered()), this, SLOT( execActionSearchNamePattern()));
+    connect(ui->pushButtonSearchPattern, SIGNAL(pressed()), this, SLOT( execActionSearchNamePattern()));
     connect(ui->actionSearchNamePattensIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatternsIntersection()));
 
     connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
@@ -2017,6 +2021,32 @@ void MainWindow::execActionSearchNamePattern2()
 {
     QString s = "execActionSearchNamePattern2()";
     QString pattern = "^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}";
+
+    bool x = cLoadFiles::searchNamePattern(pattern);
+
+    showGroupsList();
+
+    //---
+    s += ": iCount=";
+    s += QString::number(cIniFile::Groups->count());
+    //---
+    if(x)
+    {
+        s += "pattern1StringList stored in file";
+    }
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionSearchNamePattern()
+{
+    QString s = "execActionSearchNamePattern3()";
+    //QString pattern = "^IMG_20[0-9]{6}_[0-9]{6}";
+    //QString pattern = "IMG_20[0-9]{6}_[0-9]{6}";
+    QString pattern = ui->lineEditPattern->text();
 
     bool x = cLoadFiles::searchNamePattern(pattern);
 

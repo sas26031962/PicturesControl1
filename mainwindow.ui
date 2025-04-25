@@ -218,9 +218,9 @@
    <widget class="QGroupBox" name="groupBoxRotate">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>290</x>
       <y>380</y>
-      <width>261</width>
+      <width>301</width>
       <height>51</height>
      </rect>
     </property>
@@ -437,6 +437,42 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBoxPattern">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>430</y>
+      <width>301</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Pattern</string>
+    </property>
+    <widget class="QLineEdit" name="lineEditPattern">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>14</y>
+       <width>221</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonSearchPattern">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>14</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -498,6 +534,7 @@
     <addaction name="actionSearchOrYes"/>
     <addaction name="actionSearchNamePattern1"/>
     <addaction name="actionSearchNamePattern2"/>
+    <addaction name="actionSearchNamePattern"/>
     <addaction name="actionSearchNamePattensIntersection"/>
    </widget>
    <addaction name="menuFile"/>
@@ -674,6 +711,11 @@
   <action name="actionSearchNamePattensIntersection">
    <property name="text">
     <string>SearchNamePattensIntersection</string>
+   </property>
+  </action>
+  <action name="actionSearchNamePattern">
+   <property name="text">
+    <string>SearchNamePattern3</string>
    </property>
   </action>
  </widget>
