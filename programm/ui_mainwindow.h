@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -107,6 +108,7 @@ public:
     QGroupBox *groupBoxPattern;
     QLineEdit *lineEditPattern;
     QPushButton *pushButtonSearchPattern;
+    QComboBox *comboBoxPatterns;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuSelect_image;
@@ -120,7 +122,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(601, 583);
+        MainWindow->resize(601, 640);
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QStringLiteral("actionExit"));
         actionSelectImageBegin = new QAction(MainWindow);
@@ -225,7 +227,7 @@ public:
         tableViewCurrent->setGeometry(QRect(10, 30, 231, 341));
         groupBoxEdit = new QGroupBox(centralWidget);
         groupBoxEdit->setObjectName(QStringLiteral("groupBoxEdit"));
-        groupBoxEdit->setGeometry(QRect(20, 470, 451, 51));
+        groupBoxEdit->setGeometry(QRect(20, 510, 451, 51));
         pushButtonLoad = new QPushButton(groupBoxEdit);
         pushButtonLoad->setObjectName(QStringLiteral("pushButtonLoad"));
         pushButtonLoad->setGeometry(QRect(10, 20, 75, 23));
@@ -304,13 +306,16 @@ public:
         tabWidget->addTab(tab_5, QString());
         groupBoxPattern = new QGroupBox(centralWidget);
         groupBoxPattern->setObjectName(QStringLiteral("groupBoxPattern"));
-        groupBoxPattern->setGeometry(QRect(290, 430, 301, 41));
+        groupBoxPattern->setGeometry(QRect(290, 430, 301, 81));
         lineEditPattern = new QLineEdit(groupBoxPattern);
         lineEditPattern->setObjectName(QStringLiteral("lineEditPattern"));
         lineEditPattern->setGeometry(QRect(10, 14, 221, 21));
         pushButtonSearchPattern = new QPushButton(groupBoxPattern);
         pushButtonSearchPattern->setObjectName(QStringLiteral("pushButtonSearchPattern"));
         pushButtonSearchPattern->setGeometry(QRect(240, 14, 51, 21));
+        comboBoxPatterns = new QComboBox(groupBoxPattern);
+        comboBoxPatterns->setObjectName(QStringLiteral("comboBoxPatterns"));
+        comboBoxPatterns->setGeometry(QRect(10, 50, 221, 22));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

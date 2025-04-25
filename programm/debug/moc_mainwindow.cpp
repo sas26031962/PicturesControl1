@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[46];
-    char stringdata0[1053];
+    QByteArrayData data[48];
+    char stringdata0[1087];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,34 +47,36 @@ QT_MOC_LITERAL(14, 238, 32), // "execListWidgetSubjectItemClicked"
 QT_MOC_LITERAL(15, 271, 33), // "execListWidgetPropertyItemCli..."
 QT_MOC_LITERAL(16, 305, 31), // "execListWidgetTheameItemClicked"
 QT_MOC_LITERAL(17, 337, 30), // "execListWidgetPlaceItemClicked"
-QT_MOC_LITERAL(18, 368, 29), // "execListWidgetKeysItemClicked"
-QT_MOC_LITERAL(19, 398, 31), // "execListWidgetSearchItemClicked"
-QT_MOC_LITERAL(20, 430, 32), // "execActionLoadHashTagListSubject"
-QT_MOC_LITERAL(21, 463, 30), // "execActionLoadHashTagListPlace"
-QT_MOC_LITERAL(22, 494, 33), // "execActionLoadHashTagListProp..."
-QT_MOC_LITERAL(23, 528, 31), // "execActionLoadHashTagListTheame"
-QT_MOC_LITERAL(24, 560, 23), // "execActionSearchRotated"
-QT_MOC_LITERAL(25, 584, 21), // "execActionSearchOrYes"
-QT_MOC_LITERAL(26, 606, 28), // "execActionSearchNamePattern1"
-QT_MOC_LITERAL(27, 635, 28), // "execActionSearchNamePattern2"
-QT_MOC_LITERAL(28, 664, 27), // "execActionSearchNamePattern"
-QT_MOC_LITERAL(29, 692, 40), // "execActionSearchNamePatternsI..."
-QT_MOC_LITERAL(30, 733, 21), // "execActionRemoveMovie"
-QT_MOC_LITERAL(31, 755, 20), // "execActionRemoveText"
-QT_MOC_LITERAL(32, 776, 19), // "execActionRemoveTif"
-QT_MOC_LITERAL(33, 796, 19), // "execActionRemove3gp"
-QT_MOC_LITERAL(34, 816, 19), // "execActionRemoveBin"
-QT_MOC_LITERAL(35, 836, 23), // "execActionRemoveSection"
-QT_MOC_LITERAL(36, 860, 23), // "execActionGetGroupsList"
-QT_MOC_LITERAL(37, 884, 21), // "execActionGetKeysList"
-QT_MOC_LITERAL(38, 906, 19), // "execActionGotoIndex"
-QT_MOC_LITERAL(39, 926, 18), // "execActionRotateCW"
-QT_MOC_LITERAL(40, 945, 19), // "execActionRotateCCW"
-QT_MOC_LITERAL(41, 965, 16), // "execSpinBoxAngle"
-QT_MOC_LITERAL(42, 982, 5), // "angle"
-QT_MOC_LITERAL(43, 988, 18), // "execShowExecStatus"
-QT_MOC_LITERAL(44, 1007, 22), // "execShiftXValueChanged"
-QT_MOC_LITERAL(45, 1030, 22) // "execShiftYValueChanged"
+QT_MOC_LITERAL(18, 368, 31), // "execComboBoxCurrentIndexChanged"
+QT_MOC_LITERAL(19, 400, 1), // "x"
+QT_MOC_LITERAL(20, 402, 29), // "execListWidgetKeysItemClicked"
+QT_MOC_LITERAL(21, 432, 31), // "execListWidgetSearchItemClicked"
+QT_MOC_LITERAL(22, 464, 32), // "execActionLoadHashTagListSubject"
+QT_MOC_LITERAL(23, 497, 30), // "execActionLoadHashTagListPlace"
+QT_MOC_LITERAL(24, 528, 33), // "execActionLoadHashTagListProp..."
+QT_MOC_LITERAL(25, 562, 31), // "execActionLoadHashTagListTheame"
+QT_MOC_LITERAL(26, 594, 23), // "execActionSearchRotated"
+QT_MOC_LITERAL(27, 618, 21), // "execActionSearchOrYes"
+QT_MOC_LITERAL(28, 640, 28), // "execActionSearchNamePattern1"
+QT_MOC_LITERAL(29, 669, 28), // "execActionSearchNamePattern2"
+QT_MOC_LITERAL(30, 698, 27), // "execActionSearchNamePattern"
+QT_MOC_LITERAL(31, 726, 40), // "execActionSearchNamePatternsI..."
+QT_MOC_LITERAL(32, 767, 21), // "execActionRemoveMovie"
+QT_MOC_LITERAL(33, 789, 20), // "execActionRemoveText"
+QT_MOC_LITERAL(34, 810, 19), // "execActionRemoveTif"
+QT_MOC_LITERAL(35, 830, 19), // "execActionRemove3gp"
+QT_MOC_LITERAL(36, 850, 19), // "execActionRemoveBin"
+QT_MOC_LITERAL(37, 870, 23), // "execActionRemoveSection"
+QT_MOC_LITERAL(38, 894, 23), // "execActionGetGroupsList"
+QT_MOC_LITERAL(39, 918, 21), // "execActionGetKeysList"
+QT_MOC_LITERAL(40, 940, 19), // "execActionGotoIndex"
+QT_MOC_LITERAL(41, 960, 18), // "execActionRotateCW"
+QT_MOC_LITERAL(42, 979, 19), // "execActionRotateCCW"
+QT_MOC_LITERAL(43, 999, 16), // "execSpinBoxAngle"
+QT_MOC_LITERAL(44, 1016, 5), // "angle"
+QT_MOC_LITERAL(45, 1022, 18), // "execShowExecStatus"
+QT_MOC_LITERAL(46, 1041, 22), // "execShiftXValueChanged"
+QT_MOC_LITERAL(47, 1064, 22) // "execShiftYValueChanged"
 
     },
     "MainWindow\0draw\0\0s\0showExecStatus\0"
@@ -88,6 +90,7 @@ QT_MOC_LITERAL(45, 1030, 22) // "execShiftYValueChanged"
     "execListWidgetPropertyItemClicked\0"
     "execListWidgetTheameItemClicked\0"
     "execListWidgetPlaceItemClicked\0"
+    "execComboBoxCurrentIndexChanged\0x\0"
     "execListWidgetKeysItemClicked\0"
     "execListWidgetSearchItemClicked\0"
     "execActionLoadHashTagListSubject\0"
@@ -116,7 +119,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      42,   14, // methods
+      43,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -124,50 +127,51 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  224,    2, 0x06 /* Public */,
-       4,    1,  227,    2, 0x06 /* Public */,
+       1,    1,  229,    2, 0x06 /* Public */,
+       4,    1,  232,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,  230,    2, 0x08 /* Private */,
-       6,    0,  231,    2, 0x08 /* Private */,
-       7,    0,  232,    2, 0x08 /* Private */,
-       8,    0,  233,    2, 0x08 /* Private */,
-       9,    0,  234,    2, 0x08 /* Private */,
-      10,    0,  235,    2, 0x08 /* Private */,
-      11,    0,  236,    2, 0x08 /* Private */,
-      12,    0,  237,    2, 0x08 /* Private */,
-      13,    0,  238,    2, 0x08 /* Private */,
-      14,    0,  239,    2, 0x08 /* Private */,
-      15,    0,  240,    2, 0x08 /* Private */,
-      16,    0,  241,    2, 0x08 /* Private */,
-      17,    0,  242,    2, 0x08 /* Private */,
-      18,    0,  243,    2, 0x08 /* Private */,
-      19,    0,  244,    2, 0x08 /* Private */,
-      20,    0,  245,    2, 0x08 /* Private */,
-      21,    0,  246,    2, 0x08 /* Private */,
-      22,    0,  247,    2, 0x08 /* Private */,
-      23,    0,  248,    2, 0x08 /* Private */,
-      24,    0,  249,    2, 0x08 /* Private */,
-      25,    0,  250,    2, 0x08 /* Private */,
-      26,    0,  251,    2, 0x08 /* Private */,
-      27,    0,  252,    2, 0x08 /* Private */,
-      28,    0,  253,    2, 0x08 /* Private */,
-      29,    0,  254,    2, 0x08 /* Private */,
-      30,    0,  255,    2, 0x08 /* Private */,
-      31,    0,  256,    2, 0x08 /* Private */,
-      32,    0,  257,    2, 0x08 /* Private */,
-      33,    0,  258,    2, 0x08 /* Private */,
-      34,    0,  259,    2, 0x08 /* Private */,
-      35,    0,  260,    2, 0x08 /* Private */,
-      36,    0,  261,    2, 0x08 /* Private */,
-      37,    0,  262,    2, 0x08 /* Private */,
-      38,    0,  263,    2, 0x08 /* Private */,
-      39,    0,  264,    2, 0x08 /* Private */,
-      40,    0,  265,    2, 0x08 /* Private */,
-      41,    1,  266,    2, 0x08 /* Private */,
-      43,    1,  269,    2, 0x08 /* Private */,
-      44,    0,  272,    2, 0x08 /* Private */,
-      45,    0,  273,    2, 0x08 /* Private */,
+       5,    0,  235,    2, 0x08 /* Private */,
+       6,    0,  236,    2, 0x08 /* Private */,
+       7,    0,  237,    2, 0x08 /* Private */,
+       8,    0,  238,    2, 0x08 /* Private */,
+       9,    0,  239,    2, 0x08 /* Private */,
+      10,    0,  240,    2, 0x08 /* Private */,
+      11,    0,  241,    2, 0x08 /* Private */,
+      12,    0,  242,    2, 0x08 /* Private */,
+      13,    0,  243,    2, 0x08 /* Private */,
+      14,    0,  244,    2, 0x08 /* Private */,
+      15,    0,  245,    2, 0x08 /* Private */,
+      16,    0,  246,    2, 0x08 /* Private */,
+      17,    0,  247,    2, 0x08 /* Private */,
+      18,    1,  248,    2, 0x08 /* Private */,
+      20,    0,  251,    2, 0x08 /* Private */,
+      21,    0,  252,    2, 0x08 /* Private */,
+      22,    0,  253,    2, 0x08 /* Private */,
+      23,    0,  254,    2, 0x08 /* Private */,
+      24,    0,  255,    2, 0x08 /* Private */,
+      25,    0,  256,    2, 0x08 /* Private */,
+      26,    0,  257,    2, 0x08 /* Private */,
+      27,    0,  258,    2, 0x08 /* Private */,
+      28,    0,  259,    2, 0x08 /* Private */,
+      29,    0,  260,    2, 0x08 /* Private */,
+      30,    0,  261,    2, 0x08 /* Private */,
+      31,    0,  262,    2, 0x08 /* Private */,
+      32,    0,  263,    2, 0x08 /* Private */,
+      33,    0,  264,    2, 0x08 /* Private */,
+      34,    0,  265,    2, 0x08 /* Private */,
+      35,    0,  266,    2, 0x08 /* Private */,
+      36,    0,  267,    2, 0x08 /* Private */,
+      37,    0,  268,    2, 0x08 /* Private */,
+      38,    0,  269,    2, 0x08 /* Private */,
+      39,    0,  270,    2, 0x08 /* Private */,
+      40,    0,  271,    2, 0x08 /* Private */,
+      41,    0,  272,    2, 0x08 /* Private */,
+      42,    0,  273,    2, 0x08 /* Private */,
+      43,    1,  274,    2, 0x08 /* Private */,
+      45,    1,  277,    2, 0x08 /* Private */,
+      46,    0,  280,    2, 0x08 /* Private */,
+      47,    0,  281,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -187,6 +191,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   19,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -210,7 +215,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   42,
+    QMetaType::Void, QMetaType::Int,   44,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
     QMetaType::Void,
@@ -239,33 +244,34 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 12: _t->execListWidgetPropertyItemClicked(); break;
         case 13: _t->execListWidgetTheameItemClicked(); break;
         case 14: _t->execListWidgetPlaceItemClicked(); break;
-        case 15: _t->execListWidgetKeysItemClicked(); break;
-        case 16: _t->execListWidgetSearchItemClicked(); break;
-        case 17: _t->execActionLoadHashTagListSubject(); break;
-        case 18: _t->execActionLoadHashTagListPlace(); break;
-        case 19: _t->execActionLoadHashTagListProperty(); break;
-        case 20: _t->execActionLoadHashTagListTheame(); break;
-        case 21: _t->execActionSearchRotated(); break;
-        case 22: _t->execActionSearchOrYes(); break;
-        case 23: _t->execActionSearchNamePattern1(); break;
-        case 24: _t->execActionSearchNamePattern2(); break;
-        case 25: _t->execActionSearchNamePattern(); break;
-        case 26: _t->execActionSearchNamePatternsIntersection(); break;
-        case 27: _t->execActionRemoveMovie(); break;
-        case 28: _t->execActionRemoveText(); break;
-        case 29: _t->execActionRemoveTif(); break;
-        case 30: _t->execActionRemove3gp(); break;
-        case 31: _t->execActionRemoveBin(); break;
-        case 32: _t->execActionRemoveSection(); break;
-        case 33: _t->execActionGetGroupsList(); break;
-        case 34: _t->execActionGetKeysList(); break;
-        case 35: _t->execActionGotoIndex(); break;
-        case 36: _t->execActionRotateCW(); break;
-        case 37: _t->execActionRotateCCW(); break;
-        case 38: _t->execSpinBoxAngle((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 39: _t->execShowExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 40: _t->execShiftXValueChanged(); break;
-        case 41: _t->execShiftYValueChanged(); break;
+        case 15: _t->execComboBoxCurrentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->execListWidgetKeysItemClicked(); break;
+        case 17: _t->execListWidgetSearchItemClicked(); break;
+        case 18: _t->execActionLoadHashTagListSubject(); break;
+        case 19: _t->execActionLoadHashTagListPlace(); break;
+        case 20: _t->execActionLoadHashTagListProperty(); break;
+        case 21: _t->execActionLoadHashTagListTheame(); break;
+        case 22: _t->execActionSearchRotated(); break;
+        case 23: _t->execActionSearchOrYes(); break;
+        case 24: _t->execActionSearchNamePattern1(); break;
+        case 25: _t->execActionSearchNamePattern2(); break;
+        case 26: _t->execActionSearchNamePattern(); break;
+        case 27: _t->execActionSearchNamePatternsIntersection(); break;
+        case 28: _t->execActionRemoveMovie(); break;
+        case 29: _t->execActionRemoveText(); break;
+        case 30: _t->execActionRemoveTif(); break;
+        case 31: _t->execActionRemove3gp(); break;
+        case 32: _t->execActionRemoveBin(); break;
+        case 33: _t->execActionRemoveSection(); break;
+        case 34: _t->execActionGetGroupsList(); break;
+        case 35: _t->execActionGetKeysList(); break;
+        case 36: _t->execActionGotoIndex(); break;
+        case 37: _t->execActionRotateCW(); break;
+        case 38: _t->execActionRotateCCW(); break;
+        case 39: _t->execSpinBoxAngle((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 40: _t->execShowExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 41: _t->execShiftXValueChanged(); break;
+        case 42: _t->execShiftYValueChanged(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -313,13 +319,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 42)
+        if (_id < 43)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 42;
+        _id -= 43;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 42)
+        if (_id < 43)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 42;
+        _id -= 43;
     }
     return _id;
 }

@@ -24,6 +24,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ui->comboBoxPatterns->clear();
+    ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");
+    ui->comboBoxPatterns->addItem("^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}");
+    ui->comboBoxPatterns->addItem("^20[0-9]{6}_[0-9]{6}");
+
     progressBarNavigation = ui->progressBarNavigation;
     SpinBoxIndex = ui->spinBoxIndex;
 
@@ -169,6 +174,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->listWidgetKeys, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetKeysItemClicked()));
     connect(ui->listWidgetSearch, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSearchItemClicked()));
+
+    connect(ui->comboBoxPatterns, SIGNAL(currentIndexChanged(int)), this, SLOT(execComboBoxCurrentIndexChanged(int)));
 
     //ui->labelMain->setText("Exec 'Load' option for get file name list");
 
@@ -2090,6 +2097,15 @@ void MainWindow::execShiftYValueChanged()
     emit draw(cIniFile::currentRotatedImagePath);
 
     emit showExecStatus(s);
+}
+
+//=============================================================================
+
+void MainWindow::execComboBoxCurrentIndexChanged(int x)
+{
+    QString value = ui->comboBoxPatterns->currentText();
+    qDebug() << "ComboBoxCurrentIndexChanged(): index=" << x << " Text= " << value;
+    ui->lineEditPattern->setText(value);
 }
 
 //=============================================================================
