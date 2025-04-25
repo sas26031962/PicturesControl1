@@ -2060,7 +2060,7 @@ void MainWindow::execActionSearchNamePattern()
     //QString pattern = "IMG_20[0-9]{6}_[0-9]{6}";
     QString pattern = ui->lineEditPattern->text();
 
-    bool x = cLoadFiles::searchNamePattern(pattern);
+    cLoadFiles::searchNamePattern(pattern);
 
     showGroupsList();
 
@@ -2068,6 +2068,8 @@ void MainWindow::execActionSearchNamePattern()
     s += ": iCount=";
     s += QString::number(cIniFile::Groups->count());
     //---
+    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern3StringListFilePath, *cIniFile::Groups);
+
     if(x)
     {
         s += "pattern1StringList stored in file";
