@@ -312,8 +312,10 @@ void MainWindow::showCurrentIndexPicture()
         if(qsGroupName == "RecordList")
         {
             index++;
+            if(index > (iGroupsCount - 1))index = iGroupsCount - 1;//20250426
             iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
             qsGroupName = cIniFile::Groups->at(index);
+
         }
 
         settings.beginGroup(qsGroupName);
