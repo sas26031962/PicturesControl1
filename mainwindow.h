@@ -117,6 +117,8 @@ private slots:
     void execListWidgetTheameItemClicked();
     void execListWidgetPlaceItemClicked();
 
+    void execListWidgetFoundedItemClicked();
+
     void execComboBoxCurrentIndexChanged(int x);
 
     void execListWidgetKeysItemClicked();
@@ -145,6 +147,8 @@ private slots:
     void execActionGetKeysList();
 
     void execActionGotoIndex();
+
+    void execActionOpenFoundRecord();
 
     void execActionRotateCW();
     void execActionRotateCCW();

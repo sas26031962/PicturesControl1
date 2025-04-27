@@ -182,6 +182,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //    qDebug() << "Current text=" << text;
     //});
 
+    connect(ui->actionOpenFoundRecord, &QAction::triggered, this, &MainWindow::execActionOpenFoundRecord);
+    connect(ui->listWidgetFounded, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetFoundedItemClicked()));
+
     //ui->labelMain->setText("Exec 'Load' option for get file name list");
 
     //execActionLoad();
@@ -1395,10 +1398,6 @@ void MainWindow::execActionRemoveMovie()
 
     QStringList GroupsLocal = settings.childGroups();
 
-    // Выводим значения
-    //ui->listWidgetOther->clear();
-    //ui->listWidgetOther->addItems(GroupsLocal);
-
     qDebug() << "childGroupsList length: " << GroupsLocal.count();
     qDebug() << "----------------------------";
     //---
@@ -1587,7 +1586,7 @@ void MainWindow::execActionGetGroupsList()
 {
     QString s = "execActionGetGroupsList()";
 
-    ui->listWidgetOther->clear();
+    ui->listWidgetFounded->clear();
     bool x = cImportFiles::getGroupsList();
     if(x)
     {
@@ -1597,7 +1596,7 @@ void MainWindow::execActionGetGroupsList()
     {
         s += ": sucsess!";
 
-        ui->listWidgetOther->addItems(*cIniFile::Groups);
+        ui->listWidgetFounded->addItems(*cIniFile::Groups);
     }
 
     //---
@@ -1992,16 +1991,16 @@ void MainWindow::execActionSearchOrYes()
 //=============================================================================
 
 //
-// Отобразить содержимое списка cIniFile::Groups в элементе ui->listWidgetOther
+// Отобразить содержимое списка cIniFile::Groups в элементе ui->listWidgetFounded
 //
 void MainWindow::showGroupsList()
 {
-    ui->listWidgetOther->clear();
+    ui->listWidgetFounded->clear();
     QListIterator<QString> readIt(*cIniFile::Groups);
     while (readIt.hasNext())
     {
         QString qsSection = readIt.next();
-        ui->listWidgetOther->addItem(qsSection);
+        ui->listWidgetFounded->addItem(qsSection);
     }
 }
 
@@ -2110,6 +2109,15 @@ void MainWindow::execShiftYValueChanged()
 
 //=============================================================================
 
+void MainWindow::execActionOpenFoundRecord()
+{
+    QString s = "execActionOpenFoundRecord()";
+
+    emit showExecStatus(s);
+}
+
+//=============================================================================
+
 void MainWindow::execComboBoxCurrentIndexChanged(int x)
 {
     QString value = ui->comboBoxPatterns->currentText();
@@ -2131,7 +2139,7 @@ void MainWindow::execActionSearchNamePatternsIntersection()
     qDebug() << "ListPattern1 count=" << qslPattern1.count() << " ListPattern2 count=" << qslPattern2.count();
 
     int iCount = 0;// Очистка счётчика найденных объектов
-    ui->listWidgetOther->clear();
+    ui->listWidgetFounded->clear();
     QListIterator<QString> readIt(qslPattern1);
     while (readIt.hasNext())
     {
@@ -2171,7 +2179,7 @@ void MainWindow::execActionSearchNamePatternsIntersection()
             {
                 iCount++;
                 qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
-                ui->listWidgetOther->addItem(qsSection);
+                ui->listWidgetFounded->addItem(qsSection);
 
                 deleteSection(qsMirror);//!!!
             }
@@ -2183,6 +2191,35 @@ void MainWindow::execActionSearchNamePatternsIntersection()
     emit execShowExecStatus(s);
     //---
 }
+
+//=============================================================================
+
+void MainWindow::execListWidgetFoundedItemClicked()
+{
+    QString s = "execListWidgetFoundedItemClicked()";
+    QString value = ui->listWidgetFounded->currentItem()->text();
+
+    int FoundedIndex = -1;
+
+    if(cIniFile::Groups->contains(value))
+    {
+        FoundedIndex = cIniFile::Groups->indexOf(value);
+    }
+
+    // Модификация индекса
+    iCurrentIndexGlobal.store(FoundedIndex, std::memory_order_relaxed);
+
+    // Отобразить картинку
+    showCurrentIndexPicture();
+
+    s += ": ";
+    s += value;
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+
 
 //=============================================================================
 

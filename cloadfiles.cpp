@@ -188,7 +188,6 @@ bool cLoadFiles::searchNamePattern(const QString& pattern)
     cIniFile::Groups->clear();//Очистка результата
 
     int iCount = 0;// Очистка счётчика найденных объектов
-    //ui->listWidgetOther->clear();
     QListIterator<QString> readIt(TotalGroups);
     while (readIt.hasNext())
     {
@@ -200,7 +199,6 @@ bool cLoadFiles::searchNamePattern(const QString& pattern)
             iCount++;
             cIniFile::Groups->append(qsSection);
             qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
-            //ui->listWidgetOther->addItem(qsSection);
         }
     }
     //---
