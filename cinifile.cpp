@@ -16,7 +16,7 @@
     QString cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";
     QString cIniFile::pattern1StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern1StringListFile.txt";
     QString cIniFile::pattern2StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern2StringListFile.txt";
-    QString cIniFile::pattern3StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern3StringListFile.txt";
+    QString cIniFile::patternXStringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern3StringListFile.txt";
      QString cIniFile::rotatedImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/rotated_image.png";
     QString cIniFile::scaledImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/scaled_image.png";
 #endif

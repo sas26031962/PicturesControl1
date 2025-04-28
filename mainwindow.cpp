@@ -165,10 +165,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSearchNamePattern1, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern1);
     connect(ui->actionSearchNamePattern2, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern2);
-    connect(ui->actionSearchNamePattern, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern);
-    connect(ui->pushButtonSearchPattern, &QPushButton::pressed, this, &MainWindow::execActionSearchNamePattern);
+    connect(ui->actionSearchNamePatternX, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern);
+    connect(ui->pushButtonSearchPatternX, &QPushButton::pressed, this, &MainWindow::execActionSearchNamePattern);
 
-    connect(ui->actionSearchNamePattensIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatternsIntersection()));
+    connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
+    connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
 
     connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
     connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
@@ -2069,7 +2070,7 @@ void MainWindow::execActionSearchNamePattern()
     s += ": iCount=";
     s += QString::number(cIniFile::Groups->count());
     //---
-    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern3StringListFilePath, *cIniFile::Groups);
+    bool x = cLoadFiles::saveStringListToFile(cIniFile::patternXStringListFilePath, *cIniFile::Groups);
 
     if(x)
     {
@@ -2127,9 +2128,74 @@ void MainWindow::execComboBoxCurrentIndexChanged(int x)
 
 //=============================================================================
 
-void MainWindow::execActionSearchNamePatternsIntersection()
+void MainWindow::execActionSearchNamePatterns1XIntersection()
 {
-    QString s = "execActionSearchNamePattensIntersection()";
+    QString s = "execActionSearchNamePattens1XIntersection()";
+
+    QString pattern1 = "^20[0-9]{6}_[0-9]{6}";
+
+    QStringList qslPattern1 = cLoadFiles::loadStringListFromFile(cIniFile::pattern1StringListFilePath);
+    QStringList qslPatternX = cLoadFiles::loadStringListFromFile(cIniFile::patternXStringListFilePath);
+
+    qDebug() << "ListPattern1 count=" << qslPattern1.count() << " ListPatternX count=" << qslPatternX.count();
+
+    int iCount = 0;// Очистка счётчика найденных объектов
+    ui->listWidgetFounded->clear();
+    QListIterator<QString> readIt(qslPattern1);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        //qDebug() << qsSection;
+        QRegularExpression re(pattern1);
+        bool match = re.match(qsSection.toLower()).hasMatch();
+        int Year, Month, Day, Hour, Min, Sec;
+        QString qsMirror;
+        if (match)
+        {
+            Year = qsSection.mid(0, 4).toInt();
+            Month = qsSection.mid(4, 2).toInt();
+            Day = qsSection.mid(6, 2).toInt();
+            Hour = qsSection.mid(9, 2).toInt();
+            Min = qsSection.mid(11, 2).toInt();
+            Sec = qsSection.mid(13, 2).toInt();
+            //qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Year=" << Year << " Month=" << Month << " Day=" << Day << " Hour=" << Hour << " Min=" << Min << " Sec=" << Sec;
+            //Формирование шаблона по типу 3
+            qsMirror = "IMG";
+            qsMirror += QString::number(Year);
+            if(Month < 10)qsMirror += "0";
+            qsMirror += QString::number(Month);
+            if(Day < 10)qsMirror += "0";
+            qsMirror += QString::number(Day);
+            qsMirror += "_";
+            if(Hour < 10)qsMirror += "0";
+            qsMirror += QString::number(Hour);
+            if(Min < 10)qsMirror += "0";
+            qsMirror += QString::number(Min);
+            if(Sec < 10)qsMirror += "0";
+            qsMirror += QString::number(Sec);
+            qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Mirror=" << qsMirror;
+            if(qslPatternX.contains(qsMirror))
+            {
+                iCount++;
+                qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
+                ui->listWidgetFounded->addItem(qsSection);
+
+                deleteSection(qsMirror);//!!!
+            }
+        }
+    }
+    s += ": mirrors count=";
+    s += QString::number(iCount);
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionSearchNamePatterns12Intersection()
+{
+    QString s = "execActionSearchNamePattens12Intersection()";
 
     QString pattern1 = "^20[0-9]{6}_[0-9]{6}";
 

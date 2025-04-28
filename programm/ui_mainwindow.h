@@ -66,8 +66,10 @@ public:
     QAction *actionGetKeysList;
     QAction *actionSearchNamePattern1;
     QAction *actionSearchNamePattern2;
-    QAction *actionSearchNamePattensIntersection;
-    QAction *actionSearchNamePattern;
+    QAction *actionSearchNamePatterns12Intersection;
+    QAction *actionSearchNamePatternX;
+    QAction *actionOpenFoundRecord;
+    QAction *actionSearchNamePatterns1XIntersection;
     QWidget *centralWidget;
     QGroupBox *groupBoxControl;
     QPushButton *pushButtonBegin;
@@ -103,11 +105,13 @@ public:
     QLabel *labelKeysCaption;
     QLabel *labelSearchKeysCaption;
     QPushButton *pushButtonSearchOrYes;
+    QWidget *tab_7;
+    QListWidget *listWidgetFounded;
     QWidget *tab_5;
     QListWidget *listWidgetOther;
     QGroupBox *groupBoxPattern;
     QLineEdit *lineEditPattern;
-    QPushButton *pushButtonSearchPattern;
+    QPushButton *pushButtonSearchPatternX;
     QComboBox *comboBoxPatterns;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -185,10 +189,14 @@ public:
         actionSearchNamePattern1->setObjectName(QStringLiteral("actionSearchNamePattern1"));
         actionSearchNamePattern2 = new QAction(MainWindow);
         actionSearchNamePattern2->setObjectName(QStringLiteral("actionSearchNamePattern2"));
-        actionSearchNamePattensIntersection = new QAction(MainWindow);
-        actionSearchNamePattensIntersection->setObjectName(QStringLiteral("actionSearchNamePattensIntersection"));
-        actionSearchNamePattern = new QAction(MainWindow);
-        actionSearchNamePattern->setObjectName(QStringLiteral("actionSearchNamePattern"));
+        actionSearchNamePatterns12Intersection = new QAction(MainWindow);
+        actionSearchNamePatterns12Intersection->setObjectName(QStringLiteral("actionSearchNamePatterns12Intersection"));
+        actionSearchNamePatternX = new QAction(MainWindow);
+        actionSearchNamePatternX->setObjectName(QStringLiteral("actionSearchNamePatternX"));
+        actionOpenFoundRecord = new QAction(MainWindow);
+        actionOpenFoundRecord->setObjectName(QStringLiteral("actionOpenFoundRecord"));
+        actionSearchNamePatterns1XIntersection = new QAction(MainWindow);
+        actionSearchNamePatterns1XIntersection->setObjectName(QStringLiteral("actionSearchNamePatterns1XIntersection"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBoxControl = new QGroupBox(centralWidget);
@@ -298,6 +306,12 @@ public:
         pushButtonSearchOrYes->setObjectName(QStringLiteral("pushButtonSearchOrYes"));
         pushButtonSearchOrYes->setGeometry(QRect(10, 280, 91, 23));
         tabWidget->addTab(tab_6, QString());
+        tab_7 = new QWidget();
+        tab_7->setObjectName(QStringLiteral("tab_7"));
+        listWidgetFounded = new QListWidget(tab_7);
+        listWidgetFounded->setObjectName(QStringLiteral("listWidgetFounded"));
+        listWidgetFounded->setGeometry(QRect(10, 10, 261, 291));
+        tabWidget->addTab(tab_7, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
         listWidgetOther = new QListWidget(tab_5);
@@ -310,9 +324,9 @@ public:
         lineEditPattern = new QLineEdit(groupBoxPattern);
         lineEditPattern->setObjectName(QStringLiteral("lineEditPattern"));
         lineEditPattern->setGeometry(QRect(10, 14, 221, 21));
-        pushButtonSearchPattern = new QPushButton(groupBoxPattern);
-        pushButtonSearchPattern->setObjectName(QStringLiteral("pushButtonSearchPattern"));
-        pushButtonSearchPattern->setGeometry(QRect(240, 14, 51, 21));
+        pushButtonSearchPatternX = new QPushButton(groupBoxPattern);
+        pushButtonSearchPatternX->setObjectName(QStringLiteral("pushButtonSearchPatternX"));
+        pushButtonSearchPatternX->setGeometry(QRect(240, 14, 51, 21));
         comboBoxPatterns = new QComboBox(groupBoxPattern);
         comboBoxPatterns->setObjectName(QStringLiteral("comboBoxPatterns"));
         comboBoxPatterns->setGeometry(QRect(10, 50, 221, 22));
@@ -370,13 +384,15 @@ public:
         menuSearch->addAction(actionSearchOrYes);
         menuSearch->addAction(actionSearchNamePattern1);
         menuSearch->addAction(actionSearchNamePattern2);
-        menuSearch->addAction(actionSearchNamePattern);
-        menuSearch->addAction(actionSearchNamePattensIntersection);
+        menuSearch->addAction(actionSearchNamePatternX);
+        menuSearch->addAction(actionSearchNamePatterns12Intersection);
+        menuSearch->addAction(actionSearchNamePatterns1XIntersection);
+        menuSearch->addAction(actionOpenFoundRecord);
 
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -415,8 +431,10 @@ public:
         actionGetKeysList->setText(QApplication::translate("MainWindow", "GetKeysList", 0));
         actionSearchNamePattern1->setText(QApplication::translate("MainWindow", "SearchNamePattern1", 0));
         actionSearchNamePattern2->setText(QApplication::translate("MainWindow", "SearchNamePattern2", 0));
-        actionSearchNamePattensIntersection->setText(QApplication::translate("MainWindow", "SearchNamePattensIntersection", 0));
-        actionSearchNamePattern->setText(QApplication::translate("MainWindow", "SearchNamePattern", 0));
+        actionSearchNamePatterns12Intersection->setText(QApplication::translate("MainWindow", "SearchNamePatterns12Intersection", 0));
+        actionSearchNamePatternX->setText(QApplication::translate("MainWindow", "SearchNamePatternX", 0));
+        actionOpenFoundRecord->setText(QApplication::translate("MainWindow", "OpenFoundRecord", 0));
+        actionSearchNamePatterns1XIntersection->setText(QApplication::translate("MainWindow", "SearchNamePatterns1XIntersection", 0));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", 0));
 #ifndef QT_NO_TOOLTIP
         pushButtonBegin->setToolTip(QString());
@@ -463,9 +481,10 @@ public:
         labelSearchKeysCaption->setText(QApplication::translate("MainWindow", "Keys for search", 0));
         pushButtonSearchOrYes->setText(QApplication::translate("MainWindow", "Search OR YES", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Search", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Founded", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Other", 0));
         groupBoxPattern->setTitle(QApplication::translate("MainWindow", "Pattern", 0));
-        pushButtonSearchPattern->setText(QApplication::translate("MainWindow", "Search", 0));
+        pushButtonSearchPatternX->setText(QApplication::translate("MainWindow", "Search", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuSelect_image->setTitle(QApplication::translate("MainWindow", "Select image", 0));
         menuForms->setTitle(QApplication::translate("MainWindow", "Forms", 0));

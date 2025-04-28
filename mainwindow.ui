@@ -474,7 +474,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButtonSearchPattern">
+    <widget class="QPushButton" name="pushButtonSearchPatternX">
      <property name="geometry">
       <rect>
        <x>240</x>
@@ -505,7 +505,7 @@
      <x>0</x>
      <y>0</y>
      <width>601</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -559,8 +559,9 @@
     <addaction name="actionSearchOrYes"/>
     <addaction name="actionSearchNamePattern1"/>
     <addaction name="actionSearchNamePattern2"/>
-    <addaction name="actionSearchNamePattern"/>
-    <addaction name="actionSearchNamePattensIntersection"/>
+    <addaction name="actionSearchNamePatternX"/>
+    <addaction name="actionSearchNamePatterns12Intersection"/>
+    <addaction name="actionSearchNamePatterns1XIntersection"/>
     <addaction name="actionOpenFoundRecord"/>
    </widget>
    <addaction name="menuFile"/>
@@ -734,19 +735,24 @@
     <string>SearchNamePattern2</string>
    </property>
   </action>
-  <action name="actionSearchNamePattensIntersection">
+  <action name="actionSearchNamePatterns12Intersection">
    <property name="text">
-    <string>SearchNamePattensIntersection</string>
+    <string>SearchNamePatterns12Intersection</string>
    </property>
   </action>
-  <action name="actionSearchNamePattern">
+  <action name="actionSearchNamePatternX">
    <property name="text">
-    <string>SearchNamePattern</string>
+    <string>SearchNamePatternX</string>
    </property>
   </action>
   <action name="actionOpenFoundRecord">
    <property name="text">
     <string>OpenFoundRecord</string>
+   </property>
+  </action>
+  <action name="actionSearchNamePatterns1XIntersection">
+   <property name="text">
+    <string>SearchNamePatterns1XIntersection</string>
    </property>
   </action>
  </widget>
