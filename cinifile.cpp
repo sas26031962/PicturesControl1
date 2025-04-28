@@ -9,7 +9,7 @@
     QString cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";
     QString cIniFile::pattern1StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern1StringListFile.txt";
     QString cIniFile::pattern2StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern2StringListFile.txt";
-    QString cIniFile::pattern3StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern3StringListFile.txt";
+    QString cIniFile::patternXStringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern3StringListFile.txt";
     QString cIniFile::rotatedImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/rotated_image.png";
     QString cIniFile::scaledImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/scaled_image.png";
 #else
