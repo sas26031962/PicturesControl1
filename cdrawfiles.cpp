@@ -9,6 +9,8 @@ cDrawFiles::cDrawFiles()
 
 }
 
+//=============================================================================
+
 //
 // Поворот изображения
 //
@@ -82,6 +84,111 @@ QString cDrawFiles::execRotate(int angle)
 
 }//End of void cDrawFiles::execRotate(int Angle)
 
+//=============================================================================
+
+void cDrawFiles::execRotateCW90()
+{
+    //--- Читаем значения из INI-файла
+    cIniFile::getCurrentImagePath();
+
+    int x = cIniFile::currentImagePath.indexOf('.');
+    QString qsRootOfName, qsExtOfName;
+    if(x > 0)
+    {
+        qsRootOfName = cIniFile::currentImagePath.mid(0,x);
+        qsExtOfName = cIniFile::currentImagePath.mid(x + 1);
+    }
+    else
+    {
+        qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+
+        return;
+    }
+    qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
+    // Формируем имя результирующего файла
+    cIniFile::currentRotatedImagePath = qsRootOfName + "_1" + "." + qsExtOfName;
+
+    //---
+
+    QImage originalImage(cIniFile::currentImagePath);
+
+    // Создаем новое изображение для хранения повернутого изображения
+    QImage::Format format = originalImage.format();
+    QSize size = originalImage.size();
+    int iW = size.width();
+    int iH = size.height();
+    int iSize;
+    if(iW > iH)iSize = iW; else iSize = iH;
+    //QSize newSize = QSize(iH, iW);
+    QSize newSize = QSize(iSize, iSize);
+
+    //QImage rotatedImage(originalImage.size(), originalImage.format());
+    QImage rotatedImage(newSize, format);
+    //QImage rotatedImage(size, format);
+
+    //rotatedImage.fill(Qt::transparent); // Заполняем прозрачным (фактически - чёрный)
+    rotatedImage.fill(Qt::blue); // Заполняем голубым
+
+    //---
+
+    rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+    //---
+
+}//End of void cDrawFiles::execRotateCW90()
+
+//=============================================================================
+
+void cDrawFiles::execRotateCCW90()
+{
+    //--- Читаем значения из INI-файла
+    cIniFile::getCurrentImagePath();
+
+    int x = cIniFile::currentImagePath.indexOf('.');
+    QString qsRootOfName, qsExtOfName;
+    if(x > 0)
+    {
+        qsRootOfName = cIniFile::currentImagePath.mid(0,x);
+        qsExtOfName = cIniFile::currentImagePath.mid(x + 1);
+    }
+    else
+    {
+        qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+
+        return;
+    }
+    qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
+    // Формируем имя результирующего файла
+    cIniFile::currentRotatedImagePath = qsRootOfName + "_1" + "." + qsExtOfName;
+
+    //---
+
+    QImage originalImage(cIniFile::currentImagePath);
+
+    // Создаем новое изображение для хранения повернутого изображения
+    QImage::Format format = originalImage.format();
+    QSize size = originalImage.size();
+    int iW = size.width();
+    int iH = size.height();
+    int iSize;
+    if(iW > iH)iSize = iW; else iSize = iH;
+    //QSize newSize = QSize(iH, iW);
+    QSize newSize = QSize(iSize, iSize);
+
+    //QImage rotatedImage(originalImage.size(), originalImage.format());
+    QImage rotatedImage(newSize, format);
+    //QImage rotatedImage(size, format);
+
+    rotatedImage.fill(Qt::magenta); // Заполняем фиолетовым
+
+    //---
+
+    rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+    //---
+
+}//End of void cDrawFiles::execRotateCCW90()
+
+//=============================================================================
+
 //
 // Масштабирование изображения
 //
@@ -124,26 +231,6 @@ void cDrawFiles::scaleImage(QString path, int width, int height)
         Qt::KeepAspectRatio, // Сохранять пропорции
         Qt::SmoothTransformation // Использовать сглаживание
     );
-//--- Трансформирование изображения ---
-//    QImage::Format format = scaledImage.format();
-//    QSize transformSize = QSize(newWidth, newHeight);
-//    QImage transformedImage(transformSize, format);
-
-//    transformedImage.fill(Qt::transparent); // Заполняем прозрачным, если нужно
-
-//    QPainter painter(&transformedImage);
-//    painter.setRenderHint(QPainter::SmoothPixmapTransform); // Сглаживание
-//    // Создаем матрицу трансформации
-//    qreal dx = 10;//(width - newSize)/2;
-//    qreal dy = 10;
-
-//    QTransform transform;
-//    transform.translate(dx, dy);
-//    painter.setTransform(transform);
-//    painter.drawImage(0, 0, scaledImage); // Рисуем масштабированное изображение на трансформированном
-//    painter.end();
-
-//---
 
     QString scaledImagePath = cIniFile::scaledImagePath;
     status = "Image scaling to file";
@@ -151,7 +238,6 @@ void cDrawFiles::scaleImage(QString path, int width, int height)
     if(scaledImagePath.count() > 0)
     {
         scaledImage.save(scaledImagePath);    // Сохраняем масштабированное изображение
-        //transformedImage.save(scaledImagePath); // Сохраняем трансформированное изображение
         status += " sucsess!";
     }
     else
@@ -161,3 +247,6 @@ void cDrawFiles::scaleImage(QString path, int width, int height)
 
     //qDebug() << status;
 }
+
+//=============================================================================
+

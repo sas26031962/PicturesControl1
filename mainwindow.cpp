@@ -1481,9 +1481,10 @@ void MainWindow::execActionRotateCW()
 {
     QString s = "ActionRotateCW()";
 
-    iAngle = 90;
+    //iAngle = 90;
+    //cDrawFiles::execRotate(iAngle);
 
-    cDrawFiles::execRotate(iAngle);
+    cDrawFiles::execRotateCW90();
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -1499,9 +1500,11 @@ void MainWindow::execActionRotateCCW()
 {
     QString s = "ActionRotateCCW()";
 
-    iAngle = 270;
+    //iAngle = 270;
+    //cDrawFiles::execRotate(iAngle);
 
-    cDrawFiles::execRotate(iAngle);
+    cDrawFiles::execRotateCCW90();
+
 
     emit draw(cIniFile::currentRotatedImagePath);
 

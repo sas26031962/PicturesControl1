@@ -19,6 +19,8 @@ public:
     static qreal dy;// = VERTICAL_SHIFT_AFTER_ROtATION;//880
 
     static QString execRotate(int angle);
+    static void execRotateCW90();
+    static void execRotateCCW90();
     static void scaleImage(QString, int width, int height);
 
     cDrawFiles();
