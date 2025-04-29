@@ -141,7 +141,7 @@ void cDrawFiles::execRotateCW90()
     //rotatedImage.fill(Qt::transparent); // Заполняем прозрачным (фактически - чёрный)
     rotatedImage.fill(Qt::lightGray); // Заполняем голубым
 
-    //быстрое
+    //быстрое инвертирование цвета
     /*
     for (int y = 0; y < source.height(); ++y)
     {
@@ -173,7 +173,7 @@ void cDrawFiles::execRotateCW90()
         }
     }
     */
-    //медленное с поворотом
+    //медленный поворот на 90 градусов по часовой стрелке
 
     int x1, y1;
     for (int y = 0; y < source.height(); ++y)
@@ -236,22 +236,64 @@ void cDrawFiles::execRotateCCW90()
     QImage originalImage(cIniFile::currentImagePath);
 
     // Создаем новое изображение для хранения повернутого изображения
-    QImage::Format format = originalImage.format();
+    //QImage::Format format = originalImage.format();
     QSize size = originalImage.size();
     int iW = size.width();
     int iH = size.height();
     int iSize;
-    if(iW > iH)iSize = iW; else iSize = iH;
+    int iVerticalShift;
+    if(iW > iH)
+    {
+        iSize = iW;
+        iVerticalShift = (iW - iH)/2;
+    }
+    else
+    {
+        iSize = iH;
+        iVerticalShift = (iH - iW)/2;
+    }
     //QSize newSize = QSize(iH, iW);
     QSize newSize = QSize(iSize, iSize);
 
-    //QImage rotatedImage(originalImage.size(), originalImage.format());
+    //--- ДЕЙСТВИЕ
+
+    QImage source = originalImage.convertToFormat(QImage::Format_ARGB32);
+    //QImage::Format format = originalImage.format();
+    QImage::Format format = source.format();
     QImage rotatedImage(newSize, format);
-    //QImage rotatedImage(size, format);
+    rotatedImage.fill(Qt::lightGray); // Заполняем серым
 
-    rotatedImage.fill(Qt::blue); // Заполняем фиолетовым
+    //медленный поворот на 90 градусов против часовой стрелки
 
-    //---
+    int x1, y1;
+    for (int y = 0; y < source.height(); ++y)
+    {
+        for (int x = 0; x < source.width(); ++x)
+        {
+            QRgb pixel = source.pixel(x, y);
+//            x1 = source.width() - y;
+//            x1 = x1 - iVerticalShift;
+//            y1 = x;
+            x1 = y;
+            x1 = x1 + iVerticalShift;
+            y1 = x;
+            if(rotatedImage.valid(x1,y1))
+            {
+                rotatedImage.setPixel(x1, y1, qRgba(
+                                          qRed(pixel),
+                                          qGreen(pixel),
+                                          qBlue(pixel),
+                                          qAlpha(pixel)
+                                          ));
+            }
+            else
+            {
+                qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
+            }
+        }
+    }
+
+    //--- КОНЕЦ ДЕЙСТВИЯ
 
     rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
     //---
