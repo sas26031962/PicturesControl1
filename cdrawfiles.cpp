@@ -176,6 +176,8 @@ void cDrawFiles::execRotateCW90()
     //медленный поворот на 90 градусов по часовой стрелке
 
     int x1, y1;
+    int errors = 0;
+    qDebug() << "$$$CW90 rotation";
     for (int y = 0; y < source.height(); ++y)
     {
         for (int x = 0; x < source.width(); ++x)
@@ -196,13 +198,24 @@ void cDrawFiles::execRotateCW90()
             else
             {
                 qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
+                if(errors++ > 10)
+                {
+                    break;
+                }
             }
         }
     }
 
     //--- КОНЕЦ ДЕЙСТВИЯ
 
-    rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+    if(errors < 10)
+    {
+        rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+    }
+    else
+    {
+        qDebug() << "Invalid rotate operation:" << cIniFile::currentImagePath ;
+    }
     //---
 
 }//End of void cDrawFiles::execRotateCW90()
@@ -266,17 +279,16 @@ void cDrawFiles::execRotateCCW90()
     //медленный поворот на 90 градусов против часовой стрелки
 
     int x1, y1;
+    int errors = 0;
+    qDebug() << "$$$CCW90 rotation";
     for (int y = 0; y < source.height(); ++y)
     {
         for (int x = 0; x < source.width(); ++x)
         {
             QRgb pixel = source.pixel(x, y);
-//            x1 = source.width() - y;
-//            x1 = x1 - iVerticalShift;
-//            y1 = x;
             x1 = y;
             x1 = x1 + iVerticalShift;
-            y1 = x;
+            y1 = source.width() - 1 - x;
             if(rotatedImage.valid(x1,y1))
             {
                 rotatedImage.setPixel(x1, y1, qRgba(
@@ -289,13 +301,24 @@ void cDrawFiles::execRotateCCW90()
             else
             {
                 qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
+                if(errors++ > 10)
+                {
+                    break;
+                }
             }
         }
     }
 
     //--- КОНЕЦ ДЕЙСТВИЯ
 
-    rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+    if(errors < 10)
+    {
+        rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+    }
+    else
+    {
+        qDebug() << "Invalid rotate operation:" << cIniFile::currentImagePath ;
+    }
     //---
 
 }//End of void cDrawFiles::execRotateCCW90()
