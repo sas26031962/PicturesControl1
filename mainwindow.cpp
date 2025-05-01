@@ -283,7 +283,31 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
                 qDebug() << "CTRL+D pressed";
                 emit ui->actionRemoveSection->triggered();// pushButtonEnd->pressed();
             }
-            break;
+       break;
+
+       //Key_R поворот направо
+       case 1050:
+       case 82:
+             qDebug() << "R pressed";
+             KeyPressed.push(e->key());
+             if(KeyPressed.Previous == 16777249)
+             {
+                 qDebug() << "CTRL+R pressed";
+                 execActionRotateCW();
+             }
+       break;
+
+       //Key_L поворот налево
+       case 1044:
+       case 76:
+             qDebug() << "L pressed";
+             KeyPressed.push(e->key());
+             if(KeyPressed.Previous == 16777249)
+             {
+                 qDebug() << "CTRL+L pressed";
+                 execActionRotateCCW();
+             }
+       break;
 
         default:
             qDebug() << "Key press:" << e->key();
