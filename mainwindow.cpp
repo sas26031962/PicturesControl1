@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");
     ui->comboBoxPatterns->addItem("^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}");
     ui->comboBoxPatterns->addItem("^20[0-9]{6}_[0-9]{6}");
+    ui->comboBoxPatterns->addItem("^.+_1$");
 
     progressBarNavigation = ui->progressBarNavigation;
     SpinBoxIndex = ui->spinBoxIndex;
