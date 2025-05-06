@@ -9,7 +9,7 @@ CONFIG += c++14 # Добавляем поддержку C++14
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = PicturesControl0
+TARGET = PicturesControl1
 TEMPLATE = app
 
 
