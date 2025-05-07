@@ -20,6 +20,29 @@ MainWindow::MainWindow(QWidget *parent) :
     cIniFile::Keys = new QStringList();
     cIniFile::SearchKeys = new QStringList();
 
+    //---
+    qDebug() << "Build abi:" << QSysInfo::buildAbi();
+    qDebug() << "Build CPU architecture:" << QSysInfo::buildCpuArchitecture();
+    qDebug() << "Current CPU architecture:" << QSysInfo::currentCpuArchitecture();
+    qDebug() << "Kernel type:" << QSysInfo::kernelType();
+    qDebug() << "Kernel version:" << QSysInfo::kernelVersion();
+    qDebug() << "Machine host name:" << QSysInfo::machineHostName();
+    qDebug() << "Product name:" << QSysInfo::prettyProductName();
+    qDebug() << "Product type:" << QSysInfo::productType();
+    qDebug() << "Product version:" << QSysInfo::productVersion();
+
+    // Определение конкретной ОС
+    #if defined(Q_OS_WIN)
+        qDebug() << "Running on Windows";
+        iSystemType = WINDOWS_SYSTEM_TYPE;
+    #elif defined(Q_OS_LINUX)
+        qDebug() << "Running on Linux";
+        iSystemType = LINUX_SYSTEM_TYPE;
+    #else
+        qDebug() << "Running on unknown OS";
+        iSystemType = 0;
+    #endif
+    //---
     qslDeletedSections.clear();
 
     ui->setupUi(this);
@@ -117,6 +140,24 @@ MainWindow::MainWindow(QWidget *parent) :
     labelFileName = new QLabel("LoadedFileName");
     ui->statusBar->addWidget(labelFileName);
 
+    labelOsType = new QLabel();
+    ui->statusBar->addWidget(labelOsType);
+
+    switch(iSystemType)
+    {
+        case WINDOWS_SYSTEM_TYPE:
+            labelOsType->setText("Windows OS");
+        break;
+
+        case LINUX_SYSTEM_TYPE:
+            labelOsType->setText("Linux OS");
+        break;
+
+        default:
+            labelOsType->setText("Unknown OS");
+        break;
+    }
+
     //std::unique_ptr<QStringList> ptrHashTagList(new QStringList());
     //qslHashTagList = ptrHashTagList.get();
     qslHashTagList = new QStringList();
@@ -205,6 +246,7 @@ MainWindow::~MainWindow()
     delete progressBarProcess;
     delete labelExecStatus;
     delete labelFileName;
+    delete labelOsType;
 
     delete fmViewPicture;
 

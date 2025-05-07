@@ -22,6 +22,7 @@
 #include <QKeyEvent>
 #include <QSet>
 #include <QRegularExpression>
+#include <QSysInfo>
 
 #include "cinifile.h"
 #include "fmview.h"
@@ -29,6 +30,9 @@
 #include "stvarmem.h"
 #include "cdrawfiles.h"
 #include "cloadfiles.h"
+
+#define WINDOWS_SYSTEM_TYPE 1
+#define LINUX_SYSTEM_TYPE 2
 
 #define STATUS_BAR_DELAY 500
 #define WINDOW_LEFT_MARGING 40
@@ -44,12 +48,17 @@ class MainWindow : public QMainWindow
 
 private:
     //Атрибуты
+
+    int iSystemType = 0;
+
     varMem <int> KeyPressed;
 
     bool IsError = false;
 
     QLabel * labelExecStatus;
     QLabel * labelFileName;
+    QLabel * labelOsType;
+
     QProgressBar * progressBarProcess;
     QProgressBar * progressBarNavigation;
     QSpinBox * SpinBoxIndex;
