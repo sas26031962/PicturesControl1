@@ -505,16 +505,7 @@ QStringList MainWindow::loadStringListFromFile(const QString& fileName)
 
 void MainWindow::loadRemovedSectionsList()
 {
-    QString  filePathRemovedSectionList;
-    #ifdef HOME_STORAGE
-        filePathRemovedSectionList = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
-        qDebug() << "loadRemovedSectionsList():"  << "HOME_STORAGE";
-    #else
-        filePathRemovedSectionList = "C:/WORK/PicturesControl/PicturesControl1/programm/data/RemovedSectionListShips.txt";// Прямой путь к файлу
-        qDebug() << "loadRemovedSectionsList():" << "WORK_STORAGE";
-    #endif
-
-    qslDeletedSections = loadStringListFromFile(filePathRemovedSectionList);
+    qslDeletedSections = loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
     ui->listWidgetOther->clear();
     ui->listWidgetOther->addItems(qslDeletedSections);
@@ -525,16 +516,8 @@ void MainWindow::loadRemovedSectionsList()
 
 void MainWindow::saveRemovedSectionsList()
 {
-    QString  filePathRemovedSectionList;
-    #ifdef HOME_STORAGE
-        filePathRemovedSectionList = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
-        qDebug() << "saveRemovedSectionsList():"  << "HOME_STORAGE";
-    #else
-        filePathRemovedSectionList = "C:/WORK/PicturesControl/PicturesControl1/programm/data/RemovedSectionListShips.txt";// Прямой путь к файлу
-        qDebug() << "saveRemovedSectionsList():"  << "WORK_STORAGE";
-    #endif
 
-    saveStringListToFile(filePathRemovedSectionList, qslDeletedSections);
+    saveStringListToFile(cIniFile::filePathRemovedSectionList, qslDeletedSections);
 
 }//End of void MainWindow::saveRemovedSectionsList()
 
@@ -748,22 +731,10 @@ void MainWindow::execActionFormViewPicture()
 bool MainWindow::loadHashTagListSubject()
 {
 
-#ifdef HOME_STORAGE
-    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу
-    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
-    fileNameHashTag = "HashTagListSubjectPhotos.txt";
-    qDebug() << "HOME_STORAGE";
-#else
-    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу
-    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
-    fileNameHashTag = "HashTagListSubjectShips.txt";
-    qDebug() << "WORK_STORAGE";
-#endif
-
-    QFile file(filePathHashTag);
+    QFile file(cIniFile::fileSubjectHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathHashTag;
+        qDebug() << "Error: Could not open file: " << cIniFile::fileSubjectHashTag;
         return false;
     }
 
@@ -790,22 +761,10 @@ bool MainWindow::loadHashTagListSubject()
 bool MainWindow::loadHashTagListPlace()
 {
 
-#ifdef HOME_STORAGE
-    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу
-    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
-    fileNameHashTag = "HashTagListPlacesPhotos.txt";
-    qDebug() << "HOME_STORAGE";
-#else
-    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу
-    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
-    fileNameHashTag = "HashTagListPlacesShips.txt";
-    qDebug() << "WORK_STORAGE";
-#endif
-
-    QFile file(filePathHashTag);
+    QFile file(cIniFile::filePlaceHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathHashTag;
+        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
         return false;
     }
 
@@ -831,27 +790,15 @@ bool MainWindow::loadHashTagListPlace()
 bool MainWindow::loadHashTagListTheame()
 {
 
-#ifdef HOME_STORAGE
-    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой
-    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
-    fileNameHashTag = "HashTagListTheamsPhotos.txt";
-    qDebug() << "HOME_STORAGE";
-#else
-    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь прямой
-    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
-    fileNameHashTag = "HashTagListSubjectShips.txt";
-    qDebug() << "WORK_STORAGE";
-#endif
-
-    QFile file(filePathHashTag);
+    QFile file(cIniFile::fileTheamsHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathHashTag;
+        qDebug() << "Error: Could not open file: " << cIniFile::fileTheamsHashTag;
         return false;
     }
     else
     {
-        qDebug() << "File: " << filePathHashTag << " is loaded!";
+        qDebug() << "File: " << cIniFile::fileTheamsHashTag << " is loaded!";
     }
 
     QTextStream in(&file);
@@ -876,27 +823,15 @@ bool MainWindow::loadHashTagListTheame()
 bool MainWindow::loadHashTagListProperty()
 {
 
-#ifdef HOME_STORAGE
-    filePathHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой
-    filePathRoot = "/home/andy/MyQtProjects/PicturesControl1";
-    fileNameHashTag = "HashTagListTheamsPhotos.txt";
-    qDebug() << "HOME_STORAGE";
-#else
-    filePathHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой
-    filePathRoot = "C:/WORK/PicturesControl/PicturesControl1";
-    fileNameHashTag = "HashTagListTheamsShips.txt";
-    qDebug() << "WORK_STORAGE";
-#endif
-
-    QFile file(filePathHashTag);
+    QFile file(cIniFile::filePropertyesHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << filePathHashTag;
+        qDebug() << "Error: Could not open file: " << cIniFile::filePropertyesHashTag;
         return false;
     }
     else
     {
-        qDebug() << "File: " << filePathHashTag << " is loaded!";
+        qDebug() << "File: " << cIniFile::filePropertyesHashTag << " is loaded!";
     }
 
     QTextStream in(&file);

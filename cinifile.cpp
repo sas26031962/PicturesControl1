@@ -12,13 +12,26 @@
     QString cIniFile::patternXStringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern3StringListFile.txt";
     QString cIniFile::rotatedImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/rotated_image.png";
     QString cIniFile::scaledImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/scaled_image.png";
+    QString cIniFile::filePathRemovedSectionList = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
+    QString cIniFile::fileSubjectHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу;
+    QString cIniFile::filePlaceHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу;
+    QString cIniFile::filePropertyesHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
+    QString cIniFile::fileTheamsHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
+    cIniFile cIniFile::IniFile("/home/andy/From Smartfone");
+
 #else
     QString cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";
     QString cIniFile::pattern1StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern1StringListFile.txt";
     QString cIniFile::pattern2StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern2StringListFile.txt";
     QString cIniFile::patternXStringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern3StringListFile.txt";
-     QString cIniFile::rotatedImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/rotated_image.png";
+    QString cIniFile::rotatedImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/rotated_image.png";
     QString cIniFile::scaledImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/scaled_image.png";
+    QString cIniFile::filePathRemovedSectionList = "C:/WORK/PicturesControl/PicturesControl1/programm/data/RemovedSectionListShips.txt";// Прямой путь к файлу
+    QString cIniFile::fileSubjectHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу;
+    QString cIniFile::filePlaceHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу;
+    QString cIniFile::filePropertyesHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой;
+    QString cIniFile::fileTheamsHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь прямой;
+    cIniFile cIniFile::IniFile("C:/Work/Ships");
 #endif
 
     QString cIniFile::currentImagePath = "";
@@ -31,14 +44,6 @@
     QStringList * cIniFile::currentGroups;
 
     QList<cRecord> * cRecord::RecordList;
-
-
-// Путь к каталогу, который нужно прочитать.
-#ifdef HOME_STORAGE
-    cIniFile cIniFile::IniFile("/home/andy/From Smartfone");
-#else
-    cIniFile cIniFile::IniFile("C:/Work/Ships");
-#endif
 
 
 cIniFile::cIniFile(QString sourcePath)

@@ -44,6 +44,13 @@ public:
     static QString currentImagePath;
     static QString currentRotatedImagePath;
 
+    static QString filePathRemovedSectionList;
+    static QString fileSubjectHashTag;
+    static QString filePlaceHashTag;
+    static QString filePropertyesHashTag;
+    static QString fileTheamsHashTag;
+
+
     static QString pattern1StringListFilePath;
     static QString pattern2StringListFilePath;
     static QString patternXStringListFilePath;

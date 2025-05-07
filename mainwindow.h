@@ -91,7 +91,7 @@ private:
 
 public:
     //Атрибуты
-    QString filePathHashTag;// Путь к файлу для загрузки параметров
+//    QString filePathHashTag;// Путь к файлу для загрузки параметров
     QString fileNameHashTag;// Имя файла для загрузки параметров
 
     QString filePathRoot;// Путь к папке с исполняемым файлом (programm)
