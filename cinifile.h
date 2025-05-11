@@ -64,6 +64,7 @@ public:
 
     //Методы
     QString getDirectoryPah();
+    void setDirectoryPaht(QString sourcePath);
 
     void addInitalSection(int n);
     void addRecordListData();
