@@ -1,5 +1,6 @@
 Maps
 IsRotated
+IsModifyedByRotation
 Document
 Archive
 ForDeleting
