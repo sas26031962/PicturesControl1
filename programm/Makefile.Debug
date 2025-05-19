@@ -279,6 +279,7 @@ debug/moc_mainwindow.cpp: ../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWid
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/QKeyEvent \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSet \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QRegularExpression \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSysInfo \
 		../cinifile.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QString \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSettings \
@@ -607,6 +608,7 @@ debug/main.o: ../main.cpp ../mainwindow.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/QKeyEvent \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSet \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QRegularExpression \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSysInfo \
 		../cinifile.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QString \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSettings \
@@ -787,6 +789,7 @@ debug/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/QKeyEvent \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSet \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QRegularExpression \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSysInfo \
 		../cinifile.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QString \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSettings \
@@ -820,8 +823,6 @@ debug/mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qdesktopwidget.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qguiapplication.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qinputmethod.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QButtonGroup \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qbuttongroup.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QComboBox \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qcombobox.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QGroupBox \
@@ -1158,10 +1159,6 @@ debug/fmview.o: ../fmview.cpp ../fmview.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpen.h \
 		ui_fmview.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QVariant \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QAction \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qaction.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qicon.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qactiongroup.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QApplication \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qapplication.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qcoreapplication.h \
@@ -1169,31 +1166,16 @@ debug/fmview.o: ../fmview.cpp ../fmview.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qdesktopwidget.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qguiapplication.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qinputmethod.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QButtonGroup \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qbuttongroup.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QHeaderView \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qheaderview.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractitemview.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qframe.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qabstractitemmodel.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qitemselectionmodel.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qstyleoption.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractspinbox.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qslider.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractslider.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qstyle.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qtabbar.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qtabwidget.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qrubberband.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QLabel \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlabel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qframe.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QLineEdit \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlineedit.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qtextcursor.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qtextformat.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QSlider
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QSlider \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qslider.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractslider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\fmview.o ..\fmview.cpp
 
 debug/cimportfiles.o: ../cimportfiles.cpp ../cimportfiles.h \

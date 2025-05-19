@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtCore/qconfig.h>
 #include <QDebug>
 #include <QImage>
 #include <QProgressBar>

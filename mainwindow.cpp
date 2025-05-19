@@ -781,9 +781,10 @@ bool MainWindow::loadHashTagListSubject()
     }
 
     QTextStream in(&file);
-#ifndef HOME_STORAGE
-    in.setCodec("Windows-1251");
-#endif
+    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+    }
 
     qslHashTagList->clear();
 
@@ -811,9 +812,10 @@ bool MainWindow::loadHashTagListPlace()
     }
 
     QTextStream in(&file);
-#ifndef HOME_STORAGE
-    in.setCodec("Windows-1251");
-#endif
+    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+    }
 
     qslHashTagList->clear();
 
@@ -844,9 +846,10 @@ bool MainWindow::loadHashTagListTheame()
     }
 
     QTextStream in(&file);
-#ifndef HOME_STORAGE
-    in.setCodec("Windows-1251");
-#endif
+    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+    }
 
     qslHashTagList->clear();
 
@@ -877,9 +880,10 @@ bool MainWindow::loadHashTagListProperty()
     }
 
     QTextStream in(&file);
-#ifndef HOME_STORAGE
-    in.setCodec("Windows-1251");
-#endif
+    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+    }
 
     qslHashTagList->clear();
 
