@@ -117,6 +117,8 @@ public:
     QLineEdit *lineEditPattern;
     QPushButton *pushButtonSearchPatternX;
     QComboBox *comboBoxPatterns;
+    QGroupBox *groupBoxAddItem;
+    QLineEdit *lineEditAddIterm;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuSelect_image;
@@ -247,7 +249,7 @@ public:
         tableViewCurrent->setGeometry(QRect(10, 30, 231, 341));
         groupBoxEdit = new QGroupBox(centralWidget);
         groupBoxEdit->setObjectName(QStringLiteral("groupBoxEdit"));
-        groupBoxEdit->setGeometry(QRect(20, 510, 451, 51));
+        groupBoxEdit->setGeometry(QRect(10, 510, 451, 51));
         pushButtonLoad = new QPushButton(groupBoxEdit);
         pushButtonLoad->setObjectName(QStringLiteral("pushButtonLoad"));
         pushButtonLoad->setGeometry(QRect(10, 20, 75, 23));
@@ -345,6 +347,13 @@ public:
         comboBoxPatterns = new QComboBox(groupBoxPattern);
         comboBoxPatterns->setObjectName(QStringLiteral("comboBoxPatterns"));
         comboBoxPatterns->setGeometry(QRect(10, 50, 221, 22));
+        groupBoxAddItem = new QGroupBox(centralWidget);
+        groupBoxAddItem->setObjectName(QStringLiteral("groupBoxAddItem"));
+        groupBoxAddItem->setGeometry(QRect(10, 460, 271, 51));
+        lineEditAddIterm = new QLineEdit(groupBoxAddItem);
+        lineEditAddIterm->setObjectName(QStringLiteral("lineEditAddIterm"));
+        lineEditAddIterm->setGeometry(QRect(10, 20, 251, 25));
+        lineEditAddIterm->setFont(font);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -508,6 +517,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Other", 0));
         groupBoxPattern->setTitle(QApplication::translate("MainWindow", "Pattern", 0));
         pushButtonSearchPatternX->setText(QApplication::translate("MainWindow", "Search", 0));
+        groupBoxAddItem->setTitle(QApplication::translate("MainWindow", "AddItem", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuSelect_image->setTitle(QApplication::translate("MainWindow", "Select image", 0));
         menuForms->setTitle(QApplication::translate("MainWindow", "Forms", 0));

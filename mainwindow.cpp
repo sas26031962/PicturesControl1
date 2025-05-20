@@ -2350,28 +2350,57 @@ void MainWindow::execActionInsertSubject()
 {
     QString s = "execActionInsertSubject()";
 
+    QString qsGoal = ui->lineEditAddIterm->text();
+
+    if(qsGoal.length() <= 0)
+    {
+        //Информационное сообщение
+        s += ": Empty string, nothing to do!";
+        s += qsGoal;
+
+        //---
+        emit execShowExecStatus(s);
+        //---
+
+        return;
+    }
+
     //Загрузка списка Subject
 
     if(loadHashTagListSubject())
     {
         qDebug() << ": loadHashTagListSubject is sucsess";
 
-        ui->listWidgetSubject->clear();
-        int iLast = qslHashTagList->count() - 1;
-        if(qslHashTagList->at(iLast) == "")
+        //Здесь должна быть проверка на наличие нового значения в списке
+        if(qslHashTagList->indexOf(qsGoal) < 0)
         {
-            qslHashTagList->replace(iLast, (QString)"Noname");
+            ui->listWidgetSubject->clear();
+            int iLast = qslHashTagList->count() - 1;
+            if(qslHashTagList->at(iLast) == "")
+            {
+                qslHashTagList->replace(iLast, qsGoal);
+            }
+            else
+            {
+                qslHashTagList->append(qsGoal);
+            }
+            ui->listWidgetSubject->addItems(*qslHashTagList);
+
+            //Сохранение нового списка Subject
+
+            cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
+
+            //Информационное сообщение
+            s += ": ";
+            s += qsGoal;
         }
         else
         {
-            qslHashTagList->append("Noname");
+            //Информационное сообщение
+            s += ": HashTagListSubject already contain ";
+            s += qsGoal;
         }
-        ui->listWidgetSubject->addItems(*qslHashTagList);
-
     }
-
-    s += ": ";
-    s += "Noname";
 
     //---
     emit execShowExecStatus(s);

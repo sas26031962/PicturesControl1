@@ -166,7 +166,7 @@
    <widget class="QGroupBox" name="groupBoxEdit">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>510</y>
       <width>451</width>
       <height>51</height>
@@ -500,6 +500,34 @@
        <width>221</width>
        <height>22</height>
       </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxAddItem">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>460</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>AddItem</string>
+    </property>
+    <widget class="QLineEdit" name="lineEditAddIterm">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>251</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
      </property>
     </widget>
    </widget>
