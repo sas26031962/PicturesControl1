@@ -510,7 +510,7 @@
      <x>0</x>
      <y>0</y>
      <width>601</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -555,6 +555,10 @@
     <addaction name="actionLoadHashTagListPlace"/>
     <addaction name="actionLoadHashTagListProperty"/>
     <addaction name="actionLoadHashTagListTheame"/>
+    <addaction name="actionInsertSubject"/>
+    <addaction name="actionInsertPlace"/>
+    <addaction name="actionInsertProperty"/>
+    <addaction name="actionInsertTheame"/>
    </widget>
    <widget class="QMenu" name="menuSearch">
     <property name="title">
@@ -632,12 +636,12 @@
   </action>
   <action name="actionLoaadHashTagListSubject">
    <property name="text">
-    <string>Subject</string>
+    <string>LoadSubject</string>
    </property>
   </action>
   <action name="actionLoadHashTagListPlace">
    <property name="text">
-    <string>Place</string>
+    <string>LoadPlace</string>
    </property>
   </action>
   <action name="actionRemoveMovie">
@@ -657,7 +661,7 @@
   </action>
   <action name="actionLoadHashTagListProperty">
    <property name="text">
-    <string>Property</string>
+    <string>LoadProperty</string>
    </property>
   </action>
   <action name="actionImportFiles">
@@ -692,7 +696,7 @@
   </action>
   <action name="actionLoadHashTagListTheame">
    <property name="text">
-    <string>Theame</string>
+    <string>LoadTheame</string>
    </property>
   </action>
   <action name="actionRemoveSection">
@@ -758,6 +762,26 @@
   <action name="actionSearchNamePatterns1XIntersection">
    <property name="text">
     <string>SearchNamePatterns1XIntersection</string>
+   </property>
+  </action>
+  <action name="actionInsertSubject">
+   <property name="text">
+    <string>InsertSubject</string>
+   </property>
+  </action>
+  <action name="actionInsertPlace">
+   <property name="text">
+    <string>InsertPlace</string>
+   </property>
+  </action>
+  <action name="actionInsertProperty">
+   <property name="text">
+    <string>InsertProperty</string>
+   </property>
+  </action>
+  <action name="actionInsertTheame">
+   <property name="text">
+    <string>InsertTheame</string>
    </property>
   </action>
  </widget>

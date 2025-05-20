@@ -140,6 +140,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionGetKeysList, SIGNAL(triggered()), this, SLOT( execActionGetKeysList()));
 
     connect(ui->actionLoad, SIGNAL(triggered()), this, SLOT( execActionLoad()));
+
     //---Для удаления
     connect(ui->actionLoaadHashTagListSubject, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListSubject()));
     connect(ui->actionLoadHashTagListPlace, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListPlace()));
@@ -246,6 +247,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSearchRotated, SIGNAL(triggered()), this, SLOT( execActionSearchRotated()));
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
+
+    connect(ui->actionInsertSubject, &QAction::triggered, this, &MainWindow::execActionInsertSubject);
+    connect(ui->actionInsertPlace, &QAction::triggered, this, &MainWindow::execActionInsertPlace);
+    connect(ui->actionInsertProperty, &QAction::triggered, this, &MainWindow::execActionInsertProperty);
+    connect(ui->actionInsertTheame, &QAction::triggered, this, &MainWindow::execActionInsertTheame);
 
     connect(ui->actionSearchNamePattern1, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern1);
     connect(ui->actionSearchNamePattern2, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern2);
@@ -2339,4 +2345,72 @@ void MainWindow::execListWidgetFoundedItemClicked()
 
 
 //=============================================================================
+
+void MainWindow::execActionInsertSubject()
+{
+    QString s = "execActionInsertSubject()";
+
+    //Загрузка списка Subject
+
+    if(loadHashTagListSubject())
+    {
+        qDebug() << ": loadHashTagListSubject is sucsess";
+
+        ui->listWidgetSubject->clear();
+        int iLast = qslHashTagList->count() - 1;
+        if(qslHashTagList->at(iLast) == "")
+        {
+            qslHashTagList->replace(iLast, (QString)"Noname");
+        }
+        else
+        {
+            qslHashTagList->append("Noname");
+        }
+        ui->listWidgetSubject->addItems(*qslHashTagList);
+
+    }
+
+    s += ": ";
+    s += "Noname";
+
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionInsertPlace()
+{
+    QString s = "execActionInsertPlace()";
+
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionInsertProperty()
+{
+    QString s = "execActionInsertProperty()";
+
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionInsertTheame()
+{
+    QString s = "execActionInsertTheame()";
+
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
 

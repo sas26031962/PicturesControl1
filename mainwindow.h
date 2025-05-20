@@ -139,6 +139,11 @@ private slots:
     void execActionLoadHashTagListProperty();
     void execActionLoadHashTagListTheame();
 
+    void execActionInsertSubject();
+    void execActionInsertPlace();
+    void execActionInsertProperty();
+    void execActionInsertTheame();
+
     void execActionSearchRotated();
     void execActionSearchOrYes();
     void execActionSearchNamePattern1();
