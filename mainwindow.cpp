@@ -2413,6 +2413,58 @@ void MainWindow::execActionInsertPlace()
 {
     QString s = "execActionInsertPlace()";
 
+    QString qsGoal = ui->lineEditAddIterm->text();
+
+    if(qsGoal.length() <= 0)
+    {
+        //Информационное сообщение
+        s += ": Empty string, nothing to do!";
+        s += qsGoal;
+
+        //---
+        emit execShowExecStatus(s);
+        //---
+
+        return;
+    }
+
+    //Загрузка списка Place
+
+    if(loadHashTagListPlace())
+    {
+        qDebug() << ": loadHashTagListPlace is sucsess";
+
+        //Здесь должна быть проверка на наличие нового значения в списке
+        if(qslHashTagList->indexOf(qsGoal) < 0)
+        {
+            ui->listWidgetPlaces->clear();
+            int iLast = qslHashTagList->count() - 1;
+            if(qslHashTagList->at(iLast) == "")
+            {
+                qslHashTagList->replace(iLast, qsGoal);
+            }
+            else
+            {
+                qslHashTagList->append(qsGoal);
+            }
+            ui->listWidgetPlaces->addItems(*qslHashTagList);
+
+            //Сохранение нового списка Place
+
+            cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
+
+            //Информационное сообщение
+            s += ": ";
+            s += qsGoal;
+        }
+        else
+        {
+            //Информационное сообщение
+            s += ": HashTagListPlace already contain ";
+            s += qsGoal;
+        }
+    }
+
     //---
     emit execShowExecStatus(s);
     //---
