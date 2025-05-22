@@ -821,6 +821,7 @@ bool MainWindow::loadHashTagListPlace()
     if(iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
+        qDebug() << "Select Windows-1251 codec in loading case";
     }
 
     qslHashTagList->clear();
@@ -2452,37 +2453,44 @@ void MainWindow::execActionInsertPlace()
 
     //---Загрузка списка Place
 
-    QFile file(cIniFile::filePlaceHashTag);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!loadHashTagListPlace())
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
+        qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
         return;
     }
 
-    QTextStream in(&file);
-    if(iSystemType == WINDOWS_SYSTEM_TYPE)
-    {
-        in.setCodec("Windows-1251");
-        qDebug() << "Select Windows-1251 codec";
-    }
+//    QFile file(cIniFile::filePlaceHashTag);
+//    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+//    {
+//        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
+//        return;
+//    }
 
-    qslHashTagList->clear();
+//    QTextStream in(&file);
+//    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+//    {
+//        in.setCodec("Windows-1251");
+//        qDebug() << "Select Windows-1251 codec";
+//    }
 
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        QTextCodec *codec = QTextCodec::codecForName("Windows-1251"); // Получаем кодек CP1251
+//    qslHashTagList->clear();
 
-        // Преобразуем текст в Windows-1251 (QByteArray)
-        QByteArray encodedText = codec->fromUnicode(line);
+//    while (!in.atEnd())
+//    {
+//        QString line = in.readLine();//
+//        //QTextCodec *codec = QTextCodec::codecForName("Windows-1251"); // Получаем кодек CP1251
 
-        // Если нужно обратно в QString (для QLabel)
-        QString cp1251Text = QString::fromLatin1(encodedText);
+//        // Преобразуем текст в Windows-1251 (QByteArray)
+//        //QByteArray encodedText = codec->fromUnicode(line);
 
-        qslHashTagList->append(cp1251Text);
-    }
+//        // Если нужно обратно в QString (для QLabel)
+//        //QString cp1251Text = QString::fromLatin1(encodedText);
 
-    file.close();
+//        //qslHashTagList->append(cp1251Text);
+//        qslHashTagList->append(line);
+//    }
+
+//    file.close();
     //---
 
     qDebug() << ": loadHashTagListPlace is sucsess";
@@ -2504,7 +2512,7 @@ void MainWindow::execActionInsertPlace()
 
         //Сохранение нового списка Place
 
-        cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
+        //cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";
