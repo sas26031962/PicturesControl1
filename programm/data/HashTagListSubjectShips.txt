@@ -25,3 +25,4 @@ Dreadnote_Sovetsky_Soyuz
 Dreadnote_Parizskaya_Kommuna
 Dreadnote_Izmail
 Dreadnote_Novorossiysk
+Линкор_Архангельск

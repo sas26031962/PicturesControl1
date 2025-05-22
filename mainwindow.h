@@ -24,6 +24,7 @@
 #include <QSet>
 #include <QRegularExpression>
 #include <QSysInfo>
+#include <QTextCodec>
 
 #include "cinifile.h"
 #include "fmview.h"

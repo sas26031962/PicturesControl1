@@ -2367,39 +2367,61 @@ void MainWindow::execActionInsertSubject()
 
     //Загрузка списка Subject
 
-    if(loadHashTagListSubject())
+    QFile file(cIniFile::fileSubjectHashTag);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << ": loadHashTagListSubject is sucsess";
+        qDebug() << "Error: Could not open file: " << cIniFile::fileSubjectHashTag;
+        return;
+    }
 
-        //Здесь должна быть проверка на наличие нового значения в списке
-        if(qslHashTagList->indexOf(qsGoal) < 0)
+    QTextStream in(&file);
+    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+        qDebug() << "Select Windows-1251 codec";
+    }
+
+    qslHashTagList->clear();
+
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        qslHashTagList->append(line);
+    }
+
+    file.close();
+    //---
+
+    qDebug() << ": loadHashTagListSubject is sucsess";
+
+    //Здесь должна быть проверка на наличие нового значения в списке
+    if(qslHashTagList->indexOf(qsGoal) < 0)
+    {
+        ui->listWidgetSubject->clear();
+        int iLast = qslHashTagList->count() - 1;
+        if(qslHashTagList->at(iLast) == "")
         {
-            ui->listWidgetSubject->clear();
-            int iLast = qslHashTagList->count() - 1;
-            if(qslHashTagList->at(iLast) == "")
-            {
-                qslHashTagList->replace(iLast, qsGoal);
-            }
-            else
-            {
-                qslHashTagList->append(qsGoal);
-            }
-            ui->listWidgetSubject->addItems(*qslHashTagList);
-
-            //Сохранение нового списка Subject
-
-            cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
-
-            //Информационное сообщение
-            s += ": ";
-            s += qsGoal;
+            qslHashTagList->replace(iLast, qsGoal);
         }
         else
         {
-            //Информационное сообщение
-            s += ": HashTagListSubject already contain ";
-            s += qsGoal;
+            qslHashTagList->append(qsGoal);
         }
+        ui->listWidgetSubject->addItems(*qslHashTagList);
+
+        //Сохранение нового списка Place
+
+        cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
+
+        //Информационное сообщение
+        s += ": ";
+        s += qsGoal;
+    }
+    else
+    {
+        //Информационное сообщение
+        s += ": HashTagListSubject already contain ";
+        s += qsGoal;
     }
 
     //---
@@ -2428,41 +2450,71 @@ void MainWindow::execActionInsertPlace()
         return;
     }
 
-    //Загрузка списка Place
+    //---Загрузка списка Place
 
-    if(loadHashTagListPlace())
+    QFile file(cIniFile::filePlaceHashTag);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << ": loadHashTagListPlace is sucsess";
+        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
+        return;
+    }
 
-        //Здесь должна быть проверка на наличие нового значения в списке
-        if(qslHashTagList->indexOf(qsGoal) < 0)
+    QTextStream in(&file);
+    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+        qDebug() << "Select Windows-1251 codec";
+    }
+
+    qslHashTagList->clear();
+
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        QTextCodec *codec = QTextCodec::codecForName("Windows-1251"); // Получаем кодек CP1251
+
+        // Преобразуем текст в Windows-1251 (QByteArray)
+        QByteArray encodedText = codec->fromUnicode(line);
+
+        // Если нужно обратно в QString (для QLabel)
+        QString cp1251Text = QString::fromLatin1(encodedText);
+
+        qslHashTagList->append(cp1251Text);
+    }
+
+    file.close();
+    //---
+
+    qDebug() << ": loadHashTagListPlace is sucsess";
+
+    //Здесь должна быть проверка на наличие нового значения в списке
+    if(qslHashTagList->indexOf(qsGoal) < 0)
+    {
+        ui->listWidgetPlaces->clear();
+        int iLast = qslHashTagList->count() - 1;
+        if(qslHashTagList->at(iLast) == "")
         {
-            ui->listWidgetPlaces->clear();
-            int iLast = qslHashTagList->count() - 1;
-            if(qslHashTagList->at(iLast) == "")
-            {
-                qslHashTagList->replace(iLast, qsGoal);
-            }
-            else
-            {
-                qslHashTagList->append(qsGoal);
-            }
-            ui->listWidgetPlaces->addItems(*qslHashTagList);
-
-            //Сохранение нового списка Place
-
-            cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
-
-            //Информационное сообщение
-            s += ": ";
-            s += qsGoal;
+            qslHashTagList->replace(iLast, qsGoal);
         }
         else
         {
-            //Информационное сообщение
-            s += ": HashTagListPlace already contain ";
-            s += qsGoal;
+            qslHashTagList->append(qsGoal);
         }
+        ui->listWidgetPlaces->addItems(*qslHashTagList);
+
+        //Сохранение нового списка Place
+
+        cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
+
+        //Информационное сообщение
+        s += ": ";
+        s += qsGoal;
+    }
+    else
+    {
+        //Информационное сообщение
+        s += ": HashTagListPlace already contain ";
+        s += qsGoal;
     }
 
     //---
