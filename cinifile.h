@@ -16,6 +16,9 @@
  * ===
  *****************************************************************************/
 
+#define WINDOWS_SYSTEM_TYPE 1
+#define LINUX_SYSTEM_TYPE 2
+
 //-----------------------------------------------------------------------------
 //Глобальные переменные
 //-----------------------------------------------------------------------------
@@ -51,6 +54,8 @@ public:
     static QString patternXStringListFilePath;
 
     static cIniFile IniFile;
+    static int iSystemType;
+
 
     int iRecordListLength = 0;  //Полное число записей
 

@@ -33,9 +33,6 @@
 #include "cdrawfiles.h"
 #include "cloadfiles.h"
 
-#define WINDOWS_SYSTEM_TYPE 1
-#define LINUX_SYSTEM_TYPE 2
-
 #define STATUS_BAR_DELAY 500
 #define WINDOW_LEFT_MARGING 40
 #define WINDOW_TOP_MARGING 65
@@ -51,7 +48,7 @@ class MainWindow : public QMainWindow
 private:
     //Атрибуты
 
-    int iSystemType = 0;
+//    int iSystemType = 0;
 
     varMem <int> KeyPressed;
 

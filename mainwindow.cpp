@@ -34,20 +34,20 @@ MainWindow::MainWindow(QWidget *parent) :
     // Определение конкретной ОС
     #if defined(Q_OS_WIN)
         qDebug() << "Running on Windows";
-        iSystemType = WINDOWS_SYSTEM_TYPE;
+        cIniFile::iSystemType = WINDOWS_SYSTEM_TYPE;
     #elif defined(Q_OS_LINUX)
         qDebug() << "Running on Linux";
-        iSystemType = LINUX_SYSTEM_TYPE;
+        cIniFile::iSystemType = LINUX_SYSTEM_TYPE;
     #else
         qDebug() << "Running on unknown OS";
-        iSystemType = 0;
+        cIniFile::iSystemType = 0;
     #endif
 
     //--- Определение имён файлов
 
     QString qsIniFileName;
 
-    if(iSystemType == LINUX_SYSTEM_TYPE)
+    if(cIniFile::iSystemType == LINUX_SYSTEM_TYPE)
     {
 
          cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";
@@ -186,7 +186,7 @@ MainWindow::MainWindow(QWidget *parent) :
     labelOsType = new QLabel();
     ui->statusBar->addWidget(labelOsType);
 
-    switch(iSystemType)
+    switch(cIniFile::iSystemType)
     {
         case WINDOWS_SYSTEM_TYPE:
             labelOsType->setText("Windows OS");
@@ -787,7 +787,7 @@ bool MainWindow::loadHashTagListSubject()
     }
 
     QTextStream in(&file);
-    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
     }
@@ -818,7 +818,7 @@ bool MainWindow::loadHashTagListPlace()
     }
 
     QTextStream in(&file);
-    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
         qDebug() << "Select Windows-1251 codec in loading case";
@@ -853,7 +853,7 @@ bool MainWindow::loadHashTagListTheame()
     }
 
     QTextStream in(&file);
-    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
     }
@@ -887,7 +887,7 @@ bool MainWindow::loadHashTagListProperty()
     }
 
     QTextStream in(&file);
-    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
     }
@@ -2376,7 +2376,7 @@ void MainWindow::execActionInsertSubject()
     }
 
     QTextStream in(&file);
-    if(iSystemType == WINDOWS_SYSTEM_TYPE)
+    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
         qDebug() << "Select Windows-1251 codec";
@@ -2459,40 +2459,6 @@ void MainWindow::execActionInsertPlace()
         return;
     }
 
-//    QFile file(cIniFile::filePlaceHashTag);
-//    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-//    {
-//        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
-//        return;
-//    }
-
-//    QTextStream in(&file);
-//    if(iSystemType == WINDOWS_SYSTEM_TYPE)
-//    {
-//        in.setCodec("Windows-1251");
-//        qDebug() << "Select Windows-1251 codec";
-//    }
-
-//    qslHashTagList->clear();
-
-//    while (!in.atEnd())
-//    {
-//        QString line = in.readLine();//
-//        //QTextCodec *codec = QTextCodec::codecForName("Windows-1251"); // Получаем кодек CP1251
-
-//        // Преобразуем текст в Windows-1251 (QByteArray)
-//        //QByteArray encodedText = codec->fromUnicode(line);
-
-//        // Если нужно обратно в QString (для QLabel)
-//        //QString cp1251Text = QString::fromLatin1(encodedText);
-
-//        //qslHashTagList->append(cp1251Text);
-//        qslHashTagList->append(line);
-//    }
-
-//    file.close();
-    //---
-
     qDebug() << ": loadHashTagListPlace is sucsess";
 
     //Здесь должна быть проверка на наличие нового значения в списке
@@ -2512,7 +2478,7 @@ void MainWindow::execActionInsertPlace()
 
         //Сохранение нового списка Place
 
-        //cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";

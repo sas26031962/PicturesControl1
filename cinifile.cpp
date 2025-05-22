@@ -4,6 +4,8 @@
 //Глобальные переменные
 //=============================================================================
 
+    int cIniFile::iSystemType = 0;
+
     // Путь к INI-файлу
     QString cIniFile::iniFilePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";
     QString cIniFile::pattern1StringListFilePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern1StringListFile.txt";
