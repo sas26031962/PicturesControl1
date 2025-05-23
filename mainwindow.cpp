@@ -276,6 +276,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpenFoundRecord, &QAction::triggered, this, &MainWindow::execActionOpenFoundRecord);
     connect(ui->listWidgetFounded, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetFoundedItemClicked()));
 
+    // Настройка контекстного меню
+    ui->listWidgetSubject->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidgetSubject, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetSubjectCustomContextMenuRequested);
+
     //ui->labelMain->setText("Exec 'Load' option for get file name list");
 
     //execActionLoad();
@@ -2605,6 +2609,24 @@ void MainWindow::execActionInsertTheame()
         s += qsGoal;
     }
 
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos)
+{
+    QString s = "execWidgetListSubjectCustomContextMenuRequested()";
+
+    QListWidgetItem * item = ui->listWidgetSubject->itemAt(pos);
+    if(item)
+    {
+        int index = ui->listWidgetSubject->row(item);
+
+        qDebug() << "ShowContextMenu: pos.x=" << pos.x() << " pos.y=" << pos.y() << " itemAt(pos)=" << item->text() << " index of this item=" << index;
+    }
     //---
     emit execShowExecStatus(s);
     //---

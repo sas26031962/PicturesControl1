@@ -172,6 +172,8 @@ private slots:
     void execShiftXValueChanged();
     void execShiftYValueChanged();
 
+    void execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos);
+
 public slots:
 
 signals:
