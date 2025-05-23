@@ -2366,34 +2366,16 @@ void MainWindow::execActionInsertSubject()
         return;
     }
 
-    //Загрузка списка Subject
+    //---Загрузка списка Subject
 
-    QFile file(cIniFile::fileSubjectHashTag);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if(!loadHashTagListSubject())
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileSubjectHashTag;
+        qDebug() << "Error: Could not load HashTagListSubject from file: " << cIniFile::fileSubjectHashTag;
         return;
     }
 
-    QTextStream in(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
-    {
-        in.setCodec("Windows-1251");
-        qDebug() << "Select Windows-1251 codec";
-    }
-
-    qslHashTagList->clear();
-
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        qslHashTagList->append(line);
-    }
-
-    file.close();
-    //---
-
     qDebug() << ": loadHashTagListSubject is sucsess";
+    //---
 
     //Здесь должна быть проверка на наличие нового значения в списке
     if(qslHashTagList->indexOf(qsGoal) < 0)
@@ -2410,7 +2392,7 @@ void MainWindow::execActionInsertSubject()
         }
         ui->listWidgetSubject->addItems(*qslHashTagList);
 
-        //Сохранение нового списка Place
+        //Сохранение нового списка Subject
 
         cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
 

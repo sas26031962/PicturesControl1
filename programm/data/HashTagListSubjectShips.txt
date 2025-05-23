@@ -24,5 +24,7 @@ Dreadnote_Soyuz-Montana
 Dreadnote_Sovetsky_Soyuz
 Dreadnote_Parizskaya_Kommuna
 Dreadnote_Izmail
-Dreadnote_Novorossiysk
-Р›РёРЅРєРѕСЂ_РђСЂС…Р°РЅРіРµР»СЊСЃРє
+Линкор_Архангельск
+Линкор_Новороссийск
+Линкор_Советский_Союз
+Линкор_Севастополь
