@@ -2484,6 +2484,61 @@ void MainWindow::execActionInsertProperty()
 {
     QString s = "execActionInsertProperty()";
 
+    QString qsGoal = ui->lineEditAddIterm->text();
+
+    if(qsGoal.length() <= 0)
+    {
+        //Информационное сообщение
+        s += ": Empty string, nothing to do!";
+        s += qsGoal;
+
+        //---
+        emit execShowExecStatus(s);
+        //---
+
+        return;
+    }
+
+    //---Загрузка списка Property
+
+    if(!loadHashTagListProperty())
+    {
+        qDebug() << "Error: Could not load HashTagListProperty from file: " << cIniFile::filePropertyesHashTag;
+        return;
+    }
+
+    qDebug() << ": loadHashTagListProperty is sucsess";
+
+    //Здесь должна быть проверка на наличие нового значения в списке
+    if(qslHashTagList->indexOf(qsGoal) < 0)
+    {
+        ui->listWidgetPropertyes->clear();
+        int iLast = qslHashTagList->count() - 1;
+        if(qslHashTagList->at(iLast) == "")
+        {
+            qslHashTagList->replace(iLast, qsGoal);
+        }
+        else
+        {
+            qslHashTagList->append(qsGoal);
+        }
+        ui->listWidgetPropertyes->addItems(*qslHashTagList);
+
+        //Сохранение нового списка Property
+
+        cLoadFiles::saveStringListToFile(cIniFile::filePropertyesHashTag, *qslHashTagList);
+
+        //Информационное сообщение
+        s += ": ";
+        s += qsGoal;
+    }
+    else
+    {
+        //Информационное сообщение
+        s += ": HashTagListPropertyes already contain ";
+        s += qsGoal;
+    }
+
     //---
     emit execShowExecStatus(s);
     //---
