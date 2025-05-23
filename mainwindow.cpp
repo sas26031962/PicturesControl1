@@ -2550,6 +2550,61 @@ void MainWindow::execActionInsertTheame()
 {
     QString s = "execActionInsertTheame()";
 
+    QString qsGoal = ui->lineEditAddIterm->text();
+
+    if(qsGoal.length() <= 0)
+    {
+        //Информационное сообщение
+        s += ": Empty string, nothing to do!";
+        s += qsGoal;
+
+        //---
+        emit execShowExecStatus(s);
+        //---
+
+        return;
+    }
+
+    //---Загрузка списка Theame
+
+    if(!loadHashTagListTheame())
+    {
+        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheamsHashTag;
+        return;
+    }
+
+    qDebug() << ": loadHashTagListTheams is sucsess";
+
+    //Здесь должна быть проверка на наличие нового значения в списке
+    if(qslHashTagList->indexOf(qsGoal) < 0)
+    {
+        ui->listWidgetTheams->clear();
+        int iLast = qslHashTagList->count() - 1;
+        if(qslHashTagList->at(iLast) == "")
+        {
+            qslHashTagList->replace(iLast, qsGoal);
+        }
+        else
+        {
+            qslHashTagList->append(qsGoal);
+        }
+        ui->listWidgetTheams->addItems(*qslHashTagList);
+
+        //Сохранение нового списка Theams
+
+        cLoadFiles::saveStringListToFile(cIniFile::fileTheamsHashTag, *qslHashTagList);
+
+        //Информационное сообщение
+        s += ": ";
+        s += qsGoal;
+    }
+    else
+    {
+        //Информационное сообщение
+        s += ": HashTagListTheams already contain ";
+        s += qsGoal;
+    }
+
     //---
     emit execShowExecStatus(s);
     //---
