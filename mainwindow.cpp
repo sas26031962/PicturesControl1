@@ -2620,6 +2620,9 @@ void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &
 {
     QString s = "execWidgetListSubjectCustomContextMenuRequested()";
 
+    //Задание типа меню
+    lwtListType = ListWidgetType::SUBJECT_TYPE;
+
     QListWidget * listWidget = ui->listWidgetSubject;
     QListWidgetItem * item = listWidget->itemAt(pos);
     if(!item)
@@ -2631,9 +2634,8 @@ void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &
         return;
     }
 
-    int index = ui->listWidgetSubject->row(item);
+    int index = listWidget->row(item);
 
-    // Создание контекстного меню
     QMenu contextMenu;
     QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
     QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");

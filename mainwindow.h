@@ -33,9 +33,21 @@
 #include "cdrawfiles.h"
 #include "cloadfiles.h"
 
+//-----------------------------------------------------------------------------
+// КОНСТАНТЫ
+//-----------------------------------------------------------------------------
+
 #define STATUS_BAR_DELAY 500
 #define WINDOW_LEFT_MARGING 40
 #define WINDOW_TOP_MARGING 65
+
+//-----------------------------------------------------------------------------
+// ТИПЫ ДАННЫХ
+//-----------------------------------------------------------------------------
+
+enum class ListWidgetType{
+    SUBJECT_TYPE,
+};
 
 namespace Ui {
 class MainWindow;
@@ -72,6 +84,10 @@ private:
     QStringList * qslHashTagList;
 
     QStringList qslDeletedSections;
+
+    //Тип списка для работы с кнотекстными меню
+
+    ListWidgetType lwtListType = ListWidgetType::SUBJECT_TYPE;
 
     //Методы
     void showCurrentIndexPicture();
