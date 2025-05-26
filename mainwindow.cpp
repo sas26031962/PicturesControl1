@@ -211,6 +211,10 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->listWidgetSubject->clear();
         ui->listWidgetSubject->addItems(*qslHashTagList);
 
+        // Настройка контекстного меню
+        ui->listWidgetSubject->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(ui->listWidgetSubject, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetSubjectCustomContextMenuRequested);
+
         connect(ui->listWidgetSubject, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSubjectItemClicked()));
     }
 
@@ -275,10 +279,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionOpenFoundRecord, &QAction::triggered, this, &MainWindow::execActionOpenFoundRecord);
     connect(ui->listWidgetFounded, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetFoundedItemClicked()));
-
-    // Настройка контекстного меню
-    ui->listWidgetSubject->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->listWidgetSubject, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetSubjectCustomContextMenuRequested);
 
     //ui->labelMain->setText("Exec 'Load' option for get file name list");
 
@@ -1771,7 +1771,7 @@ void MainWindow::execActionMemo()
 
 //=============================================================================
 
-void MainWindow::execListWidgetSubjectItemClicked()
+void MainWindow::AddOrRemoveSubjectItemToRecord()
 {
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
     QString s = "execSubjectItemClicked()";
@@ -1803,6 +1803,17 @@ void MainWindow::execListWidgetSubjectItemClicked()
     }
     // Отобразить картинку
     showCurrentIndexPicture();
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execListWidgetSubjectItemClicked()
+{
+
+    QString s = "Use RightMouseButton to Add / Remove item to record";
     //---
     emit execShowExecStatus(s);
     //---
@@ -2635,10 +2646,12 @@ void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &
     }
 
     int index = listWidget->row(item);
+    QString qsItem = item->text();
 
     QMenu contextMenu;
     QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
     QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");
+    QAction *actionInsertItemToList = contextMenu.addAction("Добавить элемент в список");
 
     QAction *selectedAction = contextMenu.exec(listWidget->viewport()->mapToGlobal(pos));
 
@@ -2646,10 +2659,48 @@ void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &
     {
         // Обработка первого действия
         qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
-    } else if (selectedAction == actionRemoveItemFromList)
+
+        AddOrRemoveSubjectItemToRecord();
+    }
+
+    else if (selectedAction == actionRemoveItemFromList)
     {
         // Обработка второго действия
         qDebug() << "exec actionRemoveItemFromList: item=" << item->text()<< " index of this item=" << index;
+
+        //---Загрузка списка Subject
+
+        if(!loadHashTagListSubject())
+        {
+            qDebug() << "Error: Could not load HashTagListSubject from file: " << cIniFile::fileSubjectHashTag;
+            return;
+        }
+
+        qDebug() << ": loadHashTagListSubject is sucsess";
+        //Здесь должна быть проверка на наличие удаляемого значения в списке
+        if(qslHashTagList->indexOf(qsItem) > 0)
+        {
+            qslHashTagList->removeAll(qsItem);
+            ui->listWidgetSubject->clear();
+            ui->listWidgetSubject->addItems(*qslHashTagList);
+
+            //Сохранение нового списка Subject
+
+            cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
+
+            //Информационное сообщение
+            s += "Removed item: ";
+            s += qsItem;
+        }
+        //---
+
+    }
+
+    else if (selectedAction == actionInsertItemToList)
+    {
+        // Обработка третьего действия
+        qDebug() << "exec actionInsertItemToList: item=" << ui->lineEditAddIterm->text();
+        emit ui->actionInsertSubject->triggered();
     }
 
     //---

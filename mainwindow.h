@@ -117,6 +117,7 @@ public:
 
     //Методы
     void installNavigation();
+    void AddOrRemoveSubjectItemToRecord();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;//keys
