@@ -13,3 +13,4 @@
 IsRotated
 new
 —хема
+Ёскиз
