@@ -2620,13 +2620,36 @@ void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &
 {
     QString s = "execWidgetListSubjectCustomContextMenuRequested()";
 
-    QListWidgetItem * item = ui->listWidgetSubject->itemAt(pos);
-    if(item)
+    QListWidget * listWidget = ui->listWidgetSubject;
+    QListWidgetItem * item = listWidget->itemAt(pos);
+    if(!item)
     {
-        int index = ui->listWidgetSubject->row(item);
-
-        qDebug() << "ShowContextMenu: pos.x=" << pos.x() << " pos.y=" << pos.y() << " itemAt(pos)=" << item->text() << " index of this item=" << index;
+        s += ": no item selected!";
+        //---
+        emit execShowExecStatus(s);
+        //---
+        return;
     }
+
+    int index = ui->listWidgetSubject->row(item);
+
+    // Создание контекстного меню
+    QMenu contextMenu;
+    QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
+    QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");
+
+    QAction *selectedAction = contextMenu.exec(listWidget->viewport()->mapToGlobal(pos));
+
+    if (selectedAction == actionAddOrRemoveItemToRecord)
+    {
+        // Обработка первого действия
+        qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
+    } else if (selectedAction == actionRemoveItemFromList)
+    {
+        // Обработка второго действия
+        qDebug() << "exec actionRemoveItemFromList: item=" << item->text()<< " index of this item=" << index;
+    }
+
     //---
     emit execShowExecStatus(s);
     //---
