@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[57];
-    char stringdata0[1337];
+    QByteArrayData data[58];
+    char stringdata0[1383];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -85,7 +85,8 @@ QT_MOC_LITERAL(52, 1220, 18), // "execShowExecStatus"
 QT_MOC_LITERAL(53, 1239, 22), // "execShiftXValueChanged"
 QT_MOC_LITERAL(54, 1262, 22), // "execShiftYValueChanged"
 QT_MOC_LITERAL(55, 1285, 47), // "execListWidgetSubjectCustomCo..."
-QT_MOC_LITERAL(56, 1333, 3) // "pos"
+QT_MOC_LITERAL(56, 1333, 3), // "pos"
+QT_MOC_LITERAL(57, 1337, 45) // "execListWidgetPlaceCustomCont..."
 
     },
     "MainWindow\0draw\0\0s\0showExecStatus\0"
@@ -125,7 +126,7 @@ QT_MOC_LITERAL(56, 1333, 3) // "pos"
     "execSpinBoxAngle\0angle\0execShowExecStatus\0"
     "execShiftXValueChanged\0execShiftYValueChanged\0"
     "execListWidgetSubjectCustomContextMenuRequested\0"
-    "pos"
+    "pos\0execListWidgetPlaceCustomContextMenuRequested"
 };
 #undef QT_MOC_LITERAL
 
@@ -135,7 +136,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      51,   14, // methods
+      52,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -143,59 +144,60 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  269,    2, 0x06 /* Public */,
-       4,    1,  272,    2, 0x06 /* Public */,
+       1,    1,  274,    2, 0x06 /* Public */,
+       4,    1,  277,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,  275,    2, 0x08 /* Private */,
-       6,    0,  276,    2, 0x08 /* Private */,
-       7,    0,  277,    2, 0x08 /* Private */,
-       8,    0,  278,    2, 0x08 /* Private */,
-       9,    0,  279,    2, 0x08 /* Private */,
-      10,    0,  280,    2, 0x08 /* Private */,
-      11,    0,  281,    2, 0x08 /* Private */,
-      12,    0,  282,    2, 0x08 /* Private */,
-      13,    0,  283,    2, 0x08 /* Private */,
-      14,    0,  284,    2, 0x08 /* Private */,
-      15,    0,  285,    2, 0x08 /* Private */,
-      16,    0,  286,    2, 0x08 /* Private */,
-      17,    0,  287,    2, 0x08 /* Private */,
-      18,    0,  288,    2, 0x08 /* Private */,
-      19,    1,  289,    2, 0x08 /* Private */,
-      21,    0,  292,    2, 0x08 /* Private */,
-      22,    0,  293,    2, 0x08 /* Private */,
-      23,    0,  294,    2, 0x08 /* Private */,
-      24,    0,  295,    2, 0x08 /* Private */,
-      25,    0,  296,    2, 0x08 /* Private */,
-      26,    0,  297,    2, 0x08 /* Private */,
-      27,    0,  298,    2, 0x08 /* Private */,
-      28,    0,  299,    2, 0x08 /* Private */,
-      29,    0,  300,    2, 0x08 /* Private */,
-      30,    0,  301,    2, 0x08 /* Private */,
-      31,    0,  302,    2, 0x08 /* Private */,
-      32,    0,  303,    2, 0x08 /* Private */,
-      33,    0,  304,    2, 0x08 /* Private */,
-      34,    0,  305,    2, 0x08 /* Private */,
-      35,    0,  306,    2, 0x08 /* Private */,
-      36,    0,  307,    2, 0x08 /* Private */,
-      37,    0,  308,    2, 0x08 /* Private */,
-      38,    0,  309,    2, 0x08 /* Private */,
-      39,    0,  310,    2, 0x08 /* Private */,
-      40,    0,  311,    2, 0x08 /* Private */,
-      41,    0,  312,    2, 0x08 /* Private */,
-      42,    0,  313,    2, 0x08 /* Private */,
-      43,    0,  314,    2, 0x08 /* Private */,
-      44,    0,  315,    2, 0x08 /* Private */,
-      45,    0,  316,    2, 0x08 /* Private */,
-      46,    0,  317,    2, 0x08 /* Private */,
-      47,    0,  318,    2, 0x08 /* Private */,
-      48,    0,  319,    2, 0x08 /* Private */,
-      49,    0,  320,    2, 0x08 /* Private */,
-      50,    1,  321,    2, 0x08 /* Private */,
-      52,    1,  324,    2, 0x08 /* Private */,
-      53,    0,  327,    2, 0x08 /* Private */,
-      54,    0,  328,    2, 0x08 /* Private */,
-      55,    1,  329,    2, 0x08 /* Private */,
+       5,    0,  280,    2, 0x08 /* Private */,
+       6,    0,  281,    2, 0x08 /* Private */,
+       7,    0,  282,    2, 0x08 /* Private */,
+       8,    0,  283,    2, 0x08 /* Private */,
+       9,    0,  284,    2, 0x08 /* Private */,
+      10,    0,  285,    2, 0x08 /* Private */,
+      11,    0,  286,    2, 0x08 /* Private */,
+      12,    0,  287,    2, 0x08 /* Private */,
+      13,    0,  288,    2, 0x08 /* Private */,
+      14,    0,  289,    2, 0x08 /* Private */,
+      15,    0,  290,    2, 0x08 /* Private */,
+      16,    0,  291,    2, 0x08 /* Private */,
+      17,    0,  292,    2, 0x08 /* Private */,
+      18,    0,  293,    2, 0x08 /* Private */,
+      19,    1,  294,    2, 0x08 /* Private */,
+      21,    0,  297,    2, 0x08 /* Private */,
+      22,    0,  298,    2, 0x08 /* Private */,
+      23,    0,  299,    2, 0x08 /* Private */,
+      24,    0,  300,    2, 0x08 /* Private */,
+      25,    0,  301,    2, 0x08 /* Private */,
+      26,    0,  302,    2, 0x08 /* Private */,
+      27,    0,  303,    2, 0x08 /* Private */,
+      28,    0,  304,    2, 0x08 /* Private */,
+      29,    0,  305,    2, 0x08 /* Private */,
+      30,    0,  306,    2, 0x08 /* Private */,
+      31,    0,  307,    2, 0x08 /* Private */,
+      32,    0,  308,    2, 0x08 /* Private */,
+      33,    0,  309,    2, 0x08 /* Private */,
+      34,    0,  310,    2, 0x08 /* Private */,
+      35,    0,  311,    2, 0x08 /* Private */,
+      36,    0,  312,    2, 0x08 /* Private */,
+      37,    0,  313,    2, 0x08 /* Private */,
+      38,    0,  314,    2, 0x08 /* Private */,
+      39,    0,  315,    2, 0x08 /* Private */,
+      40,    0,  316,    2, 0x08 /* Private */,
+      41,    0,  317,    2, 0x08 /* Private */,
+      42,    0,  318,    2, 0x08 /* Private */,
+      43,    0,  319,    2, 0x08 /* Private */,
+      44,    0,  320,    2, 0x08 /* Private */,
+      45,    0,  321,    2, 0x08 /* Private */,
+      46,    0,  322,    2, 0x08 /* Private */,
+      47,    0,  323,    2, 0x08 /* Private */,
+      48,    0,  324,    2, 0x08 /* Private */,
+      49,    0,  325,    2, 0x08 /* Private */,
+      50,    1,  326,    2, 0x08 /* Private */,
+      52,    1,  329,    2, 0x08 /* Private */,
+      53,    0,  332,    2, 0x08 /* Private */,
+      54,    0,  333,    2, 0x08 /* Private */,
+      55,    1,  334,    2, 0x08 /* Private */,
+      57,    1,  337,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -250,6 +252,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QPoint,   56,
     QMetaType::Void, QMetaType::QPoint,   56,
 
        0        // eod
@@ -312,6 +315,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 48: _t->execShiftXValueChanged(); break;
         case 49: _t->execShiftYValueChanged(); break;
         case 50: _t->execListWidgetSubjectCustomContextMenuRequested((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 51: _t->execListWidgetPlaceCustomContextMenuRequested((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -359,13 +363,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 51)
+        if (_id < 52)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 51;
+        _id -= 52;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 51)
+        if (_id < 52)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 51;
+        _id -= 52;
     }
     return _id;
 }

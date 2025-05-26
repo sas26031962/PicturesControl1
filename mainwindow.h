@@ -47,6 +47,7 @@
 
 enum class ListWidgetType{
     SUBJECT_TYPE,
+    PLACE_TYPE,
 };
 
 namespace Ui {
@@ -118,6 +119,7 @@ public:
     //Методы
     void installNavigation();
     void AddOrRemoveSubjectItemToRecord();
+    void AddOrRemovePlaceItemToRecord();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;//keys
@@ -190,6 +192,8 @@ private slots:
     void execShiftYValueChanged();
 
     void execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos);
+
+    void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
 
 public slots:
 
