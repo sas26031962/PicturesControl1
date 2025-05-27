@@ -2339,30 +2339,43 @@ void MainWindow::execActionSearchNamePatterns1XIntersection()
 
 //=============================================================================
 
+/******************************************************************************
+ * Поиск пересечения списков qslPattern1 и qslPattern2 по признаку совпадения
+ * даты.
+ * Исходные данных содержатся в файлах с именами:
+ * cIniFile::pattern1StringListFilePath и
+ * cIniFile::pattern2StringListFilePath
+ *
+ ******************************************************************************/
 void MainWindow::execActionSearchNamePatterns12Intersection()
 {
     QString s = "execActionSearchNamePattens12Intersection()";
 
-    QString pattern1 = "^20[0-9]{6}_[0-9]{6}";
 
     QStringList qslPattern1 = cLoadFiles::loadStringListFromFile(cIniFile::pattern1StringListFilePath);
     QStringList qslPattern2 = cLoadFiles::loadStringListFromFile(cIniFile::pattern2StringListFilePath);
 
     qDebug() << "ListPattern1 count=" << qslPattern1.count() << " ListPattern2 count=" << qslPattern2.count();
 
-    int iCount = 0;// Очистка счётчика найденных объектов
+    // Очистка результата
+    int iCount = 0;
     ui->listWidgetFounded->clear();
+
     QListIterator<QString> readIt(qslPattern1);
     while (readIt.hasNext())
     {
         QString qsSection = readIt.next();
         //qDebug() << qsSection;
+
+        //Проверка строки на соответствие шаблону 1
+        QString pattern1 = "^20[0-9]{6}_[0-9]{6}";
         QRegularExpression re(pattern1);
         bool match = re.match(qsSection.toLower()).hasMatch();
         int Year, Month, Day, Hour, Min, Sec;
         QString qsMirror;
         if (match)
         {
+            //Извлечение даты
             Year = qsSection.mid(0, 4).toInt();
             Month = qsSection.mid(4, 2).toInt();
             Day = qsSection.mid(6, 2).toInt();
@@ -2370,7 +2383,9 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
             Min = qsSection.mid(11, 2).toInt();
             Sec = qsSection.mid(13, 2).toInt();
             //qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Year=" << Year << " Month=" << Month << " Day=" << Day << " Hour=" << Hour << " Min=" << Min << " Sec=" << Sec;
-             qsMirror = QString::number(Year);
+
+            //Формирование строки данных по стандарту шаблона 2
+            qsMirror = QString::number(Year);
             qsMirror += "-";
             if(Month < 10)qsMirror += "0";
             qsMirror += QString::number(Month);
@@ -2387,12 +2402,16 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
             if(Sec < 10)qsMirror += "0";
             qsMirror += QString::number(Sec);
             qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Mirror=" << qsMirror;
+
+            //Поиск сформированной строки в списке 2
             if(qslPattern2.contains(qsMirror))
             {
+                //Подсчёт совпадений
                 iCount++;
                 qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
                 ui->listWidgetFounded->addItem(qsSection);
 
+                //Удаление найденной строки из конфигурационного файла
                 deleteSection(qsMirror);//!!!
             }
         }
