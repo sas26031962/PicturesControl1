@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     fmview.cpp \
     cimportfiles.cpp \
     cdrawfiles.cpp \
-    cloadfiles.cpp
+    cloadfiles.cpp \
+    cactionlistwidgetplacecustomcontextmenu.cpp
 
 HEADERS  += mainwindow.h \
     cinifile.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     fmview.h \
     cimportfiles.h \
     cdrawfiles.h \
-    cloadfiles.h
+    cloadfiles.h \
+    cactionlistwidgetplacecustomcontextmenu.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

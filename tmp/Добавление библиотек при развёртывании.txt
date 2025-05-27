@@ -1,0 +1,1 @@
+windeployqt C:\WORK\PicturesControl\PicturesControl1\programm\debug\PicturesControl1.exe
