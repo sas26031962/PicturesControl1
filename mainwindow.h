@@ -49,6 +49,7 @@ enum class ListWidgetType{
     SUBJECT_TYPE,
     PLACE_TYPE,
     PROPERTY_TYPE,
+    THEAME_TYPE
 };
 
 namespace Ui {
@@ -122,6 +123,7 @@ public:
     void AddOrRemoveSubjectItemToRecord();
     void AddOrRemovePlaceItemToRecord();
     void AddOrRemovePropertyItemToRecord();
+    void AddOrRemoveTheameItemToRecord();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;//keys
@@ -196,6 +198,7 @@ private slots:
     void execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos);
+    void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
 
 public slots:
 
