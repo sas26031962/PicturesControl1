@@ -289,7 +289,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -306,6 +306,11 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_8">
+     <attribute name="title">
+      <string>Места</string>
+     </attribute>
+    </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>Places</string>
@@ -316,7 +321,7 @@
         <x>10</x>
         <y>10</y>
         <width>261</width>
-        <height>291</height>
+        <height>261</height>
        </rect>
       </property>
      </widget>

@@ -88,6 +88,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ListWidgetPlace = new cListWidgetPlace();
+    ListWidgetPlace->install(ui->tab_8);
+
     ui->comboBoxPatterns->clear();
     ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");
     ui->comboBoxPatterns->addItem("^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}");
@@ -149,6 +152,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //---
 
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
+    connect(ListWidgetPlace, &cListWidgetPlace::showExecStatus, this, &MainWindow::execShowExecStatus);
+    connect(ListWidgetPlace, &cListWidgetPlace::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
 
     fmViewPicture = new fmView(this);
     fmViewPicture->setWindowFlags(Qt::Window);//3 flags
@@ -306,6 +311,8 @@ MainWindow::~MainWindow()
     timerUpdate->stop();
 
     saveRemovedSectionsList();
+
+    delete ListWidgetPlace;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -1606,6 +1613,7 @@ void MainWindow::execTimerUpdate()
 
     if(iTimerUpdateCounter == 1)
     {
+
         qDebug() << "CurrentIndex=" << iCurrentIndexGlobal.load(std::memory_order_relaxed) << " Action: open ViewPictureForm";
         int windowX = this->x();
         windowX = windowX + this->width();
@@ -3062,4 +3070,9 @@ void MainWindow::execListWidgetTheameCustomContextMenuRequested(const QPoint &po
     //---
     emit execShowExecStatus(s);
     //---
+}
+
+void MainWindow::execShowCurrentIndexPicture()
+{
+    showCurrentIndexPicture();
 }

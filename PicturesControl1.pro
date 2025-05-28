@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     cimportfiles.cpp \
     cdrawfiles.cpp \
     cloadfiles.cpp \
-    cactionlistwidgetplacecustomcontextmenu.cpp
+    cactionlistwidgetplacecustomcontextmenu.cpp \
+    clistwidgetplace.cpp
 
 HEADERS  += mainwindow.h \
     cinifile.h \
@@ -35,7 +36,8 @@ HEADERS  += mainwindow.h \
     cdrawfiles.h \
     cloadfiles.h \
     cactionlistwidgetplacecustomcontextmenu.h \
-    clistwidgettype.h
+    clistwidgettype.h \
+    clistwidgetplace.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

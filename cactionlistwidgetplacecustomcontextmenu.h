@@ -48,6 +48,7 @@ signals:
 
 public slots:
     void execRequest(const QPoint &pos);
+    void execListWidgetPlaceItemClicked();
 };
 
 #endif // CACTIONLISTWIDGETPLACECUSTOMCONTEXTMENU_H

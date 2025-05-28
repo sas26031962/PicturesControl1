@@ -2,7 +2,18 @@
 
 cActionListWidgetPlaceCustomContextMenu::cActionListWidgetPlaceCustomContextMenu(QObject *parent) : QObject(parent)
 {
+    //Очистка визуального списка
+    listWidget->clear();
+    //Загрузка списка хеш-тегов Places
+    if(loadHashTagListPlace())
+    {
+        listWidget->addItems(*qslHashTagList);
 
+        // Настройка контекстного меню
+        listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(listWidget, &QListWidget::customContextMenuRequested, this, &cActionListWidgetPlaceCustomContextMenu::execRequest);
+        connect(listWidget, &QListWidget::itemClicked, this, &cActionListWidgetPlaceCustomContextMenu::execListWidgetPlaceItemClicked);
+    }
 }
 
 void cActionListWidgetPlaceCustomContextMenu::execRequest(const QPoint &pos)
@@ -13,7 +24,6 @@ void cActionListWidgetPlaceCustomContextMenu::execRequest(const QPoint &pos)
     //Задание типа меню
     lwtListType = ListWidgetType::PLACE_TYPE;
 
-    //QListWidget * listWidget = ui->listWidgetPlaces;
     QListWidgetItem * item = listWidget->itemAt(pos);
     if(!item)
     {
@@ -165,3 +175,12 @@ bool cActionListWidgetPlaceCustomContextMenu::addItemToList()
     bool x = true;
     return x;
 }
+
+void cActionListWidgetPlaceCustomContextMenu::execListWidgetPlaceItemClicked()
+{
+    QString s = "Use RightMouseButton to Add / Remove item to record";
+    //---
+    emit showExecStatus(s);
+    //---
+}
+

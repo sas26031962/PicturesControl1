@@ -33,6 +33,8 @@
 #include "cdrawfiles.h"
 #include "cloadfiles.h"
 
+#include "clistwidgetplace.h"
+
 //-----------------------------------------------------------------------------
 // КОНСТАНТЫ
 //-----------------------------------------------------------------------------
@@ -45,12 +47,12 @@
 // ТИПЫ ДАННЫХ
 //-----------------------------------------------------------------------------
 
-enum class ListWidgetType{
-    SUBJECT_TYPE,
-    PLACE_TYPE,
-    PROPERTY_TYPE,
-    THEAME_TYPE
-};
+//enum class ListWidgetType{
+//    SUBJECT_TYPE,
+//    PLACE_TYPE,
+//    PROPERTY_TYPE,
+//    THEAME_TYPE
+//};
 
 namespace Ui {
 class MainWindow;
@@ -91,6 +93,8 @@ private:
     //Тип списка для работы с кнотекстными меню
 
     ListWidgetType lwtListType = ListWidgetType::SUBJECT_TYPE;
+
+    cListWidgetPlace * ListWidgetPlace;
 
     //Методы
     void showCurrentIndexPicture();
@@ -199,6 +203,8 @@ private slots:
     void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
+
+    void execShowCurrentIndexPicture();
 
 public slots:
 

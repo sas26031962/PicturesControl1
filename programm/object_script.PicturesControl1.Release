@@ -8,8 +8,10 @@ INPUT(
 ./release\cdrawfiles.o
 ./release\cloadfiles.o
 ./release\cactionlistwidgetplacecustomcontextmenu.o
+./release\clistwidgetplace.o
 ./release\qrc_resourcedata.o
 ./release\moc_mainwindow.o
 ./release\moc_fmview.o
 ./release\moc_cactionlistwidgetplacecustomcontextmenu.o
+./release\moc_clistwidgetplace.o
 );
