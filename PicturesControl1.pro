@@ -23,7 +23,6 @@ SOURCES += main.cpp\
     cimportfiles.cpp \
     cdrawfiles.cpp \
     cloadfiles.cpp \
-    cactionlistwidgetplacecustomcontextmenu.cpp \
     clistwidgetplace.cpp
 
 HEADERS  += mainwindow.h \
@@ -35,7 +34,6 @@ HEADERS  += mainwindow.h \
     cimportfiles.h \
     cdrawfiles.h \
     cloadfiles.h \
-    cactionlistwidgetplacecustomcontextmenu.h \
     clistwidgettype.h \
     clistwidgetplace.h
 

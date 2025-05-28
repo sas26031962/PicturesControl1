@@ -7,11 +7,9 @@ INPUT(
 ./debug\cimportfiles.o
 ./debug\cdrawfiles.o
 ./debug\cloadfiles.o
-./debug\cactionlistwidgetplacecustomcontextmenu.o
 ./debug\clistwidgetplace.o
 ./debug\qrc_resourcedata.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fmview.o
-./debug\moc_cactionlistwidgetplacecustomcontextmenu.o
 ./debug\moc_clistwidgetplace.o
 );
