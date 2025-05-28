@@ -7,7 +7,7 @@ cActionListWidgetPlaceCustomContextMenu::cActionListWidgetPlaceCustomContextMenu
 
 void cActionListWidgetPlaceCustomContextMenu::execRequest(const QPoint &pos)
 {
-/*
+
     QString s = "execWidgetListPlaceCustomContextMenuRequested()";
 
     //Задание типа меню
@@ -19,7 +19,7 @@ void cActionListWidgetPlaceCustomContextMenu::execRequest(const QPoint &pos)
     {
         s += ": no item selected!";
         //---
-        emit execShowExecStatus(s);
+        emit showExecStatus(s);
         //---
         return;
     }
@@ -39,7 +39,7 @@ void cActionListWidgetPlaceCustomContextMenu::execRequest(const QPoint &pos)
         // Обработка первого действия
         qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
 
-        AddOrRemovePlaceItemToRecord();
+        addOrRemovePlaceItemToRecord();
     }
 
     else if (selectedAction == actionRemoveItemFromList)
@@ -82,12 +82,86 @@ void cActionListWidgetPlaceCustomContextMenu::execRequest(const QPoint &pos)
     else if (selectedAction == actionInsertItemToList)
     {
         // Обработка третьего действия
-        qDebug() << "exec actionInsertItemToList: item=" << ui->lineEditAddIterm->text();
-        emit ui->actionInsertPlace->triggered();
+        qDebug() << "exec actionInsertItemToList: item=" << qleAddItem->text();
+        addItemToList();
     }
 
     //---
-    emit execShowExecStatus(s);
+    emit showExecStatus(s);
     //---
-*/
+
+}
+
+void cActionListWidgetPlaceCustomContextMenu::addOrRemovePlaceItemToRecord()
+{
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    QString s = "execPlaceItemClicked()";
+    QString item = listWidget->currentItem()->text();
+    qDebug() << "listWidgetPlace: item=" << item;
+
+    // Сохранение параметра в INI-файле
+    if(cIniFile::Groups->count() > 0)
+    {
+        QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
+        settings.beginGroup(qsGroupName);
+        QStringList list = settings.childKeys();
+        if(list.contains(item))
+        {
+            qDebug() << qsGroupName << " contains " << item;
+            settings.remove(item);
+        }
+        else
+        {
+            qDebug() << qsGroupName << " not contains " << item;
+            settings.setValue(item, "true");
+        }
+        settings.endGroup();
+        settings.sync();
+    }
+    else
+    {
+        s = "List is empty, exec Load function!!!";
+    }
+    // Отобразить картинку
+    emit showCurrentIndexPicture();
+
+    //---
+    emit showExecStatus(s);
+    //---
+}
+
+bool cActionListWidgetPlaceCustomContextMenu::loadHashTagListPlace()
+{
+
+    QFile file(cIniFile::filePlaceHashTag);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
+        return false;
+    }
+
+    QTextStream in(&file);
+    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
+    {
+        in.setCodec("Windows-1251");
+        qDebug() << "Select Windows-1251 codec in loading case";
+    }
+
+    qslHashTagList->clear();
+
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        qslHashTagList->append(line);
+    }
+
+    file.close();
+    qDebug() << "Load " << qslHashTagList->count() << " strings";
+    return true;
+}
+
+bool cActionListWidgetPlaceCustomContextMenu::addItemToList()
+{
+    bool x = true;
+    return x;
 }

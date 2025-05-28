@@ -76,7 +76,8 @@ DIST          =  ..\mainwindow.h \
 		..\cimportfiles.h \
 		..\cdrawfiles.h \
 		..\cloadfiles.h \
-		..\cactionlistwidgetplacecustomcontextmenu.h ..\main.cpp \
+		..\cactionlistwidgetplacecustomcontextmenu.h \
+		..\clistwidgettype.h ..\main.cpp \
 		..\mainwindow.cpp \
 		..\cinifile.cpp \
 		..\crecord.cpp \
@@ -498,6 +499,100 @@ debug/moc_cactionlistwidgetplacecustomcontextmenu.cpp: ../../../../../Qt/Qt5.6.0
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qvarlengtharray.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qcontainerfwd.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qobject_impl.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QString \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QStringList \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QListWidget \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlistwidget.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlistview.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractitemview.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qframe.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qwidget.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qwindowdefs.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qwindowdefs_win.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qmargins.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpaintdevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qrect.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsize.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qpoint.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpalette.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qcolor.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qrgb.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qrgba64.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qbrush.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qvector.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qmatrix.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpolygon.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qregion.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdatastream.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qiodevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qline.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qtransform.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpainterpath.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qimage.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpixelformat.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpixmap.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsharedpointer.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qshareddata.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qhash.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsharedpointer_impl.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qfont.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qfontmetrics.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qfontinfo.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qsizepolicy.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qcursor.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qkeysequence.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qevent.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qvariant.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qmap.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdebug.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qtextstream.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qlocale.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qset.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qcontiguouscache.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qurl.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qurlquery.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qfile.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qfiledevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qvector2d.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qtouchdevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qabstractitemmodel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qitemselectionmodel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qstyleoption.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractspinbox.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qvalidator.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qregularexpression.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qicon.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qslider.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractslider.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qstyle.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qtabbar.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qtabwidget.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qrubberband.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QListWidgetItem \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QDebug \
+		../clistwidgettype.h \
+		../cinifile.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSettings \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsettings.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/QImage \
+		../crecord.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QDir \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdir.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qfileinfo.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QFileInfo \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QDirIterator \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdiriterator.h \
+		../cloadfiles.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QFile \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QTextStream \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QRegularExpression \
+		../cimportfiles.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QLabel \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlabel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QProgressBar \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qprogressbar.h \
 		../cactionlistwidgetplacecustomcontextmenu.h
 	C:\Qt\Qt5.6.0\5.6\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.0/5.6/mingw49_32/mkspecs/win32-g++ -IC:/WORK/PicturesControl/PicturesControl1 -IC:/Qt/Qt5.6.0/5.6/mingw49_32/include -IC:/Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.0/5.6/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore -I. ..\cactionlistwidgetplacecustomcontextmenu.h -o debug\moc_cactionlistwidgetplacecustomcontextmenu.cpp
 
@@ -1694,7 +1789,101 @@ debug/cactionlistwidgetplacecustomcontextmenu.o: ../cactionlistwidgetplacecustom
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qmetatype.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qvarlengtharray.h \
 		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qcontainerfwd.h \
-		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qobject_impl.h
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qobject_impl.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QString \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QStringList \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QListWidget \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlistwidget.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlistview.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractitemview.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qframe.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qwidget.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qwindowdefs.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qwindowdefs_win.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qmargins.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpaintdevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qrect.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsize.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qpoint.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpalette.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qcolor.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qrgb.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qrgba64.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qbrush.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qvector.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qmatrix.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpolygon.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qregion.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdatastream.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qiodevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qline.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qtransform.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpainterpath.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qimage.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpixelformat.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qpixmap.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsharedpointer.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qshareddata.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qhash.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsharedpointer_impl.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qfont.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qfontmetrics.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qfontinfo.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qsizepolicy.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qcursor.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qkeysequence.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qevent.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qvariant.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qmap.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdebug.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qtextstream.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qlocale.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qset.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qcontiguouscache.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qurl.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qurlquery.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qfile.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qfiledevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qvector2d.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qtouchdevice.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qabstractitemmodel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qitemselectionmodel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qstyleoption.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractspinbox.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qvalidator.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qregularexpression.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/qicon.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qslider.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qabstractslider.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qstyle.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qtabbar.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qtabwidget.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qrubberband.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QListWidgetItem \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QDebug \
+		../clistwidgettype.h \
+		../cinifile.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QSettings \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qsettings.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtGui/QImage \
+		../crecord.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QDir \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdir.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qfileinfo.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QFileInfo \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QDirIterator \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/qdiriterator.h \
+		../cloadfiles.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QFile \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QTextStream \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtCore/QRegularExpression \
+		../cimportfiles.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QLabel \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qlabel.h \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/QProgressBar \
+		../../../../../Qt/Qt5.6.0/5.6/mingw49_32/include/QtWidgets/qprogressbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\cactionlistwidgetplacecustomcontextmenu.o ..\cactionlistwidgetplacecustomcontextmenu.cpp
 
 debug/qrc_resourcedata.o: debug/qrc_resourcedata.cpp 

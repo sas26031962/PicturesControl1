@@ -34,7 +34,8 @@ HEADERS  += mainwindow.h \
     cimportfiles.h \
     cdrawfiles.h \
     cloadfiles.h \
-    cactionlistwidgetplacecustomcontextmenu.h
+    cactionlistwidgetplacecustomcontextmenu.h \
+    clistwidgettype.h
 
 FORMS    += mainwindow.ui \
     fmview.ui
