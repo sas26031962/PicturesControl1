@@ -146,7 +146,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //---Для удаления
     connect(ui->actionLoaadHashTagListSubject, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListSubject()));
-    connect(ui->actionLoadHashTagListPlace, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListPlace()));
+    //connect(ui->actionLoadHashTagListPlace, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListPlace()));
     connect(ui->actionLoadHashTagListProperty, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListProperty()));
     connect(ui->actionLoadHashTagListTheame, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListTheame()));
     //---
@@ -236,6 +236,7 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(ui->listWidgetPropertyes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetPropertyItemClicked()));
     }
 
+/*
     //Загрузка списка хеш-тегов Places
     if(loadHashTagListPlace())
     {
@@ -248,7 +249,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         connect(ui->listWidgetPlaces, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetPlaceItemClicked()));
     }
-
+*/
     //Загрузка списка хеш-тегов Theams
     if(loadHashTagListTheame())
     {
@@ -270,7 +271,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
 
     connect(ui->actionInsertSubject, &QAction::triggered, this, &MainWindow::execActionInsertSubject);
-    connect(ui->actionInsertPlace, &QAction::triggered, this, &MainWindow::execActionInsertPlace);
     connect(ui->actionInsertProperty, &QAction::triggered, this, &MainWindow::execActionInsertProperty);
     connect(ui->actionInsertTheame, &QAction::triggered, this, &MainWindow::execActionInsertTheame);
 
@@ -944,30 +944,6 @@ void MainWindow::execActionLoadHashTagListSubject()
     {
         ui->listWidgetSubject->clear();
         qDebug() << s << ": loadHashTagListSubject is broken!!!";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionLoadHashTagListPlace()
-{
-    QString s = "ActionLoadHashTagListPlace()";
-
-    if(loadHashTagListPlace())
-    {
-        qDebug() << s << ": loadHashTagListPlace is sucsess";
-        ui->listWidgetPlaces->clear();
-        ui->listWidgetPlaces->addItems(*qslHashTagList);
-
-    }
-    else
-    {
-        ui->listWidgetPlaces->clear();
-        qDebug() << s << ": loadHashTagListPlace is broken!!!";
     }
     //---
     emit execShowExecStatus(s);
@@ -2022,55 +1998,6 @@ void MainWindow::execListWidgetSearchItemClicked()
 
 //=============================================================================
 
-void MainWindow::AddOrRemovePlaceItemToRecord()
-{
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    QString s = "execPlaceItemClicked()";
-    QString item = ui->listWidgetPlaces->currentItem()->text();
-    qDebug() << "listWidgetPlace: item=" << item;
-
-    // Сохранение параметра в INI-файле
-    if(cIniFile::Groups->count() > 0)
-    {
-        QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-        settings.beginGroup(qsGroupName);
-        QStringList list = settings.childKeys();
-        if(list.contains(item))
-        {
-            qDebug() << qsGroupName << " contains " << item;
-            settings.remove(item);
-        }
-        else
-        {
-            qDebug() << qsGroupName << " not contains " << item;
-            settings.setValue(item, "true");
-        }
-        settings.endGroup();
-        settings.sync();
-    }
-    else
-    {
-        s = "List is empty, exec Load function!!!";
-    }
-    // Отобразить картинку
-    showCurrentIndexPicture();
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execListWidgetPlaceItemClicked()
-{
-    QString s = "Use RightMouseButton to Add / Remove item to record";
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::installNavigation()
 {
     iCurrentIndexGlobal.store(0, std::memory_order_relaxed);
@@ -2529,72 +2456,6 @@ void MainWindow::execActionInsertSubject()
 
 //=============================================================================
 
-void MainWindow::execActionInsertPlace()
-{
-    QString s = "execActionInsertPlace()";
-
-    QString qsGoal = ui->lineEditAddIterm->text();
-
-    if(qsGoal.length() <= 0)
-    {
-        //Информационное сообщение
-        s += ": Empty string, nothing to do!";
-        s += qsGoal;
-
-        //---
-        emit execShowExecStatus(s);
-        //---
-
-        return;
-    }
-
-    //---Загрузка списка Place
-
-    if(!loadHashTagListPlace())
-    {
-        qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
-        return;
-    }
-
-    qDebug() << ": loadHashTagListPlace is sucsess";
-
-    //Здесь должна быть проверка на наличие нового значения в списке
-    if(qslHashTagList->indexOf(qsGoal) < 0)
-    {
-        ui->listWidgetPlaces->clear();
-        int iLast = qslHashTagList->count() - 1;
-        if(qslHashTagList->at(iLast) == "")
-        {
-            qslHashTagList->replace(iLast, qsGoal);
-        }
-        else
-        {
-            qslHashTagList->append(qsGoal);
-        }
-        ui->listWidgetPlaces->addItems(*qslHashTagList);
-
-        //Сохранение нового списка Place
-
-        cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
-
-        //Информационное сообщение
-        s += ": ";
-        s += qsGoal;
-    }
-    else
-    {
-        //Информационное сообщение
-        s += ": HashTagListPlace already contain ";
-        s += qsGoal;
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execActionInsertProperty()
 {
     QString s = "execActionInsertProperty()";
@@ -2810,93 +2671,6 @@ void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &
 
 //=============================================================================
 
-void MainWindow::execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos)
-{
-    QString s = "execWidgetListPlaceCustomContextMenuRequested()";
-
-    //Задание типа меню
-    lwtListType = ListWidgetType::PLACE_TYPE;
-
-    QListWidget * listWidget = ui->listWidgetPlaces;
-    QListWidgetItem * item = listWidget->itemAt(pos);
-    if(!item)
-    {
-        s += ": no item selected!";
-        //---
-        emit execShowExecStatus(s);
-        //---
-        return;
-    }
-
-    int index = listWidget->row(item);
-    QString qsItem = item->text();
-
-    QMenu contextMenu;
-    QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
-    QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");
-    QAction *actionInsertItemToList = contextMenu.addAction("Добавить элемент в список");
-
-    QAction *selectedAction = contextMenu.exec(listWidget->viewport()->mapToGlobal(pos));
-
-    if (selectedAction == actionAddOrRemoveItemToRecord)
-    {
-        // Обработка первого действия
-        qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
-
-        AddOrRemovePlaceItemToRecord();
-    }
-
-    else if (selectedAction == actionRemoveItemFromList)
-    {
-        // Обработка второго действия
-        qDebug() << "exec actionRemoveItemFromList: item=" << item->text()<< " index of this item=" << index;
-
-        //---Загрузка списка Place
-
-        if(!loadHashTagListPlace())
-        {
-            qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
-            return;
-        }
-
-        qDebug() << ": loadHashTagListPlace is sucsess";
-        //Здесь должна быть проверка на наличие удаляемого значения в списке
-        if(qslHashTagList->indexOf(qsItem) > 0)
-        {
-            qslHashTagList->removeAll(qsItem);
-            listWidget->clear();
-            listWidget->addItems(*qslHashTagList);
-
-            //Сохранение нового списка Place
-
-            cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
-
-            //Информационное сообщение
-            s += "Removed item: ";
-            s += qsItem;
-        }
-        else
-        {
-            qDebug() << "Item " << qsItem << "not found in HashTagListPlace";
-        }
-        //---
-
-    }
-
-    else if (selectedAction == actionInsertItemToList)
-    {
-        // Обработка третьего действия
-        qDebug() << "exec actionInsertItemToList: item=" << ui->lineEditAddIterm->text();
-        emit ui->actionInsertPlace->triggered();
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos)
 {
     QString s = "execWidgetListPropertyCustomContextMenuRequested()";
@@ -3076,3 +2850,7 @@ void MainWindow::execShowCurrentIndexPicture()
 {
     showCurrentIndexPicture();
 }
+
+//##############################################################################
+
+

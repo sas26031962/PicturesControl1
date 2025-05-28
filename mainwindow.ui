@@ -289,7 +289,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -310,21 +310,6 @@
      <attribute name="title">
       <string>Места</string>
      </attribute>
-    </widget>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Places</string>
-     </attribute>
-     <widget class="QListWidget" name="listWidgetPlaces">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>261</width>
-        <height>261</height>
-       </rect>
-      </property>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -585,11 +570,9 @@
      <string>Tags</string>
     </property>
     <addaction name="actionLoaadHashTagListSubject"/>
-    <addaction name="actionLoadHashTagListPlace"/>
     <addaction name="actionLoadHashTagListProperty"/>
     <addaction name="actionLoadHashTagListTheame"/>
     <addaction name="actionInsertSubject"/>
-    <addaction name="actionInsertPlace"/>
     <addaction name="actionInsertProperty"/>
     <addaction name="actionInsertTheame"/>
    </widget>

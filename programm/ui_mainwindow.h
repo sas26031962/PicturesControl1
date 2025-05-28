@@ -98,8 +98,6 @@ public:
     QWidget *tab_4;
     QListWidget *listWidgetSubject;
     QWidget *tab_8;
-    QWidget *tab;
-    QListWidget *listWidgetPlaces;
     QWidget *tab_2;
     QListWidget *listWidgetPropertyes;
     QWidget *tab_3;
@@ -286,12 +284,6 @@ public:
         tab_8 = new QWidget();
         tab_8->setObjectName(QStringLiteral("tab_8"));
         tabWidget->addTab(tab_8, QString());
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        listWidgetPlaces = new QListWidget(tab);
-        listWidgetPlaces->setObjectName(QStringLiteral("listWidgetPlaces"));
-        listWidgetPlaces->setGeometry(QRect(10, 10, 261, 261));
-        tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         listWidgetPropertyes = new QListWidget(tab_2);
@@ -405,11 +397,9 @@ public:
         menuSelect_image->addAction(actionGotoIndex);
         menuForms->addAction(actionViewPicture);
         menuTags->addAction(actionLoaadHashTagListSubject);
-        menuTags->addAction(actionLoadHashTagListPlace);
         menuTags->addAction(actionLoadHashTagListProperty);
         menuTags->addAction(actionLoadHashTagListTheame);
         menuTags->addAction(actionInsertSubject);
-        menuTags->addAction(actionInsertPlace);
         menuTags->addAction(actionInsertProperty);
         menuTags->addAction(actionInsertTheame);
         menuSearch->addAction(actionSearchRotated);
@@ -424,7 +414,7 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -511,7 +501,6 @@ public:
         pushButtonRotateCW->setText(QApplication::translate("MainWindow", "Rotate CW", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Subject", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Places", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Propertyes", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Theams", 0));
         labelKeysCaption->setText(QApplication::translate("MainWindow", "All keys", 0));

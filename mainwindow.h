@@ -125,7 +125,7 @@ public:
     //Методы
     void installNavigation();
     void AddOrRemoveSubjectItemToRecord();
-    void AddOrRemovePlaceItemToRecord();
+    //void AddOrRemovePlaceItemToRecord();
     void AddOrRemovePropertyItemToRecord();
     void AddOrRemoveTheameItemToRecord();
 
@@ -150,7 +150,7 @@ private slots:
     void execListWidgetSubjectItemClicked();
     void execListWidgetPropertyItemClicked();
     void execListWidgetTheameItemClicked();
-    void execListWidgetPlaceItemClicked();
+    //void execListWidgetPlaceItemClicked();
 
     void execListWidgetFoundedItemClicked();
 
@@ -160,12 +160,12 @@ private slots:
     void execListWidgetSearchItemClicked();
 
     void execActionLoadHashTagListSubject();
-    void execActionLoadHashTagListPlace();
+    //void execActionLoadHashTagListPlace();
     void execActionLoadHashTagListProperty();
     void execActionLoadHashTagListTheame();
 
     void execActionInsertSubject();
-    void execActionInsertPlace();
+    //void execActionInsertPlace();
     void execActionInsertProperty();
     void execActionInsertTheame();
 
@@ -200,9 +200,9 @@ private slots:
     void execShiftYValueChanged();
 
     void execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos);
-    void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
+    //void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
 
     void execShowCurrentIndexPicture();
 
