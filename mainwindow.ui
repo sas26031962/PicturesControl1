@@ -289,7 +289,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_Subject">
      <attribute name="title">
@@ -299,6 +299,11 @@
     <widget class="QWidget" name="tab_Place">
      <attribute name="title">
       <string>Места</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_Property">
+     <attribute name="title">
+      <string>Свойства</string>
      </attribute>
     </widget>
     <widget class="QWidget" name="tab_2">

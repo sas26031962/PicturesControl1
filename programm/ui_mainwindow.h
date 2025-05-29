@@ -97,6 +97,7 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab_Subject;
     QWidget *tab_Place;
+    QWidget *tab_Property;
     QWidget *tab_2;
     QListWidget *listWidgetPropertyes;
     QWidget *tab_3;
@@ -280,6 +281,9 @@ public:
         tab_Place = new QWidget();
         tab_Place->setObjectName(QStringLiteral("tab_Place"));
         tabWidget->addTab(tab_Place, QString());
+        tab_Property = new QWidget();
+        tab_Property->setObjectName(QStringLiteral("tab_Property"));
+        tabWidget->addTab(tab_Property, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         listWidgetPropertyes = new QListWidget(tab_2);
@@ -408,7 +412,7 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -495,6 +499,7 @@ public:
         pushButtonRotateCW->setText(QApplication::translate("MainWindow", "Rotate CW", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\241\321\203\321\211\320\275\320\276\321\201\321\202\320\270", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Place), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Property), QApplication::translate("MainWindow", "\320\241\320\262\320\276\320\271\321\201\321\202\320\262\320\260", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Propertyes", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Theams", 0));
         labelKeysCaption->setText(QApplication::translate("MainWindow", "All keys", 0));

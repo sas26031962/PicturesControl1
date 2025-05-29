@@ -94,6 +94,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ListWidgetSubject = new cListWidgetSubject();
     ListWidgetSubject->install(ui->tab_Subject);
 
+    ListWidgetProperty = new cListWidgetProperty();
+    ListWidgetProperty->install(ui->tab_Property);
+
     ui->comboBoxPatterns->clear();
     ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");
     ui->comboBoxPatterns->addItem("^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}");
@@ -158,6 +161,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ListWidgetSubject, &cListWidgetSubject::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(ListWidgetSubject, &cListWidgetSubject::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+
+    connect(ListWidgetProperty, &cListWidgetProperty::showExecStatus, this, &MainWindow::execShowExecStatus);
+    connect(ListWidgetProperty, &cListWidgetProperty::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
 
     fmViewPicture = new fmView(this);
     fmViewPicture->setWindowFlags(Qt::Window);//3 flags
@@ -290,6 +296,7 @@ MainWindow::~MainWindow()
 
     delete ListWidgetPlace;
     delete ListWidgetSubject;
+    delete ListWidgetProperty;
 
     delete progressBarProcess;
     delete labelExecStatus;
