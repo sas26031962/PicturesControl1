@@ -60,10 +60,14 @@ SOURCES       = ../main.cpp \
 		../cimportfiles.cpp \
 		../cdrawfiles.cpp \
 		../cloadfiles.cpp \
-		../clistwidgetplace.cpp qrc_resourcedata.cpp \
+		../clistwidgetplace.cpp \
+		../clistwidgetsubject.cpp \
+		../clistwidgetproperty.cpp qrc_resourcedata.cpp \
 		moc_mainwindow.cpp \
 		moc_fmview.cpp \
-		moc_clistwidgetplace.cpp
+		moc_clistwidgetplace.cpp \
+		moc_clistwidgetsubject.cpp \
+		moc_clistwidgetproperty.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		cinifile.o \
@@ -73,10 +77,14 @@ OBJECTS       = main.o \
 		cdrawfiles.o \
 		cloadfiles.o \
 		clistwidgetplace.o \
+		clistwidgetsubject.o \
+		clistwidgetproperty.o \
 		qrc_resourcedata.o \
 		moc_mainwindow.o \
 		moc_fmview.o \
-		moc_clistwidgetplace.o
+		moc_clistwidgetplace.o \
+		moc_clistwidgetsubject.o \
+		moc_clistwidgetproperty.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -163,7 +171,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../cdrawfiles.h \
 		../cloadfiles.h \
 		../clistwidgettype.h \
-		../clistwidgetplace.h ../main.cpp \
+		../clistwidgetplace.h \
+		../clistwidgetsubject.h \
+		../clistwidgetproperty.h ../main.cpp \
 		../mainwindow.cpp \
 		../cinifile.cpp \
 		../crecord.cpp \
@@ -171,7 +181,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../cimportfiles.cpp \
 		../cdrawfiles.cpp \
 		../cloadfiles.cpp \
-		../clistwidgetplace.cpp
+		../clistwidgetplace.cpp \
+		../clistwidgetsubject.cpp \
+		../clistwidgetproperty.cpp
 QMAKE_TARGET  = PicturesControl1
 DESTDIR       = 
 TARGET        = PicturesControl1
@@ -360,8 +372,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resourcedata.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cdrawfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfiles.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cdrawfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfiles.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../mainwindow.ui ../fmview.ui $(DISTDIR)/
 
 
@@ -400,9 +412,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1y -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp moc_clistwidgetsubject.cpp moc_clistwidgetproperty.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp moc_clistwidgetsubject.cpp moc_clistwidgetproperty.cpp
 moc_mainwindow.cpp: ../mainwindow.h \
 		../cinifile.h \
 		../crecord.h \
@@ -413,6 +425,8 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../cloadfiles.h \
 		../clistwidgetplace.h \
 		../clistwidgettype.h \
+		../clistwidgetsubject.h \
+		../clistwidgetproperty.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../mainwindow.h -o moc_mainwindow.cpp
@@ -434,6 +448,26 @@ moc_clistwidgetplace.cpp: ../clistwidgetplace.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgetplace.h -o moc_clistwidgetplace.cpp
+
+moc_clistwidgetsubject.cpp: ../clistwidgetsubject.h \
+		../clistwidgettype.h \
+		../cinifile.h \
+		../crecord.h \
+		../cloadfiles.h \
+		../cimportfiles.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgetsubject.h -o moc_clistwidgetsubject.cpp
+
+moc_clistwidgetproperty.cpp: ../clistwidgetproperty.h \
+		../clistwidgettype.h \
+		../cinifile.h \
+		../crecord.h \
+		../cloadfiles.h \
+		../cimportfiles.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgetproperty.h -o moc_clistwidgetproperty.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -469,7 +503,9 @@ main.o: ../main.cpp ../mainwindow.h \
 		../stvarmem.h \
 		../cloadfiles.h \
 		../clistwidgetplace.h \
-		../clistwidgettype.h
+		../clistwidgettype.h \
+		../clistwidgetsubject.h \
+		../clistwidgetproperty.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
 
 mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
@@ -482,6 +518,8 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../cloadfiles.h \
 		../clistwidgetplace.h \
 		../clistwidgettype.h \
+		../clistwidgetsubject.h \
+		../clistwidgetproperty.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
@@ -523,6 +561,22 @@ clistwidgetplace.o: ../clistwidgetplace.cpp ../clistwidgetplace.h \
 		../cimportfiles.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgetplace.o ../clistwidgetplace.cpp
 
+clistwidgetsubject.o: ../clistwidgetsubject.cpp ../clistwidgetsubject.h \
+		../clistwidgettype.h \
+		../cinifile.h \
+		../crecord.h \
+		../cloadfiles.h \
+		../cimportfiles.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgetsubject.o ../clistwidgetsubject.cpp
+
+clistwidgetproperty.o: ../clistwidgetproperty.cpp ../clistwidgetproperty.h \
+		../clistwidgettype.h \
+		../cinifile.h \
+		../crecord.h \
+		../cloadfiles.h \
+		../cimportfiles.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgetproperty.o ../clistwidgetproperty.cpp
+
 qrc_resourcedata.o: qrc_resourcedata.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resourcedata.o qrc_resourcedata.cpp
 
@@ -534,6 +588,12 @@ moc_fmview.o: moc_fmview.cpp
 
 moc_clistwidgetplace.o: moc_clistwidgetplace.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clistwidgetplace.o moc_clistwidgetplace.cpp
+
+moc_clistwidgetsubject.o: moc_clistwidgetsubject.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clistwidgetsubject.o moc_clistwidgetsubject.cpp
+
+moc_clistwidgetproperty.o: moc_clistwidgetproperty.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clistwidgetproperty.o moc_clistwidgetproperty.cpp
 
 ####### Install
 
