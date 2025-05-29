@@ -9,9 +9,11 @@ INPUT(
 ./release\cloadfiles.o
 ./release\clistwidgetplace.o
 ./release\clistwidgetsubject.o
+./release\clistwidgetproperty.o
 ./release\qrc_resourcedata.o
 ./release\moc_mainwindow.o
 ./release\moc_fmview.o
 ./release\moc_clistwidgetplace.o
 ./release\moc_clistwidgetsubject.o
+./release\moc_clistwidgetproperty.o
 );

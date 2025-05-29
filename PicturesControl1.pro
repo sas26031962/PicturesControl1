@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     cdrawfiles.cpp \
     cloadfiles.cpp \
     clistwidgetplace.cpp \
-    clistwidgetsubject.cpp
+    clistwidgetsubject.cpp \
+    clistwidgetproperty.cpp
 
 HEADERS  += mainwindow.h \
     cinifile.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     cloadfiles.h \
     clistwidgettype.h \
     clistwidgetplace.h \
-    clistwidgetsubject.h
+    clistwidgetsubject.h \
+    clistwidgetproperty.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

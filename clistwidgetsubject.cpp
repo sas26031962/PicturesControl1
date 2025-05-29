@@ -126,7 +126,7 @@ void cListWidgetSubject::execRequest(const QPoint &pos)
 void cListWidgetSubject::addOrRemovePlaceItemToRecord()
 {
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    QString s = "execPlaceItemClicked()";
+    QString s = "execSubjectItemClicked()";
     QString item = listWidget->currentItem()->text();
     qDebug() << "listWidgetPlace: item=" << item;
 

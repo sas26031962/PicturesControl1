@@ -9,9 +9,11 @@ INPUT(
 ./debug\cloadfiles.o
 ./debug\clistwidgetplace.o
 ./debug\clistwidgetsubject.o
+./debug\clistwidgetproperty.o
 ./debug\qrc_resourcedata.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fmview.o
 ./debug\moc_clistwidgetplace.o
 ./debug\moc_clistwidgetsubject.o
+./debug\moc_clistwidgetproperty.o
 );
