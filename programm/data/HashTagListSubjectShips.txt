@@ -25,6 +25,6 @@ Dreadnote_Sovetsky_Soyuz
 Dreadnote_Parizskaya_Kommuna
 Dreadnote_Izmail
 Линкор_Архангельск
-Линкор_Новороссийск
 Линкор_Советский_Союз
 Линкор_Севастополь
+Линкор_Новороссийск

@@ -289,42 +289,22 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
-    <widget class="QWidget" name="tab_4">
+    <widget class="QWidget" name="tab_Subject">
      <attribute name="title">
-      <string>Subject</string>
+      <string>Сущности</string>
      </attribute>
-     <widget class="QListWidget" name="listWidgetSubject">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>261</width>
-        <height>291</height>
-       </rect>
-      </property>
-     </widget>
     </widget>
-    <widget class="QWidget" name="tab_8">
+    <widget class="QWidget" name="tab_Place">
      <attribute name="title">
       <string>Места</string>
      </attribute>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="tab_Property">
      <attribute name="title">
-      <string>Propertyes</string>
+      <string>Свойства</string>
      </attribute>
-     <widget class="QListWidget" name="listWidgetPropertyes">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>261</width>
-        <height>291</height>
-       </rect>
-      </property>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -569,11 +549,7 @@
     <property name="title">
      <string>Tags</string>
     </property>
-    <addaction name="actionLoaadHashTagListSubject"/>
-    <addaction name="actionLoadHashTagListProperty"/>
     <addaction name="actionLoadHashTagListTheame"/>
-    <addaction name="actionInsertSubject"/>
-    <addaction name="actionInsertProperty"/>
     <addaction name="actionInsertTheame"/>
    </widget>
    <widget class="QMenu" name="menuSearch">

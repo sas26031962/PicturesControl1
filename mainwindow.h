@@ -34,6 +34,8 @@
 #include "cloadfiles.h"
 
 #include "clistwidgetplace.h"
+#include "clistwidgetsubject.h"
+#include "clistwidgetproperty.h"
 
 //-----------------------------------------------------------------------------
 // КОНСТАНТЫ
@@ -46,13 +48,6 @@
 //-----------------------------------------------------------------------------
 // ТИПЫ ДАННЫХ
 //-----------------------------------------------------------------------------
-
-//enum class ListWidgetType{
-//    SUBJECT_TYPE,
-//    PLACE_TYPE,
-//    PROPERTY_TYPE,
-//    THEAME_TYPE
-//};
 
 namespace Ui {
 class MainWindow;
@@ -95,12 +90,12 @@ private:
     ListWidgetType lwtListType = ListWidgetType::SUBJECT_TYPE;
 
     cListWidgetPlace * ListWidgetPlace;
+    cListWidgetSubject * ListWidgetSubject;
+    cListWidgetProperty * ListWidgetProperty;
 
     //Методы
     void showCurrentIndexPicture();
-    bool loadHashTagListSubject();
     bool loadHashTagListPlace();
-    bool loadHashTagListProperty();
     bool loadHashTagListTheame();
     bool deleteSection(QString s);
 
@@ -124,9 +119,6 @@ public:
 
     //Методы
     void installNavigation();
-    void AddOrRemoveSubjectItemToRecord();
-    //void AddOrRemovePlaceItemToRecord();
-    void AddOrRemovePropertyItemToRecord();
     void AddOrRemoveTheameItemToRecord();
 
 protected:
@@ -147,10 +139,7 @@ private slots:
     void execActionMemo();
     void execTimerUpdate();
 
-    void execListWidgetSubjectItemClicked();
-    void execListWidgetPropertyItemClicked();
     void execListWidgetTheameItemClicked();
-    //void execListWidgetPlaceItemClicked();
 
     void execListWidgetFoundedItemClicked();
 
@@ -159,14 +148,8 @@ private slots:
     void execListWidgetKeysItemClicked();
     void execListWidgetSearchItemClicked();
 
-    void execActionLoadHashTagListSubject();
-    //void execActionLoadHashTagListPlace();
-    void execActionLoadHashTagListProperty();
     void execActionLoadHashTagListTheame();
 
-    void execActionInsertSubject();
-    //void execActionInsertPlace();
-    void execActionInsertProperty();
     void execActionInsertTheame();
 
     void execActionSearchRotated();
@@ -199,10 +182,7 @@ private slots:
     void execShiftXValueChanged();
     void execShiftYValueChanged();
 
-    void execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos);
-    void execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
-    //void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
 
     void execShowCurrentIndexPicture();
 
