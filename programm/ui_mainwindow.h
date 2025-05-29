@@ -97,7 +97,8 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab_4;
     QListWidget *listWidgetSubject;
-    QWidget *tab_8;
+    QWidget *tab_Subject;
+    QWidget *tab_Place;
     QWidget *tab_2;
     QListWidget *listWidgetPropertyes;
     QWidget *tab_3;
@@ -281,9 +282,12 @@ public:
         listWidgetSubject->setObjectName(QStringLiteral("listWidgetSubject"));
         listWidgetSubject->setGeometry(QRect(10, 10, 261, 291));
         tabWidget->addTab(tab_4, QString());
-        tab_8 = new QWidget();
-        tab_8->setObjectName(QStringLiteral("tab_8"));
-        tabWidget->addTab(tab_8, QString());
+        tab_Subject = new QWidget();
+        tab_Subject->setObjectName(QStringLiteral("tab_Subject"));
+        tabWidget->addTab(tab_Subject, QString());
+        tab_Place = new QWidget();
+        tab_Place->setObjectName(QStringLiteral("tab_Place"));
+        tabWidget->addTab(tab_Place, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
         listWidgetPropertyes = new QListWidget(tab_2);
@@ -500,7 +504,8 @@ public:
 #endif // QT_NO_TOOLTIP
         pushButtonRotateCW->setText(QApplication::translate("MainWindow", "Rotate CW", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Subject", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\237\320\265\321\200\321\201\320\276\320\275\321\213", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Place), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Propertyes", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Theams", 0));
         labelKeysCaption->setText(QApplication::translate("MainWindow", "All keys", 0));

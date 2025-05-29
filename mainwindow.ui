@@ -306,7 +306,12 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_8">
+    <widget class="QWidget" name="tab_Subject">
+     <attribute name="title">
+      <string>Персоны</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_Place">
      <attribute name="title">
       <string>Места</string>
      </attribute>

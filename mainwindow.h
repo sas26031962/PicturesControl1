@@ -34,6 +34,7 @@
 #include "cloadfiles.h"
 
 #include "clistwidgetplace.h"
+#include "clistwidgetsubject.h"
 
 //-----------------------------------------------------------------------------
 // КОНСТАНТЫ
@@ -46,13 +47,6 @@
 //-----------------------------------------------------------------------------
 // ТИПЫ ДАННЫХ
 //-----------------------------------------------------------------------------
-
-//enum class ListWidgetType{
-//    SUBJECT_TYPE,
-//    PLACE_TYPE,
-//    PROPERTY_TYPE,
-//    THEAME_TYPE
-//};
 
 namespace Ui {
 class MainWindow;
@@ -95,6 +89,7 @@ private:
     ListWidgetType lwtListType = ListWidgetType::SUBJECT_TYPE;
 
     cListWidgetPlace * ListWidgetPlace;
+    cListWidgetSubject * ListWidgetSubject;
 
     //Методы
     void showCurrentIndexPicture();

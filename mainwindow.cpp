@@ -89,7 +89,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ListWidgetPlace = new cListWidgetPlace();
-    ListWidgetPlace->install(ui->tab_8);
+    ListWidgetPlace->install(ui->tab_Place);
+
+    ListWidgetSubject = new cListWidgetSubject();
+    ListWidgetSubject->install(ui->tab_Subject);
 
     ui->comboBoxPatterns->clear();
     ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");
@@ -155,6 +158,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ListWidgetPlace, &cListWidgetPlace::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(ListWidgetPlace, &cListWidgetPlace::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
 
+    connect(ListWidgetSubject, &cListWidgetSubject::showExecStatus, this, &MainWindow::execShowExecStatus);
+    connect(ListWidgetSubject, &cListWidgetSubject::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+
     fmViewPicture = new fmView(this);
     fmViewPicture->setWindowFlags(Qt::Window);//3 flags
     //ViewPicture->setWindowFlags(Qt::Drawer);//1 flag
@@ -210,6 +216,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //qslHashTagList = ptrHashTagList.get();
     qslHashTagList = new QStringList();
 
+    //--- DELETE ---
     //Загрузка списка хеш-тегов Subject
     if(loadHashTagListSubject())
     {
@@ -222,6 +229,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         connect(ui->listWidgetSubject, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSubjectItemClicked()));
     }
+    //---
 
     //Загрузка списка хеш-тегов Propertyes
     if(loadHashTagListProperty())
@@ -236,20 +244,6 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(ui->listWidgetPropertyes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetPropertyItemClicked()));
     }
 
-/*
-    //Загрузка списка хеш-тегов Places
-    if(loadHashTagListPlace())
-    {
-        ui->listWidgetPlaces->clear();
-        ui->listWidgetPlaces->addItems(*qslHashTagList);
-
-        // Настройка контекстного меню
-        ui->listWidgetPlaces->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(ui->listWidgetPlaces, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetPlaceCustomContextMenuRequested);
-
-        connect(ui->listWidgetPlaces, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetPlaceItemClicked()));
-    }
-*/
     //Загрузка списка хеш-тегов Theams
     if(loadHashTagListTheame())
     {
@@ -313,6 +307,7 @@ MainWindow::~MainWindow()
     saveRemovedSectionsList();
 
     delete ListWidgetPlace;
+    delete ListWidgetSubject;
 
     delete progressBarProcess;
     delete labelExecStatus;
