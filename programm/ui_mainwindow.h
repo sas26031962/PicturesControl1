@@ -95,8 +95,6 @@ public:
     QSpinBox *spinBoxAngle;
     QPushButton *pushButtonRotateCW;
     QTabWidget *tabWidget;
-    QWidget *tab_4;
-    QListWidget *listWidgetSubject;
     QWidget *tab_Subject;
     QWidget *tab_Place;
     QWidget *tab_2;
@@ -276,12 +274,6 @@ public:
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         tabWidget->setGeometry(QRect(250, 30, 341, 341));
-        tab_4 = new QWidget();
-        tab_4->setObjectName(QStringLiteral("tab_4"));
-        listWidgetSubject = new QListWidget(tab_4);
-        listWidgetSubject->setObjectName(QStringLiteral("listWidgetSubject"));
-        listWidgetSubject->setGeometry(QRect(10, 10, 261, 291));
-        tabWidget->addTab(tab_4, QString());
         tab_Subject = new QWidget();
         tab_Subject->setObjectName(QStringLiteral("tab_Subject"));
         tabWidget->addTab(tab_Subject, QString());
@@ -400,10 +392,8 @@ public:
         menuSelect_image->addAction(actionRotateCCW_2);
         menuSelect_image->addAction(actionGotoIndex);
         menuForms->addAction(actionViewPicture);
-        menuTags->addAction(actionLoaadHashTagListSubject);
         menuTags->addAction(actionLoadHashTagListProperty);
         menuTags->addAction(actionLoadHashTagListTheame);
-        menuTags->addAction(actionInsertSubject);
         menuTags->addAction(actionInsertProperty);
         menuTags->addAction(actionInsertTheame);
         menuSearch->addAction(actionSearchRotated);
@@ -418,7 +408,7 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -503,8 +493,7 @@ public:
         pushButtonRotateCW->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
         pushButtonRotateCW->setText(QApplication::translate("MainWindow", "Rotate CW", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Subject", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\237\320\265\321\200\321\201\320\276\320\275\321\213", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\241\321\203\321\211\320\275\320\276\321\201\321\202\320\270", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Place), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Propertyes", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Theams", 0));

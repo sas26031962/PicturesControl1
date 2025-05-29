@@ -289,26 +289,11 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>Subject</string>
-     </attribute>
-     <widget class="QListWidget" name="listWidgetSubject">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>261</width>
-        <height>291</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
     <widget class="QWidget" name="tab_Subject">
      <attribute name="title">
-      <string>Персоны</string>
+      <string>Сущности</string>
      </attribute>
     </widget>
     <widget class="QWidget" name="tab_Place">
@@ -574,10 +559,8 @@
     <property name="title">
      <string>Tags</string>
     </property>
-    <addaction name="actionLoaadHashTagListSubject"/>
     <addaction name="actionLoadHashTagListProperty"/>
     <addaction name="actionLoadHashTagListTheame"/>
-    <addaction name="actionInsertSubject"/>
     <addaction name="actionInsertProperty"/>
     <addaction name="actionInsertTheame"/>
    </widget>

@@ -93,7 +93,6 @@ private:
 
     //Методы
     void showCurrentIndexPicture();
-    bool loadHashTagListSubject();
     bool loadHashTagListPlace();
     bool loadHashTagListProperty();
     bool loadHashTagListTheame();
@@ -119,8 +118,6 @@ public:
 
     //Методы
     void installNavigation();
-    void AddOrRemoveSubjectItemToRecord();
-    //void AddOrRemovePlaceItemToRecord();
     void AddOrRemovePropertyItemToRecord();
     void AddOrRemoveTheameItemToRecord();
 
@@ -142,10 +139,8 @@ private slots:
     void execActionMemo();
     void execTimerUpdate();
 
-    void execListWidgetSubjectItemClicked();
     void execListWidgetPropertyItemClicked();
     void execListWidgetTheameItemClicked();
-    //void execListWidgetPlaceItemClicked();
 
     void execListWidgetFoundedItemClicked();
 
@@ -154,13 +149,9 @@ private slots:
     void execListWidgetKeysItemClicked();
     void execListWidgetSearchItemClicked();
 
-    void execActionLoadHashTagListSubject();
-    //void execActionLoadHashTagListPlace();
     void execActionLoadHashTagListProperty();
     void execActionLoadHashTagListTheame();
 
-    void execActionInsertSubject();
-    //void execActionInsertPlace();
     void execActionInsertProperty();
     void execActionInsertTheame();
 
@@ -194,10 +185,8 @@ private slots:
     void execShiftXValueChanged();
     void execShiftYValueChanged();
 
-    void execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
-    //void execListWidgetPlaceCustomContextMenuRequested(const QPoint &pos);
 
     void execShowCurrentIndexPicture();
 

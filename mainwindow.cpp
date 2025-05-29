@@ -148,8 +148,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLoad, SIGNAL(triggered()), this, SLOT( execActionLoad()));
 
     //---Для удаления
-    connect(ui->actionLoaadHashTagListSubject, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListSubject()));
-    //connect(ui->actionLoadHashTagListPlace, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListPlace()));
     connect(ui->actionLoadHashTagListProperty, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListProperty()));
     connect(ui->actionLoadHashTagListTheame, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListTheame()));
     //---
@@ -216,21 +214,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //qslHashTagList = ptrHashTagList.get();
     qslHashTagList = new QStringList();
 
-    //--- DELETE ---
-    //Загрузка списка хеш-тегов Subject
-    if(loadHashTagListSubject())
-    {
-        ui->listWidgetSubject->clear();
-        ui->listWidgetSubject->addItems(*qslHashTagList);
-
-        // Настройка контекстного меню
-        ui->listWidgetSubject->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(ui->listWidgetSubject, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetSubjectCustomContextMenuRequested);
-
-        connect(ui->listWidgetSubject, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSubjectItemClicked()));
-    }
-    //---
-
     //Загрузка списка хеш-тегов Propertyes
     if(loadHashTagListProperty())
     {
@@ -264,7 +247,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
 
-    connect(ui->actionInsertSubject, &QAction::triggered, this, &MainWindow::execActionInsertSubject);
     connect(ui->actionInsertProperty, &QAction::triggered, this, &MainWindow::execActionInsertProperty);
     connect(ui->actionInsertTheame, &QAction::triggered, this, &MainWindow::execActionInsertTheame);
 
@@ -794,37 +776,6 @@ void MainWindow::execActionFormViewPicture()
 
 //=============================================================================
 
-bool MainWindow::loadHashTagListSubject()
-{
-
-    QFile file(cIniFile::fileSubjectHashTag);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileSubjectHashTag;
-        return false;
-    }
-
-    QTextStream in(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
-    {
-        in.setCodec("Windows-1251");
-    }
-
-    qslHashTagList->clear();
-
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        qslHashTagList->append(line);
-    }
-
-    file.close();
-    qDebug() << "Load " << qslHashTagList->count() << " strings";
-    return true;
-}
-
-//=============================================================================
-
 bool MainWindow::loadHashTagListPlace()
 {
 
@@ -921,29 +872,6 @@ bool MainWindow::loadHashTagListProperty()
     file.close();
     qDebug() << "Load " << qslHashTagList->count() << " strings";
     return true;
-}
-
-//=============================================================================
-
-void MainWindow::execActionLoadHashTagListSubject()
-{
-    QString s = "ActionLoadHashTagListSubject()";
-    if(loadHashTagListSubject())
-    {
-        qDebug() << s << ": loadHashTagListSubject is sucsess";
-        ui->listWidgetSubject->clear();
-        ui->listWidgetSubject->addItems(*qslHashTagList);
-
-    }
-    else
-    {
-        ui->listWidgetSubject->clear();
-        qDebug() << s << ": loadHashTagListSubject is broken!!!";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-
 }
 
 //=============================================================================
@@ -1762,56 +1690,6 @@ void MainWindow::execActionMemo()
 
 //=============================================================================
 
-void MainWindow::AddOrRemoveSubjectItemToRecord()
-{
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    QString s = "execSubjectItemClicked()";
-    QString item = ui->listWidgetSubject->currentItem()->text();
-    qDebug() << "listWidgetSubject: item=" << item;
-
-    // Сохранение параметра в INI-файле
-    if(cIniFile::Groups->count() > 0)
-    {
-        QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-        settings.beginGroup(qsGroupName);
-        QStringList list = settings.childKeys();
-        if(list.contains(item))
-        {
-            qDebug() << qsGroupName << " contains " << item;
-            settings.remove(item);
-        }
-        else
-        {
-            qDebug() << qsGroupName << " not contains " << item;
-            settings.setValue(item, "true");
-        }
-        settings.endGroup();
-        settings.sync();
-    }
-    else
-    {
-        s = "List is empty, exec Load function!!!";
-    }
-    // Отобразить картинку
-    showCurrentIndexPicture();
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execListWidgetSubjectItemClicked()
-{
-
-    QString s = "Use RightMouseButton to Add / Remove item to record";
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::AddOrRemovePropertyItemToRecord()
 {
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
@@ -2384,71 +2262,6 @@ void MainWindow::execListWidgetFoundedItemClicked()
 
 //=============================================================================
 
-void MainWindow::execActionInsertSubject()
-{
-    QString s = "execActionInsertSubject()";
-
-    QString qsGoal = ui->lineEditAddIterm->text();
-
-    if(qsGoal.length() <= 0)
-    {
-        //Информационное сообщение
-        s += ": Empty string, nothing to do!";
-        s += qsGoal;
-
-        //---
-        emit execShowExecStatus(s);
-        //---
-
-        return;
-    }
-
-    //---Загрузка списка Subject
-
-    if(!loadHashTagListSubject())
-    {
-        qDebug() << "Error: Could not load HashTagListSubject from file: " << cIniFile::fileSubjectHashTag;
-        return;
-    }
-
-    qDebug() << ": loadHashTagListSubject is sucsess";
-    //---
-
-    //Здесь должна быть проверка на наличие нового значения в списке
-    if(qslHashTagList->indexOf(qsGoal) < 0)
-    {
-        ui->listWidgetSubject->clear();
-        int iLast = qslHashTagList->count() - 1;
-        if(qslHashTagList->at(iLast) == "")
-        {
-            qslHashTagList->replace(iLast, qsGoal);
-        }
-        else
-        {
-            qslHashTagList->append(qsGoal);
-        }
-        ui->listWidgetSubject->addItems(*qslHashTagList);
-
-        //Сохранение нового списка Subject
-
-        cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
-
-        //Информационное сообщение
-        s += ": ";
-        s += qsGoal;
-    }
-    else
-    {
-        //Информационное сообщение
-        s += ": HashTagListSubject already contain ";
-        s += qsGoal;
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
 //=============================================================================
 
 void MainWindow::execActionInsertProperty()
@@ -2574,89 +2387,6 @@ void MainWindow::execActionInsertTheame()
         //Информационное сообщение
         s += ": HashTagListTheams already contain ";
         s += qsGoal;
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void  MainWindow::execListWidgetSubjectCustomContextMenuRequested(const QPoint &pos)
-{
-    QString s = "execWidgetListSubjectCustomContextMenuRequested()";
-
-    //Задание типа меню
-    lwtListType = ListWidgetType::SUBJECT_TYPE;
-
-    QListWidget * listWidget = ui->listWidgetSubject;
-    QListWidgetItem * item = listWidget->itemAt(pos);
-    if(!item)
-    {
-        s += ": no item selected!";
-        //---
-        emit execShowExecStatus(s);
-        //---
-        return;
-    }
-
-    int index = listWidget->row(item);
-    QString qsItem = item->text();
-
-    QMenu contextMenu;
-    QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
-    QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");
-    QAction *actionInsertItemToList = contextMenu.addAction("Добавить элемент в список");
-
-    QAction *selectedAction = contextMenu.exec(listWidget->viewport()->mapToGlobal(pos));
-
-    if (selectedAction == actionAddOrRemoveItemToRecord)
-    {
-        // Обработка первого действия
-        qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
-
-        AddOrRemoveSubjectItemToRecord();
-    }
-
-    else if (selectedAction == actionRemoveItemFromList)
-    {
-        // Обработка второго действия
-        qDebug() << "exec actionRemoveItemFromList: item=" << item->text()<< " index of this item=" << index;
-
-        //---Загрузка списка Subject
-
-        if(!loadHashTagListSubject())
-        {
-            qDebug() << "Error: Could not load HashTagListSubject from file: " << cIniFile::fileSubjectHashTag;
-            return;
-        }
-
-        qDebug() << ": loadHashTagListSubject is sucsess";
-        //Здесь должна быть проверка на наличие удаляемого значения в списке
-        if(qslHashTagList->indexOf(qsItem) > 0)
-        {
-            qslHashTagList->removeAll(qsItem);
-            listWidget->clear();
-            listWidget->addItems(*qslHashTagList);
-
-            //Сохранение нового списка Subject
-
-            cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
-
-            //Информационное сообщение
-            s += "Removed item: ";
-            s += qsItem;
-        }
-        //---
-
-    }
-
-    else if (selectedAction == actionInsertItemToList)
-    {
-        // Обработка третьего действия
-        qDebug() << "exec actionInsertItemToList: item=" << ui->lineEditAddIterm->text();
-        emit ui->actionInsertSubject->triggered();
     }
 
     //---
