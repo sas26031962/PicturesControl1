@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_cListWidgetPlace_t {
     QByteArrayData data[8];
-    char stringdata0[106];
+    char stringdata0[101];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,12 +36,12 @@ QT_MOC_LITERAL(3, 33, 1), // "s"
 QT_MOC_LITERAL(4, 35, 23), // "showCurrentIndexPicture"
 QT_MOC_LITERAL(5, 59, 11), // "execRequest"
 QT_MOC_LITERAL(6, 71, 3), // "pos"
-QT_MOC_LITERAL(7, 75, 30) // "execListWidgetPlaceItemClicked"
+QT_MOC_LITERAL(7, 75, 25) // "execListWidgetItemClicked"
 
     },
     "cListWidgetPlace\0showExecStatus\0\0s\0"
     "showCurrentIndexPicture\0execRequest\0"
-    "pos\0execListWidgetPlaceItemClicked"
+    "pos\0execListWidgetItemClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,7 +86,7 @@ void cListWidgetPlace::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 0: _t->showExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->showCurrentIndexPicture(); break;
         case 2: _t->execRequest((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
-        case 3: _t->execListWidgetPlaceItemClicked(); break;
+        case 3: _t->execListWidgetItemClicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

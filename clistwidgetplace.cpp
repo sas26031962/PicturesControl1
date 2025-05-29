@@ -8,8 +8,8 @@ cListWidgetPlace::cListWidgetPlace(QObject *parent) : QObject(parent)
 cListWidgetPlace::~cListWidgetPlace()
 {
     delete qslHashTagList;
-    if(listWidget != nullptr) delete listWidget;
-    if(qleAddItem != nullptr) delete qleAddItem;
+    delete listWidget;
+    delete qleAddItem;
 }
 
 void cListWidgetPlace::install(QWidget * qwidget)
@@ -25,14 +25,14 @@ void cListWidgetPlace::install(QWidget * qwidget)
     //Очистка визуального списка
     listWidget->clear();
     //Загрузка списка хеш-тегов Places
-    if(loadHashTagListPlace())
+    if(loadHashTagList())
     {
         listWidget->addItems(*qslHashTagList);
 
         // Настройка контекстного меню
         listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(listWidget, &QListWidget::customContextMenuRequested, this, &cListWidgetPlace::execRequest);
-        connect(listWidget, &QListWidget::itemClicked, this, &cListWidgetPlace::execListWidgetPlaceItemClicked);
+        connect(listWidget, &QListWidget::itemClicked, this, &cListWidgetPlace::execListWidgetItemClicked);
     }
 
 }
@@ -70,7 +70,7 @@ void cListWidgetPlace::execRequest(const QPoint &pos)
         // Обработка первого действия
         qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
 
-        addOrRemovePlaceItemToRecord();
+        addOrRemoveItemToRecord();
     }
 
     else if (selectedAction == actionRemoveItemFromList)
@@ -80,7 +80,7 @@ void cListWidgetPlace::execRequest(const QPoint &pos)
 
         //---Загрузка списка Place
 
-        if(!loadHashTagListPlace())
+        if(!loadHashTagList())
         {
             qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
             return;
@@ -123,7 +123,7 @@ void cListWidgetPlace::execRequest(const QPoint &pos)
 
 }
 
-void cListWidgetPlace::addOrRemovePlaceItemToRecord()
+void cListWidgetPlace::addOrRemoveItemToRecord()
 {
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
     QString s = "execPlaceItemClicked()";
@@ -161,7 +161,7 @@ void cListWidgetPlace::addOrRemovePlaceItemToRecord()
     //---
 }
 
-bool cListWidgetPlace::loadHashTagListPlace()
+bool cListWidgetPlace::loadHashTagList()
 {
 
     QFile file(cIniFile::filePlaceHashTag);
@@ -212,7 +212,7 @@ bool cListWidgetPlace::addItemToList()
 
     //---Загрузка списка Place
 
-    if(!loadHashTagListPlace())
+    if(!loadHashTagList())
     {
         qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
         return false;
@@ -256,7 +256,7 @@ bool cListWidgetPlace::addItemToList()
     return true;
 }
 
-void cListWidgetPlace::execListWidgetPlaceItemClicked()
+void cListWidgetPlace::execListWidgetItemClicked()
 {
     QString s = "Use RightMouseButton to Add / Remove item to record";
     //---

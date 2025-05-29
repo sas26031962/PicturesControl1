@@ -41,8 +41,8 @@ public:
     ~cListWidgetPlace();
 
     //Методы
-    void addOrRemovePlaceItemToRecord();
-    bool loadHashTagListPlace();
+    void addOrRemoveItemToRecord();
+    bool loadHashTagList();
     bool addItemToList();
     void install(QWidget * qwidget);
 
@@ -52,7 +52,7 @@ signals:
 
 public slots:
     void execRequest(const QPoint &pos);
-    void execListWidgetPlaceItemClicked();
+    void execListWidgetItemClicked();
 };
 
 #endif // CLISTWIDGETPLACE_H

@@ -8,8 +8,10 @@ INPUT(
 ./debug\cdrawfiles.o
 ./debug\cloadfiles.o
 ./debug\clistwidgetplace.o
+./debug\clistwidgetsubject.o
 ./debug\qrc_resourcedata.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fmview.o
 ./debug\moc_clistwidgetplace.o
+./debug\moc_clistwidgetsubject.o
 );
