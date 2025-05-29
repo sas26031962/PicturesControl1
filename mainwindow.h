@@ -96,7 +96,6 @@ private:
     //Методы
     void showCurrentIndexPicture();
     bool loadHashTagListPlace();
-    bool loadHashTagListProperty();
     bool loadHashTagListTheame();
     bool deleteSection(QString s);
 
@@ -120,7 +119,6 @@ public:
 
     //Методы
     void installNavigation();
-    void AddOrRemovePropertyItemToRecord();
     void AddOrRemoveTheameItemToRecord();
 
 protected:
@@ -141,7 +139,6 @@ private slots:
     void execActionMemo();
     void execTimerUpdate();
 
-    void execListWidgetPropertyItemClicked();
     void execListWidgetTheameItemClicked();
 
     void execListWidgetFoundedItemClicked();
@@ -151,10 +148,8 @@ private slots:
     void execListWidgetKeysItemClicked();
     void execListWidgetSearchItemClicked();
 
-    void execActionLoadHashTagListProperty();
     void execActionLoadHashTagListTheame();
 
-    void execActionInsertProperty();
     void execActionInsertTheame();
 
     void execActionSearchRotated();
@@ -187,7 +182,6 @@ private slots:
     void execShiftXValueChanged();
     void execShiftYValueChanged();
 
-    void execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos);
     void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
 
     void execShowCurrentIndexPicture();

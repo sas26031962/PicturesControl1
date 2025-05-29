@@ -151,7 +151,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionLoad, SIGNAL(triggered()), this, SLOT( execActionLoad()));
 
     //---Для удаления
-    connect(ui->actionLoadHashTagListProperty, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListProperty()));
     connect(ui->actionLoadHashTagListTheame, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListTheame()));
     //---
 
@@ -220,19 +219,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //qslHashTagList = ptrHashTagList.get();
     qslHashTagList = new QStringList();
 
-    //Загрузка списка хеш-тегов Propertyes
-    if(loadHashTagListProperty())
-    {
-        ui->listWidgetPropertyes->clear();
-        ui->listWidgetPropertyes->addItems(*qslHashTagList);
-
-        // Настройка контекстного меню
-        ui->listWidgetPropertyes->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(ui->listWidgetPropertyes, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetPropertyCustomContextMenuRequested);
-
-        connect(ui->listWidgetPropertyes, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetPropertyItemClicked()));
-    }
-
     //Загрузка списка хеш-тегов Theams
     if(loadHashTagListTheame())
     {
@@ -253,7 +239,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
 
-    connect(ui->actionInsertProperty, &QAction::triggered, this, &MainWindow::execActionInsertProperty);
     connect(ui->actionInsertTheame, &QAction::triggered, this, &MainWindow::execActionInsertTheame);
 
     connect(ui->actionSearchNamePattern1, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern1);
@@ -783,37 +768,6 @@ void MainWindow::execActionFormViewPicture()
 
 //=============================================================================
 
-bool MainWindow::loadHashTagListPlace()
-{
-
-    QFile file(cIniFile::filePlaceHashTag);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
-        return false;
-    }
-
-    QTextStream in(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
-    {
-        in.setCodec("Windows-1251");
-        qDebug() << "Select Windows-1251 codec in loading case";
-    }
-
-    qslHashTagList->clear();
-
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        qslHashTagList->append(line);
-    }
-
-    file.close();
-    qDebug() << "Load " << qslHashTagList->count() << " strings";
-    return true;
-}
-
-//=============================================================================
 bool MainWindow::loadHashTagListTheame()
 {
 
@@ -847,65 +801,6 @@ bool MainWindow::loadHashTagListTheame()
     return true;
 
 }
-
-bool MainWindow::loadHashTagListProperty()
-{
-
-    QFile file(cIniFile::filePropertyesHashTag);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Error: Could not open file: " << cIniFile::filePropertyesHashTag;
-        return false;
-    }
-    else
-    {
-        qDebug() << "File: " << cIniFile::filePropertyesHashTag << " is loaded!";
-    }
-
-    QTextStream in(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
-    {
-        in.setCodec("Windows-1251");
-    }
-
-    qslHashTagList->clear();
-
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        qslHashTagList->append(line);
-    }
-
-    file.close();
-    qDebug() << "Load " << qslHashTagList->count() << " strings";
-    return true;
-}
-
-//=============================================================================
-
-void MainWindow::execActionLoadHashTagListProperty()
-{
-    QString s = "ActionLoadHashTagListProperty()";
-
-    if(loadHashTagListProperty())
-    {
-        qDebug() << s << ": loadHashTagListProperty is sucsess";
-        ui->listWidgetPropertyes->clear();
-        ui->listWidgetPropertyes->addItems(*qslHashTagList);
-
-    }
-    else
-    {
-        ui->listWidgetPropertyes->clear();
-        qDebug() << s << ": loadHashTagListPrperty is broken!!!";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-
-}
-
-//=============================================================================
 
 void MainWindow::execActionLoadHashTagListTheame()
 {
@@ -1697,54 +1592,6 @@ void MainWindow::execActionMemo()
 
 //=============================================================================
 
-void MainWindow::AddOrRemovePropertyItemToRecord()
-{
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    QString s = "execPropertyItemClicked()";
-    QString item = ui->listWidgetPropertyes->currentItem()->text();
-    qDebug() << "listWidgetProperty: item=" << item;
-
-    // Сохранение параметра в INI-файле
-    if(cIniFile::Groups->count() > 0)
-    {
-        QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-        settings.beginGroup(qsGroupName);
-        QStringList list = settings.childKeys();
-        if(list.contains(item))
-        {
-            qDebug() << qsGroupName << " contains " << item;
-            settings.remove(item);
-        }
-        else
-        {
-            qDebug() << qsGroupName << " not contains " << item;
-            settings.setValue(item, "true");
-        }
-       settings.endGroup();
-       settings.sync();
-    }
-    else
-    {
-        s = "List is empty, exec Load function!!!";
-    }
-    // Отобразить картинку
-    showCurrentIndexPicture();
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-void MainWindow::execListWidgetPropertyItemClicked()
-{
-
-    QString s = "Use RightMouseButton to Add / Remove item to record";
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::AddOrRemoveTheameItemToRecord()
 {
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
@@ -2269,74 +2116,6 @@ void MainWindow::execListWidgetFoundedItemClicked()
 
 //=============================================================================
 
-//=============================================================================
-
-void MainWindow::execActionInsertProperty()
-{
-    QString s = "execActionInsertProperty()";
-
-    QString qsGoal = ui->lineEditAddIterm->text();
-
-    if(qsGoal.length() <= 0)
-    {
-        //Информационное сообщение
-        s += ": Empty string, nothing to do!";
-        s += qsGoal;
-
-        //---
-        emit execShowExecStatus(s);
-        //---
-
-        return;
-    }
-
-    //---Загрузка списка Property
-
-    if(!loadHashTagListProperty())
-    {
-        qDebug() << "Error: Could not load HashTagListProperty from file: " << cIniFile::filePropertyesHashTag;
-        return;
-    }
-
-    qDebug() << ": loadHashTagListProperty is sucsess";
-
-    //Здесь должна быть проверка на наличие нового значения в списке
-    if(qslHashTagList->indexOf(qsGoal) < 0)
-    {
-        ui->listWidgetPropertyes->clear();
-        int iLast = qslHashTagList->count() - 1;
-        if(qslHashTagList->at(iLast) == "")
-        {
-            qslHashTagList->replace(iLast, qsGoal);
-        }
-        else
-        {
-            qslHashTagList->append(qsGoal);
-        }
-        ui->listWidgetPropertyes->addItems(*qslHashTagList);
-
-        //Сохранение нового списка Property
-
-        cLoadFiles::saveStringListToFile(cIniFile::filePropertyesHashTag, *qslHashTagList);
-
-        //Информационное сообщение
-        s += ": ";
-        s += qsGoal;
-    }
-    else
-    {
-        //Информационное сообщение
-        s += ": HashTagListPropertyes already contain ";
-        s += qsGoal;
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execActionInsertTheame()
 {
     QString s = "execActionInsertTheame()";
@@ -2394,94 +2173,6 @@ void MainWindow::execActionInsertTheame()
         //Информационное сообщение
         s += ": HashTagListTheams already contain ";
         s += qsGoal;
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execListWidgetPropertyCustomContextMenuRequested(const QPoint &pos)
-{
-    QString s = "execWidgetListPropertyCustomContextMenuRequested()";
-
-    //Задание типа меню
-    lwtListType = ListWidgetType::PROPERTY_TYPE;
-
-    QListWidget * listWidget = ui->listWidgetPropertyes;
-    QListWidgetItem * item = listWidget->itemAt(pos);
-    if(!item)
-    {
-        s += ": no item selected!";
-        //---
-        emit execShowExecStatus(s);
-        //---
-        return;
-    }
-
-    int index = listWidget->row(item);
-    QString qsItem = item->text();
-
-    QMenu contextMenu;
-    QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
-    QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");
-    QAction *actionInsertItemToList = contextMenu.addAction("Добавить элемент в список");
-
-    QAction *selectedAction = contextMenu.exec(listWidget->viewport()->mapToGlobal(pos));
-
-    if (selectedAction == actionAddOrRemoveItemToRecord)
-    {
-        // Обработка первого действия
-        qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
-
-        AddOrRemovePropertyItemToRecord();
-    }
-
-    else if (selectedAction == actionRemoveItemFromList)
-    {
-        // Обработка второго действия
-        qDebug() << "exec actionRemoveItemFromList: item=" << item->text()<< " index of this item=" << index;
-
-        //---Загрузка списка Property
-
-        if(!loadHashTagListProperty())
-        {
-            qDebug() << "Error: Could not load HashTagListProperty from file: " << cIniFile::filePropertyesHashTag;
-            return;
-        }
-
-        qDebug() << ": loadHashTagListProperty is sucsess";
-
-        //Здесь должна быть проверка на наличие удаляемого значения в списке
-        if(qslHashTagList->indexOf(qsItem) > 0)
-        {
-            qslHashTagList->removeAll(qsItem);
-            listWidget->clear();
-            listWidget->addItems(*qslHashTagList);
-
-            //Сохранение нового списка Place
-
-            cLoadFiles::saveStringListToFile(cIniFile::filePropertyesHashTag, *qslHashTagList);
-
-            //Информационное сообщение
-            s += "Removed item: ";
-            s += qsItem;
-        }
-        else
-        {
-            qDebug() << "Item " << qsItem << "not found in HashTagListPropertyes";
-        }
-        //---
-
-    }
-
-    else if (selectedAction == actionInsertItemToList)
-    {
-        // Обработка третьего действия
-        qDebug() << "exec actionInsertItemToList: item=" << ui->lineEditAddIterm->text();
-        emit ui->actionInsertProperty->triggered();
     }
 
     //---
