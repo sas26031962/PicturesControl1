@@ -153,10 +153,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionLoad, SIGNAL(triggered()), this, SLOT( execActionLoad()));
 
-    //---Для удаления
-    connect(ui->actionLoadHashTagListTheame, SIGNAL(triggered()), this, SLOT( execActionLoadHashTagListTheame()));
-    //---
-
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
     connect(ListWidgetPlace, &cListWidgetPlace::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(ListWidgetPlace, &cListWidgetPlace::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
@@ -221,22 +217,7 @@ MainWindow::MainWindow(QWidget *parent) :
         break;
     }
 
-    //std::unique_ptr<QStringList> ptrHashTagList(new QStringList());
-    //qslHashTagList = ptrHashTagList.get();
     qslHashTagList = new QStringList();
-
-    //Загрузка списка хеш-тегов Theams
-    if(loadHashTagListTheame())
-    {
-        ui->listWidgetTheams->clear();
-        ui->listWidgetTheams->addItems(*qslHashTagList);
-
-        // Настройка контекстного меню
-        ui->listWidgetTheams->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(ui->listWidgetTheams, &QListWidget::customContextMenuRequested, this, &MainWindow::execListWidgetTheameCustomContextMenuRequested);
-
-        connect(ui->listWidgetTheams, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetTheameItemClicked()));
-    }
 
     connect(fmViewPicture, SIGNAL(shiftXValueChanged()), this, SLOT( execShiftXValueChanged()));
     connect(fmViewPicture, SIGNAL(shiftYValueChanged()), this, SLOT( execShiftYValueChanged()));
@@ -244,8 +225,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSearchRotated, SIGNAL(triggered()), this, SLOT( execActionSearchRotated()));
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
-
-    connect(ui->actionInsertTheame, &QAction::triggered, this, &MainWindow::execActionInsertTheame);
 
     connect(ui->actionSearchNamePattern1, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern1);
     connect(ui->actionSearchNamePattern2, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern2);
@@ -771,65 +750,6 @@ void MainWindow::execActionFormViewPicture()
     QString s = "execActionFormViewPicture()";
     emit execShowExecStatus(s);
    //---
-}
-
-//=============================================================================
-
-bool MainWindow::loadHashTagListTheame()
-{
-
-    QFile file(cIniFile::fileTheameHashTag);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileTheameHashTag;
-        return false;
-    }
-    else
-    {
-        qDebug() << "File: " << cIniFile::fileTheameHashTag << " is loaded!";
-    }
-
-    QTextStream in(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
-    {
-        in.setCodec("Windows-1251");
-    }
-
-    qslHashTagList->clear();
-
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        qslHashTagList->append(line);
-    }
-
-    file.close();
-    qDebug() << "Load " << qslHashTagList->count() << " strings";
-    return true;
-
-}
-
-void MainWindow::execActionLoadHashTagListTheame()
-{
-
-    QString s = "ActionLoadHashTagListTheame()";
-
-    if(loadHashTagListTheame())
-    {
-        qDebug() << s << ": loadHashTagListTheame is sucsess";
-        ui->listWidgetTheams->clear();
-        ui->listWidgetTheams->addItems(*qslHashTagList);
-
-    }
-    else
-    {
-        ui->listWidgetTheams->clear();
-        qDebug() << s << ": loadHashTagListTheame is broken!!!";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-
 }
 
 //=============================================================================
@@ -1599,87 +1519,6 @@ void MainWindow::execActionMemo()
 
 //=============================================================================
 
-void MainWindow::AddOrRemoveTheameItemToRecord()
-{
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    QString s = "execTheameItemClicked()";
-    QString item = ui->listWidgetTheams->currentItem()->text();
-    qDebug() << "listWidgetTheame: item=" << item;
-
-    // Сохранение параметра в INI-файле
-    if(cIniFile::Groups->count() > 0)
-    {
-        QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-        settings.beginGroup(qsGroupName);
-        QStringList list = settings.childKeys();
-        if(list.contains(item))
-        {
-            qDebug() << qsGroupName << " contains " << item;
-            settings.remove(item);
-        }
-        else
-        {
-            qDebug() << qsGroupName << " not contains " << item;
-            settings.setValue(item, "true");
-        }
-        settings.endGroup();
-        settings.sync();
-    }
-    else
-    {
-        s = "List is empty, exec Load function!!!";
-    }
-    // Отобразить картинку
-    showCurrentIndexPicture();
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execListWidgetTheameItemClicked()
-{
-/*
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    QString s = "execTheameItemClicked()";
-    QString item = ui->listWidgetTheams->currentItem()->text();
-    qDebug() << "listWidgetTheame: item=" << item;
-
-    // Сохранение параметра в INI-файле
-    if(cIniFile::Groups->count() > 0)
-    {
-        QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-        settings.beginGroup(qsGroupName);
-        QStringList list = settings.childKeys();
-        if(list.contains(item))
-        {
-            qDebug() << qsGroupName << " contains " << item;
-            settings.remove(item);
-        }
-        else
-        {
-            qDebug() << qsGroupName << " not contains " << item;
-            settings.setValue(item, "true");
-        }
-        settings.endGroup();
-        settings.sync();
-    }
-    else
-    {
-        s = "List is empty, exec Load function!!!";
-    }
-    // Отобразить картинку
-    showCurrentIndexPicture();
-*/
-    QString s = "Use RightMouseButton to Add / Remove item to record";
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execListWidgetKeysItemClicked()
 {
     //QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
@@ -2122,159 +1961,6 @@ void MainWindow::execListWidgetFoundedItemClicked()
 
 
 //=============================================================================
-
-void MainWindow::execActionInsertTheame()
-{
-    QString s = "execActionInsertTheame()";
-
-    QString qsGoal = ui->lineEditAddIterm->text();
-
-    if(qsGoal.length() <= 0)
-    {
-        //Информационное сообщение
-        s += ": Empty string, nothing to do!";
-        s += qsGoal;
-
-        //---
-        emit execShowExecStatus(s);
-        //---
-
-        return;
-    }
-
-    //---Загрузка списка Theame
-
-    if(!loadHashTagListTheame())
-    {
-        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
-        return;
-    }
-
-    qDebug() << ": loadHashTagListTheams is sucsess";
-
-    //Здесь должна быть проверка на наличие нового значения в списке
-    if(qslHashTagList->indexOf(qsGoal) < 0)
-    {
-        ui->listWidgetTheams->clear();
-        int iLast = qslHashTagList->count() - 1;
-        if(qslHashTagList->at(iLast) == "")
-        {
-            qslHashTagList->replace(iLast, qsGoal);
-        }
-        else
-        {
-            qslHashTagList->append(qsGoal);
-        }
-        ui->listWidgetTheams->addItems(*qslHashTagList);
-
-        //Сохранение нового списка Theams
-
-        cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
-
-        //Информационное сообщение
-        s += ": ";
-        s += qsGoal;
-    }
-    else
-    {
-        //Информационное сообщение
-        s += ": HashTagListTheams already contain ";
-        s += qsGoal;
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execListWidgetTheameCustomContextMenuRequested(const QPoint &pos)
-{
-
-    QString s = "execWidgetListTheameCustomContextMenuRequested()";
-
-    //Задание типа меню
-    lwtListType = ListWidgetType::THEAME_TYPE;
-
-    QListWidget * listWidget = ui->listWidgetTheams;
-    QListWidgetItem * item = listWidget->itemAt(pos);
-    if(!item)
-    {
-        s += ": no item selected!";
-        //---
-        emit execShowExecStatus(s);
-        //---
-        return;
-    }
-
-    int index = listWidget->row(item);
-    QString qsItem = item->text();
-
-    QMenu contextMenu;
-    QAction *actionAddOrRemoveItemToRecord = contextMenu.addAction("Добавить(удалить) элемент в запись");
-    QAction *actionRemoveItemFromList = contextMenu.addAction("Удалить элемент из списка");
-    QAction *actionInsertItemToList = contextMenu.addAction("Добавить элемент в список");
-
-    QAction *selectedAction = contextMenu.exec(listWidget->viewport()->mapToGlobal(pos));
-
-    if (selectedAction == actionAddOrRemoveItemToRecord)
-    {
-        // Обработка первого действия
-        qDebug() << "exec actionAddOrRemoveItemToRecord: item=" << item->text()<< " index of this item=" << index;
-
-        AddOrRemoveTheameItemToRecord();
-    }
-
-    else if (selectedAction == actionRemoveItemFromList)
-    {
-        // Обработка второго действия
-        qDebug() << "exec actionRemoveItemFromList: item=" << item->text()<< " index of this item=" << index;
-
-        //---Загрузка списка Theame
-
-        if(!loadHashTagListTheame())
-        {
-            qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
-            return;
-        }
-
-        qDebug() << ": loadHashTagListTheame is sucsess";
-
-        //Здесь должна быть проверка на наличие удаляемого значения в списке
-        if(qslHashTagList->indexOf(qsItem) > 0)
-        {
-            qslHashTagList->removeAll(qsItem);
-            listWidget->clear();
-            listWidget->addItems(*qslHashTagList);
-
-            //Сохранение нового списка Place
-
-            cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
-
-            //Информационное сообщение
-            s += "Removed item: ";
-            s += qsItem;
-        }
-        else
-        {
-            qDebug() << "Item " << qsItem << "not found in HashTagListTheames";
-        }
-        //---
-
-    }
-
-    else if (selectedAction == actionInsertItemToList)
-    {
-        // Обработка третьего действия
-        qDebug() << "exec actionInsertItemToList: item=" << ui->lineEditAddIterm->text();
-        emit ui->actionInsertTheame->triggered();
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
 
 void MainWindow::execShowCurrentIndexPicture()
 {

@@ -97,8 +97,6 @@ private:
 
     //Методы
     void showCurrentIndexPicture();
-    bool loadHashTagListPlace();
-    bool loadHashTagListTheame();
     bool deleteSection(QString s);
 
     bool saveStringListToFile(const QString& fileName, const QStringList& list);
@@ -110,7 +108,6 @@ private:
 
 public:
     //Атрибуты
-//    QString filePathHashTag;// Путь к файлу для загрузки параметров
     QString fileNameHashTag;// Имя файла для загрузки параметров
 
     QString filePathRoot;// Путь к папке с исполняемым файлом (programm)
@@ -121,7 +118,6 @@ public:
 
     //Методы
     void installNavigation();
-    void AddOrRemoveTheameItemToRecord();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;//keys
@@ -141,18 +137,12 @@ private slots:
     void execActionMemo();
     void execTimerUpdate();
 
-    void execListWidgetTheameItemClicked();
-
     void execListWidgetFoundedItemClicked();
 
     void execComboBoxCurrentIndexChanged(int x);
 
     void execListWidgetKeysItemClicked();
     void execListWidgetSearchItemClicked();
-
-    void execActionLoadHashTagListTheame();
-
-    void execActionInsertTheame();
 
     void execActionSearchRotated();
     void execActionSearchOrYes();
@@ -183,8 +173,6 @@ private slots:
 
     void execShiftXValueChanged();
     void execShiftYValueChanged();
-
-    void execListWidgetTheameCustomContextMenuRequested(const QPoint &pos);
 
     void execShowCurrentIndexPicture();
 

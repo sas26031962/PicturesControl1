@@ -289,7 +289,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab_Subject">
      <attribute name="title">
@@ -310,21 +310,6 @@
      <attribute name="title">
       <string>Тема</string>
      </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>Theams</string>
-     </attribute>
-     <widget class="QListWidget" name="listWidgetTheams">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>261</width>
-        <height>291</height>
-       </rect>
-      </property>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -478,34 +463,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBoxAddItem">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>460</y>
-      <width>271</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>AddItem</string>
-    </property>
-    <widget class="QLineEdit" name="lineEditAddIterm">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>251</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-    </widget>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -554,8 +511,6 @@
     <property name="title">
      <string>Tags</string>
     </property>
-    <addaction name="actionLoadHashTagListTheame"/>
-    <addaction name="actionInsertTheame"/>
    </widget>
    <widget class="QMenu" name="menuSearch">
     <property name="title">
