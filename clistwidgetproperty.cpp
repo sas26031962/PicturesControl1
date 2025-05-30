@@ -24,7 +24,7 @@ void cListWidgetProperty::install(QWidget * qwidget)
 
     //Очистка визуального списка
     listWidget->clear();
-    //Загрузка списка хеш-тегов Places
+    //Загрузка списка хеш-тегов Property
     if(loadHashTagList())
     {
         listWidget->addItems(*qslHashTagList);
@@ -127,7 +127,7 @@ void cListWidgetProperty::addOrRemovePlaceItemToRecord()
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
     QString s = "execPropertyItemClicked()";
     QString item = listWidget->currentItem()->text();
-    qDebug() << "listWidgetPlace: item=" << item;
+    qDebug() << "listWidgetProperty: item=" << item;
 
     // Сохранение параметра в INI-файле
     if(cIniFile::Groups->count() > 0)

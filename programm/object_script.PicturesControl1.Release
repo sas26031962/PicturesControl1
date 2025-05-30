@@ -10,10 +10,12 @@ INPUT(
 ./release\clistwidgetplace.o
 ./release\clistwidgetsubject.o
 ./release\clistwidgetproperty.o
+./release\clistwidgettheame.o
 ./release\qrc_resourcedata.o
 ./release\moc_mainwindow.o
 ./release\moc_fmview.o
 ./release\moc_clistwidgetplace.o
 ./release\moc_clistwidgetsubject.o
 ./release\moc_clistwidgetproperty.o
+./release\moc_clistwidgettheame.o
 );
