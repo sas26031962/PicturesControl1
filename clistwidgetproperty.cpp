@@ -3,6 +3,11 @@
 cListWidgetProperty::cListWidgetProperty(QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
+
+    //Задание типа меню
+    lwtListType = ListWidgetType::PROPERTY_TYPE;
+
+    qsFileNameHashTag = cIniFile::filePropertyHashTag;
 }
 
 cListWidgetProperty::~cListWidgetProperty()
@@ -41,9 +46,6 @@ void cListWidgetProperty::execRequest(const QPoint &pos)
 
     QString s = "execWidgetListPropertyCustomContextMenuRequested()";
 
-    //Задание типа меню
-    lwtListType = ListWidgetType::PROPERTY_TYPE;
-
     QListWidgetItem * item = listWidget->itemAt(pos);
     if(!item)
     {
@@ -81,7 +83,7 @@ void cListWidgetProperty::execRequest(const QPoint &pos)
 
         if(!loadHashTagList())
         {
-            qDebug() << "Error: Could not load HashTagListProperty from file: " << cIniFile::filePropertyHashTag;
+            qDebug() << "Error: Could not load HashTagListProperty from file: " << qsFileNameHashTag;
             return;
         }
 
@@ -95,7 +97,7 @@ void cListWidgetProperty::execRequest(const QPoint &pos)
 
             //Сохранение нового списка Property
 
-            cLoadFiles::saveStringListToFile(cIniFile::filePropertyHashTag, *qslHashTagList);
+            cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
             //Информационное сообщение
             s += "Removed item: ";
@@ -163,10 +165,10 @@ void cListWidgetProperty::addOrRemovePlaceItemToRecord()
 bool cListWidgetProperty::loadHashTagList()
 {
 
-    QFile file(cIniFile::filePropertyHashTag);
+    QFile file(qsFileNameHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::filePropertyHashTag;
+        qDebug() << "Error: Could not open file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -213,7 +215,7 @@ bool cListWidgetProperty::addItemToList()
 
     if(!loadHashTagList())
     {
-        qDebug() << "Error: Could not load HashTagListProperty from file: " << cIniFile::filePropertyHashTag;
+        qDebug() << "Error: Could not load HashTagListProperty from file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -236,7 +238,7 @@ bool cListWidgetProperty::addItemToList()
 
         //Сохранение нового списка Property
 
-        cLoadFiles::saveStringListToFile(cIniFile::filePropertyHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";

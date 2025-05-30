@@ -26,8 +26,9 @@ class cListWidgetTheame : public QObject
 public:
 
     //Атрибуты
-    ListWidgetType lwtListType = ListWidgetType::THEAME_TYPE; //Тип списка для работы с контекстными меню
-    QStringList * qslHashTagList;                               //Рабочий список строк
+    QString qsFileNameHashTag;                              //Имя файла для записи/чтения списка
+    ListWidgetType lwtListType;                             //Тип списка для работы с контекстными меню
+    QStringList * qslHashTagList;                           //Рабочий список строк
 
     //Визуальные компоненты
     QRect qrListWidget;// = QRect(10, 10, 261, 261);

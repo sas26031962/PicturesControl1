@@ -3,6 +3,10 @@
 cListWidgetPlace::cListWidgetPlace(QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
+    //Задание типа меню
+    lwtListType = ListWidgetType::PLACE_TYPE;
+
+    qsFileNameHashTag = cIniFile::filePlaceHashTag;
 }
 
 cListWidgetPlace::~cListWidgetPlace()
@@ -39,11 +43,7 @@ void cListWidgetPlace::install(QWidget * qwidget)
 
 void cListWidgetPlace::execRequest(const QPoint &pos)
 {
-
     QString s = "execWidgetListPlaceCustomContextMenuRequested()";
-
-    //Задание типа меню
-    lwtListType = ListWidgetType::PLACE_TYPE;
 
     QListWidgetItem * item = listWidget->itemAt(pos);
     if(!item)
@@ -82,7 +82,7 @@ void cListWidgetPlace::execRequest(const QPoint &pos)
 
         if(!loadHashTagList())
         {
-            qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
+            qDebug() << "Error: Could not load HashTagListPlace from file: " << qsFileNameHashTag;
             return;
         }
 
@@ -96,7 +96,7 @@ void cListWidgetPlace::execRequest(const QPoint &pos)
 
             //Сохранение нового списка Place
 
-            cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
+            cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
             //Информационное сообщение
             s += "Removed item: ";
@@ -164,10 +164,10 @@ void cListWidgetPlace::addOrRemoveItemToRecord()
 bool cListWidgetPlace::loadHashTagList()
 {
 
-    QFile file(cIniFile::filePlaceHashTag);
+    QFile file(qsFileNameHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::filePlaceHashTag;
+        qDebug() << "Error: Could not open file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -214,7 +214,7 @@ bool cListWidgetPlace::addItemToList()
 
     if(!loadHashTagList())
     {
-        qDebug() << "Error: Could not load HashTagListPlace from file: " << cIniFile::filePlaceHashTag;
+        qDebug() << "Error: Could not load HashTagListPlace from file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -237,7 +237,7 @@ bool cListWidgetPlace::addItemToList()
 
         //Сохранение нового списка Place
 
-        cLoadFiles::saveStringListToFile(cIniFile::filePlaceHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";

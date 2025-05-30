@@ -3,6 +3,11 @@
 cListWidgetTheame::cListWidgetTheame(QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
+    //Задание типа меню
+    lwtListType = ListWidgetType::THEAME_TYPE;
+
+    qsFileNameHashTag = cIniFile::fileTheameHashTag;
+
 }
 
 cListWidgetTheame::~cListWidgetTheame()
@@ -41,9 +46,6 @@ void cListWidgetTheame::execRequest(const QPoint &pos)
 
     QString s = "execWidgetListTheameCustomContextMenuRequested()";
 
-    //Задание типа меню
-    lwtListType = ListWidgetType::THEAME_TYPE;
-
     QListWidgetItem * item = listWidget->itemAt(pos);
     if(!item)
     {
@@ -81,7 +83,7 @@ void cListWidgetTheame::execRequest(const QPoint &pos)
 
         if(!loadHashTagList())
         {
-            qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
+            qDebug() << "Error: Could not load HashTagListTheame from file: " << qsFileNameHashTag;
             return;
         }
 
@@ -95,7 +97,7 @@ void cListWidgetTheame::execRequest(const QPoint &pos)
 
             //Сохранение нового списка Theame
 
-            cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
+            cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
             //Информационное сообщение
             s += "Removed item: ";
@@ -163,10 +165,10 @@ void cListWidgetTheame::addOrRemovePlaceItemToRecord()
 bool cListWidgetTheame::loadHashTagList()
 {
 
-    QFile file(cIniFile::fileTheameHashTag);
+    QFile file(qsFileNameHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileTheameHashTag;
+        qDebug() << "Error: Could not open file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -213,7 +215,7 @@ bool cListWidgetTheame::addItemToList()
 
     if(!loadHashTagList())
     {
-        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
+        qDebug() << "Error: Could not load HashTagListTheame from file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -236,7 +238,7 @@ bool cListWidgetTheame::addItemToList()
 
         //Сохранение нового списка Theame
 
-        cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";

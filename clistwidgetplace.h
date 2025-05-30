@@ -26,7 +26,8 @@ class cListWidgetPlace : public QObject
 public:
 
     //Атрибуты
-    ListWidgetType lwtListType = ListWidgetType::PLACE_TYPE;//Тип списка для работы с контекстными меню
+    QString qsFileNameHashTag;                              //Имя файла для записи/чтения списка
+    ListWidgetType lwtListType;                             //Тип списка для работы с контекстными меню
     QStringList * qslHashTagList;                           //Рабочий список строк
 
     //Визуальные компоненты

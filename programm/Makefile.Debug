@@ -81,7 +81,7 @@ OBJECTS       = debug/main.o \
 		debug/moc_clistwidgetproperty.o \
 		debug/moc_clistwidgettheame.o
 
-DIST          = TODO_List.txt ..\mainwindow.h \
+DIST          =  ..\mainwindow.h \
 		..\cinifile.h \
 		..\crecord.h \
 		..\fmview.h \
@@ -149,7 +149,7 @@ compiler_rcc_make_all: debug/qrc_resourcedata.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resourcedata.cpp
 debug/qrc_resourcedata.cpp: ../resourcedata.qrc \
-		../tmp/TODO_List.txt
+		../TODO_List.txt
 	C:\Qt\Qt5.6.0\5.6\mingw49_32\bin\rcc.exe -name resourcedata ..\resourcedata.qrc -o debug\qrc_resourcedata.cpp
 
 compiler_moc_header_make_all: debug/moc_mainwindow.cpp debug/moc_fmview.cpp debug/moc_clistwidgetplace.cpp debug/moc_clistwidgetsubject.cpp debug/moc_clistwidgetproperty.cpp debug/moc_clistwidgettheame.cpp

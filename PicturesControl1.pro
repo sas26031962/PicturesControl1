@@ -54,5 +54,4 @@ win32 {
 RESOURCES += \
     resourcedata.qrc
 
-DISTFILES += \
-    TODO_List.txt
+DISTFILES +=

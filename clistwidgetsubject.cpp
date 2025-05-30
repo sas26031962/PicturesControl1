@@ -3,6 +3,11 @@
 cListWidgetSubject::cListWidgetSubject(QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
+
+    //Задание типа меню
+    lwtListType = ListWidgetType::SUBJECT_TYPE;
+
+    qsFileNameHashTag = cIniFile::fileSubjectHashTag;
 }
 
 cListWidgetSubject::~cListWidgetSubject()
@@ -42,9 +47,6 @@ void cListWidgetSubject::execRequest(const QPoint &pos)
 
     QString s = "execWidgetListSubjectCustomContextMenuRequested()";
 
-    //Задание типа меню
-    lwtListType = ListWidgetType::SUBJECT_TYPE;
-
     QListWidgetItem * item = listWidget->itemAt(pos);
     if(!item)
     {
@@ -82,7 +84,7 @@ void cListWidgetSubject::execRequest(const QPoint &pos)
 
         if(!loadHashTagList())
         {
-            qDebug() << "Error: Could not load HashTagListSubject from file: " << cIniFile::fileSubjectHashTag;
+            qDebug() << "Error: Could not load HashTagListSubject from file: " << qsFileNameHashTag;
             return;
         }
 
@@ -96,7 +98,7 @@ void cListWidgetSubject::execRequest(const QPoint &pos)
 
             //Сохранение нового списка Subject
 
-            cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
+            cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
             //Информационное сообщение
             s += "Removed item: ";
@@ -164,10 +166,10 @@ void cListWidgetSubject::addOrRemovePlaceItemToRecord()
 bool cListWidgetSubject::loadHashTagList()
 {
 
-    QFile file(cIniFile::fileSubjectHashTag);
+    QFile file(qsFileNameHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileSubjectHashTag;
+        qDebug() << "Error: Could not open file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -214,7 +216,7 @@ bool cListWidgetSubject::addItemToList()
 
     if(!loadHashTagList())
     {
-        qDebug() << "Error: Could not load HashTagListSubject from file: " << cIniFile::fileSubjectHashTag;
+        qDebug() << "Error: Could not load HashTagListSubject from file: " << qsFileNameHashTag;
         return false;
     }
 
@@ -237,7 +239,7 @@ bool cListWidgetSubject::addItemToList()
 
         //Сохранение нового списка Subject
 
-        cLoadFiles::saveStringListToFile(cIniFile::fileSubjectHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(qsFileNameHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";
