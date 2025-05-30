@@ -16,8 +16,8 @@
     QString cIniFile::filePathRemovedSectionList;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
     QString cIniFile::fileSubjectHashTag;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к;// файлу;
     QString cIniFile::filePlaceHashTag;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу;
-    QString cIniFile::filePropertyesHashTag;// = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
-    QString cIniFile::fileTheamsHashTag;// = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
+    QString cIniFile::filePropertyHashTag;// = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
+    QString cIniFile::fileTheameHashTag;// = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
     cIniFile cIniFile::IniFile("/home/andy/From Smartfone");
 
     QString cIniFile::currentImagePath = "";

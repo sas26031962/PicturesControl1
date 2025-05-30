@@ -36,6 +36,7 @@
 #include "clistwidgetplace.h"
 #include "clistwidgetsubject.h"
 #include "clistwidgetproperty.h"
+#include "clistwidgettheame.h"
 
 //-----------------------------------------------------------------------------
 // КОНСТАНТЫ
@@ -92,6 +93,7 @@ private:
     cListWidgetPlace * ListWidgetPlace;
     cListWidgetSubject * ListWidgetSubject;
     cListWidgetProperty * ListWidgetProperty;
+    cListWidgetTheame * ListWidgetTheame;
 
     //Методы
     void showCurrentIndexPicture();

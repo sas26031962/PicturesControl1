@@ -59,8 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
          cIniFile::filePathRemovedSectionList = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
          cIniFile::fileSubjectHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу;
          cIniFile::filePlaceHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу;
-         cIniFile::filePropertyesHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
-         cIniFile::fileTheamsHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
+         cIniFile::filePropertyHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
+         cIniFile::fileTheameHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
          qsIniFileName ="/home/andy/From Smartfone";
 
     }
@@ -76,8 +76,8 @@ MainWindow::MainWindow(QWidget *parent) :
          cIniFile::filePathRemovedSectionList = "C:/WORK/PicturesControl/PicturesControl1/programm/data/RemovedSectionListShips.txt";// Прямой путь к файлу
          cIniFile::fileSubjectHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу;
          cIniFile::filePlaceHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу;
-         cIniFile::filePropertyesHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой;
-         cIniFile::fileTheamsHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь п р ямой;
+         cIniFile::filePropertyHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой;
+         cIniFile::fileTheameHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь п р ямой;
          qsIniFileName = "C:/Work/Ships";
     }
     cIniFile::IniFile.setDirectoryPaht(qsIniFileName);
@@ -96,6 +96,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ListWidgetProperty = new cListWidgetProperty();
     ListWidgetProperty->install(ui->tab_Property);
+
+    ListWidgetTheame = new cListWidgetTheame();
+    ListWidgetTheame->install(ui->tab_Theame);
 
     ui->comboBoxPatterns->clear();
     ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");
@@ -163,6 +166,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ListWidgetProperty, &cListWidgetProperty::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(ListWidgetProperty, &cListWidgetProperty::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+
+    connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
+    connect(ListWidgetTheame, &cListWidgetTheame::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
 
     fmViewPicture = new fmView(this);
     fmViewPicture->setWindowFlags(Qt::Window);//3 flags
@@ -282,6 +288,7 @@ MainWindow::~MainWindow()
     delete ListWidgetPlace;
     delete ListWidgetSubject;
     delete ListWidgetProperty;
+    delete ListWidgetTheame;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -771,15 +778,15 @@ void MainWindow::execActionFormViewPicture()
 bool MainWindow::loadHashTagListTheame()
 {
 
-    QFile file(cIniFile::fileTheamsHashTag);
+    QFile file(cIniFile::fileTheameHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileTheamsHashTag;
+        qDebug() << "Error: Could not open file: " << cIniFile::fileTheameHashTag;
         return false;
     }
     else
     {
-        qDebug() << "File: " << cIniFile::fileTheamsHashTag << " is loaded!";
+        qDebug() << "File: " << cIniFile::fileTheameHashTag << " is loaded!";
     }
 
     QTextStream in(&file);
@@ -2139,7 +2146,7 @@ void MainWindow::execActionInsertTheame()
 
     if(!loadHashTagListTheame())
     {
-        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheamsHashTag;
+        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
         return;
     }
 
@@ -2162,7 +2169,7 @@ void MainWindow::execActionInsertTheame()
 
         //Сохранение нового списка Theams
 
-        cLoadFiles::saveStringListToFile(cIniFile::fileTheamsHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";
@@ -2228,7 +2235,7 @@ void MainWindow::execListWidgetTheameCustomContextMenuRequested(const QPoint &po
 
         if(!loadHashTagListTheame())
         {
-            qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheamsHashTag;
+            qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
             return;
         }
 
@@ -2243,7 +2250,7 @@ void MainWindow::execListWidgetTheameCustomContextMenuRequested(const QPoint &po
 
             //Сохранение нового списка Place
 
-            cLoadFiles::saveStringListToFile(cIniFile::fileTheamsHashTag, *qslHashTagList);
+            cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
 
             //Информационное сообщение
             s += "Removed item: ";

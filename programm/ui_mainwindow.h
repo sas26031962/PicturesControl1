@@ -98,6 +98,7 @@ public:
     QWidget *tab_Subject;
     QWidget *tab_Place;
     QWidget *tab_Property;
+    QWidget *tab_Theame;
     QWidget *tab_3;
     QListWidget *listWidgetTheams;
     QWidget *tab_6;
@@ -282,6 +283,9 @@ public:
         tab_Property = new QWidget();
         tab_Property->setObjectName(QStringLiteral("tab_Property"));
         tabWidget->addTab(tab_Property, QString());
+        tab_Theame = new QWidget();
+        tab_Theame->setObjectName(QStringLiteral("tab_Theame"));
+        tabWidget->addTab(tab_Theame, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
         listWidgetTheams = new QListWidget(tab_3);
@@ -490,6 +494,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\241\321\203\321\211\320\275\320\276\321\201\321\202\320\270", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Place), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Property), QApplication::translate("MainWindow", "\320\241\320\262\320\276\320\271\321\201\321\202\320\262\320\260", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Theame), QApplication::translate("MainWindow", "\320\242\320\265\320\274\320\260", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Theams", 0));
         labelKeysCaption->setText(QApplication::translate("MainWindow", "All keys", 0));
         labelSearchKeysCaption->setText(QApplication::translate("MainWindow", "Keys for search", 0));

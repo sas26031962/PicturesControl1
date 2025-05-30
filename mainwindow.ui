@@ -306,6 +306,11 @@
       <string>Свойства</string>
      </attribute>
     </widget>
+    <widget class="QWidget" name="tab_Theame">
+     <attribute name="title">
+      <string>Тема</string>
+     </attribute>
+    </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
       <string>Theams</string>

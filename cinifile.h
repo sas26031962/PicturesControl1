@@ -45,8 +45,8 @@ public:
     static QString filePathRemovedSectionList;
     static QString fileSubjectHashTag;
     static QString filePlaceHashTag;
-    static QString filePropertyesHashTag;
-    static QString fileTheamsHashTag;
+    static QString filePropertyHashTag;
+    static QString fileTheameHashTag;
 
 
     static QString pattern1StringListFilePath;

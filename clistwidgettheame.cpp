@@ -81,7 +81,7 @@ void cListWidgetTheame::execRequest(const QPoint &pos)
 
         if(!loadHashTagList())
         {
-            qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheamsHashTag;
+            qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
             return;
         }
 
@@ -95,7 +95,7 @@ void cListWidgetTheame::execRequest(const QPoint &pos)
 
             //Сохранение нового списка Theame
 
-            cLoadFiles::saveStringListToFile(cIniFile::fileTheamsHashTag, *qslHashTagList);
+            cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
 
             //Информационное сообщение
             s += "Removed item: ";
@@ -163,10 +163,10 @@ void cListWidgetTheame::addOrRemovePlaceItemToRecord()
 bool cListWidgetTheame::loadHashTagList()
 {
 
-    QFile file(cIniFile::fileTheamsHashTag);
+    QFile file(cIniFile::fileTheameHashTag);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Error: Could not open file: " << cIniFile::fileTheamsHashTag;
+        qDebug() << "Error: Could not open file: " << cIniFile::fileTheameHashTag;
         return false;
     }
 
@@ -213,7 +213,7 @@ bool cListWidgetTheame::addItemToList()
 
     if(!loadHashTagList())
     {
-        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheamsHashTag;
+        qDebug() << "Error: Could not load HashTagListTheame from file: " << cIniFile::fileTheameHashTag;
         return false;
     }
 
@@ -236,7 +236,7 @@ bool cListWidgetTheame::addItemToList()
 
         //Сохранение нового списка Theame
 
-        cLoadFiles::saveStringListToFile(cIniFile::fileTheamsHashTag, *qslHashTagList);
+        cLoadFiles::saveStringListToFile(cIniFile::fileTheameHashTag, *qslHashTagList);
 
         //Информационное сообщение
         s += ": ";
