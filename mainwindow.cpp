@@ -231,11 +231,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSearchNamePatternX, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern);
     connect(ui->pushButtonSearchPatternX, &QPushButton::pressed, this, &MainWindow::execActionSearchNamePattern);
 
+    connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
+    //connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
+    connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, this, &MainWindow::execActionSearchOrYes);
+
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
-
-    connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
-    connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
 
     connect(ui->listWidgetKeys, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetKeysItemClicked()));
     connect(ui->listWidgetSearch, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSearchItemClicked()));

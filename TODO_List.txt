@@ -74,6 +74,7 @@
 [x] Удалить функцию AddOrRemoveTheameItemToRecord() в классе MainWindow
 [x] Удалить функцию execActionLoadHashTagListTheame() в классе MainWindow
 [x] Удалить функцию execActionInsertTheame() в классе MainWindow
+[] После завершения поиска, если число найденных объектов равно нулю, индикатор progress bar ведёт себя неадекватно (должен быть 0)
 
 
 

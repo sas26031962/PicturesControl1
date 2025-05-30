@@ -7,17 +7,17 @@
     int cIniFile::iSystemType = 0;
 
     // Путь к INI-файлу
-    QString cIniFile::iniFilePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";
-    QString cIniFile::pattern1StringListFilePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern1StringListFile.txt";
-    QString cIniFile::pattern2StringListFilePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern2StringListFile.txt";
-    QString cIniFile::patternXStringListFilePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern3StringListFile.txt";
-    QString cIniFile::rotatedImagePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/rotated_image.png";
-    QString cIniFile::scaledImagePath;// = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/scaled_image.png";
-    QString cIniFile::filePathRemovedSectionList;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
-    QString cIniFile::fileSubjectHashTag;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к;// файлу;
-    QString cIniFile::filePlaceHashTag;// = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу;
-    QString cIniFile::filePropertyHashTag;// = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
-    QString cIniFile::fileTheameHashTag;// = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
+    QString cIniFile::iniFilePath;
+    QString cIniFile::pattern1StringListFilePath;
+    QString cIniFile::pattern2StringListFilePath;
+    QString cIniFile::patternXStringListFilePath;
+    QString cIniFile::rotatedImagePath;
+    QString cIniFile::scaledImagePath;
+    QString cIniFile::filePathRemovedSectionList;
+    QString cIniFile::fileSubjectHashTag;
+    QString cIniFile::filePlaceHashTag;
+    QString cIniFile::filePropertyHashTag;
+    QString cIniFile::fileTheameHashTag;
     cIniFile cIniFile::IniFile("/home/andy/From Smartfone");
 
     QString cIniFile::currentImagePath = "";
