@@ -57,17 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
          qsProjectPath = "/home/andy/MyQtProjects";
          qsHashTagFileNameSuffix = "Photos";
-
-         //cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";
-         cIniFile::pattern1StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern1StringListFile.txt";
-         cIniFile::pattern2StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern2StringListFile.txt";
-         cIniFile::patternXStringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern3StringListFile.txt";
-         //cIniFile::scaledImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/scaled_image.png";
-         //cIniFile::filePathRemovedSectionList = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
-         //cIniFile::fileSubjectHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу;
-         //cIniFile::filePlaceHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу;
-         //cIniFile::filePropertyHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
-         //cIniFile::fileTheameHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
          qsIniFileName ="/home/andy/From Smartfone";
 
     }
@@ -76,16 +65,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
          qsProjectPath = "C:/WORK/PicturesControl";
          qsHashTagFileNameSuffix = "Ships";
-         //cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";
-         cIniFile::pattern1StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern1StringListFile.txt";
-         cIniFile::pattern2StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern2StringListFile.txt";
-         cIniFile::patternXStringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern3StringListFile.txt";
-         //cIniFile::scaledImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/scaled_image.png";
-         //cIniFile::filePathRemovedSectionList = "C:/WORK/PicturesControl/PicturesControl1/programm/data/RemovedSectionListShips.txt";// Прямой путь к файлу
-         //cIniFile::fileSubjectHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу;
-         //cIniFile::filePlaceHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу;
-         //cIniFile::filePropertyHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой;
-         //cIniFile::fileTheameHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь п р ямой;
          qsIniFileName = "C:/Work/Ships";
     }
 
@@ -93,9 +72,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";//Windows version
     cIniFile::iniFilePath = qsProjectPath + qsProjectName + "/programm/data/FilesConfig" + qsHashTagFileNameSuffix + ".ini";
 
-//    cIniFile::pattern1StringListFilePath = qsProjectPath + "/PicturesControl1/programm/data/pattern1StringListFile" + qsDataFileNameExtension;
-//    cIniFile::pattern2StringListFilePath = qsProjectPath + "/PicturesControl1/programm/data/pattern2StringListFile" + qsDataFileNameExtension;
-//    cIniFile::patternXStringListFilePath = qsProjectPath + "/PicturesControl1/programm/data/pattern3StringListFile" + qsDataFileNameExtension;
+    cIniFile::pattern1StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern1StringListFile" + qsDataFileNameExtension;
+    cIniFile::pattern2StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern2StringListFile" + qsDataFileNameExtension;
+    cIniFile::patternXStringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern3StringListFile" + qsDataFileNameExtension;
     cIniFile::scaledImagePath = qsProjectPath + qsProjectName + "/programm/img/tmp/scaled_image.png";
     cIniFile::filePathRemovedSectionList = qsProjectPath + qsProjectName + "/programm/data/RemovedSectionList" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
     cIniFile::fileSubjectHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListSubject" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
