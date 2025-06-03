@@ -63,6 +63,14 @@ private:
 
 //    int iSystemType = 0;
 
+    QString qsProjectPath;
+    QString qsProjectName;
+    QString qsProjectNameDataSuffix;
+    QString qsProjectNameImgSuffix;
+
+    QString qsDataFileNameExtension;
+    QString qsHashTagFileNameSuffix;
+
     varMem <int> KeyPressed;
 
     bool IsError = false;

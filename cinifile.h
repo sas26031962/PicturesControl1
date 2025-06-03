@@ -37,7 +37,6 @@ public:
     static QStringList * currentGroups;
 
     static QString iniFilePath;
-    static QString rotatedImagePath;
     static QString scaledImagePath;
     static QString currentImagePath;
     static QString currentRotatedImagePath;
