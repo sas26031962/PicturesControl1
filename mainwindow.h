@@ -25,6 +25,7 @@
 #include <QRegularExpression>
 #include <QSysInfo>
 #include <QTextCodec>
+#include <QProcess>
 
 #include "cinifile.h"
 #include "fmview.h"
@@ -49,6 +50,15 @@
 //-----------------------------------------------------------------------------
 // ТИПЫ ДАННЫХ
 //-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+//-----------------------------------------------------------------------------
+
+//QString qsApplicationName = "NoName";
+
+extern QString qsApplicationName;
+
 
 namespace Ui {
 class MainWindow;
@@ -116,6 +126,9 @@ private:
 
 public:
     //Атрибуты
+
+//    QString qsApplicationName;
+
     QString fileNameHashTag;// Имя файла для загрузки параметров
 
     QString filePathRoot;// Путь к папке с исполняемым файлом (programm)

@@ -7,7 +7,6 @@
 
 std::atomic<int> iCurrentIndexGlobal(0); //Индекс для отображения
 
-
 //-----------------------------------------------------------------------------
 //Реализации элементов класса
 //-----------------------------------------------------------------------------
@@ -20,16 +19,19 @@ MainWindow::MainWindow(QWidget *parent) :
     cIniFile::Keys = new QStringList();
     cIniFile::SearchKeys = new QStringList();
 
+//    qsApplicationName = QProcess::applicationName();
     //---
-    qDebug() << "Build abi:" << QSysInfo::buildAbi();
-    qDebug() << "Build CPU architecture:" << QSysInfo::buildCpuArchitecture();
-    qDebug() << "Current CPU architecture:" << QSysInfo::currentCpuArchitecture();
-    qDebug() << "Kernel type:" << QSysInfo::kernelType();
-    qDebug() << "Kernel version:" << QSysInfo::kernelVersion();
-    qDebug() << "Machine host name:" << QSysInfo::machineHostName();
-    qDebug() << "Product name:" << QSysInfo::prettyProductName();
-    qDebug() << "Product type:" << QSysInfo::productType();
-    qDebug() << "Product version:" << QSysInfo::productVersion();
+    qDebug() << "Build abi: " << QSysInfo::buildAbi();
+    qDebug() << "Build CPU architecture: " << QSysInfo::buildCpuArchitecture();
+    qDebug() << "Current CPU architecture: " << QSysInfo::currentCpuArchitecture();
+    qDebug() << "Kernel type: " << QSysInfo::kernelType();
+    qDebug() << "Kernel version: " << QSysInfo::kernelVersion();
+    qDebug() << "Machine host name: " << QSysInfo::machineHostName();
+    qDebug() << "Product name: " << QSysInfo::prettyProductName();
+    qDebug() << "Product type: " << QSysInfo::productType();
+    qDebug() << "Product version: " << QSysInfo::productVersion();
+
+    qDebug() << "Application name: " << qsApplicationName;
 
     // Определение конкретной ОС
     #if defined(Q_OS_WIN)

@@ -1,5 +1,12 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <QString>
+
+//-----------------------------------------------------------------------------
+// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+//-----------------------------------------------------------------------------
+
+QString qsApplicationName = "NoName";
 
 int main(int argc, char *argv[])
 {
@@ -10,5 +17,9 @@ int main(int argc, char *argv[])
     w.activateWindow();
     w.show();
 
-    return a.exec();
+
+    int x = a.exec();
+    qsApplicationName = a.applicationName();
+
+    return x;
 }
