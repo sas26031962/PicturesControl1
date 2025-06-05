@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
     cIniFile::Keys = new QStringList();
     cIniFile::SearchKeys = new QStringList();
 
-//    qsApplicationName = QProcess::applicationName();
     //---
     qDebug() << "Build abi: " << QSysInfo::buildAbi();
     qDebug() << "Build CPU architecture: " << QSysInfo::buildCpuArchitecture();
@@ -47,13 +46,72 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //--- Определение имён файлов
 
-    QString qsProjectPathWindows = "C:/WORK/PicturesControl";
-    QString qsProjectPathLinux = "/home/andy/MyQtProjects";
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+
+    //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/programm/data/settings.ini";
+    //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/settings.ini";
+    QString qsSettingsFileName = "./settings.ini";
+    QSettings settings(qsSettingsFileName, QSettings::IniFormat);
+/*
+    //Кусок для тестирования, если что-то пошло не так
+    QStringList SettingsGroups = settings.childGroups();
+    qDebug() << "settings groups count:" << SettingsGroups.count();
+
+    QListIterator<QString> readIt(SettingsGroups);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        qDebug() << "SectionName=" << qsSection;
+        settings.beginGroup(qsSection);
+        //===
+        qDebug() << "iterator: section=" << qsSection;
+        QStringList keys = settings.childKeys();
+        QListIterator<QString> readIt(keys);
+        while(readIt.hasNext())
+        {
+            QString key = readIt.next();
+            QString value = settings.value(key,"0").toString();
+
+            qDebug() << "iterator: key=" << key << "; value=" << value;
+        }
+        //===
+        settings.endGroup();
+    }
+
+    qDebug() << "--------------------------------------";
+
+    QString value1 = settings.value("IniFileNameWindows","1").toString();
+    QString value2 = settings.value("IniFileNameLinux","2").toString();
+
+    QString value3 = settings.value("ProjectPathWindows","3").toString();
+    QString value4 = settings.value("ProjectPathLinux","4").toString();
+
+    QString value5 = settings.value("HashTagFileNameSuffixWindows","5").toString();
+    QString value6 = settings.value("HashTagFileNameSuffixLinux","6").toString();
+
+    qDebug() << "Value1=" << value1;
+    qDebug() << "Value2=" << value2;
+    qDebug() << "Value3=" << value3;
+    qDebug() << "Value4=" << value4;
+    qDebug() << "Value5=" << value5;
+    qDebug() << "Value6=" << value6;
+*/
+    // Читаем значения из INI-файла
+
+    settings.beginGroup("Files");
+
+    QString qsIniFileNameWindows = settings.value("IniFileNameWindows","1").toString();//"C:/Work/Ships";
+    QString qsIniFileNameLinux = settings.value("IniFileNameLinux","2").toString();//"/home/andy/From Smartfone";
+
+    QString qsProjectPathWindows = settings.value("ProjectPathWindows","3").toString();//"C:/WORK/PicturesControl";
+    QString qsProjectPathLinux = settings.value("ProjectPathLinux","4").toString();//"/home/andy/MyQtProjects";
+
+    QString qsHashTagFileNameSuffixWindows = settings.value("HashTagFileNameSuffixWindows","5").toString();//"Ships";
+    QString qsHashTagFileNameSuffixLinux = settings.value("HashTagFileNameSuffixLinux","6").toString();//"Photos";
+
+    settings.endGroup();
+
     QString qsIniFileName;
-
-    QString qsHashTagFileNameSuffixWindows = "Ships";
-    QString qsHashTagFileNameSuffixLinux = "Photos";
-
     qsProjectName = "/" + qsApplicationName;
     qsProjectNameDataSuffix = "/programm/data";
     qsProjectNameImgSuffix = "/programm/img/tmp";
@@ -62,21 +120,21 @@ MainWindow::MainWindow(QWidget *parent) :
     if(cIniFile::iSystemType == LINUX_SYSTEM_TYPE)
     {
 
-        qsProjectPath = qsProjectPathLinux;//"/home/andy/MyQtProjects";
-        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixLinux;//"Photos";
+        qsProjectPath = qsProjectPathLinux;
+        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixLinux;
         //qsProjectPath = "/home/andy/MyQtProjects";
         //qsHashTagFileNameSuffix = "Photos";
-         qsIniFileName ="/home/andy/From Smartfone";
+         qsIniFileName = qsIniFileNameLinux;
 
     }
     else
     {
 
-        qsProjectPath = qsProjectPathWindows;//"C:/WORK/PicturesControl";
-        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixWindows;//"Ships";
+        qsProjectPath = qsProjectPathWindows;
+        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixWindows;
         //qsProjectPath = "C:/WORK/PicturesControl";
         //qsHashTagFileNameSuffix = "Ships";
-         qsIniFileName = "C:/Work/Ships";
+         qsIniFileName = qsIniFileNameWindows;
     }
 
     //---Прямые имена файлов
