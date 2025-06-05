@@ -47,9 +47,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //--- Определение имён файлов
 
+    QString qsProjectPathWindows = "C:/WORK/PicturesControl";
+    QString qsProjectPathLinux = "/home/andy/MyQtProjects";
     QString qsIniFileName;
 
-    qsProjectName = "/PicturesControl1";
+    QString qsHashTagFileNameSuffixWindows = "Ships";
+    QString qsHashTagFileNameSuffixLinux = "Photos";
+
+    qsProjectName = "/" + qsApplicationName;
     qsProjectNameDataSuffix = "/programm/data";
     qsProjectNameImgSuffix = "/programm/img/tmp";
     qsDataFileNameExtension = ".txt";
@@ -57,21 +62,27 @@ MainWindow::MainWindow(QWidget *parent) :
     if(cIniFile::iSystemType == LINUX_SYSTEM_TYPE)
     {
 
-         qsProjectPath = "/home/andy/MyQtProjects";
-         qsHashTagFileNameSuffix = "Photos";
+        qsProjectPath = qsProjectPathLinux;//"/home/andy/MyQtProjects";
+        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixLinux;//"Photos";
+        //qsProjectPath = "/home/andy/MyQtProjects";
+        //qsHashTagFileNameSuffix = "Photos";
          qsIniFileName ="/home/andy/From Smartfone";
 
     }
     else
     {
 
-         qsProjectPath = "C:/WORK/PicturesControl";
-         qsHashTagFileNameSuffix = "Ships";
+        qsProjectPath = qsProjectPathWindows;//"C:/WORK/PicturesControl";
+        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixWindows;//"Ships";
+        //qsProjectPath = "C:/WORK/PicturesControl";
+        //qsHashTagFileNameSuffix = "Ships";
          qsIniFileName = "C:/Work/Ships";
     }
 
+    //---Прямые имена файлов
     //cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";//Linux version
     //cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";//Windows version
+
     cIniFile::iniFilePath = qsProjectPath + qsProjectName + "/programm/data/FilesConfig" + qsHashTagFileNameSuffix + ".ini";
 
     cIniFile::pattern1StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern1StringListFile" + qsDataFileNameExtension;

@@ -6,11 +6,12 @@
 // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
 //-----------------------------------------------------------------------------
 
-QString qsApplicationName = "NoName";
+QString qsApplicationName = "PicturesControl1";
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setApplicationName(qsApplicationName);
     MainWindow w;
 
     w.raise();
