@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     clistwidgetplace.cpp \
     clistwidgetsubject.cpp \
     clistwidgetproperty.cpp \
-    clistwidgettheame.cpp
+    clistwidgettheame.cpp \
+    cactionsexec.cpp
 
 HEADERS  += mainwindow.h \
     cinifile.h \
@@ -41,7 +42,8 @@ HEADERS  += mainwindow.h \
     clistwidgetplace.h \
     clistwidgetsubject.h \
     clistwidgetproperty.h \
-    clistwidgettheame.h
+    clistwidgettheame.h \
+    cactionsexec.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

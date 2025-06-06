@@ -180,6 +180,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ActionsExec.install(ui->listWidgetOther);
+
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
 
@@ -212,7 +214,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSelectImagePrevious, SIGNAL(triggered()), this, SLOT( execActionSelectImagePrevious()));
     connect(ui->actionSelectImageEnd, SIGNAL(triggered()), this, SLOT( execActionSelectImageEnd()));
 
-    connect(ui->actionRemoveMovie, SIGNAL(triggered()), this, SLOT( execActionRemoveMovie()));
+    connect(ui->actionRemoveMovie, SIGNAL(triggered(bool)), this, SLOT( execActionRemoveMovie(bool)));
+    //connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);//20250606
+    connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
+
     connect(ui->actionRemoveText, SIGNAL(triggered()), this, SLOT( execActionRemoveText()));
     connect(ui->actionRemoveTif, SIGNAL(triggered()), this, SLOT( execActionRemoveTif()));
     connect(ui->actionRemoveBin, SIGNAL(triggered()), this, SLOT( execActionRemoveBin()));
@@ -1322,7 +1327,7 @@ void MainWindow::execActionRemoveBin()
 }
 
 //=============================================================================
-
+/*
 void MainWindow::execActionRemoveMovie()
 {
     QString s = "ActionRemoveMovie()";
@@ -1407,7 +1412,7 @@ void MainWindow::execActionRemoveMovie()
    //===
 
 }
-
+*/
 //=============================================================================
 
 void MainWindow::execActionRotateCW()

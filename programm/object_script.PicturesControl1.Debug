@@ -11,6 +11,7 @@ INPUT(
 ./debug\clistwidgetsubject.o
 ./debug\clistwidgetproperty.o
 ./debug\clistwidgettheame.o
+./debug\cactionsexec.o
 ./debug\qrc_resourcedata.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fmview.o
@@ -18,4 +19,5 @@ INPUT(
 ./debug\moc_clistwidgetsubject.o
 ./debug\moc_clistwidgetproperty.o
 ./debug\moc_clistwidgettheame.o
+./debug\moc_cactionsexec.o
 );

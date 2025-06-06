@@ -39,6 +39,7 @@
 #include "clistwidgetsubject.h"
 #include "clistwidgetproperty.h"
 #include "clistwidgettheame.h"
+#include "cactionsexec.h"
 
 //-----------------------------------------------------------------------------
 // КОНСТАНТЫ
@@ -114,6 +115,9 @@ private:
     cListWidgetProperty * ListWidgetProperty;
     cListWidgetTheame * ListWidgetTheame;
 
+    //20250606
+    cActionsExec ActionsExec;
+
     //Методы
     void showCurrentIndexPicture();
     bool deleteSection(QString s);
@@ -174,7 +178,8 @@ private slots:
     void execActionSearchNamePatterns12Intersection();
     void execActionSearchNamePatterns1XIntersection();
 
-    void execActionRemoveMovie();
+    //void execActionRemoveMovie();
+
     void execActionRemoveText();
     void execActionRemoveTif();
     void execActionRemove3gp();
