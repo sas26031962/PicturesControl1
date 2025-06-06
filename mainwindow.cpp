@@ -48,9 +48,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Создаем объект QSettings с указанием формата INI и пути к файлу
 
-    //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/programm/data/settings.ini";
-    //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/settings.ini";
-    QString qsSettingsFileName = "./settings.ini";
+    QString qsApplicationDirPath = QCoreApplication::applicationDirPath();
+    int iLastSlashIndex = qsApplicationDirPath.lastIndexOf('/');
+    QString qsApplicationDirProgrammPath = qsApplicationDirPath.mid(0, iLastSlashIndex);
+
+    qDebug() << "ApplicationDirPath=" << qsApplicationDirPath << " LastIndexOfSlash=" << iLastSlashIndex << " ApplicationDirProgrammPath=" << qsApplicationDirProgrammPath;
+
+    //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/programm/settings.ini";
+    QString qsSettingsFileName = qsApplicationDirProgrammPath + "/settings.ini";
+
     QSettings settings(qsSettingsFileName, QSettings::IniFormat);
 /*
     //Кусок для тестирования, если что-то пошло не так

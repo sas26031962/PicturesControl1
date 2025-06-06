@@ -26,6 +26,7 @@
 #include <QSysInfo>
 #include <QTextCodec>
 #include <QProcess>
+#include <QCoreApplication>
 
 #include "cinifile.h"
 #include "fmview.h"
