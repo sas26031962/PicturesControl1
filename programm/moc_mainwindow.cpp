@@ -1,19 +1,18 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.3)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include <memory>
 #include "../mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.15.3. It"
+#error "This file was generated using the moc from 5.12.8. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -23,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[44];
-    char stringdata0[959];
+    char stringdata0[960];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,40 +41,40 @@ QT_MOC_LITERAL(6, 61, 25), // "execActionSelectImageNext"
 QT_MOC_LITERAL(7, 87, 29), // "execActionSelectImagePrevious"
 QT_MOC_LITERAL(8, 117, 24), // "execActionSelectImageEnd"
 QT_MOC_LITERAL(9, 142, 23), // "execActionImportInitial"
-QT_MOC_LITERAL(10, 166, 14), // "execActionLoad"
-QT_MOC_LITERAL(11, 181, 25), // "execActionFormViewPicture"
-QT_MOC_LITERAL(12, 207, 14), // "execActionMemo"
-QT_MOC_LITERAL(13, 222, 15), // "execTimerUpdate"
-QT_MOC_LITERAL(14, 238, 32), // "execListWidgetFoundedItemClicked"
-QT_MOC_LITERAL(15, 271, 31), // "execComboBoxCurrentIndexChanged"
-QT_MOC_LITERAL(16, 303, 1), // "x"
-QT_MOC_LITERAL(17, 305, 29), // "execListWidgetKeysItemClicked"
-QT_MOC_LITERAL(18, 335, 31), // "execListWidgetSearchItemClicked"
-QT_MOC_LITERAL(19, 367, 23), // "execActionSearchRotated"
-QT_MOC_LITERAL(20, 391, 21), // "execActionSearchOrYes"
-QT_MOC_LITERAL(21, 413, 28), // "execActionSearchNamePattern1"
-QT_MOC_LITERAL(22, 442, 28), // "execActionSearchNamePattern2"
-QT_MOC_LITERAL(23, 471, 27), // "execActionSearchNamePattern"
-QT_MOC_LITERAL(24, 499, 42), // "execActionSearchNamePatterns1..."
-QT_MOC_LITERAL(25, 542, 42), // "execActionSearchNamePatterns1..."
-QT_MOC_LITERAL(26, 585, 21), // "execActionRemoveMovie"
-QT_MOC_LITERAL(27, 607, 20), // "execActionRemoveText"
-QT_MOC_LITERAL(28, 628, 19), // "execActionRemoveTif"
-QT_MOC_LITERAL(29, 648, 19), // "execActionRemove3gp"
-QT_MOC_LITERAL(30, 668, 19), // "execActionRemoveBin"
-QT_MOC_LITERAL(31, 688, 23), // "execActionRemoveSection"
-QT_MOC_LITERAL(32, 712, 23), // "execActionGetGroupsList"
-QT_MOC_LITERAL(33, 736, 21), // "execActionGetKeysList"
-QT_MOC_LITERAL(34, 758, 19), // "execActionGotoIndex"
-QT_MOC_LITERAL(35, 778, 25), // "execActionOpenFoundRecord"
-QT_MOC_LITERAL(36, 804, 18), // "execActionRotateCW"
-QT_MOC_LITERAL(37, 823, 19), // "execActionRotateCCW"
-QT_MOC_LITERAL(38, 843, 16), // "execSpinBoxAngle"
-QT_MOC_LITERAL(39, 860, 5), // "angle"
-QT_MOC_LITERAL(40, 866, 18), // "execShowExecStatus"
-QT_MOC_LITERAL(41, 885, 22), // "execShiftXValueChanged"
-QT_MOC_LITERAL(42, 908, 22), // "execShiftYValueChanged"
-QT_MOC_LITERAL(43, 931, 27) // "execShowCurrentIndexPicture"
+QT_MOC_LITERAL(10, 166, 22), // "execActionShowNewFiles"
+QT_MOC_LITERAL(11, 189, 14), // "execActionLoad"
+QT_MOC_LITERAL(12, 204, 25), // "execActionFormViewPicture"
+QT_MOC_LITERAL(13, 230, 14), // "execActionMemo"
+QT_MOC_LITERAL(14, 245, 15), // "execTimerUpdate"
+QT_MOC_LITERAL(15, 261, 32), // "execListWidgetFoundedItemClicked"
+QT_MOC_LITERAL(16, 294, 31), // "execComboBoxCurrentIndexChanged"
+QT_MOC_LITERAL(17, 326, 1), // "x"
+QT_MOC_LITERAL(18, 328, 29), // "execListWidgetKeysItemClicked"
+QT_MOC_LITERAL(19, 358, 31), // "execListWidgetSearchItemClicked"
+QT_MOC_LITERAL(20, 390, 23), // "execActionSearchRotated"
+QT_MOC_LITERAL(21, 414, 21), // "execActionSearchOrYes"
+QT_MOC_LITERAL(22, 436, 28), // "execActionSearchNamePattern1"
+QT_MOC_LITERAL(23, 465, 28), // "execActionSearchNamePattern2"
+QT_MOC_LITERAL(24, 494, 27), // "execActionSearchNamePattern"
+QT_MOC_LITERAL(25, 522, 42), // "execActionSearchNamePatterns1..."
+QT_MOC_LITERAL(26, 565, 42), // "execActionSearchNamePatterns1..."
+QT_MOC_LITERAL(27, 608, 20), // "execActionRemoveText"
+QT_MOC_LITERAL(28, 629, 19), // "execActionRemoveTif"
+QT_MOC_LITERAL(29, 649, 19), // "execActionRemove3gp"
+QT_MOC_LITERAL(30, 669, 19), // "execActionRemoveBin"
+QT_MOC_LITERAL(31, 689, 23), // "execActionRemoveSection"
+QT_MOC_LITERAL(32, 713, 23), // "execActionGetGroupsList"
+QT_MOC_LITERAL(33, 737, 21), // "execActionGetKeysList"
+QT_MOC_LITERAL(34, 759, 19), // "execActionGotoIndex"
+QT_MOC_LITERAL(35, 779, 25), // "execActionOpenFoundRecord"
+QT_MOC_LITERAL(36, 805, 18), // "execActionRotateCW"
+QT_MOC_LITERAL(37, 824, 19), // "execActionRotateCCW"
+QT_MOC_LITERAL(38, 844, 16), // "execSpinBoxAngle"
+QT_MOC_LITERAL(39, 861, 5), // "angle"
+QT_MOC_LITERAL(40, 867, 18), // "execShowExecStatus"
+QT_MOC_LITERAL(41, 886, 22), // "execShiftXValueChanged"
+QT_MOC_LITERAL(42, 909, 22), // "execShiftYValueChanged"
+QT_MOC_LITERAL(43, 932, 27) // "execShowCurrentIndexPicture"
 
     },
     "MainWindow\0draw\0\0s\0showExecStatus\0"
@@ -83,9 +82,10 @@ QT_MOC_LITERAL(43, 931, 27) // "execShowCurrentIndexPicture"
     "execActionSelectImageNext\0"
     "execActionSelectImagePrevious\0"
     "execActionSelectImageEnd\0"
-    "execActionImportInitial\0execActionLoad\0"
-    "execActionFormViewPicture\0execActionMemo\0"
-    "execTimerUpdate\0execListWidgetFoundedItemClicked\0"
+    "execActionImportInitial\0execActionShowNewFiles\0"
+    "execActionLoad\0execActionFormViewPicture\0"
+    "execActionMemo\0execTimerUpdate\0"
+    "execListWidgetFoundedItemClicked\0"
     "execComboBoxCurrentIndexChanged\0x\0"
     "execListWidgetKeysItemClicked\0"
     "execListWidgetSearchItemClicked\0"
@@ -95,13 +95,13 @@ QT_MOC_LITERAL(43, 931, 27) // "execShowCurrentIndexPicture"
     "execActionSearchNamePattern\0"
     "execActionSearchNamePatterns12Intersection\0"
     "execActionSearchNamePatterns1XIntersection\0"
-    "execActionRemoveMovie\0execActionRemoveText\0"
-    "execActionRemoveTif\0execActionRemove3gp\0"
-    "execActionRemoveBin\0execActionRemoveSection\0"
-    "execActionGetGroupsList\0execActionGetKeysList\0"
-    "execActionGotoIndex\0execActionOpenFoundRecord\0"
-    "execActionRotateCW\0execActionRotateCCW\0"
-    "execSpinBoxAngle\0angle\0execShowExecStatus\0"
+    "execActionRemoveText\0execActionRemoveTif\0"
+    "execActionRemove3gp\0execActionRemoveBin\0"
+    "execActionRemoveSection\0execActionGetGroupsList\0"
+    "execActionGetKeysList\0execActionGotoIndex\0"
+    "execActionOpenFoundRecord\0execActionRotateCW\0"
+    "execActionRotateCCW\0execSpinBoxAngle\0"
+    "angle\0execShowExecStatus\0"
     "execShiftXValueChanged\0execShiftYValueChanged\0"
     "execShowCurrentIndexPicture"
 };
@@ -135,8 +135,8 @@ static const uint qt_meta_data_MainWindow[] = {
       12,    0,  222,    2, 0x08 /* Private */,
       13,    0,  223,    2, 0x08 /* Private */,
       14,    0,  224,    2, 0x08 /* Private */,
-      15,    1,  225,    2, 0x08 /* Private */,
-      17,    0,  228,    2, 0x08 /* Private */,
+      15,    0,  225,    2, 0x08 /* Private */,
+      16,    1,  226,    2, 0x08 /* Private */,
       18,    0,  229,    2, 0x08 /* Private */,
       19,    0,  230,    2, 0x08 /* Private */,
       20,    0,  231,    2, 0x08 /* Private */,
@@ -178,8 +178,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -213,7 +213,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<MainWindow *>(_o);
-        (void)_t;
+        Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->draw((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->showExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
@@ -222,22 +222,22 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->execActionSelectImagePrevious(); break;
         case 5: _t->execActionSelectImageEnd(); break;
         case 6: _t->execActionImportInitial(); break;
-        case 7: _t->execActionLoad(); break;
-        case 8: _t->execActionFormViewPicture(); break;
-        case 9: _t->execActionMemo(); break;
-        case 10: _t->execTimerUpdate(); break;
-        case 11: _t->execListWidgetFoundedItemClicked(); break;
-        case 12: _t->execComboBoxCurrentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->execListWidgetKeysItemClicked(); break;
-        case 14: _t->execListWidgetSearchItemClicked(); break;
-        case 15: _t->execActionSearchRotated(); break;
-        case 16: _t->execActionSearchOrYes(); break;
-        case 17: _t->execActionSearchNamePattern1(); break;
-        case 18: _t->execActionSearchNamePattern2(); break;
-        case 19: _t->execActionSearchNamePattern(); break;
-        case 20: _t->execActionSearchNamePatterns12Intersection(); break;
-        case 21: _t->execActionSearchNamePatterns1XIntersection(); break;
-        case 22: _t->execActionRemoveMovie(); break;
+        case 7: _t->execActionShowNewFiles(); break;
+        case 8: _t->execActionLoad(); break;
+        case 9: _t->execActionFormViewPicture(); break;
+        case 10: _t->execActionMemo(); break;
+        case 11: _t->execTimerUpdate(); break;
+        case 12: _t->execListWidgetFoundedItemClicked(); break;
+        case 13: _t->execComboBoxCurrentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->execListWidgetKeysItemClicked(); break;
+        case 15: _t->execListWidgetSearchItemClicked(); break;
+        case 16: _t->execActionSearchRotated(); break;
+        case 17: _t->execActionSearchOrYes(); break;
+        case 18: _t->execActionSearchNamePattern1(); break;
+        case 19: _t->execActionSearchNamePattern2(); break;
+        case 20: _t->execActionSearchNamePattern(); break;
+        case 21: _t->execActionSearchNamePatterns12Intersection(); break;
+        case 22: _t->execActionSearchNamePatterns1XIntersection(); break;
         case 23: _t->execActionRemoveText(); break;
         case 24: _t->execActionRemoveTif(); break;
         case 25: _t->execActionRemove3gp(); break;
@@ -276,7 +276,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = { {
-    QMetaObject::SuperData::link<QMainWindow::staticMetaObject>(),
+    &QMainWindow::staticMetaObject,
     qt_meta_stringdata_MainWindow.data,
     qt_meta_data_MainWindow,
     qt_static_metacall,
@@ -318,14 +318,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 // SIGNAL 0
 void MainWindow::draw(QString _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
 void MainWindow::showExecStatus(QString _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

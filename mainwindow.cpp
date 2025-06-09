@@ -2085,7 +2085,7 @@ void MainWindow::execActionShowNewFiles()
         return;
     }
 
-    cImportFiles::execSearchNewFiles(ui->progressBarNavigation);
+    //cImportFiles::execSearchNewFiles(ui->progressBarNavigation);
 
     //---
     emit execShowExecStatus(s);
