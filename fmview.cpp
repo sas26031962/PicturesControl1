@@ -17,10 +17,7 @@ fmView::fmView(QWidget *parent) :
     connect(this->ui->horizontalSliderScale, SIGNAL(valueChanged(int)), this, SLOT( execHorizontalSliderValueChanged(int)));
 
     connect(this->ui->lineEditX, SIGNAL(editingFinished()), this, SLOT( execXChanged()));
-    //connect(this->ui->lineEditX, SIGNAL(inputRejected()), this, SLOT( execXRejected()));
-
     connect(this->ui->lineEditY, SIGNAL(editingFinished()), this, SLOT(execYChanged()));
-    //connect(this->ui->lineEditY, SIGNAL(inputRejected()), this, SLOT( execYRejected()));
 
 }
 
@@ -35,7 +32,6 @@ void fmView::execDraw(QString s)
     emit showExecStatus(s + " Size=" + QString::number(iSize));
     cDrawFiles::scaleImage(s, iSize, iSize);
     QPixmap pmMain(cIniFile::scaledImagePath);//
-    //QPixmap pmMain(s);//
     ui->labelMain->setPixmap(pmMain);
 }
 
@@ -58,7 +54,6 @@ void fmView::execXChanged()
     cDrawFiles::dx += s.toInt();
     qDebug() << "X=" << s << " Value=" << cDrawFiles::dx;
     emit shiftXValueChanged();
-    //execDraw(cIniFile::currentRotatedImagePath);
 }
 
 void fmView::execYChanged()
@@ -68,7 +63,6 @@ void fmView::execYChanged()
     cDrawFiles::dy += s.toInt();
     qDebug() << "Y=" << s << " Value=" << cDrawFiles::dy;
     emit shiftYValueChanged();
-    //execDraw(cIniFile::currentRotatedImagePath);
 }
 
 void fmView::execXRejected()

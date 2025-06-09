@@ -11,7 +11,6 @@
     QString cIniFile::pattern1StringListFilePath;
     QString cIniFile::pattern2StringListFilePath;
     QString cIniFile::patternXStringListFilePath;
-    QString cIniFile::rotatedImagePath;
     QString cIniFile::scaledImagePath;
     QString cIniFile::filePathRemovedSectionList;
     QString cIniFile::fileSubjectHashTag;

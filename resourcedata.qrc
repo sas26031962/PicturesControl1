@@ -2,4 +2,7 @@
     <qresource prefix="/TODO">
         <file>TODO_List.txt</file>
     </qresource>
+    <qresource prefix="/config">
+        <file>programm/settings.ini</file>
+    </qresource>
 </RCC>

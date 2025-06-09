@@ -487,6 +487,7 @@
     <addaction name="actionGetGroupsList"/>
     <addaction name="actionGetKeysList"/>
     <addaction name="actionRemoveSection"/>
+    <addaction name="actionShowNewFiles"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuSelect_image">
@@ -734,6 +735,11 @@
   <action name="actionInsertTheame">
    <property name="text">
     <string>InsertTheame</string>
+   </property>
+  </action>
+  <action name="actionShowNewFiles">
+   <property name="text">
+    <string>ShowNewFiles</string>
    </property>
   </action>
  </widget>

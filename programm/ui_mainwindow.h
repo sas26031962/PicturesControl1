@@ -74,6 +74,7 @@ public:
     QAction *actionInsertPlace;
     QAction *actionInsertProperty;
     QAction *actionInsertTheame;
+    QAction *actionShowNewFiles;
     QWidget *centralWidget;
     QGroupBox *groupBoxControl;
     QPushButton *pushButtonBegin;
@@ -205,6 +206,8 @@ public:
         actionInsertProperty->setObjectName(QStringLiteral("actionInsertProperty"));
         actionInsertTheame = new QAction(MainWindow);
         actionInsertTheame->setObjectName(QStringLiteral("actionInsertTheame"));
+        actionShowNewFiles = new QAction(MainWindow);
+        actionShowNewFiles->setObjectName(QStringLiteral("actionShowNewFiles"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBoxControl = new QGroupBox(centralWidget);
@@ -366,6 +369,7 @@ public:
         menuFile->addAction(actionGetGroupsList);
         menuFile->addAction(actionGetKeysList);
         menuFile->addAction(actionRemoveSection);
+        menuFile->addAction(actionShowNewFiles);
         menuFile->addAction(actionExit);
         menuSelect_image->addAction(actionSelectImageBegin);
         menuSelect_image->addAction(actionSelectImageNext);
@@ -434,6 +438,7 @@ public:
         actionInsertPlace->setText(QApplication::translate("MainWindow", "InsertPlace", 0));
         actionInsertProperty->setText(QApplication::translate("MainWindow", "InsertProperty", 0));
         actionInsertTheame->setText(QApplication::translate("MainWindow", "InsertTheame", 0));
+        actionShowNewFiles->setText(QApplication::translate("MainWindow", "ShowNewFiles", 0));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", 0));
 #ifndef QT_NO_TOOLTIP
         pushButtonBegin->setToolTip(QString());

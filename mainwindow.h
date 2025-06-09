@@ -25,6 +25,8 @@
 #include <QRegularExpression>
 #include <QSysInfo>
 #include <QTextCodec>
+#include <QProcess>
+#include <QCoreApplication>
 
 #include "cinifile.h"
 #include "fmview.h"
@@ -37,6 +39,7 @@
 #include "clistwidgetsubject.h"
 #include "clistwidgetproperty.h"
 #include "clistwidgettheame.h"
+#include "cactionsexec.h"
 
 //-----------------------------------------------------------------------------
 // КОНСТАНТЫ
@@ -50,6 +53,15 @@
 // ТИПЫ ДАННЫХ
 //-----------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------
+// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+//-----------------------------------------------------------------------------
+
+//QString qsApplicationName = "NoName";
+
+extern QString qsApplicationName;
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -62,6 +74,14 @@ private:
     //Атрибуты
 
 //    int iSystemType = 0;
+
+    QString qsProjectPath;
+    QString qsProjectName;
+    QString qsProjectNameDataSuffix;
+    QString qsProjectNameImgSuffix;
+
+    QString qsDataFileNameExtension;
+    QString qsHashTagFileNameSuffix;
 
     varMem <int> KeyPressed;
 
@@ -95,6 +115,9 @@ private:
     cListWidgetProperty * ListWidgetProperty;
     cListWidgetTheame * ListWidgetTheame;
 
+    //20250606
+    cActionsExec ActionsExec;
+
     //Методы
     void showCurrentIndexPicture();
     bool deleteSection(QString s);
@@ -108,6 +131,9 @@ private:
 
 public:
     //Атрибуты
+
+//    QString qsApplicationName;
+
     QString fileNameHashTag;// Имя файла для загрузки параметров
 
     QString filePathRoot;// Путь к папке с исполняемым файлом (programm)
@@ -132,6 +158,7 @@ private slots:
     void execActionSelectImagePrevious();
     void execActionSelectImageEnd();
     void execActionImportInitial();
+    void execActionShowNewFiles();
     void execActionLoad();
     void execActionFormViewPicture();
     void execActionMemo();
@@ -152,7 +179,8 @@ private slots:
     void execActionSearchNamePatterns12Intersection();
     void execActionSearchNamePatterns1XIntersection();
 
-    void execActionRemoveMovie();
+    //void execActionRemoveMovie();
+
     void execActionRemoveText();
     void execActionRemoveTif();
     void execActionRemove3gp();

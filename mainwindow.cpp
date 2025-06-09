@@ -7,7 +7,6 @@
 
 std::atomic<int> iCurrentIndexGlobal(0); //Индекс для отображения
 
-
 //-----------------------------------------------------------------------------
 //Реализации элементов класса
 //-----------------------------------------------------------------------------
@@ -21,15 +20,17 @@ MainWindow::MainWindow(QWidget *parent) :
     cIniFile::SearchKeys = new QStringList();
 
     //---
-    qDebug() << "Build abi:" << QSysInfo::buildAbi();
-    qDebug() << "Build CPU architecture:" << QSysInfo::buildCpuArchitecture();
-    qDebug() << "Current CPU architecture:" << QSysInfo::currentCpuArchitecture();
-    qDebug() << "Kernel type:" << QSysInfo::kernelType();
-    qDebug() << "Kernel version:" << QSysInfo::kernelVersion();
-    qDebug() << "Machine host name:" << QSysInfo::machineHostName();
-    qDebug() << "Product name:" << QSysInfo::prettyProductName();
-    qDebug() << "Product type:" << QSysInfo::productType();
-    qDebug() << "Product version:" << QSysInfo::productVersion();
+    qDebug() << "Build abi: " << QSysInfo::buildAbi();
+    qDebug() << "Build CPU architecture: " << QSysInfo::buildCpuArchitecture();
+    qDebug() << "Current CPU architecture: " << QSysInfo::currentCpuArchitecture();
+    qDebug() << "Kernel type: " << QSysInfo::kernelType();
+    qDebug() << "Kernel version: " << QSysInfo::kernelVersion();
+    qDebug() << "Machine host name: " << QSysInfo::machineHostName();
+    qDebug() << "Product name: " << QSysInfo::prettyProductName();
+    qDebug() << "Product type: " << QSysInfo::productType();
+    qDebug() << "Product version: " << QSysInfo::productVersion();
+
+    qDebug() << "Application name: " << qsApplicationName;
 
     // Определение конкретной ОС
     #if defined(Q_OS_WIN)
@@ -45,41 +46,132 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //--- Определение имён файлов
 
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+
+    QString qsApplicationDirPath = QCoreApplication::applicationDirPath();
+    int iLastSlashIndex = qsApplicationDirPath.lastIndexOf('/');
+    QString qsApplicationDirProgrammPath = qsApplicationDirPath.mid(0, iLastSlashIndex);
+
+    qDebug() << "ApplicationDirPath=" << qsApplicationDirPath << " LastIndexOfSlash=" << iLastSlashIndex << " ApplicationDirProgrammPath=" << qsApplicationDirProgrammPath;
+
+    //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/programm/settings.ini";
+    QString qsSettingsFileName = qsApplicationDirProgrammPath + "/settings.ini";
+
+    QSettings settings(qsSettingsFileName, QSettings::IniFormat);
+/*
+    //Кусок для тестирования, если что-то пошло не так
+    QStringList SettingsGroups = settings.childGroups();
+    qDebug() << "settings groups count:" << SettingsGroups.count();
+
+    QListIterator<QString> readIt(SettingsGroups);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        qDebug() << "SectionName=" << qsSection;
+        settings.beginGroup(qsSection);
+        //===
+        qDebug() << "iterator: section=" << qsSection;
+        QStringList keys = settings.childKeys();
+        QListIterator<QString> readIt(keys);
+        while(readIt.hasNext())
+        {
+            QString key = readIt.next();
+            QString value = settings.value(key,"0").toString();
+
+            qDebug() << "iterator: key=" << key << "; value=" << value;
+        }
+        //===
+        settings.endGroup();
+    }
+
+    qDebug() << "--------------------------------------";
+
+    QString value1 = settings.value("IniFileNameWindows","1").toString();
+    QString value2 = settings.value("IniFileNameLinux","2").toString();
+
+    QString value3 = settings.value("ProjectPathWindows","3").toString();
+    QString value4 = settings.value("ProjectPathLinux","4").toString();
+
+    QString value5 = settings.value("HashTagFileNameSuffixWindows","5").toString();
+    QString value6 = settings.value("HashTagFileNameSuffixLinux","6").toString();
+
+    qDebug() << "Value1=" << value1;
+    qDebug() << "Value2=" << value2;
+    qDebug() << "Value3=" << value3;
+    qDebug() << "Value4=" << value4;
+    qDebug() << "Value5=" << value5;
+    qDebug() << "Value6=" << value6;
+*/
+    // Читаем значения из INI-файла
+
+    settings.beginGroup("Files");
+
+    QString qsIniFileNameWindows = settings.value("IniFileNameWindows","1").toString();//"C:/Work/Ships";
+    QString qsIniFileNameLinux = settings.value("IniFileNameLinux","2").toString();//"/home/andy/From Smartfone";
+
+    QString qsProjectPathWindows = settings.value("ProjectPathWindows","3").toString();//"C:/WORK/PicturesControl";
+    QString qsProjectPathLinux = settings.value("ProjectPathLinux","4").toString();//"/home/andy/MyQtProjects";
+
+    QString qsHashTagFileNameSuffixWindows = settings.value("HashTagFileNameSuffixWindows","5").toString();//"Ships";
+    QString qsHashTagFileNameSuffixLinux = settings.value("HashTagFileNameSuffixLinux","6").toString();//"Photos";
+
+    settings.endGroup();
+
     QString qsIniFileName;
+    qsProjectName = "/" + qsApplicationName;
+    qsProjectNameDataSuffix = "/programm/data";
+    qsProjectNameImgSuffix = "/programm/img/tmp";
+    qsDataFileNameExtension = ".txt";
 
     if(cIniFile::iSystemType == LINUX_SYSTEM_TYPE)
     {
 
-         cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";
-         cIniFile::pattern1StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern1StringListFile.txt";
-         cIniFile::pattern2StringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern2StringListFile.txt";
-         cIniFile::patternXStringListFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/pattern3StringListFile.txt";
-         cIniFile::rotatedImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/rotated_image.png";
-         cIniFile::scaledImagePath = "/home/andy/MyQtProjects/PicturesControl1/programm/img/tmp/scaled_image.png";
-         cIniFile::filePathRemovedSectionList = "/home/andy/MyQtProjects/PicturesControl1/programm/data/RemovedSectionListPhotos.txt";// Прямой путь к файлу
-         cIniFile::fileSubjectHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListSubjectPhotos.txt";// Прямой путь к файлу;
-         cIniFile::filePlaceHashTag = "/home/andy/MyQtProjects/PicturesControl1/programm/data/HashTagListPlacesPhotos.txt";//Прямой путь к файлу;
-         cIniFile::filePropertyHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListPropertyesPhotos.txt";// Путь прямой;
-         cIniFile::fileTheameHashTag = "/home/andy/MyQtProjects/PicturesControl1//programm/data/HashTagListTheamsPhotos.txt";// Путь прямой;
-         qsIniFileName ="/home/andy/From Smartfone";
+        qsProjectPath = qsProjectPathLinux;
+        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixLinux;
+        //qsProjectPath = "/home/andy/MyQtProjects";
+        //qsHashTagFileNameSuffix = "Photos";
+         qsIniFileName = qsIniFileNameLinux;
 
     }
     else
     {
 
-         cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";
-         cIniFile::pattern1StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern1StringListFile.txt";
-         cIniFile::pattern2StringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern2StringListFile.txt";
-         cIniFile::patternXStringListFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/pattern3StringListFile.txt";
-         cIniFile::rotatedImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/rotated_image.png";
-         cIniFile::scaledImagePath = "C:/WORK/PicturesControl/PicturesControl1/programm/img/tmp/scaled_image.png";
-         cIniFile::filePathRemovedSectionList = "C:/WORK/PicturesControl/PicturesControl1/programm/data/RemovedSectionListShips.txt";// Прямой путь к файлу
-         cIniFile::fileSubjectHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListSubjectShips.txt";// Прямой путь к файлу;
-         cIniFile::filePlaceHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPlacesShips.txt";//Прямой путь к файлу;
-         cIniFile::filePropertyHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListPropertyesShips.txt";// Путь прямой;
-         cIniFile::fileTheameHashTag = "C:/WORK/PicturesControl/PicturesControl1/programm/data/HashTagListTheamsShips.txt";// Путь п р ямой;
-         qsIniFileName = "C:/Work/Ships";
+        qsProjectPath = qsProjectPathWindows;
+        qsHashTagFileNameSuffix = qsHashTagFileNameSuffixWindows;
+        //qsProjectPath = "C:/WORK/PicturesControl";
+        //qsHashTagFileNameSuffix = "Ships";
+         qsIniFileName = qsIniFileNameWindows;
     }
+
+    //---Прямые имена файлов
+    //cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";//Linux version
+    //cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";//Windows version
+
+    cIniFile::iniFilePath = qsProjectPath + qsProjectName + "/programm/data/FilesConfig" + qsHashTagFileNameSuffix + ".ini";
+
+    cIniFile::pattern1StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern1StringListFile" + qsDataFileNameExtension;
+    cIniFile::pattern2StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern2StringListFile" + qsDataFileNameExtension;
+    cIniFile::patternXStringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern3StringListFile" + qsDataFileNameExtension;
+    cIniFile::scaledImagePath = qsProjectPath + qsProjectName + "/programm/img/tmp/scaled_image.png";
+    cIniFile::filePathRemovedSectionList = qsProjectPath + qsProjectName + "/programm/data/RemovedSectionList" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+    cIniFile::fileSubjectHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListSubject" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+    cIniFile::filePlaceHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListPlaces" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+    cIniFile::filePropertyHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListPropertyes" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+    cIniFile::fileTheameHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListTheams" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+
+    qDebug() << "qsIniFileName=" << qsIniFileName;
+    qDebug() << "cIniFile::iniFilePath=" << cIniFile::iniFilePath;
+    qDebug() << "cIniFile::pattern1StringListFilePath=" << cIniFile::pattern1StringListFilePath;
+    qDebug() << "cIniFile::pattern2StringListFilePath=" << cIniFile::pattern2StringListFilePath;
+    qDebug() << "cIniFile::patternXStringListFilePath=" << cIniFile::patternXStringListFilePath;
+    qDebug() << "cIniFile::scaledImagePath=" << cIniFile::scaledImagePath;
+    qDebug() << "cIniFile::filePathRemovedSectionList=" << cIniFile::filePathRemovedSectionList;
+    qDebug() << "cIniFile::fileSubjectHashTag=" << cIniFile::fileSubjectHashTag;
+    qDebug() << "cIniFile::filePlaceHashTag=" << cIniFile::filePlaceHashTag;
+    qDebug() << "cIniFile::filePropertyHashTag=" << cIniFile::filePropertyHashTag;
+    qDebug() << "cIniFile::fileTheameHashTag=" << cIniFile::fileTheameHashTag;
+
+
     cIniFile::IniFile.setDirectoryPaht(qsIniFileName);
 
     //---
@@ -87,6 +179,8 @@ MainWindow::MainWindow(QWidget *parent) :
     qslDeletedSections.clear();
 
     ui->setupUi(this);
+
+    ActionsExec.install(ui->listWidgetOther);
 
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
@@ -120,7 +214,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSelectImagePrevious, SIGNAL(triggered()), this, SLOT( execActionSelectImagePrevious()));
     connect(ui->actionSelectImageEnd, SIGNAL(triggered()), this, SLOT( execActionSelectImageEnd()));
 
-    connect(ui->actionRemoveMovie, SIGNAL(triggered()), this, SLOT( execActionRemoveMovie()));
+    connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
+
     connect(ui->actionRemoveText, SIGNAL(triggered()), this, SLOT( execActionRemoveText()));
     connect(ui->actionRemoveTif, SIGNAL(triggered()), this, SLOT( execActionRemoveTif()));
     connect(ui->actionRemoveBin, SIGNAL(triggered()), this, SLOT( execActionRemoveBin()));
@@ -234,6 +329,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
     //connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
     connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, this, &MainWindow::execActionSearchOrYes);
+
+    connect(ui->actionShowNewFiles, SIGNAL(triggered()), this, SLOT( execActionShowNewFiles()));
 
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
@@ -391,6 +488,9 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
 void MainWindow::showCurrentIndexPicture()
 {
 
+    int iGroupsCount = cIniFile::Groups->count();
+    if(iGroupsCount > 0)
+    {
     // Читаем значения из INI-файла
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
     int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
@@ -401,9 +501,6 @@ void MainWindow::showCurrentIndexPicture()
         index = 0;
         iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
     }
-    int iGroupsCount = cIniFile::Groups->count();
-    if(iGroupsCount > 0)
-    {
         QString qsGroupName = cIniFile::Groups->at(index);
         //qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName;
         //Пропускаем RecordList
@@ -478,10 +575,11 @@ void MainWindow::showCurrentIndexPicture()
     else
     {
         QString s = "Groups is empty!";
+        qDebug() << s;
+
         emit showExecStatus(s);
 
     }
-
 }
 
 //=============================================================================
@@ -560,8 +658,13 @@ void MainWindow::execActionGotoIndex()
     // Отобразить картинку
     showCurrentIndexPicture();
 
-    progressBarNavigation->setValue(index);
-    SpinBoxIndex->setValue(index);
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionGotoIndex(): index < 0";
+    }
+    progressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
     //---
     QString s = "execActionGotoIndex(), goto index:";
     s += QString::number(index);
@@ -581,8 +684,13 @@ void MainWindow::execActionSelectImageBegin()
     // Отобразить картинку
     showCurrentIndexPicture();
 
-    progressBarNavigation->setValue(index);
-    SpinBoxIndex->setValue(index);
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImageBegin: index < 0";
+    }
+    progressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
     //---
     QString s = "execActionSelectImageBegin(), goto index:";
     s += QString::number(index);
@@ -605,8 +713,13 @@ void MainWindow::execActionSelectImageNext()
     // Отобразить картинку
     showCurrentIndexPicture();
 
-    progressBarNavigation->setValue(index);
-    SpinBoxIndex->setValue(index);
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImageNext: index < 0";
+    }
+    progressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
     //---
     QString s = "execActionSelectImageNext(), goto index:";
     s += QString::number(index);
@@ -629,8 +742,13 @@ void MainWindow::execActionSelectImagePrevious()
     // Отобразить картинку
     showCurrentIndexPicture();
 
-    progressBarNavigation->setValue(index);
-    SpinBoxIndex->setValue(index);
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImagePrevious: index < 0";
+    }
+    progressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
     //---
     QString s = "execActionSelectImagePrevious(), goto index:";
     s += QString::number(index);
@@ -650,8 +768,17 @@ void MainWindow::execActionSelectImageEnd()
     // Отобразить картинку
     showCurrentIndexPicture();
 
-    progressBarNavigation->setValue(index);
-    SpinBoxIndex->setValue(index);
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImageEnd(): index < 0";
+    }
+    else if(value > cIniFile::Groups->count() - 1)
+    {
+        value =  cIniFile::Groups->count() - 1;
+    }
+    progressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
     //---
     QString s = "execActionSelectImageEnd(), goto index";
     s += QString::number(index);
@@ -703,6 +830,7 @@ void MainWindow::execActionImportInitial()
 void MainWindow::execActionLoad()
 {
     //--- Начало функции загрузки
+    qDebug() << "execActionLoad(): begin";
 
     // Читаем значение текущего индекса из INI-файла
     int LoadedCurrentIndex = cIniFile::getCurrentIndex();
@@ -710,6 +838,9 @@ void MainWindow::execActionLoad()
     //Загрузка списка групп
     cImportFiles::getGroupsList();
     cImportFiles::MaxIndexValue = cIniFile::Groups->count();
+
+    qDebug() << "execActionLoad(): load" << cImportFiles::MaxIndexValue << " records in cIniFile::Groups list";
+
 
     // Загрузка списка ключей
     execActionGetKeysList();
@@ -1196,7 +1327,7 @@ void MainWindow::execActionRemoveBin()
 }
 
 //=============================================================================
-
+/*
 void MainWindow::execActionRemoveMovie()
 {
     QString s = "ActionRemoveMovie()";
@@ -1281,7 +1412,7 @@ void MainWindow::execActionRemoveMovie()
    //===
 
 }
-
+*/
 //=============================================================================
 
 void MainWindow::execActionRotateCW()
@@ -1927,6 +2058,35 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
     }
     s += ": mirrors count=";
     s += QString::number(iCount);
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionShowNewFiles()
+{
+    QString s = "execActionShowNewFiles()";
+
+    //---Создание рабочего списка
+    std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
+    cRecord::RecordList = ptrRecordList.get();
+
+    //--- Очистка рабочего списка
+    cRecord::RecordList->clear();
+
+    //---Чтение содержимого каталога ---
+
+    if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
+    {
+        //qDebug() << "Directory not found: " << directoryPath;
+        IsError = true;
+        return;
+    }
+
+    cImportFiles::execSearchNewFiles(ui->progressBarNavigation);
+
     //---
     emit execShowExecStatus(s);
     //---

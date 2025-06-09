@@ -138,8 +138,69 @@ void cImportFiles::execImport(QProgressBar * bar)
 
     qDebug() << "Result: added files counter=" << iAddedFilesCounter <<" skiped files couner=" << iSkippedFilesCounter;
 
-}//End of bool cImportFiles::execImport()
+}//End of void cImportFiles::execImport()
 
+/*******************************************************************************
+ * Функция создания списка файлов, не включённых в файл конфигурации
+ ******************************************************************************/
+
+void cImportFiles::execSearchNewFiles(QProgressBar * bar)
+{
+
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    QStringList Groups = settings.childGroups();//Загрузка полного списка групп
+
+    qDebug() << "Groups count=" << Groups.count();
+
+    //---Инициализация индикатора
+
+    int iCurrentIndex = 0;
+    bar->setRange(1, cImportFiles::MaxIndexValue);
+    bar->setValue(0);
+
+    int iAddedFilesCounter = 0;
+    int iSkippedFilesCounter = 0;
+
+    for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+     {
+
+        bar->setValue(iCurrentIndex);
+
+        const cRecord rec = *it;
+
+        QString name = rec.qsName;
+        int iDotPosition = name.indexOf('.');
+        QString groupName = name.mid(0, iDotPosition);
+
+        QString path = rec.qsPath;
+        int iNamePosition = path.indexOf(name);
+        QString PathWithoutName = path.mid(0, iNamePosition - 1);
+
+        int size = rec.iSize;
+
+        int iExtensionPosition = path.indexOf('.');
+        QString qsExtension = path.mid(iExtensionPosition + 1);
+
+        //Добавление записи в конфигурационный файл, если её там нет
+        if(!Groups.contains(groupName))
+        {
+            qDebug() << "###Add section:" << groupName << " Path+FileName=" << path;
+            iAddedFilesCounter++;
+
+        }
+        else
+        {
+            iSkippedFilesCounter++;
+
+            qDebug() << "Skip existing section:" << groupName;
+        }
+
+    }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+
+    qDebug() << "Result: added files counter=" << iAddedFilesCounter <<" skiped files couner=" << iSkippedFilesCounter;
+
+}
 
 //-------------------------------------------------------------------------
 // Получить список групп
