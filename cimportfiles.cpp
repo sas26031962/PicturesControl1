@@ -159,6 +159,9 @@ void cImportFiles::execSearchNewFiles(QProgressBar * bar)
     bar->setRange(1, cImportFiles::MaxIndexValue);
     bar->setValue(0);
 
+    QStringList slNewItems;
+    slNewItems.clear();
+
     int iAddedFilesCounter = 0;
     int iSkippedFilesCounter = 0;
 
@@ -186,6 +189,7 @@ void cImportFiles::execSearchNewFiles(QProgressBar * bar)
         if(!Groups.contains(groupName))
         {
             qDebug() << "###Add section:" << groupName << " Path+FileName=" << path;
+            slNewItems.append(path);
             iAddedFilesCounter++;
 
         }
@@ -199,6 +203,23 @@ void cImportFiles::execSearchNewFiles(QProgressBar * bar)
     }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
 
     qDebug() << "Result: added files counter=" << iAddedFilesCounter <<" skiped files couner=" << iSkippedFilesCounter;
+
+    //Store data in file
+    if(iAddedFilesCounter > 0)
+    {
+        if(cLoadFiles::saveStringListToFile(cIniFile::fileNewItems, slNewItems))
+        {
+             qDebug() << "New items list stored in file:" << cIniFile::fileNewItems;
+        }
+        else
+        {
+            qDebug() << "Store in file:" << cIniFile::fileNewItems << " process error";
+        }
+    }
+    else
+    {
+        qDebug() << "New items not founded";
+    }
 
 }
 

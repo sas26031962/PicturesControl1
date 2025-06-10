@@ -159,6 +159,8 @@ MainWindow::MainWindow(QWidget *parent) :
     cIniFile::filePropertyHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListPropertyes" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
     cIniFile::fileTheameHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListTheams" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
 
+    cIniFile::fileNewItems = qsProjectPath + qsProjectName + "/programm/data/NewItems" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+
     qDebug() << "qsIniFileName=" << qsIniFileName;
     qDebug() << "cIniFile::iniFilePath=" << cIniFile::iniFilePath;
     qDebug() << "cIniFile::pattern1StringListFilePath=" << cIniFile::pattern1StringListFilePath;
@@ -170,6 +172,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "cIniFile::filePlaceHashTag=" << cIniFile::filePlaceHashTag;
     qDebug() << "cIniFile::filePropertyHashTag=" << cIniFile::filePropertyHashTag;
     qDebug() << "cIniFile::fileTheameHashTag=" << cIniFile::fileTheameHashTag;
+    qDebug() << "cIniFile::fileNewItems=" << cIniFile::fileNewItems;
 
 
     cIniFile::IniFile.setDirectoryPaht(qsIniFileName);

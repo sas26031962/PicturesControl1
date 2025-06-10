@@ -1,0 +1,13 @@
+C:/Work/Ships/bka_1125/bka_1125_3a.tif
+C:/Work/Ships/bka_1125/bka_1125_4a.tif
+C:/Work/Ships/bka_1125/bka_1125_5a.tif
+C:/Work/Ships/bka_1125/bka_1125_6a.tif
+C:/Work/Ships/mo_4/mo_4_4a.tif
+C:/Work/Ships/mo_4/mo_4_5a.tif
+C:/Work/Ships/mo_4/mo_4_6a.tif
+C:/Work/Ships/slava/slava_1_600dpi.tif
+C:/Work/Ships/slava/slava_2_600dpi.tif
+C:/Work/Ships/slava/slava_3_600dpi.tif
+C:/Work/Ships/slava/slava_4_600dpi.tif
+C:/Work/Ships/timer0.3gp
+C:/Work/Ships/timer0.bin

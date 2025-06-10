@@ -47,6 +47,7 @@ public:
     static QString filePropertyHashTag;
     static QString fileTheameHashTag;
 
+    static QString fileNewItems;
 
     static QString pattern1StringListFilePath;
     static QString pattern2StringListFilePath;
