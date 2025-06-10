@@ -636,6 +636,7 @@ void MainWindow::loadRemovedSectionsList()
     qslDeletedSections = loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
     ui->listWidgetOther->clear();
+    ui->listWidgetOther->addItem("==LoadRemovedSectionsList==");
     ui->listWidgetOther->addItems(qslDeletedSections);
 
 }//End of void MainWindow::loadRemovedSectionsList()
@@ -822,7 +823,7 @@ void MainWindow::execActionImportInitial()
     qslDeletedSections.clear();
 
     ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(qslDeletedSections);
+    ui->listWidgetOther->addItem("==FileImport complete==");
 
     //execActionLoad();//Выполнить загрузку изображений
 
@@ -952,6 +953,7 @@ void MainWindow::execActionRemoveSection()
         cIniFile::Groups->removeAt(iCurrentIndexGlobal.load(std::memory_order_relaxed));
 
         ui->listWidgetOther->clear();
+        ui->listWidgetOther->addItem("==DeletedSectionsList==");
         ui->listWidgetOther->addItems(qslDeletedSections);
     }
 
@@ -1034,8 +1036,8 @@ void MainWindow::execActionRemoveText()
             cIniFile::Groups->removeOne(qsSection);
             //qslDeletedSections.append(qsSection);
             qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
+            //ui->listWidgetOther->clear();
+            //ui->listWidgetOther->addItems(qslDeletedSections);
             qDebug() << "Section " << qsSection << " removed!";
         }
 
@@ -1043,12 +1045,18 @@ void MainWindow::execActionRemoveText()
 
     // Выводим имена обрабатываемых файлов
     ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
+    ui->listWidgetOther->addItem("==ActionRemoveText==");
 
     if(iCount > 0)
+    {
+        ui->listWidgetOther->addItems(GroupsResult);
         qDebug() << "Extension 'txt' detected in " << iCount << " files";
+    }
     else
+    {
+        ui->listWidgetOther->addItem("No items found");
         qDebug() << "No 'txt' in file names detected, Ok!";
+    }
 
     //===
     emit execShowExecStatus(s);
@@ -1251,8 +1259,8 @@ void MainWindow::execActionRemoveBin()
     QStringList GroupsLocal = settings.childGroups();
 
     // Выводим значения
-    //ui->listWidgetOther->clear();
-    //ui->listWidgetOther->addItems(GroupsLocal);
+    ui->listWidgetOther->clear();
+    ui->listWidgetOther->addItems(GroupsLocal);
 
     qDebug() << "childGroupsList length: " << GroupsLocal.count();
     qDebug() << "----------------------------";
