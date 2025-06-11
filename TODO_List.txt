@@ -1,7 +1,14 @@
+#20250611
+
+[x] Перененсти слот execActionRemoveText() из MainWindow в класс cActionExec
+[] Перененсти слот execActionRemoveTif() из MainWindow в класс cActionExec
+[] Перененсти слот execActionRemove3gp() из MainWindow в класс cActionExec
+[] Перененсти слот execActionRemoveBin() из MainWindow в класс cActionExec
+
 #20250605
 
 [x] Перенестии имена файлов хранилища в конфигурационный файл
-[] Перененсти слот execActionRemoveMovie() из MainWindow в класс cActionExec
+[x] Перененсти слот execActionRemoveMovie() из MainWindow в класс cActionExec
 
 #20250603
 

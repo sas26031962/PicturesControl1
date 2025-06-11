@@ -1,3 +1,7 @@
+C:/Work/Ships/Cruiser_Moscow.png
+C:/Work/Ships/Destroyer_Pr56/2019-04-09 08-30-00_1.png
+C:/Work/Ships/Destroyer_Pr56/2019-04-09 08-39-00_1.png
+C:/Work/Ships/Dreadnotes/1708939963_hdpic-club-p-linkor-sssr-1_1_1.jpg
 C:/Work/Ships/bka_1125/bka_1125_3a.tif
 C:/Work/Ships/bka_1125/bka_1125_4a.tif
 C:/Work/Ships/bka_1125/bka_1125_5a.tif
@@ -5,6 +9,11 @@ C:/Work/Ships/bka_1125/bka_1125_6a.tif
 C:/Work/Ships/mo_4/mo_4_4a.tif
 C:/Work/Ships/mo_4/mo_4_5a.tif
 C:/Work/Ships/mo_4/mo_4_6a.tif
+C:/Work/Ships/portfolio/BK-1124/BK-1124.txt
+C:/Work/Ships/portfolio/Cruiser_Moscow/Cruiser_Moscow.png
+C:/Work/Ships/portfolio/Cruiser_Moscow/Cruiser_Moscow.txt
+C:/Work/Ships/portfolio/Cruiser_Varyag_old/Cruiser_Varyag_old.txt
+C:/Work/Ships/portfolio/Minesweeper_Strela/Minesweeper_Strela.txt
 C:/Work/Ships/slava/slava_1_600dpi.tif
 C:/Work/Ships/slava/slava_2_600dpi.tif
 C:/Work/Ships/slava/slava_3_600dpi.tif

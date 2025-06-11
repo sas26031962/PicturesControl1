@@ -180,12 +180,6 @@ private slots:
     void execActionSearchNamePatterns12Intersection();
     void execActionSearchNamePatterns1XIntersection();
 
-    void execActionRemoveMovie();
-
-    void execActionRemoveText();
-    void execActionRemoveTif();
-    void execActionRemove3gp();
-    void execActionRemoveBin();
     void execActionRemoveSection();
 
     void execActionGetGroupsList();
