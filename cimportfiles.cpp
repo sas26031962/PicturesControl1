@@ -144,7 +144,7 @@ void cImportFiles::execImport(QProgressBar * bar)
  * Функция создания списка файлов, не включённых в файл конфигурации
  ******************************************************************************/
 
-void cImportFiles::execSearchNewFiles(QProgressBar * bar)
+void cImportFiles::execSearchNewFiles()
 {
 
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
@@ -152,12 +152,6 @@ void cImportFiles::execSearchNewFiles(QProgressBar * bar)
     QStringList Groups = settings.childGroups();//Загрузка полного списка групп
 
     qDebug() << "Groups count=" << Groups.count();
-
-    //---Инициализация индикатора
-
-    int iCurrentIndex = 0;
-    bar->setRange(1, cImportFiles::MaxIndexValue);
-    bar->setValue(0);
 
     QStringList slNewItems;
     slNewItems.clear();
@@ -167,9 +161,6 @@ void cImportFiles::execSearchNewFiles(QProgressBar * bar)
 
     for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
      {
-
-        bar->setValue(iCurrentIndex);
-
         const cRecord rec = *it;
 
         QString name = rec.qsName;
@@ -179,8 +170,6 @@ void cImportFiles::execSearchNewFiles(QProgressBar * bar)
         QString path = rec.qsPath;
         int iNamePosition = path.indexOf(name);
         QString PathWithoutName = path.mid(0, iNamePosition - 1);
-
-        int size = rec.iSize;
 
         int iExtensionPosition = path.indexOf('.');
         QString qsExtension = path.mid(iExtensionPosition + 1);

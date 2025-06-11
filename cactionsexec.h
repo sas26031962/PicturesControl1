@@ -8,6 +8,7 @@
 #include <QListWidget>
 
 #include "cinifile.h"
+#include "cimportfiles.h"
 
 class cActionsExec : public QObject
 {
@@ -32,6 +33,7 @@ public slots:
     void execActionRemoveTif(bool x);
     void execActionRemoveBin(bool x);
     void execActionRemove3gp(bool x);
+    void execActionShowNewFiles(bool x);
 
 };//End of class cActionsExec : public QObject
 

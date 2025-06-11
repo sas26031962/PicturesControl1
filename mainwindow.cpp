@@ -332,9 +332,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
     connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, this, &MainWindow::execActionSearchOrYes);
 
-    connect(ui->actionShowNewFiles, SIGNAL(triggered()), this, SLOT( execActionShowNewFiles()));
-
-    connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
+   connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
 
     connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);
@@ -342,6 +340,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRemoveTif, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveTif);
     connect(ui->actionRemoveBin, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveBin);
     connect(ui->actionRemove3gp, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemove3gp);
+    connect(ui->actionShowNewFiles, &QAction::triggered, ActionsExec, &cActionsExec::execActionShowNewFiles);
 
     connect(ui->listWidgetKeys, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetKeysItemClicked()));
     connect(ui->listWidgetSearch, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSearchItemClicked()));
@@ -1624,36 +1623,6 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
 }
 
 //=============================================================================
-
-void MainWindow::execActionShowNewFiles()
-{
-    QString s = "execActionShowNewFiles()";
-
-    //---Создание рабочего списка
-    std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
-    cRecord::RecordList = ptrRecordList.get();
-
-    //--- Очистка рабочего списка
-    cRecord::RecordList->clear();
-
-    //---Чтение содержимого каталога ---
-
-    if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
-    {
-        //qDebug() << "Directory not found: " << directoryPath;
-        IsError = true;
-        return;
-    }
-
-    //cImportFiles::execSearchNewFiles(ui->progressBarNavigation);
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execListWidgetFoundedItemClicked()
 {
     QString s = "execListWidgetFoundedItemClicked()";

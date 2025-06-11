@@ -413,4 +413,110 @@ void cActionsExec::execActionRemove3gp(bool x)
 
 //=============================================================================
 
+void cActionsExec::execActionShowNewFiles(bool x)
+{
+    QString s = "execActionShowNewFiles()";
+    s += QString::number(x);
+
+    //---Создание рабочего списка
+    std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
+    cRecord::RecordList = ptrRecordList.get();
+
+    //--- Очистка рабочего списка
+    cRecord::RecordList->clear();
+
+    //---Чтение содержимого каталога ---
+
+    if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
+    {
+        ListWidgetOther->clear();
+        ListWidgetOther->addItem("==ActionShowNewFiles==");
+        ListWidgetOther->addItem("=DirectoryNotFound=");
+        ListWidgetOther->addItem("Path=" + cIniFile::IniFile.getDirectoryPah());
+        return;
+    }
+
+    //cImportFiles::execSearchNewFiles();
+    //---
+
+    ListWidgetOther->clear();
+    ListWidgetOther->addItem("==ActionShowNewFiles==");
+
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    QStringList Groups = settings.childGroups();//Загрузка полного списка групп
+
+    ListWidgetOther->addItem("AllGroupsListCount=" + QString::number(Groups.count()));
+
+    QStringList slNewItems;
+    slNewItems.clear();
+
+    int iAddedFilesCounter = 0;
+    int iSkippedFilesCounter = 0;
+
+    for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+     {
+        const cRecord rec = *it;
+
+        QString name = rec.qsName;
+        int iDotPosition = name.indexOf('.');
+        QString groupName = name.mid(0, iDotPosition);
+
+        QString path = rec.qsPath;
+        int iNamePosition = path.indexOf(name);
+        QString PathWithoutName = path.mid(0, iNamePosition - 1);
+
+        int iExtensionPosition = path.indexOf('.');
+        QString qsExtension = path.mid(iExtensionPosition + 1);
+
+        //Добавление записи в конфигурационный файл, если её там нет
+        if(!Groups.contains(groupName))
+        {
+            //qDebug() << "###Add section:" << groupName << " Path+FileName=" << path;
+            slNewItems.append(path);
+            iAddedFilesCounter++;
+
+        }
+        else
+        {
+            iSkippedFilesCounter++;
+
+            //qDebug() << "Skip existing section:" << groupName;
+        }
+
+    }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+
+    ListWidgetOther->addItem("AddedFilesCount=" + QString::number(iAddedFilesCounter));
+    ListWidgetOther->addItem("SkipedFilesCount=" + QString::number(iSkippedFilesCounter));
+    //qDebug() << "Result: added files counter=" << iAddedFilesCounter <<" skiped files couner=" << iSkippedFilesCounter;
+
+    //Store data in file
+    if(iAddedFilesCounter > 0)
+    {
+        if(cLoadFiles::saveStringListToFile(cIniFile::fileNewItems, slNewItems))
+        {
+             //qDebug() << "New items list stored in file:" << cIniFile::fileNewItems;
+             ListWidgetOther->addItem("New items list stored in file:" + cIniFile::fileNewItems);
+        }
+        else
+        {
+            //qDebug() << "Store in file:" << cIniFile::fileNewItems << " process error";
+            ListWidgetOther->addItem("NStore in file:" + cIniFile::fileNewItems + " process error");
+        }
+    }
+    else
+    {
+        ListWidgetOther->addItem("=New items not founded=");
+        //qDebug() << "New items not founded";
+    }
+
+
+
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
 

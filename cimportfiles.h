@@ -39,7 +39,7 @@ public:
     cImportFiles();
 
     static void execImport(QProgressBar * bar);
-    static void execSearchNewFiles(QProgressBar * bar);
+    static void execSearchNewFiles();
     static bool getGroupsList();
     static bool getKeysList();
 
