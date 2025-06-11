@@ -13,6 +13,7 @@
 #include <QProgressBar>
 #include "crecord.h"
 #include "cinifile.h"
+#include "cloadfiles.h"
 
 #define MAX_INDEX_DEFAULT_VALUE 100
 

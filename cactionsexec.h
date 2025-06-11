@@ -28,6 +28,10 @@ signals:
 
 public slots:
     void execActionRemoveMovie(bool x);
+    void execActionRemoveText(bool x);
+    void execActionRemoveTif(bool x);
+    void execActionRemoveBin(bool x);
+    void execActionRemove3gp(bool x);
 
 };//End of class cActionsExec : public QObject
 

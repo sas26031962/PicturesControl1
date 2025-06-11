@@ -159,6 +159,8 @@ MainWindow::MainWindow(QWidget *parent) :
     cIniFile::filePropertyHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListPropertyes" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
     cIniFile::fileTheameHashTag = qsProjectPath + qsProjectName + "/programm/data/HashTagListTheams" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
 
+    cIniFile::fileNewItems = qsProjectPath + qsProjectName + "/programm/data/NewItems" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
+
     qDebug() << "qsIniFileName=" << qsIniFileName;
     qDebug() << "cIniFile::iniFilePath=" << cIniFile::iniFilePath;
     qDebug() << "cIniFile::pattern1StringListFilePath=" << cIniFile::pattern1StringListFilePath;
@@ -170,6 +172,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "cIniFile::filePlaceHashTag=" << cIniFile::filePlaceHashTag;
     qDebug() << "cIniFile::filePropertyHashTag=" << cIniFile::filePropertyHashTag;
     qDebug() << "cIniFile::fileTheameHashTag=" << cIniFile::fileTheameHashTag;
+    qDebug() << "cIniFile::fileNewItems=" << cIniFile::fileNewItems;
 
 
     cIniFile::IniFile.setDirectoryPaht(qsIniFileName);
@@ -180,7 +183,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    ActionsExec.install(ui->listWidgetOther);
+    ActionsExec = new cActionsExec();
+    ActionsExec->install(ui->listWidgetOther);
 
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
@@ -216,10 +220,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
 
-    connect(ui->actionRemoveText, SIGNAL(triggered()), this, SLOT( execActionRemoveText()));
-    connect(ui->actionRemoveTif, SIGNAL(triggered()), this, SLOT( execActionRemoveTif()));
-    connect(ui->actionRemoveBin, SIGNAL(triggered()), this, SLOT( execActionRemoveBin()));
-    connect(ui->actionRemove3gp, SIGNAL(triggered()), this, SLOT( execActionRemove3gp()));
     connect(ui->actionRemoveSection, SIGNAL(triggered()), this, SLOT( execActionRemoveSection()));
 
     connect(ui->pushButtonRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
@@ -314,6 +314,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qslHashTagList = new QStringList();
 
+
+
     connect(fmViewPicture, SIGNAL(shiftXValueChanged()), this, SLOT( execShiftXValueChanged()));
     connect(fmViewPicture, SIGNAL(shiftYValueChanged()), this, SLOT( execShiftYValueChanged()));
 
@@ -334,6 +336,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
+
+    connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);
+    connect(ui->actionRemoveText, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveText);
+    connect(ui->actionRemoveTif, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveTif);
+    connect(ui->actionRemoveBin, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveBin);
+    connect(ui->actionRemove3gp, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemove3gp);
 
     connect(ui->listWidgetKeys, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetKeysItemClicked()));
     connect(ui->listWidgetSearch, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSearchItemClicked()));
@@ -366,6 +374,8 @@ MainWindow::~MainWindow()
     delete ListWidgetSubject;
     delete ListWidgetProperty;
     delete ListWidgetTheame;
+
+    delete ActionsExec;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -633,6 +643,8 @@ void MainWindow::loadRemovedSectionsList()
     qslDeletedSections = loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
     ui->listWidgetOther->clear();
+    ui->listWidgetOther->addItem("==LoadRemovedSectionsList==");
+    ui->listWidgetOther->addItem("RemovedSectionsListCount=" + QString::number(qslDeletedSections.count()));
     ui->listWidgetOther->addItems(qslDeletedSections);
 
 }//End of void MainWindow::loadRemovedSectionsList()
@@ -819,7 +831,7 @@ void MainWindow::execActionImportInitial()
     qslDeletedSections.clear();
 
     ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(qslDeletedSections);
+    ui->listWidgetOther->addItem("==FileImport complete==");
 
     //execActionLoad();//Выполнить загрузку изображений
 
@@ -949,7 +961,8 @@ void MainWindow::execActionRemoveSection()
         cIniFile::Groups->removeAt(iCurrentIndexGlobal.load(std::memory_order_relaxed));
 
         ui->listWidgetOther->clear();
-        ui->listWidgetOther->addItems(qslDeletedSections);
+        ui->listWidgetOther->addItem("==ActionRemoveSection==");
+        ui->listWidgetOther->addItem(qsGroupName);
     }
 
     execActionSelectImagePrevious();//Перерисовка изображения
@@ -960,459 +973,6 @@ void MainWindow::execActionRemoveSection()
 
 }
 
-//=============================================================================
-
-void MainWindow::execActionRemoveText()
-{
-    QString s = "ActionRemoveText()";
-    //===
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    QStringList GroupsLocal = settings.childGroups();
-
-    // Выводим значения
-    //ui->listWidgetOther->clear();
-    //ui->listWidgetOther->addItems(GroupsLocal);
-
-    qDebug() << "childGroupsList length: " << GroupsLocal.count();
-    qDebug() << "----------------------------";
-    //---
-
-    int iCount = 0;
-
-    QStringList GroupsResult;//Список - результат
-    GroupsResult.clear();
-
-    QListIterator<QString> readIt(GroupsLocal);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-
-        bool IsSign = false;
-
-        settings.beginGroup(qsSection);
-        QList<QString> keys = settings.childKeys();
-        int iKeysCount = keys.count();
-
-        QString qsName = settings.value("name", "noName").toString();
-        QString qsPath = settings.value("path", "noPath").toString();
-        QString qsWay = qsPath + "/" + qsName;
-
-        if(qsName.toLower().indexOf(".txt") >= 0)
-        {
-            iCount++;
-
-            IsSign = true;
-
-            GroupsResult.append(qsSection);//Добавление секции в список - результат
-
-            qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
-
-            //--- Удаление ключей секции: начало ---
-            // Перебор всей ключей в секции
-            QListIterator<QString> readKeyIt(keys);
-            while (readKeyIt.hasNext())
-            {
-                QString qsKey = readKeyIt.next();
-                qDebug() << qsKey;
-                settings.remove(qsKey);
-            }
-            qDebug() << "All keys in section " << qsSection << " removed!";
-            //--- Удаление ключей секции: конец ---
-        }
-
-        settings.endGroup();
-
-        //--- Удаление секции совсем ---
-        if(IsSign)
-        {
-            settings.remove(qsSection);
-            cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
-            qDebug() << "Section " << qsSection << " removed!";
-        }
-
-    }//End of while (readIt.hasNext())
-
-    // Выводим имена обрабатываемых файлов
-    ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
-
-    if(iCount > 0)
-        qDebug() << "Extension 'txt' detected in " << iCount << " files";
-    else
-        qDebug() << "No 'txt' in file names detected, Ok!";
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionRemoveTif()
-{
-
-    QString s = "ActionRemoveTif()";
-    //===
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    QStringList GroupsLocal = settings.childGroups();
-
-    // Выводим значения
-    //ui->listWidgetOther->clear();
-    //ui->listWidgetOther->addItems(GroupsLocal);
-
-    qDebug() << "childGroupsList length: " << GroupsLocal.count();
-    qDebug() << "----------------------------";
-    //---
-
-    int iCount = 0;
-
-    QStringList GroupsResult;//Список - результат
-    GroupsResult.clear();
-
-    QListIterator<QString> readIt(GroupsLocal);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-
-        bool IsSign = false;
-
-        settings.beginGroup(qsSection);
-        QList<QString> keys = settings.childKeys();
-        int iKeysCount = keys.count();
-
-        QString qsName = settings.value("name", "noName").toString();
-        QString qsPath = settings.value("path", "noPath").toString();
-        QString qsWay = qsPath + "/" + qsName;
-
-        if(qsName.toLower().indexOf(".tif") >= 0)
-        {
-            iCount++;
-
-            IsSign = true;
-
-            GroupsResult.append(qsSection);//Добавление секции в список - результат
-
-            qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
-            // Перебор всей ключей в секции
-            QListIterator<QString> readKeyIt(keys);
-            while (readKeyIt.hasNext())
-            {
-                QString qsKey = readKeyIt.next();
-                qDebug() << qsKey;
-                settings.remove(qsKey);
-            }
-            qDebug() << "All keys in section " << qsSection << " removed!";
-        }
-
-        settings.endGroup();
-
-        //--- Удаление секции совсем ---
-        if(IsSign)
-        {
-            settings.remove(qsSection);
-            cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
-            qDebug() << "Section " << qsSection << " removed!";
-        }
-
-    }//End of while (readIt.hasNext())
-
-    // Выводим имена обрабатываемых файлов
-    ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
-
-    if(iCount > 0)
-        qDebug() << "Extension 'tif' detected in " << iCount << " files";
-    else
-        qDebug() << "No 'tif' in file names detected, Ok!";
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionRemove3gp()
-{
-
-    QString s = "ActionRemove3gp()";
-    //===
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    QStringList GroupsLocal = settings.childGroups();
-
-    // Выводим значения
-    //ui->listWidgetOther->clear();
-    //ui->listWidgetOther->addItems(GroupsLocal);
-
-    qDebug() << "childGroupsList length: " << GroupsLocal.count();
-    qDebug() << "----------------------------";
-    //---
-
-    int iCount = 0;
-
-    QStringList GroupsResult;//Список - результат
-    GroupsResult.clear();
-
-    QListIterator<QString> readIt(GroupsLocal);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-
-        bool IsSign = false;
-
-        settings.beginGroup(qsSection);
-        QList<QString> keys = settings.childKeys();
-        int iKeysCount = keys.count();
-
-        QString qsName = settings.value("name", "noName").toString();
-        QString qsPath = settings.value("path", "noPath").toString();
-        QString qsWay = qsPath + "/" + qsName;
-
-        if(qsName.toLower().indexOf(".3gp") >= 0)
-        {
-            iCount++;
-
-            IsSign = true;
-
-            GroupsResult.append(qsSection);//Добавление секции в список - результат
-
-            qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
-            // Перебор всей ключей в секции
-            QListIterator<QString> readKeyIt(keys);
-            while (readKeyIt.hasNext())
-            {
-                QString qsKey = readKeyIt.next();
-                qDebug() << qsKey;
-                settings.remove(qsKey);
-            }
-            qDebug() << "All keys in section " << qsSection << " removed!";
-        }
-
-        settings.endGroup();
-
-        //--- Удаление секции совсем ---
-        if(IsSign)
-        {
-            settings.remove(qsSection);
-            cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
-            qDebug() << "Section " << qsSection << " removed!";
-        }
-
-    }//End of while (readIt.hasNext())
-
-    // Выводим имена обрабатываемых файлов
-    ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
-
-    if(iCount > 0)
-        qDebug() << "Extension '3gp' detected in " << iCount << " files";
-    else
-        qDebug() << "No '3gp' in file names detected, Ok!";
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionRemoveBin()
-{
-
-    QString s = "ActionRemoveBin()";
-    //===
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    QStringList GroupsLocal = settings.childGroups();
-
-    // Выводим значения
-    //ui->listWidgetOther->clear();
-    //ui->listWidgetOther->addItems(GroupsLocal);
-
-    qDebug() << "childGroupsList length: " << GroupsLocal.count();
-    qDebug() << "----------------------------";
-    //---
-
-    int iCount = 0;
-
-    QStringList GroupsResult;//Список - результат
-    GroupsResult.clear();
-
-    QListIterator<QString> readIt(GroupsLocal);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-
-        bool IsSign = false;
-
-        settings.beginGroup(qsSection);
-        QList<QString> keys = settings.childKeys();
-        int iKeysCount = keys.count();
-
-        QString qsName = settings.value("name", "noName").toString();
-        QString qsPath = settings.value("path", "noPath").toString();
-        QString qsWay = qsPath + "/" + qsName;
-
-        if(qsName.toLower().indexOf(".bin") >= 0)
-        {
-            iCount++;
-
-            IsSign = true;
-
-            GroupsResult.append(qsSection);//Добавление секции в список - результат
-
-            qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
-            // Перебор всей ключей в секции
-            QListIterator<QString> readKeyIt(keys);
-            while (readKeyIt.hasNext())
-            {
-                QString qsKey = readKeyIt.next();
-                qDebug() << qsKey;
-                settings.remove(qsKey);
-            }
-            qDebug() << "All keys in section " << qsSection << " removed!";
-        }
-
-        settings.endGroup();
-
-        //--- Удаление секции совсем ---
-        if(IsSign)
-        {
-            settings.remove(qsSection);
-            cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
-            qDebug() << "Section " << qsSection << " removed!";
-        }
-
-    }//End of while (readIt.hasNext())
-
-    // Выводим имена обрабатываемых файлов
-    ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
-
-    if(iCount > 0)
-        qDebug() << "Extension 'bin' detected in " << iCount << " files";
-    else
-        qDebug() << "No 'bin' in file names detected, Ok!";
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-
-//=============================================================================
-/*
-void MainWindow::execActionRemoveMovie()
-{
-    QString s = "ActionRemoveMovie()";
-    //===
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    QStringList GroupsLocal = settings.childGroups();
-
-    qDebug() << "childGroupsList length: " << GroupsLocal.count();
-    qDebug() << "----------------------------";
-    //---
-
-    int iCount = 0;
-
-    QStringList GroupsResult;//Список - результат
-    GroupsResult.clear();
-
-    QListIterator<QString> readIt(GroupsLocal);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-
-        //---
-        bool IsSign = false;
-
-        settings.beginGroup(qsSection);
-        QList<QString> keys = settings.childKeys();
-        int iKeysCount = keys.count();
-
-        QString qsName = settings.value("name", "noName").toString();
-        QString qsPath = settings.value("path", "noPath").toString();
-        QString qsWay = qsPath + "/" + qsName;
-
-        if(qsName.toLower().indexOf(".mp4") >= 0)
-        {
-            iCount++;
-
-            IsSign = true;
-
-            GroupsResult.append(qsSection);//Добавление секции в список - результат
-
-            qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
-            // Перебор всей ключей в секции
-            QListIterator<QString> readKeyIt(keys);
-            while (readKeyIt.hasNext())
-            {
-                QString qsKey = readKeyIt.next();
-                qDebug() << qsKey;
-
-                settings.remove(qsKey);
-            }
-            qDebug() << "All keys in section " << qsSection << " removed!";
-        }
-
-        settings.endGroup();
-
-        //--- Удаление секции совсем ---
-        if(IsSign)
-        {
-            settings.remove(qsSection);
-            cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
-            qDebug() << "Section " << qsSection << " removed!";
-        }
-        //---
-    }//End of while (readIt.hasNext())
-    // Выводим имена обрабатываемых файлов
-    ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
-
-    if(iCount > 0)
-        qDebug() << "Extension 'mp4' detected in " << iCount << " files";
-    else
-        qDebug() << "No 'mp4' in file names detected, Ok!";
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-*/
 //=============================================================================
 
 void MainWindow::execActionRotateCW()
