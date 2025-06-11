@@ -84,6 +84,9 @@ void cActionsExec::execActionRemoveMovie(bool x)
     }//End of while (readIt.hasNext())
     // Выводим имена обрабатываемых файлов
     ListWidgetOther->clear();
+    ListWidgetOther->addItem("==ActionRemoveMovie==");
+    ListWidgetOther->addItem("=RemovedItemsList=");
+    ListWidgetOther->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
     ListWidgetOther->addItems(GroupsResult);
 
     if(iCount > 0)

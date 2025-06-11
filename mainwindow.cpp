@@ -183,7 +183,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    ActionsExec.install(ui->listWidgetOther);
+    ActionsExec = new cActionsExec();
+    ActionsExec->install(ui->listWidgetOther);
 
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
@@ -317,6 +318,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qslHashTagList = new QStringList();
 
+
+
     connect(fmViewPicture, SIGNAL(shiftXValueChanged()), this, SLOT( execShiftXValueChanged()));
     connect(fmViewPicture, SIGNAL(shiftYValueChanged()), this, SLOT( execShiftYValueChanged()));
 
@@ -337,6 +340,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
+
+    //connect(ui->actionRemoveMovie, SIGNAL(triggered()), this, SLOT( execActionRemoveMovie()));
+    connect(ui->actionRemoveMovie, SIGNAL(triggered(bool)), ActionsExec, SLOT( execActionRemoveMovie(bool)));
 
     connect(ui->listWidgetKeys, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetKeysItemClicked()));
     connect(ui->listWidgetSearch, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetSearchItemClicked()));
@@ -369,6 +375,8 @@ MainWindow::~MainWindow()
     delete ListWidgetSubject;
     delete ListWidgetProperty;
     delete ListWidgetTheame;
+
+    delete ActionsExec;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -1338,92 +1346,17 @@ void MainWindow::execActionRemoveBin()
 }
 
 //=============================================================================
-/*
+
 void MainWindow::execActionRemoveMovie()
 {
     QString s = "ActionRemoveMovie()";
-    //===
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    QStringList GroupsLocal = settings.childGroups();
-
-    qDebug() << "childGroupsList length: " << GroupsLocal.count();
-    qDebug() << "----------------------------";
-    //---
-
-    int iCount = 0;
-
-    QStringList GroupsResult;//Список - результат
-    GroupsResult.clear();
-
-    QListIterator<QString> readIt(GroupsLocal);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-
-        //---
-        bool IsSign = false;
-
-        settings.beginGroup(qsSection);
-        QList<QString> keys = settings.childKeys();
-        int iKeysCount = keys.count();
-
-        QString qsName = settings.value("name", "noName").toString();
-        QString qsPath = settings.value("path", "noPath").toString();
-        QString qsWay = qsPath + "/" + qsName;
-
-        if(qsName.toLower().indexOf(".mp4") >= 0)
-        {
-            iCount++;
-
-            IsSign = true;
-
-            GroupsResult.append(qsSection);//Добавление секции в список - результат
-
-            qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
-            // Перебор всей ключей в секции
-            QListIterator<QString> readKeyIt(keys);
-            while (readKeyIt.hasNext())
-            {
-                QString qsKey = readKeyIt.next();
-                qDebug() << qsKey;
-
-                settings.remove(qsKey);
-            }
-            qDebug() << "All keys in section " << qsSection << " removed!";
-        }
-
-        settings.endGroup();
-
-        //--- Удаление секции совсем ---
-        if(IsSign)
-        {
-            settings.remove(qsSection);
-            cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ui->listWidgetOther->clear();
-            ui->listWidgetOther->addItems(qslDeletedSections);
-            qDebug() << "Section " << qsSection << " removed!";
-        }
-        //---
-    }//End of while (readIt.hasNext())
-    // Выводим имена обрабатываемых файлов
-    ui->listWidgetOther->clear();
-    ui->listWidgetOther->addItems(GroupsResult);
-
-    if(iCount > 0)
-        qDebug() << "Extension 'mp4' detected in " << iCount << " files";
-    else
-        qDebug() << "No 'mp4' in file names detected, Ok!";
 
     //===
     emit execShowExecStatus(s);
    //===
 
 }
-*/
+
 //=============================================================================
 
 void MainWindow::execActionRotateCW()
