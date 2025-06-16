@@ -332,7 +332,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
     connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, this, &MainWindow::execActionSearchOrYes);
 
-   connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
+    connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
 
     connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);
@@ -354,17 +354,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOpenFoundRecord, &QAction::triggered, this, &MainWindow::execActionOpenFoundRecord);
     connect(ui->listWidgetFounded, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetFoundedItemClicked()));
 
-    //ui->labelMain->setText("Exec 'Load' option for get file name list");
-
-    //execActionLoad();
-
-    //execActionSelectImageBegin();
+    ListWidget = ui->listWidgetOther;//20250616
 
 }//End of ctor
 
 MainWindow::~MainWindow()
 {
-//    cIniFile::settings.sync();//20250417
     timerUpdate->stop();
 
     saveRemovedSectionsList();
@@ -494,105 +489,6 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
 
 //=============================================================================
 
-void MainWindow::showCurrentIndexPicture()
-{
-
-    int iGroupsCount = cIniFile::Groups->count();
-    if(iGroupsCount > 0)
-    {
-    // Читаем значения из INI-файла
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-    if(index > (cIniFile::Groups->count() - 1))
-    {
-        qDebug() << "Loaded index out of range:" << index << " goto head of list";
-
-        index = 0;
-        iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
-    }
-        QString qsGroupName = cIniFile::Groups->at(index);
-        //qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName;
-        //Пропускаем RecordList
-        if(qsGroupName == "RecordList")
-        {
-            index++;
-            if(index > (iGroupsCount - 1))index = iGroupsCount - 1;//20250426
-            iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
-            qsGroupName = cIniFile::Groups->at(index);
-
-        }
-
-        settings.beginGroup(qsGroupName);
-
-        QString qsPath, qsName, qsError;
-
-        QStringList keys = settings.childKeys();
-        int iStrings = keys.count();
-        qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName << " KeysCount=" << iStrings;
-
-        QStandardItemModel * model= new QStandardItemModel(iStrings, 2);
-        QListIterator<QString> readIt(keys);
-        int iIndex = 0;
-        while(readIt.hasNext())
-        {
-            QString key = readIt.next();
-            QString value = settings.value(key,"0").toString();
-
-            if(key == "path") qsPath = value;
-            if(key == "name") qsName = value;
-            if(key == "Eror") qsError = value;
-
-            model->setItem(iIndex, 0, new QStandardItem(key));
-            model->setItem(iIndex, 1, new QStandardItem(value));
-            iIndex++;
-            //qDebug() << "iterator:" << key << " index:" << iIndex;
-        }
-        model->setHeaderData(0, Qt::Horizontal, "Key");
-        model->setHeaderData(1,Qt::Horizontal,"Value");
-        ui->tableViewCurrent->setModel(model);
-
-        settings.endGroup();
-
-        if(!qsPath.count() || !qsName.count())
-        {
-            qDebug() << "FilePath=" << qsPath << " FileName=" << qsName << " file not exist!!!";
-            return;
-        }
-
-        QString imagePath = qsPath + '/' + qsName;
-
-        if(qsError == "true")
-        {
-            qDebug() << "FullPath: " << imagePath << " Error:" << qsError;
-            //ui->labelMain->setText(imagePath);
-            return;
-        }
-        else
-        {
-            emit draw(imagePath);
-        }
-        cImportFiles::labelFileNameText = qsName;
-        cImportFiles::IslabelFileNameTextChanged = true;
-
-        //Сохранение текущего индекса
-        int x = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-        settings.beginGroup("RecordList");
-        settings.setValue("index", x);
-        settings.endGroup();
-        settings.sync();
-    }
-    else
-    {
-        QString s = "Groups is empty!";
-        qDebug() << s;
-
-        emit showExecStatus(s);
-
-    }
-}
-
-//=============================================================================
-
 //
 // Запись QStringList в файл
 //
@@ -641,7 +537,7 @@ void MainWindow::loadRemovedSectionsList()
 {
     qslDeletedSections = loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
-    ui->listWidgetOther->clear();
+    //ui->listWidgetOther->clear();
     ui->listWidgetOther->addItem("==LoadRemovedSectionsList==");
     ui->listWidgetOther->addItem("RemovedSectionsListCount=" + QString::number(qslDeletedSections.count()));
     ui->listWidgetOther->addItems(qslDeletedSections);
@@ -1656,6 +1552,116 @@ void MainWindow::execShowCurrentIndexPicture()
 {
     showCurrentIndexPicture();
 }
+
+//=============================================================================
+
+void MainWindow::showCurrentIndexPicture()
+{
+
+    //ListWidget->clear();
+
+    int iGroupsCount = cIniFile::Groups->count();
+    ListWidget->addItem("==ShowCurrentIndexPicture==");
+    ListWidget->addItem("GroupsCount=" + QString::number(iGroupsCount));
+    if(iGroupsCount > 0)
+    {
+        // Читаем значения из INI-файла
+        QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+        int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+        if(index > (cIniFile::Groups->count() - 1))
+        {
+            ListWidget->addItem("Index=" + QString::number(index) + " Set Index to head of GroupsList");
+            //qDebug() << "Loaded index out of range:" << index << " goto head of list";
+
+            index = 0;
+            iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
+
+        }
+        ListWidget->addItem("Index > GroupsCount. Index=" + QString::number(index));
+
+        QString qsGroupName = cIniFile::Groups->at(index);
+        //qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName;
+
+        //Пропускаем RecordList
+        if(qsGroupName == "RecordList")
+        {
+            index++;
+            if(index > (iGroupsCount - 1))index = iGroupsCount - 1;//20250426
+            iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
+            qsGroupName = cIniFile::Groups->at(index);
+
+        }
+
+        settings.beginGroup(qsGroupName);
+
+        QString qsPath, qsName, qsError;
+
+        QStringList keys = settings.childKeys();
+        int iStrings = keys.count();
+        qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName << " KeysCount=" << iStrings;
+
+        QStandardItemModel * model= new QStandardItemModel(iStrings, 2);
+        QListIterator<QString> readIt(keys);
+        int iIndex = 0;
+        while(readIt.hasNext())
+        {
+            QString key = readIt.next();
+            QString value = settings.value(key,"0").toString();
+
+            if(key == "path") qsPath = value;
+            if(key == "name") qsName = value;
+            if(key == "Eror") qsError = value;
+
+            model->setItem(iIndex, 0, new QStandardItem(key));
+            model->setItem(iIndex, 1, new QStandardItem(value));
+            iIndex++;
+            //qDebug() << "iterator:" << key << " index:" << iIndex;
+        }
+        model->setHeaderData(0, Qt::Horizontal, "Key");
+        model->setHeaderData(1,Qt::Horizontal,"Value");
+        ui->tableViewCurrent->setModel(model);
+
+        settings.endGroup();
+
+        if(!qsPath.count() || !qsName.count())
+        {
+            qDebug() << "FilePath=" << qsPath << " FileName=" << qsName << " file not exist!!!";
+            return;
+        }
+
+        QString imagePath = qsPath + '/' + qsName;
+
+        if(qsError == "true")
+        {
+            qDebug() << "FullPath: " << imagePath << " Error:" << qsError;
+            //ui->labelMain->setText(imagePath);
+            return;
+        }
+        else
+        {
+            emit draw(imagePath);
+        }
+        cImportFiles::labelFileNameText = qsName;
+        cImportFiles::IslabelFileNameTextChanged = true;
+
+        //Сохранение текущего индекса
+        int x = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+        settings.beginGroup("RecordList");
+        settings.setValue("index", x);
+        settings.endGroup();
+        settings.sync();
+    }
+    else
+    {
+        QString s = "Groups is empty!";
+        ListWidget->addItem(s);
+
+        emit showExecStatus(s);
+
+    }
+}
+
+//=============================================================================
 
 //##############################################################################
 

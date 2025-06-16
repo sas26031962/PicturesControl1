@@ -27,6 +27,7 @@
 #include <QTextCodec>
 #include <QProcess>
 #include <QCoreApplication>
+#include <QListWidget>
 
 #include "cinifile.h"
 #include "fmview.h"
@@ -133,7 +134,7 @@ private:
 public:
     //Атрибуты
 
-//    QString qsApplicationName;
+    QListWidget * ListWidget;//20250616
 
     QString fileNameHashTag;// Имя файла для загрузки параметров
 
