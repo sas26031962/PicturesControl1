@@ -1561,7 +1561,9 @@ void MainWindow::showCurrentIndexPicture()
     //ListWidget->clear();
 
     int iGroupsCount = cIniFile::Groups->count();
-    ListWidget->addItem("==ShowCurrentIndexPicture==");
+    QListWidgetItem * item = new QListWidgetItem("==ShowCurrentIndexPicture==");
+    item->setForeground(Qt::blue);
+    ListWidget->addItem(item);
     ListWidget->addItem("GroupsCount=" + QString::number(iGroupsCount));
     if(iGroupsCount > 0)
     {
@@ -1570,14 +1572,15 @@ void MainWindow::showCurrentIndexPicture()
         int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
         if(index > (cIniFile::Groups->count() - 1))
         {
-            ListWidget->addItem("Index=" + QString::number(index) + " Set Index to head of GroupsList");
+            QListWidgetItem * item = new QListWidgetItem("Index > GroupsCount. Index=" + QString::number(index) + " Set Index to head of GroupsList");
+            item->setForeground(Qt::red);
+            ListWidget->addItem(item);
             //qDebug() << "Loaded index out of range:" << index << " goto head of list";
 
             index = 0;
             iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
         }
-        ListWidget->addItem("Index > GroupsCount. Index=" + QString::number(index));
 
         QString qsGroupName = cIniFile::Groups->at(index);
         //qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName;
@@ -1590,15 +1593,22 @@ void MainWindow::showCurrentIndexPicture()
             iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
             qsGroupName = cIniFile::Groups->at(index);
 
+            QListWidgetItem * item = new QListWidgetItem("Skip 'RecordList' group");
+            item->setForeground(Qt::yellow);
+            ListWidget->addItem(item);
         }
 
+        ListWidget->addItem("Index=" + QString::number(index));
+        //===
         settings.beginGroup(qsGroupName);
 
         QString qsPath, qsName, qsError;
 
         QStringList keys = settings.childKeys();
         int iStrings = keys.count();
-        qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName << " KeysCount=" << iStrings;
+
+        //qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName << " KeysCount=" << iStrings;
+        ListWidget->addItem("GroupName=" + qsGroupName + " KeysCount=" + QString::number(iStrings));
 
         QStandardItemModel * model= new QStandardItemModel(iStrings, 2);
         QListIterator<QString> readIt(keys);
@@ -1622,10 +1632,13 @@ void MainWindow::showCurrentIndexPicture()
         ui->tableViewCurrent->setModel(model);
 
         settings.endGroup();
-
+        //===
         if(!qsPath.count() || !qsName.count())
         {
-            qDebug() << "FilePath=" << qsPath << " FileName=" << qsName << " file not exist!!!";
+            QListWidgetItem * item = new QListWidgetItem("FilePaht=" + qsPath + " FileName=" + qsName + " file not exit!!!");
+            item->setForeground(Qt::red);
+            ListWidget->addItem(item);
+            //qDebug() << "FilePath=" << qsPath << " FileName=" << qsName << " file not exist!!!";
             return;
         }
 
@@ -1633,8 +1646,10 @@ void MainWindow::showCurrentIndexPicture()
 
         if(qsError == "true")
         {
-            qDebug() << "FullPath: " << imagePath << " Error:" << qsError;
-            //ui->labelMain->setText(imagePath);
+            QListWidgetItem * item = new QListWidgetItem("FullPaht=" + imagePath + " Error=" + qsError);
+            item->setForeground(Qt::red);
+            ListWidget->addItem(item);
+            //qDebug() << "FullPath: " << imagePath << " Error:" << qsError;
             return;
         }
         else
