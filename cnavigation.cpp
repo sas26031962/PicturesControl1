@@ -20,7 +20,11 @@ void cNavigation::showCurrentIndexPicture()
     QListWidgetItem * item = new QListWidgetItem("==ShowCurrentIndexPicture==");
     item->setForeground(Qt::blue);
     ListWidget->addItem(item);
-    ListWidget->addItem("GroupsCount=" + QString::number(iGroupsCount));
+    QListWidgetItem * item1 = new QListWidgetItem("GroupsCount=" + QString::number(iGroupsCount));
+    ListWidget->addItem(item1);
+    ListWidget->setCurrentItem(item1);
+    ListWidget->scrollToItem(item1);
+
     if(iGroupsCount > 0)
     {
         // Читаем значения из INI-файла
@@ -31,6 +35,8 @@ void cNavigation::showCurrentIndexPicture()
             QListWidgetItem * item = new QListWidgetItem("Index > GroupsCount. Index=" + QString::number(index) + " Set Index to head of GroupsList");
             item->setForeground(Qt::red);
             ListWidget->addItem(item);
+            ListWidget->setCurrentItem(item);
+            ListWidget->scrollToItem(item);
             //qDebug() << "Loaded index out of range:" << index << " goto head of list";
 
             index = 0;
@@ -52,9 +58,14 @@ void cNavigation::showCurrentIndexPicture()
             QListWidgetItem * item = new QListWidgetItem("Skip 'RecordList' group");
             item->setForeground(Qt::yellow);
             ListWidget->addItem(item);
+            ListWidget->setCurrentItem(item);
+            ListWidget->scrollToItem(item);
         }
 
-        ListWidget->addItem("Index=" + QString::number(index));
+        QListWidgetItem * item = new QListWidgetItem("Index=" + QString::number(index));
+        ListWidget->addItem(item);
+        ListWidget->setCurrentItem(item);
+        ListWidget->scrollToItem(item);
         //===
         settings.beginGroup(qsGroupName);
 
@@ -64,7 +75,10 @@ void cNavigation::showCurrentIndexPicture()
         int iStrings = keys.count();
 
         //qDebug() << "showCurrentIndexPicture(): GroupName=" << qsGroupName << " KeysCount=" << iStrings;
-        ListWidget->addItem("GroupName=" + qsGroupName + " KeysCount=" + QString::number(iStrings));
+        QListWidgetItem * item1 = new QListWidgetItem("GroupName=" + qsGroupName + " KeysCount=" + QString::number(iStrings));
+        ListWidget->addItem(item1);
+        ListWidget->setCurrentItem(item1);
+        ListWidget->scrollToItem(item1);
 
         QStandardItemModel * model= new QStandardItemModel(iStrings, 2);
         QListIterator<QString> readIt(keys);
@@ -94,6 +108,8 @@ void cNavigation::showCurrentIndexPicture()
             QListWidgetItem * item = new QListWidgetItem("FilePaht=" + qsPath + " FileName=" + qsName + " file not exit!!!");
             item->setForeground(Qt::red);
             ListWidget->addItem(item);
+            ListWidget->setCurrentItem(item);
+            ListWidget->scrollToItem(item);
             //qDebug() << "FilePath=" << qsPath << " FileName=" << qsName << " file not exist!!!";
             return;
         }
@@ -125,7 +141,10 @@ void cNavigation::showCurrentIndexPicture()
     else
     {
         QString s = "Groups is empty!";
-        ListWidget->addItem(s);
+        QListWidgetItem * item = new QListWidgetItem(s);
+        ListWidget->addItem(item);
+        ListWidget->setCurrentItem(item);
+        ListWidget->scrollToItem(item);
 
         emit showExecStatus(s);
 
