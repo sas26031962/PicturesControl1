@@ -489,53 +489,9 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
 
 //=============================================================================
 
-//
-// Запись QStringList в файл
-//
-bool MainWindow::saveStringListToFile(const QString& fileName, const QStringList& list)
-{
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        return false;
-    }
-
-    QTextStream out(&file);
-    out.setCodec("UTF-8"); // Установка кодировки
-
-    for (const QString& str : list) {
-        out << str << "\n";
-    }
-
-    file.close();
-    return true;
-}
-
-
-//=============================================================================
-
-QStringList MainWindow::loadStringListFromFile(const QString& fileName)
-{
-    QStringList list;
-    QFile file(fileName);
-
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&file);
-        in.setCodec("UTF-8");
-
-        while (!in.atEnd()) {
-            list << in.readLine();
-        }
-
-        file.close();
-    }
-    return list;
-}
-
-//=============================================================================
-
 void MainWindow::loadRemovedSectionsList()
 {
-    qslDeletedSections = loadStringListFromFile(cIniFile::filePathRemovedSectionList);
+    qslDeletedSections = cLoadFiles::loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
     //ui->listWidgetOther->clear();
     ui->listWidgetOther->addItem("==LoadRemovedSectionsList==");
@@ -549,7 +505,7 @@ void MainWindow::loadRemovedSectionsList()
 void MainWindow::saveRemovedSectionsList()
 {
 
-    saveStringListToFile(cIniFile::filePathRemovedSectionList, qslDeletedSections);
+    cLoadFiles::saveStringListToFile(cIniFile::filePathRemovedSectionList, qslDeletedSections);
 
 }//End of void MainWindow::saveRemovedSectionsList()
 
