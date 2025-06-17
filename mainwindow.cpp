@@ -183,6 +183,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    Navigation = new cNavigation();
+    Navigation->install(ui->listWidgetOther, ui->tableViewCurrent);
+
     ActionsExec = new cActionsExec();
     ActionsExec->install(ui->listWidgetOther);
 
@@ -370,6 +373,7 @@ MainWindow::~MainWindow()
     delete ListWidgetTheame;
 
     delete ActionsExec;
+    delete Navigation;
 
     delete progressBarProcess;
     delete labelExecStatus;

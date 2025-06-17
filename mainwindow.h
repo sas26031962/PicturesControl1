@@ -41,6 +41,7 @@
 #include "clistwidgetproperty.h"
 #include "clistwidgettheame.h"
 #include "cactionsexec.h"
+#include "cnavigation.h"
 
 
 //-----------------------------------------------------------------------------
@@ -119,14 +120,16 @@ private:
 
     //20250606
     cActionsExec * ActionsExec;
+    cNavigation * Navigation;
 
     //Методы
-    void showCurrentIndexPicture();
     bool deleteSection(QString s);
 
     void loadRemovedSectionsList();
     void saveRemovedSectionsList();
     void showGroupsList();
+
+    void showCurrentIndexPicture();
 
 public:
     //Атрибуты
