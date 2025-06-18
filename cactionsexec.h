@@ -15,8 +15,7 @@ class cActionsExec : public QObject
     Q_OBJECT
 public:
     //Атрибуты
-    QListWidget * ListWidgetOther;
-    QStringList qslDeletedSections;
+    QListWidget * ListWidget;
 
     //Конструкторы
     explicit cActionsExec(QObject *parent = 0);

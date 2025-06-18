@@ -179,7 +179,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //---
 
-    qslDeletedSections.clear();
+    cIniFile::qslDeletedSections.clear();
 
     ui->setupUi(this);
 
@@ -499,7 +499,7 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
 void MainWindow::saveRemovedSectionsList()
 {
 
-    cLoadFiles::saveStringListToFile(cIniFile::filePathRemovedSectionList, qslDeletedSections);
+    cLoadFiles::saveStringListToFile(cIniFile::filePathRemovedSectionList, cIniFile::qslDeletedSections);
 
 }//End of void MainWindow::saveRemovedSectionsList()
 
@@ -673,7 +673,7 @@ void MainWindow::execActionImportInitial()
 
     emit execShowExecStatus("File import complete!");
 
-    qslDeletedSections.clear();
+    cIniFile::qslDeletedSections.clear();
 
     ui->listWidgetOther->clear();
     ui->listWidgetOther->addItem("==FileImport complete==");
@@ -784,7 +784,7 @@ bool MainWindow::deleteSection(QString s)
     qDebug() << "Section " << s << " removed!";
 
     //Добавление секции в список - результат
-    qslDeletedSections.append(qsWay);//#@
+    cIniFile::qslDeletedSections.append(qsWay);//#@
 
     return Error;
 }

@@ -141,15 +141,15 @@ void cNavigation::showCurrentIndexPicture()
 
 void cNavigation::loadRemovedSectionsList()
 {
-    QStringList qslDeletedSections = cLoadFiles::loadStringListFromFile(cIniFile::filePathRemovedSectionList);
+    cIniFile::qslDeletedSections = cLoadFiles::loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
     //ui->listWidgetOther->clear();
     QListWidgetItem * item0 = new QListWidgetItem("==LoadRemovedSectionsList==");
     item0->setForeground(Qt::blue);
     appEndItem(item0);
-    QListWidgetItem * item1 = new QListWidgetItem("RemovedSectionsListCount=" + QString::number(qslDeletedSections.count()));
+    QListWidgetItem * item1 = new QListWidgetItem("RemovedSectionsListCount=" + QString::number(cIniFile::qslDeletedSections.count()));
     appEndItem(item1);
-    ListWidget->addItems(qslDeletedSections);
+    ListWidget->addItems(cIniFile::qslDeletedSections);
     QListWidgetItem * item2 = new QListWidgetItem("=RemovedSectionsList tail=");
     item2->setForeground(Qt::darkGreen);
     appEndItem(item2);

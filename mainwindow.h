@@ -107,8 +107,6 @@ private:
 
     QStringList * qslHashTagList;
 
-    QStringList qslDeletedSections;
-
     //Тип списка для работы с кнотекстными меню
 
     ListWidgetType lwtListType = ListWidgetType::SUBJECT_TYPE;

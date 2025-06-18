@@ -36,6 +36,8 @@ public:
     static QStringList * SearchKeys;
     static QStringList * currentGroups;
 
+    static QStringList  qslDeletedSections;
+
     static QString iniFilePath;
     static QString scaledImagePath;
     static QString currentImagePath;

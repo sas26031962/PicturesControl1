@@ -30,6 +30,8 @@
 
     QStringList * cIniFile::currentGroups;
 
+    QStringList cIniFile::qslDeletedSections;
+
     QList<cRecord> * cRecord::RecordList;
 
 

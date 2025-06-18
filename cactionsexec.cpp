@@ -2,12 +2,12 @@
 
 cActionsExec::cActionsExec(QObject *parent) : QObject(parent)
 {
-    qslDeletedSections.clear();
+    cIniFile::qslDeletedSections.clear();
 }
 
 void cActionsExec::install(QListWidget * other)
 {
-    ListWidgetOther = other;
+    ListWidget = other;
 }
 
 void cActionsExec::execActionRemoveMovie(bool x)
@@ -74,19 +74,19 @@ void cActionsExec::execActionRemoveMovie(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            qslDeletedSections.append(qsWay);//#@
-            ListWidgetOther->clear();
-            ListWidgetOther->addItems(qslDeletedSections);
+            cIniFile::qslDeletedSections.append(qsWay);//#@
+            ListWidget->clear();
+            ListWidget->addItems(cIniFile::qslDeletedSections);
             qDebug() << "Section " << qsSection << " removed!";
         }
         //---
     }//End of while (readIt.hasNext())
     // Выводим имена обрабатываемых файлов
-    ListWidgetOther->clear();
-    ListWidgetOther->addItem("==ActionRemoveMovie==");
-    ListWidgetOther->addItem("=RemovedItemsList=");
-    ListWidgetOther->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
-    ListWidgetOther->addItems(GroupsResult);
+    ListWidget->clear();
+    ListWidget->addItem("==ActionRemoveMovie==");
+    ListWidget->addItem("=RemovedItemsList=");
+    ListWidget->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    ListWidget->addItems(GroupsResult);
 
     //===
     emit execShowExecStatus(s);
@@ -156,18 +156,18 @@ void cActionsExec::execActionRemoveText(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            qslDeletedSections.append(qsWay);//#@
+            cIniFile::qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
 
     }//End of while (readIt.hasNext())
 
     // Выводим имена обрабатываемых файлов
-    ListWidgetOther->clear();
-    ListWidgetOther->addItem("==ActionRemoveText==");
-    ListWidgetOther->addItem("=RemovedItemsList=");
-    ListWidgetOther->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
-    ListWidgetOther->addItems(GroupsResult);
+    ListWidget->clear();
+    ListWidget->addItem("==ActionRemoveText==");
+    ListWidget->addItem("=RemovedItemsList=");
+    ListWidget->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    ListWidget->addItems(GroupsResult);
 
     //===
     emit execShowExecStatus(s);
@@ -235,18 +235,18 @@ void cActionsExec::execActionRemoveTif(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            qslDeletedSections.append(qsWay);//#@
+            cIniFile::qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
 
     }//End of while (readIt.hasNext())
 
     // Выводим имена обрабатываемых файлов
-    ListWidgetOther->clear();
-    ListWidgetOther->addItem("==ActionRemoveTif==");
-    ListWidgetOther->addItem("=RemovedItemsList=");
-    ListWidgetOther->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
-    ListWidgetOther->addItems(GroupsResult);
+    ListWidget->clear();
+    ListWidget->addItem("==ActionRemoveTif==");
+    ListWidget->addItem("=RemovedItemsList=");
+    ListWidget->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    ListWidget->addItems(GroupsResult);
 
     //===
     emit execShowExecStatus(s);
@@ -314,18 +314,18 @@ void cActionsExec::execActionRemoveBin(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            qslDeletedSections.append(qsWay);//#@
+            cIniFile::qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
 
     }//End of while (readIt.hasNext())
 
     // Выводим имена обрабатываемых файлов
-    ListWidgetOther->clear();
-    ListWidgetOther->addItem("==ActionRemoveBin==");
-    ListWidgetOther->addItem("=RemovedItemsList=");
-    ListWidgetOther->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
-    ListWidgetOther->addItems(GroupsResult);
+    ListWidget->clear();
+    ListWidget->addItem("==ActionRemoveBin==");
+    ListWidget->addItem("=RemovedItemsList=");
+    ListWidget->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    ListWidget->addItems(GroupsResult);
 
     //===
     emit execShowExecStatus(s);
@@ -392,18 +392,18 @@ void cActionsExec::execActionRemove3gp(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            qslDeletedSections.append(qsWay);//#@
+            cIniFile::qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
 
     }//End of while (readIt.hasNext())
 
     // Выводим имена обрабатываемых файлов
-    ListWidgetOther->clear();
-    ListWidgetOther->addItem("==ActionRemove3gp==");
-    ListWidgetOther->addItem("=RemovedItemsList=");
-    ListWidgetOther->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
-    ListWidgetOther->addItems(GroupsResult);
+    ListWidget->clear();
+    ListWidget->addItem("==ActionRemove3gp==");
+    ListWidget->addItem("=RemovedItemsList=");
+    ListWidget->addItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    ListWidget->addItems(GroupsResult);
 
 }
 
@@ -425,24 +425,24 @@ void cActionsExec::execActionShowNewFiles(bool x)
 
     if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
     {
-        ListWidgetOther->clear();
-        ListWidgetOther->addItem("==ActionShowNewFiles==");
-        ListWidgetOther->addItem("=DirectoryNotFound=");
-        ListWidgetOther->addItem("Path=" + cIniFile::IniFile.getDirectoryPah());
+        ListWidget->clear();
+        ListWidget->addItem("==ActionShowNewFiles==");
+        ListWidget->addItem("=DirectoryNotFound=");
+        ListWidget->addItem("Path=" + cIniFile::IniFile.getDirectoryPah());
         return;
     }
 
     //cImportFiles::execSearchNewFiles();
     //---
 
-    ListWidgetOther->clear();
-    ListWidgetOther->addItem("==ActionShowNewFiles==");
+    ListWidget->clear();
+    ListWidget->addItem("==ActionShowNewFiles==");
 
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
 
     QStringList Groups = settings.childGroups();//Загрузка полного списка групп
 
-    ListWidgetOther->addItem("AllGroupsListCount=" + QString::number(Groups.count()));
+    ListWidget->addItem("AllGroupsListCount=" + QString::number(Groups.count()));
 
     QStringList slNewItems;
     slNewItems.clear();
@@ -482,8 +482,8 @@ void cActionsExec::execActionShowNewFiles(bool x)
 
     }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
 
-    ListWidgetOther->addItem("AddedFilesCount=" + QString::number(iAddedFilesCounter));
-    ListWidgetOther->addItem("SkipedFilesCount=" + QString::number(iSkippedFilesCounter));
+    ListWidget->addItem("AddedFilesCount=" + QString::number(iAddedFilesCounter));
+    ListWidget->addItem("SkipedFilesCount=" + QString::number(iSkippedFilesCounter));
     //qDebug() << "Result: added files counter=" << iAddedFilesCounter <<" skiped files couner=" << iSkippedFilesCounter;
 
     //Store data in file
@@ -492,17 +492,17 @@ void cActionsExec::execActionShowNewFiles(bool x)
         if(cLoadFiles::saveStringListToFile(cIniFile::fileNewItems, slNewItems))
         {
              //qDebug() << "New items list stored in file:" << cIniFile::fileNewItems;
-             ListWidgetOther->addItem("New items list stored in file:" + cIniFile::fileNewItems);
+             ListWidget->addItem("New items list stored in file:" + cIniFile::fileNewItems);
         }
         else
         {
             //qDebug() << "Store in file:" << cIniFile::fileNewItems << " process error";
-            ListWidgetOther->addItem("NStore in file:" + cIniFile::fileNewItems + " process error");
+            ListWidget->addItem("NStore in file:" + cIniFile::fileNewItems + " process error");
         }
     }
     else
     {
-        ListWidgetOther->addItem("=New items not founded=");
+        ListWidget->addItem("=New items not founded=");
         //qDebug() << "New items not founded";
     }
 
