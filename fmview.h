@@ -34,7 +34,6 @@ private:
 
 private slots:
 
-    void execDraw(QString s);
     void execShowExecStatus(QString s);
     void execHorizontalSliderValueChanged(int x);
 
@@ -43,6 +42,9 @@ private slots:
 
     void execXRejected();
     void execYRejected();
+
+public slots:
+    void execDraw(QString s);
 
 signals:
     void showExecStatus(QString s);

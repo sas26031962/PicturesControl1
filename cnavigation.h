@@ -15,6 +15,10 @@ class cNavigation : public QObject
 {
     Q_OBJECT
     //Атрибуты
+
+    //Методы
+    void appEndItem(QListWidgetItem * item);
+
 public:
 
     QListWidget * ListWidget;
@@ -32,6 +36,7 @@ signals:
     void showExecStatus(QString s);
 
 public slots:
+    void loadRemovedSectionsList();
 
 };
 

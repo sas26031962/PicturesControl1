@@ -125,11 +125,8 @@ private:
     //Методы
     bool deleteSection(QString s);
 
-    void loadRemovedSectionsList();
     void saveRemovedSectionsList();
     void showGroupsList();
-
-    void showCurrentIndexPicture();
 
 public:
     //Атрибуты

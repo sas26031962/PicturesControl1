@@ -74,7 +74,6 @@ void cActionsExec::execActionRemoveMovie(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
             qslDeletedSections.append(qsWay);//#@
             ListWidgetOther->clear();
             ListWidgetOther->addItems(qslDeletedSections);
@@ -236,7 +235,6 @@ void cActionsExec::execActionRemoveTif(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
             qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
@@ -316,7 +314,6 @@ void cActionsExec::execActionRemoveBin(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
             qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
@@ -395,7 +392,6 @@ void cActionsExec::execActionRemove3gp(bool x)
         {
             settings.remove(qsSection);
             cIniFile::Groups->removeOne(qsSection);
-            //qslDeletedSections.append(qsSection);
             qslDeletedSections.append(qsWay);//#@
             qDebug() << "Section " << qsSection << " removed!";
         }
