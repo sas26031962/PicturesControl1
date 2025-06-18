@@ -13,6 +13,10 @@
 class cActionsExec : public QObject
 {
     Q_OBJECT
+
+    //Методы
+    void appEndItem(QListWidgetItem * item);
+
 public:
     //Атрибуты
     QListWidget * ListWidget;

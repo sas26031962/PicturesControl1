@@ -1,7 +1,4 @@
 C:/Work/Ships/Cruiser_Moscow.png
-C:/Work/Ships/Destroyer_Pr56/2019-04-09 08-30-00_1.png
-C:/Work/Ships/Destroyer_Pr56/2019-04-09 08-39-00_1.png
-C:/Work/Ships/Dreadnotes/1708939963_hdpic-club-p-linkor-sssr-1_1_1.jpg
 C:/Work/Ships/bka_1125/bka_1125_3a.tif
 C:/Work/Ships/bka_1125/bka_1125_4a.tif
 C:/Work/Ships/bka_1125/bka_1125_5a.tif

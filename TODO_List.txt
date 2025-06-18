@@ -1,9 +1,14 @@
+#20250618
+
+[] Список удалённых файлов перенести в одно место и сделать статическим
+[] В классе cActionExec вывод сообщений в ListWidgetOther сопроводить переносом указателя на конец списка
+
 #20250611
 
 [x] Перененсти слот execActionRemoveText() из MainWindow в класс cActionExec
-[] Перененсти слот execActionRemoveTif() из MainWindow в класс cActionExec
-[] Перененсти слот execActionRemove3gp() из MainWindow в класс cActionExec
-[] Перененсти слот execActionRemoveBin() из MainWindow в класс cActionExec
+[x] Перененсти слот execActionRemoveTif() из MainWindow в класс cActionExec
+[x] Перененсти слот execActionRemove3gp() из MainWindow в класс cActionExec
+[x] Перененсти слот execActionRemoveBin() из MainWindow в класс cActionExec
 
 #20250605
 
