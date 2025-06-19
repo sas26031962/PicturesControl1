@@ -12,6 +12,7 @@ INPUT(
 ./release\clistwidgetproperty.o
 ./release\clistwidgettheame.o
 ./release\cactionsexec.o
+./release\cnavigation.o
 ./release\qrc_resourcedata.o
 ./release\moc_mainwindow.o
 ./release\moc_fmview.o
@@ -20,4 +21,5 @@ INPUT(
 ./release\moc_clistwidgetproperty.o
 ./release\moc_clistwidgettheame.o
 ./release\moc_cactionsexec.o
+./release\moc_cnavigation.o
 );

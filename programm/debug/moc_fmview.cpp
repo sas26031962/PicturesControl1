@@ -35,21 +35,21 @@ QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 1), // "s"
 QT_MOC_LITERAL(4, 25, 18), // "shiftXValueChanged"
 QT_MOC_LITERAL(5, 44, 18), // "shiftYValueChanged"
-QT_MOC_LITERAL(6, 63, 8), // "execDraw"
-QT_MOC_LITERAL(7, 72, 18), // "execShowExecStatus"
-QT_MOC_LITERAL(8, 91, 32), // "execHorizontalSliderValueChanged"
-QT_MOC_LITERAL(9, 124, 1), // "x"
-QT_MOC_LITERAL(10, 126, 12), // "execXChanged"
-QT_MOC_LITERAL(11, 139, 12), // "execYChanged"
-QT_MOC_LITERAL(12, 152, 13), // "execXRejected"
-QT_MOC_LITERAL(13, 166, 13) // "execYRejected"
+QT_MOC_LITERAL(6, 63, 18), // "execShowExecStatus"
+QT_MOC_LITERAL(7, 82, 32), // "execHorizontalSliderValueChanged"
+QT_MOC_LITERAL(8, 115, 1), // "x"
+QT_MOC_LITERAL(9, 117, 12), // "execXChanged"
+QT_MOC_LITERAL(10, 130, 12), // "execYChanged"
+QT_MOC_LITERAL(11, 143, 13), // "execXRejected"
+QT_MOC_LITERAL(12, 157, 13), // "execYRejected"
+QT_MOC_LITERAL(13, 171, 8) // "execDraw"
 
     },
     "fmView\0showExecStatus\0\0s\0shiftXValueChanged\0"
-    "shiftYValueChanged\0execDraw\0"
-    "execShowExecStatus\0execHorizontalSliderValueChanged\0"
-    "x\0execXChanged\0execYChanged\0execXRejected\0"
-    "execYRejected"
+    "shiftYValueChanged\0execShowExecStatus\0"
+    "execHorizontalSliderValueChanged\0x\0"
+    "execXChanged\0execYChanged\0execXRejected\0"
+    "execYRejected\0execDraw"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,11 +74,11 @@ static const uint qt_meta_data_fmView[] = {
  // slots: name, argc, parameters, tag, flags
        6,    1,   69,    2, 0x08 /* Private */,
        7,    1,   72,    2, 0x08 /* Private */,
-       8,    1,   75,    2, 0x08 /* Private */,
-      10,    0,   78,    2, 0x08 /* Private */,
-      11,    0,   79,    2, 0x08 /* Private */,
-      12,    0,   80,    2, 0x08 /* Private */,
-      13,    0,   81,    2, 0x08 /* Private */,
+       9,    0,   75,    2, 0x08 /* Private */,
+      10,    0,   76,    2, 0x08 /* Private */,
+      11,    0,   77,    2, 0x08 /* Private */,
+      12,    0,   78,    2, 0x08 /* Private */,
+      13,    1,   79,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -87,12 +87,12 @@ static const uint qt_meta_data_fmView[] = {
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
 
        0        // eod
 };
@@ -106,13 +106,13 @@ void fmView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->showExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->shiftXValueChanged(); break;
         case 2: _t->shiftYValueChanged(); break;
-        case 3: _t->execDraw((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: _t->execShowExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 5: _t->execHorizontalSliderValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->execXChanged(); break;
-        case 7: _t->execYChanged(); break;
-        case 8: _t->execXRejected(); break;
-        case 9: _t->execYRejected(); break;
+        case 3: _t->execShowExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->execHorizontalSliderValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->execXChanged(); break;
+        case 6: _t->execYChanged(); break;
+        case 7: _t->execXRejected(); break;
+        case 8: _t->execYRejected(); break;
+        case 9: _t->execDraw((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
