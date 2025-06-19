@@ -143,7 +143,6 @@ void cNavigation::loadRemovedSectionsList()
 {
     cIniFile::qslDeletedSections = cLoadFiles::loadStringListFromFile(cIniFile::filePathRemovedSectionList);
 
-    //ui->listWidgetOther->clear();
     QListWidgetItem * item0 = new QListWidgetItem("==LoadRemovedSectionsList==");
     item0->setForeground(Qt::blue);
     appEndItem(item0);

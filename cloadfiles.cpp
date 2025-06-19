@@ -4,6 +4,19 @@ cLoadFiles::cLoadFiles()
 {
 
 }
+
+void cLoadFiles::install(QListWidget * other)
+{
+    ListWidget = other;
+}
+
+void cLoadFiles::appEndItem(QListWidgetItem * item)
+{
+    ListWidget->addItem(item);
+    ListWidget->setCurrentItem(item);
+    ListWidget->scrollToItem(item);
+}
+
 //
 // Функция отбора файлов из общего списка по условию
 //
@@ -12,6 +25,10 @@ bool cLoadFiles::execLoadFiles()
     bool Result = true;
 
     //--- Начало функции загрузки
+
+    QListWidgetItem * item0 = new QListWidgetItem("==execLoadFiles==");
+    item0->setForeground(Qt::blue);
+    ListWidget->addItem(item0);
 
     // Создаем объект QSettings с указанием формата INI и пути к файлу
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
@@ -22,8 +39,10 @@ bool cLoadFiles::execLoadFiles()
     cIniFile::Groups->clear();//Очистка результата
 
     // Выводим значения
-    qDebug() << "TotalGroups length: " << TotalGroups.count();
-    qDebug() << "----------------------------";
+    QListWidgetItem * item1 = new QListWidgetItem("TotalGroups length: " + QString::number(TotalGroups.count()));
+    ListWidget->addItem(item1);
+    //qDebug() << "TotalGroups length: " << TotalGroups.count();
+    //qDebug() << "----------------------------";
 
     int iCount = 0;// Очистка счётчика найденных объектов
 
@@ -55,10 +74,22 @@ bool cLoadFiles::execLoadFiles()
         settings.endGroup();
     }
 
+    QString qsItem2;
     if(iCount > 0)
-        qDebug() << "IsRotated key detected in " << iCount << " files";
+    {
+        qsItem2 = "IsRotated key detected in ";
+        qsItem2 += QString::number(iCount);
+        qsItem2 += " files";
+        //qDebug() << "IsRotated key detected in " << iCount << " files";
+    }
     else
-        qDebug() << "No IsRotated key detected";
+    {
+        qsItem2 = "No IsRotated key detected";
+        //qDebug() << "No IsRotated key detected";
+    }
+
+    QListWidgetItem * item2 = new QListWidgetItem(qsItem2);
+    ListWidget->addItem(item2);
 
     //--- Окончание функции загрузки
 

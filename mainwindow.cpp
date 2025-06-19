@@ -183,11 +183,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    Navigation = new cNavigation();
-    Navigation->install(ui->listWidgetOther, ui->tableViewCurrent);
+    NavigationInstance = new cNavigation();
+    NavigationInstance->install(ui->listWidgetOther, ui->tableViewCurrent);
 
     ActionsExec = new cActionsExec();
     ActionsExec->install(ui->listWidgetOther);
+
+    LoadFilesInstance = new cLoadFiles();
+    LoadFilesInstance->install(ui->listWidgetOther);
 
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
@@ -357,8 +360,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->listWidgetFounded, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetFoundedItemClicked()));
 
     //Подключение сигналов модуля Navigation
-    connect(Navigation, &cNavigation::showExecStatus, this, &MainWindow::execShowExecStatus);
-    connect(Navigation, &cNavigation::draw, fmViewPicture, &fmView::execDraw);
+    connect(NavigationInstance, &cNavigation::showExecStatus, this, &MainWindow::execShowExecStatus);
+    connect(NavigationInstance, &cNavigation::draw, fmViewPicture, &fmView::execDraw);
 
     ListWidget = ui->listWidgetOther;
 
@@ -376,7 +379,8 @@ MainWindow::~MainWindow()
     delete ListWidgetTheame;
 
     delete ActionsExec;
-    delete Navigation;
+    delete NavigationInstance;
+    delete LoadFilesInstance;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -513,7 +517,7 @@ void MainWindow::execActionGotoIndex()
     iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
     // Отобразить картинку
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -539,7 +543,7 @@ void MainWindow::execActionSelectImageBegin()
     iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
     // Отобразить картинку
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -568,7 +572,7 @@ void MainWindow::execActionSelectImageNext()
     int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
     // Отобразить картинку
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -597,7 +601,7 @@ void MainWindow::execActionSelectImagePrevious()
     int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
     // Отобразить картинку
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -623,7 +627,7 @@ void MainWindow::execActionSelectImageEnd()
     iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
     // Отобразить картинку
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -897,7 +901,7 @@ void MainWindow::execTimerUpdate()
         qDebug() << "CurrentIndex=" << iCurrentIndexGlobal.load(std::memory_order_relaxed);
         execActionLoad();
 
-        Navigation->loadRemovedSectionsList();
+        NavigationInstance->loadRemovedSectionsList();
 
     }//End of if(iTimerUpdateCounter == 1)
 
@@ -1040,7 +1044,7 @@ void MainWindow::execActionMemo()
             s = "List is empty, exec Load function!!!";
         }
         // Отобразить картинку
-        Navigation->showCurrentIndexPicture();
+        NavigationInstance->showCurrentIndexPicture();
     }
     else
     {
@@ -1135,7 +1139,7 @@ void MainWindow::execActionSearchRotated()
 {
     QString s = "execActionSearchRotated()";
 
-    cLoadFiles::execLoadFiles();
+    LoadFilesInstance->execLoadFiles();
 
     installNavigation();//Настройка навигации
 
@@ -1484,7 +1488,7 @@ void MainWindow::execListWidgetFoundedItemClicked()
     iCurrentIndexGlobal.store(FoundedIndex, std::memory_order_relaxed);
 
     // Отобразить картинку
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 
     s += ": ";
     s += value;
@@ -1499,7 +1503,7 @@ void MainWindow::execListWidgetFoundedItemClicked()
 
 void MainWindow::execShowCurrentIndexPicture()
 {
-    Navigation->showCurrentIndexPicture();
+    NavigationInstance->showCurrentIndexPicture();
 }
 
 //=============================================================================

@@ -118,7 +118,8 @@ private:
 
     //20250606
     cActionsExec * ActionsExec;
-    cNavigation * Navigation;
+    cNavigation * NavigationInstance;
+    cLoadFiles * LoadFilesInstance;
 
     //Методы
     bool deleteSection(QString s);
