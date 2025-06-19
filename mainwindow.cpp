@@ -1139,7 +1139,7 @@ void MainWindow::execActionSearchRotated()
 {
     QString s = "execActionSearchRotated()";
 
-    LoadFilesInstance->execLoadFiles();
+    LoadFilesInstance->execLoadFilesSignedIsRotated();
 
     installNavigation();//Настройка навигации
 
@@ -1157,16 +1157,9 @@ void MainWindow::execActionSearchOrYes()
 {
     QString s = "execActionSearchOrYes()";
 
-//    cIniFile::SearchKeys->clear();
-//    cIniFile::SearchKeys->append("IsRotated");
-//    cIniFile::SearchKeys->append("Archive");
-
-//    ui->listWidgetSearch->clear();
-//    ui->listWidgetSearch->addItems(*cIniFile::SearchKeys);
-
     if(cIniFile::SearchKeys->count() > 0)
     {
-        cLoadFiles::execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
+        LoadFilesInstance->execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
 
         installNavigation();//Настройка навигации
 
@@ -1206,7 +1199,7 @@ void MainWindow::execActionSearchNamePattern1()
     QString s = "execActionSearchNamePattern1()";
     QString pattern = "^20[0-9]{6}_[0-9]{6}";
 
-    bool x = cLoadFiles::searchNamePattern(pattern);
+    bool x = LoadFilesInstance->searchNamePattern(pattern);
 
     showGroupsList();
 
@@ -1230,7 +1223,7 @@ void MainWindow::execActionSearchNamePattern2()
     QString s = "execActionSearchNamePattern2()";
     QString pattern = "^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}";
 
-    bool x = cLoadFiles::searchNamePattern(pattern);
+    bool x = LoadFilesInstance->searchNamePattern(pattern);
 
     showGroupsList();
 
@@ -1256,7 +1249,7 @@ void MainWindow::execActionSearchNamePattern()
     //QString pattern = "IMG_20[0-9]{6}_[0-9]{6}";
     QString pattern = ui->lineEditPattern->text();
 
-    cLoadFiles::searchNamePattern(pattern);
+    LoadFilesInstance->searchNamePattern(pattern);
 
     showGroupsList();
 

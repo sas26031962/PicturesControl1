@@ -10,6 +10,8 @@ void cLoadFiles::install(QListWidget * other)
     ListWidget = other;
 }
 
+//=============================================================================
+
 void cLoadFiles::appEndItem(QListWidgetItem * item)
 {
     ListWidget->addItem(item);
@@ -17,16 +19,18 @@ void cLoadFiles::appEndItem(QListWidgetItem * item)
     ListWidget->scrollToItem(item);
 }
 
-//
-// Функция отбора файлов из общего списка по условию
-//
-bool cLoadFiles::execLoadFiles()
-{
-    bool Result = true;
+//=============================================================================
 
+/******************************************************************************
+ * Функция выбирает из полного списка файлов те файлы, которые содержат признак
+ * IsRotated.
+ * Результат работы функции - список cIniFile::Groups
+ *****************************************************************************/
+void cLoadFiles::execLoadFilesSignedIsRotated()
+{
     //--- Начало функции загрузки
 
-    QListWidgetItem * item0 = new QListWidgetItem("==execLoadFiles==");
+    QListWidgetItem * item0 = new QListWidgetItem("==execLoadFilesSignedIsRotated==");
     item0->setForeground(Qt::blue);
     ListWidget->addItem(item0);
 
@@ -41,8 +45,6 @@ bool cLoadFiles::execLoadFiles()
     // Выводим значения
     QListWidgetItem * item1 = new QListWidgetItem("TotalGroups length: " + QString::number(TotalGroups.count()));
     ListWidget->addItem(item1);
-    //qDebug() << "TotalGroups length: " << TotalGroups.count();
-    //qDebug() << "----------------------------";
 
     int iCount = 0;// Очистка счётчика найденных объектов
 
@@ -95,15 +97,22 @@ bool cLoadFiles::execLoadFiles()
 
     settings.sync();
 
-    return Result;
-}//End of bool cLoadFiles::execLoadFiles()
+}//End of void cLoadFiles::execLoadFilesSignedIsRotated()
 
+//=============================================================================
 
-bool cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
+/******************************************************************************
+ * Функция выбирает из полного списка файлов те файлы, которые удовлетворяют
+ * любому из списка условий, приведённых в списке yes, передаваемому как параметр.
+ * Результат работы функции - список cIniFile::Groups
+ *****************************************************************************/
+void cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
 {
-    bool Result = true;
-
     //--- Начало функции загрузки
+
+    QListWidgetItem * item0 = new QListWidgetItem("==execLoadFilesByConditionOrYes==");
+    item0->setForeground(Qt::blue);
+    ListWidget->addItem(item0);
 
     // Создаем объект QSettings с указанием формата INI и пути к файлу
     QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
@@ -114,8 +123,8 @@ bool cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
     cIniFile::Groups->clear();//Очистка результата
 
     // Выводим значения
-    qDebug() << "TotalGroups length: " << TotalGroups.count();
-    qDebug() << "----------------------------";
+    QListWidgetItem * item1 = new QListWidgetItem("TotalGroups length: " + QString::number(TotalGroups.count()));
+    ListWidget->addItem(item1);
 
     int iCount = 0;// Очистка счётчика найденных объектов
 
@@ -148,7 +157,7 @@ bool cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
                     qsIsRotated = value_yes;
                     iCount++;
                     cIniFile::Groups->append(qsSection);
-                    qDebug() << "iterator: section=" << qsSection << " key=" << key << " count=" << iCount;
+                    //qDebug() << "iterator: section=" << qsSection << " key=" << key << " count=" << iCount;
                 }
             }
         }
@@ -156,17 +165,91 @@ bool cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
         settings.endGroup();
     }
 
+    QString qsItem2;
     if(iCount > 0)
-        qDebug() << "IsRotated key detected in " << iCount << " files";
+    {
+        qsItem2 = "Signed by condition OrYes key detected in ";
+        qsItem2 += QString::number(iCount);
+        qsItem2 += " files";
+    }
     else
-        qDebug() << "No IsRotated key detected";
+    {
+        qsItem2 = "No signed by condition OrYes key detected";
+    }
+
+    QListWidgetItem * item2 = new QListWidgetItem(qsItem2);
+    ListWidget->addItem(item2);
 
     //--- Окончание функции загрузки
 
     settings.sync();
 
-    return Result;
+}//End of void cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
+
+//=============================================================================
+
+bool cLoadFiles::searchNamePattern(const QString& pattern)
+{
+    QRegularExpression re(pattern);
+
+    QListWidgetItem * item0 = new QListWidgetItem("==execLoadFilesByNamePattern==");
+    item0->setForeground(Qt::blue);
+    ListWidget->addItem(item0);
+
+    QListWidgetItem * item1 = new QListWidgetItem("<Pattern>=" + pattern);
+    ListWidget->addItem(item1);
+
+    //qDebug() << "Search pattern:" << pattern;
+
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    // Читаем значения из INI-файла
+
+    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
+
+    QListWidgetItem * item2 = new QListWidgetItem("TotalGroups length: " + QString::number(TotalGroups.count()));
+    ListWidget->addItem(item2);
+
+    cIniFile::Groups->clear();//Очистка результата
+
+    int iCount = 0;// Очистка счётчика найденных объектов
+    QListIterator<QString> readIt(TotalGroups);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        //qDebug() << qsSection;
+        bool match = re.match(qsSection.toLower()).hasMatch();
+        if(match)
+        {
+            iCount++;
+            cIniFile::Groups->append(qsSection);
+            //qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
+        }
+    }
+
+    QString qsItem3;
+    if(iCount > 0)
+    {
+        qsItem3 = "<Pattern> in file names detected in ";
+        qsItem3 += QString::number(iCount);
+        qsItem3 += " files";
+    }
+    else
+    {
+        qsItem3 = "No <Pattern> in file names detected";
+    }
+
+    QListWidgetItem * item3 = new QListWidgetItem(qsItem3);
+    ListWidget->addItem(item3);
+
+    //---
+    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern1StringListFilePath, *cIniFile::Groups);
+    //---
+    return x;
 }
+
+//=============================================================================
 
 bool cLoadFiles::saveStringListToFile(const QString& fileName, const QStringList& list)
 {
@@ -189,6 +272,8 @@ bool cLoadFiles::saveStringListToFile(const QString& fileName, const QStringList
     return true;
 }
 
+//=============================================================================
+
 QStringList cLoadFiles::loadStringListFromFile(const QString& fileName)
 {
     QStringList list;
@@ -207,36 +292,5 @@ QStringList cLoadFiles::loadStringListFromFile(const QString& fileName)
     return list;
 }
 
-bool cLoadFiles::searchNamePattern(const QString& pattern)
-{
-    QRegularExpression re(pattern);
+//=============================================================================
 
-    qDebug() << "Search pattern:" << pattern;
-
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    // Читаем значения из INI-файла
-
-    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
-    cIniFile::Groups->clear();//Очистка результата
-
-    int iCount = 0;// Очистка счётчика найденных объектов
-    QListIterator<QString> readIt(TotalGroups);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-        //qDebug() << qsSection;
-        bool match = re.match(qsSection.toLower()).hasMatch();
-        if(match)
-        {
-            iCount++;
-            cIniFile::Groups->append(qsSection);
-            qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
-        }
-    }
-    //---
-    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern1StringListFilePath, *cIniFile::Groups);
-    //---
-    return x;
-}
