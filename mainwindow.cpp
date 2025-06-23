@@ -128,6 +128,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         qsProjectPath = qsProjectPathLinux;
         qsHashTagFileNameSuffix = qsHashTagFileNameSuffixLinux;
+        cIniFile::GarbageCollectorPath = "/home/andy/GarbageCollector/";
         //qsProjectPath = "/home/andy/MyQtProjects";
         //qsHashTagFileNameSuffix = "Photos";
          qsIniFileName = qsIniFileNameLinux;
@@ -138,6 +139,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         qsProjectPath = qsProjectPathWindows;
         qsHashTagFileNameSuffix = qsHashTagFileNameSuffixWindows;
+        cIniFile::GarbageCollectorPath = "C:/WORK/GarbageCollector/";
         //qsProjectPath = "C:/WORK/PicturesControl";
         //qsHashTagFileNameSuffix = "Ships";
          qsIniFileName = qsIniFileNameWindows;
@@ -750,6 +752,84 @@ void MainWindow::execActionFormViewPicture()
 //=============================================================================
 
 //
+// Удалить секцию из ini файла и отправить исходный файл в GarbageCollector
+//
+bool MainWindow::eraseSection(QString s)
+{
+    bool Error = false;
+
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    settings.beginGroup(s);
+    QList<QString> keys = settings.childKeys();
+    int iKeysCount = keys.count();
+
+    QString qsName = settings.value("name", "noName").toString();
+    QString qsPath = settings.value("path", "noPath").toString();
+    QString qsWay = qsPath + "/" + qsName;
+
+    if(iKeysCount > 0)
+    {
+        // Перебор всей ключей в секции
+        QListIterator<QString> readKeyIt(keys);
+        while (readKeyIt.hasNext())
+        {
+            QString qsKey = readKeyIt.next();
+            qDebug() << qsKey;
+            settings.remove(qsKey);
+        }
+        qDebug() << "All keys in section " << s << " removed!";
+
+    }
+    else
+    {
+        qDebug() << "No keys in section " << s << " found!";
+    }
+    settings.endGroup();
+
+    settings.remove(s);
+    settings.sync();
+
+    qDebug() << "Section " << s << " removed!";
+
+    //--- Перемещение файла в папку GargbageCollector
+
+    QFile file(qsWay);
+    if(file.exists())
+    {
+        qDebug() << "GarbageCollector: " << cIniFile::GarbageCollectorPath;
+        //if(file.copy(cIniFile::GarbageCollectorPath + qsName))
+        if(file.rename(cIniFile::GarbageCollectorPath + qsName))
+        {
+            qDebug() << "File " << qsWay << " moved to GarbageCollector successfully";
+
+            if(file.exists())
+            {
+                qDebug() << "!!!File " << qsWay << " yet exist";
+            }
+        }
+        else
+        {
+            qDebug() << "!!!File " << qsWay << " moving to GarbageCollector error: " << file.errorString();
+
+            Error = true;
+        }
+    }
+    else
+    {
+        qDebug() << "File " << qsWay << " not exist";
+        Error = true;
+    }
+
+    //---
+    //Добавление секции в список - результат
+    cIniFile::qslDeletedSections.append(qsWay);//#@
+
+    return Error;
+}
+
+//=============================================================================
+
+//
 // Удалить секцию из ini файла
 //
 bool MainWindow::deleteSection(QString s)
@@ -829,6 +909,21 @@ void MainWindow::execActionEraseSection()
 {
     QString s = "ActionEraseeSection()";
 
+    // Читаем имя текущей секции
+    QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
+
+    bool x = eraseSection(qsGroupName);
+    // Выводим значения удалённых секций
+    if(!x)
+    {
+        cIniFile::Groups->removeAt(iCurrentIndexGlobal.load(std::memory_order_relaxed));
+
+        ui->listWidgetOther->clear();
+        ui->listWidgetOther->addItem("==ActionEraseeSection==");
+        ui->listWidgetOther->addItem(qsGroupName);
+    }
+
+    execActionSelectImagePrevious();//Перерисовка изображения
 
     //===
     emit execShowExecStatus(s);

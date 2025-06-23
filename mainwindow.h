@@ -123,6 +123,7 @@ private:
 
     //Методы
     bool deleteSection(QString s);
+    bool eraseSection(QString s);
 
     void saveRemovedSectionsList();
     void showGroupsList();
@@ -177,6 +178,7 @@ private slots:
     void execActionSearchNamePatterns1XIntersection();
 
     void execActionRemoveSection();
+    void execActionEraseSection();
 
     void execActionGetGroupsList();
     void execActionGetKeysList();

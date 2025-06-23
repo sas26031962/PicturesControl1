@@ -22,6 +22,8 @@
     QString cIniFile::currentImagePath = "";
     QString cIniFile::currentRotatedImagePath = "";
 
+    QString cIniFile::GarbageCollectorPath = "";
+
     QString cIniFile::fileNewItems;
 
     QStringList * cIniFile::Groups;

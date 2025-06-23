@@ -43,6 +43,8 @@ public:
     static QString currentImagePath;
     static QString currentRotatedImagePath;
 
+    static QString GarbageCollectorPath;
+
     static QString filePathRemovedSectionList;
     static QString fileSubjectHashTag;
     static QString filePlaceHashTag;
