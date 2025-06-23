@@ -20,7 +20,7 @@
       <x>10</x>
       <y>380</y>
       <width>271</width>
-      <height>81</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="title">
@@ -137,6 +137,19 @@
      </property>
      <property name="text">
       <string>Remove</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonErase">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>80</y>
+       <width>55</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Erase</string>
      </property>
     </widget>
    </widget>
@@ -488,6 +501,7 @@
     <addaction name="actionGetKeysList"/>
     <addaction name="actionRemoveSection"/>
     <addaction name="actionShowNewFiles"/>
+    <addaction name="actionEraseSection"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuSelect_image">
@@ -740,6 +754,11 @@
   <action name="actionShowNewFiles">
    <property name="text">
     <string>ShowNewFiles</string>
+   </property>
+  </action>
+  <action name="actionEraseSection">
+   <property name="text">
+    <string>EraseSection</string>
    </property>
   </action>
  </widget>

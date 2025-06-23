@@ -227,8 +227,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
 
     connect(ui->actionRemoveSection, SIGNAL(triggered()), this, SLOT( execActionRemoveSection()));
+    connect(ui->actionEraseSection, SIGNAL(triggered()), this, SLOT( execActionEraseSection()));
 
     connect(ui->pushButtonRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
+    connect(ui->pushButtonErase, SIGNAL(pressed()), this, SLOT( execActionEraseSection()));
 
     connect(ui->actionRotateCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
     connect(ui->actionRotateCCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
@@ -814,6 +816,19 @@ void MainWindow::execActionRemoveSection()
     }
 
     execActionSelectImagePrevious();//Перерисовка изображения
+
+    //===
+    emit execShowExecStatus(s);
+   //===
+
+}
+
+//=============================================================================
+
+void MainWindow::execActionEraseSection()
+{
+    QString s = "ActionEraseeSection()";
+
 
     //===
     emit execShowExecStatus(s);
