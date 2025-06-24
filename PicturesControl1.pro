@@ -21,7 +21,7 @@ SOURCES += main.cpp\
     #programm/moc_mainwindow.cpp
     fmview.cpp \
     cimportfiles.cpp \
-    cdrawfiles.cpp \
+    cdrawfilex.cpp \
     cloadfiles.cpp \
     clistwidgetplace.cpp \
     clistwidgetsubject.cpp \
@@ -37,7 +37,6 @@ HEADERS  += mainwindow.h \
     #programm/ui_mainwindow.h
     fmview.h \
     cimportfiles.h \
-    cdrawfiles.h \
     cloadfiles.h \
     clistwidgettype.h \
     clistwidgetplace.h \
@@ -45,7 +44,8 @@ HEADERS  += mainwindow.h \
     clistwidgetproperty.h \
     clistwidgettheame.h \
     cactionsexec.h \
-    cnavigation.h
+    cnavigation.h \
+    cdrawfilex.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

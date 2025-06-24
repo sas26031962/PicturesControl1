@@ -30,7 +30,7 @@ void fmView::execDraw(QString s)
 {
     currentImagePath = s;
     emit showExecStatus(s + " Size=" + QString::number(iSize));
-    cDrawFiles::scaleImage(s, iSize, iSize);
+    cDrawFilex::scaleImage(s, iSize, iSize);
     QPixmap pmMain(cIniFile::scaledImagePath);//
     ui->labelMain->setPixmap(pmMain);
 }
@@ -50,18 +50,18 @@ void fmView::execHorizontalSliderValueChanged(int x)
 void fmView::execXChanged()
 {
     QString s = ui->lineEditX->text();
-    cDrawFiles::dx = INITIAL_SHIFT_X;
-    cDrawFiles::dx += s.toInt();
-    qDebug() << "X=" << s << " Value=" << cDrawFiles::dx;
+    cDrawFilex::dx = INITIAL_SHIFT_X;
+    cDrawFilex::dx += s.toInt();
+    qDebug() << "X=" << s << " Value=" << cDrawFilex::dx;
     emit shiftXValueChanged();
 }
 
 void fmView::execYChanged()
 {
     QString s = ui->lineEditY->text();
-    cDrawFiles::dy = INITIAL_SHIFT_Y;
-    cDrawFiles::dy += s.toInt();
-    qDebug() << "Y=" << s << " Value=" << cDrawFiles::dy;
+    cDrawFilex::dy = INITIAL_SHIFT_Y;
+    cDrawFilex::dy += s.toInt();
+    qDebug() << "Y=" << s << " Value=" << cDrawFilex::dy;
     emit shiftYValueChanged();
 }
 

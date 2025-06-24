@@ -33,7 +33,7 @@
 #include "fmview.h"
 #include "cimportfiles.h"
 #include "stvarmem.h"
-#include "cdrawfiles.h"
+#include "cdrawfilex.h"
 #include "cloadfiles.h"
 
 #include "clistwidgetplace.h"
@@ -120,6 +120,7 @@ private:
     cActionsExec * ActionsExec;
     cNavigation * NavigationInstance;
     cLoadFiles * LoadFilesInstance;
+    cDrawFilex * DrawFilesInstance;
 
     //Методы
     bool deleteSection(QString s);

@@ -8,7 +8,7 @@
 #include <QValidator>
 
 #include "cinifile.h"
-#include "cdrawfiles.h"
+#include "cdrawfilex.h"
 
 #define INT_VALIDATOR_VALUE 3000
 

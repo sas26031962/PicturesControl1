@@ -1,10 +1,12 @@
-#ifndef CDRAWFILES_H
-#define CDRAWFILES_H
+#ifndef CDRAWFILEX_H
+#define CDRAWFILEX_H
 
+#include <QObject>
 #include <QString>
 #include <QDebug>
 #include <QImage>
 #include <QPainter>
+#include <QListWidget>
 
 #include "cinifile.h"
 
@@ -12,18 +14,32 @@
 #define INITIAL_SHIFT_X -200
 #define INITIAL_SHIFT_Y -200
 
-class cDrawFiles
+class cDrawFilex : public QObject
 {
+    Q_OBJECT
+
+    //Атрибуты
+    QListWidget * ListWidget;
+
 public:
     static qreal dx;// = 0;
     static qreal dy;// = VERTICAL_SHIFT_AFTER_ROtATION;//880
+
+    explicit cDrawFilex(QObject *parent = 0);
+
+    //Методы
+    void install(QListWidget * other);
 
     static QString execRotate(int angle);
     static void execRotateCW90();
     static void execRotateCCW90();
     static void scaleImage(QString, int width, int height);
 
-    cDrawFiles();
+
+
+signals:
+
+public slots:
 };
 
-#endif // CDRAWFILES_H
+#endif // CDRAWFILEX_H

@@ -194,6 +194,9 @@ MainWindow::MainWindow(QWidget *parent) :
     LoadFilesInstance = new cLoadFiles();
     LoadFilesInstance->install(ui->listWidgetOther);
 
+    DrawFilesInstance = new cDrawFilex();
+    DrawFilesInstance->install(ui->listWidgetOther);
+
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
 
@@ -385,6 +388,7 @@ MainWindow::~MainWindow()
     delete ActionsExec;
     delete NavigationInstance;
     delete LoadFilesInstance;
+    delete DrawFilesInstance;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -938,9 +942,9 @@ void MainWindow::execActionRotateCW()
     QString s = "ActionRotateCW()";
 
     //iAngle = 90;
-    //cDrawFiles::execRotate(iAngle);
+    //cDrawFilex::execRotate(iAngle);
 
-    cDrawFiles::execRotateCW90();
+    cDrawFilex::execRotateCW90();
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -957,9 +961,9 @@ void MainWindow::execActionRotateCCW()
     QString s = "ActionRotateCCW()";
 
     //iAngle = 270;
-    //cDrawFiles::execRotate(iAngle);
+    //cDrawFilex::execRotate(iAngle);
 
-    cDrawFiles::execRotateCCW90();
+    cDrawFilex::execRotateCCW90();
 
 
     emit draw(cIniFile::currentRotatedImagePath);
@@ -976,7 +980,7 @@ void MainWindow::execSpinBoxAngle(int angle)
 {
     qDebug() << "Angle:" << angle;
     iAngle = angle;
-    cDrawFiles::execRotate(iAngle);
+    cDrawFilex::execRotate(iAngle);
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -1383,9 +1387,9 @@ void MainWindow::execActionSearchNamePattern()
 void MainWindow::execShiftXValueChanged()
 {
     QString s = "ShiftXValueChanged:";
-    s += QString::number(cDrawFiles::dx);
+    s += QString::number(cDrawFilex::dx);
 
-    cDrawFiles::execRotate(0);
+    cDrawFilex::execRotate(0);
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -1396,9 +1400,9 @@ void MainWindow::execShiftXValueChanged()
 void MainWindow::execShiftYValueChanged()
 {
     QString s = "ShiftYValueChanged:";
-    s += QString::number(cDrawFiles::dy);
+    s += QString::number(cDrawFilex::dy);
 
-    cDrawFiles::execRotate(0);
+    cDrawFilex::execRotate(0);
 
     emit draw(cIniFile::currentRotatedImagePath);
 

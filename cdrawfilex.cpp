@@ -1,20 +1,24 @@
-#include "cdrawfiles.h"
+#include "cdrawfilex.h"
 
+qreal cDrawFilex::dx = INITIAL_SHIFT_X;
+qreal cDrawFilex::dy = INITIAL_SHIFT_Y;
 
-qreal cDrawFiles::dx = INITIAL_SHIFT_X;
-qreal cDrawFiles::dy = INITIAL_SHIFT_Y;
-
-cDrawFiles::cDrawFiles()
+cDrawFilex::cDrawFilex(QObject *parent) : QObject(parent)
 {
 
 }
 
 //=============================================================================
 
+void cDrawFilex::install(QListWidget * other)
+{
+    ListWidget = other;
+}
+
 //
 // Поворот изображения
 //
-QString cDrawFiles::execRotate(int angle)
+QString cDrawFilex::execRotate(int angle)
 {
     //--- Читаем значения из INI-файла
     cIniFile::getCurrentImagePath();
@@ -72,7 +76,7 @@ QString cDrawFiles::execRotate(int angle)
     //qreal dy = VERTICAL_SHIFT_AFTER_ROtATION;//880
 
     painter.setTransform(transform);
-    painter.drawImage(cDrawFiles::dy, cDrawFiles::dx, originalImage); // Рисуем исходное изображение на повернутом
+    painter.drawImage(cDrawFilex::dy, cDrawFilex::dx, originalImage); // Рисуем исходное изображение на повернутом
 
     painter.end();
     //---
@@ -82,11 +86,11 @@ QString cDrawFiles::execRotate(int angle)
 
     return cIniFile::currentRotatedImagePath;
 
-}//End of void cDrawFiles::execRotate(int Angle)
+}//End of void cDrawFilex::execRotate(int Angle)
 
 //=============================================================================
 
-void cDrawFiles::execRotateCW90()
+void cDrawFilex::execRotateCW90()
 {
     //--- Читаем значения из INI-файла
     cIniFile::getCurrentImagePath();
@@ -218,11 +222,11 @@ void cDrawFiles::execRotateCW90()
     }
     //---
 
-}//End of void cDrawFiles::execRotateCW90()
+}//End of void cDrawFilex::execRotateCW90()
 
 //=============================================================================
 
-void cDrawFiles::execRotateCCW90()
+void cDrawFilex::execRotateCCW90()
 {
     //--- Читаем значения из INI-файла
     cIniFile::getCurrentImagePath();
@@ -321,14 +325,14 @@ void cDrawFiles::execRotateCCW90()
     }
     //---
 
-}//End of void cDrawFiles::execRotateCCW90()
+}//End of void cDrawFilex::execRotateCCW90()
 
 //=============================================================================
 
 //
 // Масштабирование изображения
 //
-void cDrawFiles::scaleImage(QString path, int width, int height)
+void cDrawFilex::scaleImage(QString path, int width, int height)
 {
     //int newSize = 582;
     int newWidth = width;
