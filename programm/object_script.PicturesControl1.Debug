@@ -5,7 +5,7 @@ INPUT(
 ./debug\crecord.o
 ./debug\fmview.o
 ./debug\cimportfiles.o
-./debug\cdrawfiles.o
+./debug\cdrawfilex.o
 ./debug\cloadfiles.o
 ./debug\clistwidgetplace.o
 ./debug\clistwidgetsubject.o
@@ -22,4 +22,5 @@ INPUT(
 ./debug\moc_clistwidgettheame.o
 ./debug\moc_cactionsexec.o
 ./debug\moc_cnavigation.o
+./debug\moc_cdrawfilex.o
 );

@@ -92,6 +92,10 @@ QString cDrawFilex::execRotate(int angle)
 
 void cDrawFilex::execRotateCW90()
 {
+    QListWidgetItem * item0 = new QListWidgetItem("==execRotateCW90==");
+    item0->setForeground(Qt::blue);
+    ListWidget->addItem(item0);
+
     //--- Читаем значения из INI-файла
     cIniFile::getCurrentImagePath();
 
@@ -228,6 +232,10 @@ void cDrawFilex::execRotateCW90()
 
 void cDrawFilex::execRotateCCW90()
 {
+    QListWidgetItem * item0 = new QListWidgetItem("==execRotateCCW90==");
+    item0->setForeground(Qt::blue);
+    ListWidget->addItem(item0);
+
     //--- Читаем значения из INI-файла
     cIniFile::getCurrentImagePath();
 
@@ -334,7 +342,12 @@ void cDrawFilex::execRotateCCW90()
 //
 void cDrawFilex::scaleImage(QString path, int width, int height)
 {
-    //int newSize = 582;
+    QListWidgetItem * item0 = new QListWidgetItem("==execScaleImage==");
+    item0->setForeground(Qt::blue);
+    QListWidgetItem * item1 = new QListWidgetItem(path);
+    ListWidget->addItem(item0);
+    ListWidget->addItem(item1);
+
     int newWidth = width;
     int newHeight = height;
 
@@ -344,7 +357,9 @@ void cDrawFilex::scaleImage(QString path, int width, int height)
 
     if (originalImage.isNull())
     {
-        qDebug() << "Error: Could not load image: " << path;
+        QListWidgetItem * item3 = new QListWidgetItem("Error: Could not load image: " + path);
+        item3->setForeground(Qt::red);
+        ListWidget->addItem(item3);
         return;
     }
 
@@ -356,13 +371,18 @@ void cDrawFilex::scaleImage(QString path, int width, int height)
     info += QString::number(oldWidth);
     info += " height=";
     info += QString::number(oldHeight);
-    info += " Scaled:";
+
+    QListWidgetItem * item4 = new QListWidgetItem(info);
+    ListWidget->addItem(item4);
+
+    info = " Scaled:";
     info += " width=";
     info += QString::number(newWidth);
     info += " height=";
     info += QString::number(newHeight);
 
-    qDebug() << info;
+    QListWidgetItem * item5 = new QListWidgetItem(info);
+    ListWidget->addItem(item5);
 
     // Масштабирование изображения
     QImage scaledImage = originalImage.scaled(
@@ -385,7 +405,9 @@ void cDrawFilex::scaleImage(QString path, int width, int height)
         status += " fault";
     }
 
-    //qDebug() << status;
+    QListWidgetItem * item6 = new QListWidgetItem(status);
+    ListWidget->addItem(item6);
+
 }
 
 //=============================================================================

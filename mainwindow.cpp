@@ -284,6 +284,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //ViewPicture->setWindowFlags(Qt::ToolTip);//no flags, immobil
     //ViewPicture->setWindowFlags(Qt::SplashScreen);//no flags, immobil
 
+    fmViewPicture->ListWidget = ui->listWidgetOther;
+    fmViewPicture->DrawFilesInstance->install(fmViewPicture->ListWidget);
+
     connect(fmViewPicture, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
 
     ui->actionViewPicture->setChecked(false);
@@ -369,6 +372,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //Подключение сигналов модуля Navigation
     connect(NavigationInstance, &cNavigation::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(NavigationInstance, &cNavigation::draw, fmViewPicture, &fmView::execDraw);
+
+    connect(this, &MainWindow::draw, fmViewPicture, &fmView::execDraw);
 
     ListWidget = ui->listWidgetOther;
 
@@ -941,10 +946,7 @@ void MainWindow::execActionRotateCW()
 {
     QString s = "ActionRotateCW()";
 
-    //iAngle = 90;
-    //cDrawFilex::execRotate(iAngle);
-
-    cDrawFilex::execRotateCW90();
+    DrawFilesInstance->execRotateCW90();
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -960,11 +962,7 @@ void MainWindow::execActionRotateCCW()
 {
     QString s = "ActionRotateCCW()";
 
-    //iAngle = 270;
-    //cDrawFilex::execRotate(iAngle);
-
-    cDrawFilex::execRotateCCW90();
-
+    DrawFilesInstance->execRotateCCW90();
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -980,7 +978,7 @@ void MainWindow::execSpinBoxAngle(int angle)
 {
     qDebug() << "Angle:" << angle;
     iAngle = angle;
-    cDrawFilex::execRotate(iAngle);
+    DrawFilesInstance->execRotate(iAngle);
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -1389,7 +1387,7 @@ void MainWindow::execShiftXValueChanged()
     QString s = "ShiftXValueChanged:";
     s += QString::number(cDrawFilex::dx);
 
-    cDrawFilex::execRotate(0);
+    DrawFilesInstance->execRotate(0);
 
     emit draw(cIniFile::currentRotatedImagePath);
 
@@ -1402,7 +1400,7 @@ void MainWindow::execShiftYValueChanged()
     QString s = "ShiftYValueChanged:";
     s += QString::number(cDrawFilex::dy);
 
-    cDrawFilex::execRotate(0);
+    DrawFilesInstance->execRotate(0);
 
     emit draw(cIniFile::currentRotatedImagePath);
 

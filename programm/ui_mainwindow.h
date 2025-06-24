@@ -75,6 +75,7 @@ public:
     QAction *actionInsertProperty;
     QAction *actionInsertTheame;
     QAction *actionShowNewFiles;
+    QAction *actionEraseSection;
     QWidget *centralWidget;
     QGroupBox *groupBoxControl;
     QPushButton *pushButtonBegin;
@@ -85,6 +86,7 @@ public:
     QSpinBox *spinBoxIndex;
     QPushButton *pushButtonGotoIndex;
     QPushButton *pushButtonRemove;
+    QPushButton *pushButtonErase;
     QLabel *labelIncomingListCaption;
     QTableView *tableViewCurrent;
     QGroupBox *groupBoxEdit;
@@ -208,11 +210,13 @@ public:
         actionInsertTheame->setObjectName(QStringLiteral("actionInsertTheame"));
         actionShowNewFiles = new QAction(MainWindow);
         actionShowNewFiles->setObjectName(QStringLiteral("actionShowNewFiles"));
+        actionEraseSection = new QAction(MainWindow);
+        actionEraseSection->setObjectName(QStringLiteral("actionEraseSection"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         groupBoxControl = new QGroupBox(centralWidget);
         groupBoxControl->setObjectName(QStringLiteral("groupBoxControl"));
-        groupBoxControl->setGeometry(QRect(10, 380, 271, 81));
+        groupBoxControl->setGeometry(QRect(10, 380, 271, 111));
         pushButtonBegin = new QPushButton(groupBoxControl);
         pushButtonBegin->setObjectName(QStringLiteral("pushButtonBegin"));
         pushButtonBegin->setGeometry(QRect(20, 20, 23, 23));
@@ -238,6 +242,9 @@ public:
         pushButtonRemove = new QPushButton(groupBoxControl);
         pushButtonRemove->setObjectName(QStringLiteral("pushButtonRemove"));
         pushButtonRemove->setGeometry(QRect(210, 50, 55, 25));
+        pushButtonErase = new QPushButton(groupBoxControl);
+        pushButtonErase->setObjectName(QStringLiteral("pushButtonErase"));
+        pushButtonErase->setGeometry(QRect(210, 80, 55, 25));
         labelIncomingListCaption = new QLabel(centralWidget);
         labelIncomingListCaption->setObjectName(QStringLiteral("labelIncomingListCaption"));
         labelIncomingListCaption->setGeometry(QRect(10, 10, 221, 20));
@@ -370,6 +377,7 @@ public:
         menuFile->addAction(actionGetKeysList);
         menuFile->addAction(actionRemoveSection);
         menuFile->addAction(actionShowNewFiles);
+        menuFile->addAction(actionEraseSection);
         menuFile->addAction(actionExit);
         menuSelect_image->addAction(actionSelectImageBegin);
         menuSelect_image->addAction(actionSelectImageNext);
@@ -391,7 +399,7 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -439,6 +447,7 @@ public:
         actionInsertProperty->setText(QApplication::translate("MainWindow", "InsertProperty", 0));
         actionInsertTheame->setText(QApplication::translate("MainWindow", "InsertTheame", 0));
         actionShowNewFiles->setText(QApplication::translate("MainWindow", "ShowNewFiles", 0));
+        actionEraseSection->setText(QApplication::translate("MainWindow", "EraseSection", 0));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", 0));
 #ifndef QT_NO_TOOLTIP
         pushButtonBegin->setToolTip(QString());
@@ -458,6 +467,7 @@ public:
         pushButtonEnd->setText(QApplication::translate("MainWindow", ">|", 0));
         pushButtonGotoIndex->setText(QApplication::translate("MainWindow", "Goto", 0));
         pushButtonRemove->setText(QApplication::translate("MainWindow", "Remove", 0));
+        pushButtonErase->setText(QApplication::translate("MainWindow", "Erase", 0));
         labelIncomingListCaption->setText(QApplication::translate("MainWindow", "Incoming tag", 0));
         groupBoxEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
         pushButtonLoad->setText(QApplication::translate("MainWindow", "Load", 0));

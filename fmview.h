@@ -6,6 +6,7 @@
 #include <QStatusBar>
 #include <QString>
 #include <QValidator>
+#include <QListWidget>
 
 #include "cinifile.h"
 #include "cdrawfilex.h"
@@ -21,8 +22,12 @@ class fmView : public QDialog
     Q_OBJECT
 
 public:
+
+    //Атрибуты
     int iSize = 821;
     QString currentImagePath;
+    QListWidget * ListWidget;
+    cDrawFilex * DrawFilesInstance;
 
     explicit fmView(QWidget *parent = 0);
     ~fmView();

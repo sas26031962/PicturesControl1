@@ -12,6 +12,7 @@ fmView::fmView(QWidget *parent) :
     ui->lineEditX->setValidator(validatorX);
     ui->lineEditY->setValidator(validatorY);
 
+    DrawFilesInstance = new cDrawFilex();
 
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
     connect(this->ui->horizontalSliderScale, SIGNAL(valueChanged(int)), this, SLOT( execHorizontalSliderValueChanged(int)));
@@ -24,13 +25,15 @@ fmView::fmView(QWidget *parent) :
 fmView::~fmView()
 {
     delete ui;
+    delete DrawFilesInstance;
+
 }
 
 void fmView::execDraw(QString s)
 {
     currentImagePath = s;
     emit showExecStatus(s + " Size=" + QString::number(iSize));
-    cDrawFilex::scaleImage(s, iSize, iSize);
+    DrawFilesInstance->scaleImage(s, iSize, iSize);
     QPixmap pmMain(cIniFile::scaledImagePath);//
     ui->labelMain->setPixmap(pmMain);
 }

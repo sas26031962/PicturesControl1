@@ -30,10 +30,11 @@ public:
     //Методы
     void install(QListWidget * other);
 
-    static QString execRotate(int angle);
-    static void execRotateCW90();
-    static void execRotateCCW90();
-    static void scaleImage(QString, int width, int height);
+    QString execRotate(int angle);
+    void execRotateCW90();
+    void execRotateCCW90();
+
+    void scaleImage(QString, int width, int height);
 
 
 
