@@ -20,6 +20,12 @@ void cDrawFilex::install(QListWidget * other)
 //
 QString cDrawFilex::execRotate(int angle)
 {
+    QListWidgetItem * item0 = new QListWidgetItem("==execRotate==");
+    item0->setForeground(Qt::blue);
+    QListWidgetItem * item1 = new QListWidgetItem("Angle=" + QString::number(angle));
+    ListWidget->addItem(item0);
+    ListWidget->addItem(item1);
+
     //--- Читаем значения из INI-файла
     cIniFile::getCurrentImagePath();
 
@@ -32,14 +38,19 @@ QString cDrawFilex::execRotate(int angle)
     }
     else
     {
-        qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+        //qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+        QListWidgetItem * item3 = new QListWidgetItem("Wrong file format:" + cIniFile::currentImagePath);
+        item3->setForeground(Qt::red);
+        ListWidget->addItem(item3);
 
         return cIniFile::currentRotatedImagePath;
     }
-    qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
+    //qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
 
     cIniFile::currentRotatedImagePath = qsRootOfName + "_1" + "." + qsExtOfName;
 
+    QListWidgetItem * item4 = new QListWidgetItem("TargetFileName:" + cIniFile::currentRotatedImagePath);
+    ListWidget->addItem(item4);
 
     QImage originalImage(cIniFile::currentImagePath);
 
@@ -82,7 +93,9 @@ QString cDrawFilex::execRotate(int angle)
     //---
     rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
 
-    qDebug() << "Image rotated successfully";
+    //qDebug() << "Image rotated successfully";
+    QListWidgetItem * item5 = new QListWidgetItem("Image rotated successfully");
+    ListWidget->addItem(item5);
 
     return cIniFile::currentRotatedImagePath;
 
@@ -108,13 +121,19 @@ void cDrawFilex::execRotateCW90()
     }
     else
     {
-        qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+        //qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+        QListWidgetItem * item1 = new QListWidgetItem("Wrong file format:" + cIniFile::currentImagePath);
+        item1->setForeground(Qt::red);
+        ListWidget->addItem(item1);
 
         return;
     }
-    qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
+    //qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
     // Формируем имя результирующего файла
     cIniFile::currentRotatedImagePath = qsRootOfName + "_1" + "." + qsExtOfName;
+    QListWidgetItem * item2 = new QListWidgetItem("TargetFileName:" + cIniFile::currentRotatedImagePath);
+    ListWidget->addItem(item2);
+
 
     //---
 
@@ -149,38 +168,6 @@ void cDrawFilex::execRotateCW90()
     //rotatedImage.fill(Qt::transparent); // Заполняем прозрачным (фактически - чёрный)
     rotatedImage.fill(Qt::lightGray); // Заполняем голубым
 
-    //быстрое инвертирование цвета
-    /*
-    for (int y = 0; y < source.height(); ++y)
-    {
-        QRgb* rowIn = (QRgb*)source.scanLine(y);
-        QRgb* rowOut = (QRgb*)rotatedImage.scanLine(y + iVerticalShift);
-        for (int x = 0; x < source.width(); ++x)
-        {
-            QRgb pixel = rowIn[x];
-            rowOut[x] = qRgba(
-                255 - qRed(pixel),
-                255 - qGreen(pixel),
-                255 - qBlue(pixel),
-                qAlpha(pixel)
-            );
-        }
-    }
-    */
-    /*
-    //медленное (рефлексия)
-    for (int y = 0; y < source.height(); ++y) {
-        for (int x = 0; x < source.width(); ++x) {
-            QRgb pixel = source.pixel(x, y);
-            rotatedImage.setPixel(x, y + iVerticalShift, qRgba(
-                qRed(pixel),
-                qGreen(pixel),
-                qBlue(pixel),
-                qAlpha(pixel)
-            ));
-        }
-    }
-    */
     //медленный поворот на 90 градусов по часовой стрелке
 
     int x1, y1;
@@ -222,7 +209,10 @@ void cDrawFilex::execRotateCW90()
     }
     else
     {
-        qDebug() << "Invalid rotate operation:" << cIniFile::currentImagePath ;
+        //qDebug() << "Invalid rotate operation:" << cIniFile::currentImagePath ;
+        QListWidgetItem * item3 = new QListWidgetItem("Invalid rotate operation:" + cIniFile::currentRotatedImagePath);
+        item3->setForeground(Qt::red);
+        ListWidget->addItem(item3);
     }
     //---
 
@@ -248,13 +238,18 @@ void cDrawFilex::execRotateCCW90()
     }
     else
     {
-        qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+        //qDebug() << "Wrong file format:" << cIniFile::currentImagePath;
+        QListWidgetItem * item1 = new QListWidgetItem("Wrong file format:" + cIniFile::currentImagePath);
+        item1->setForeground(Qt::red);
+        ListWidget->addItem(item1);
 
         return;
     }
-    qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
+    //qDebug() << "RootOfName=" << qsRootOfName << " ExtOfName=" << qsExtOfName;
     // Формируем имя результирующего файла
     cIniFile::currentRotatedImagePath = qsRootOfName + "_1" + "." + qsExtOfName;
+    QListWidgetItem * item2 = new QListWidgetItem("TargetFileName:" + cIniFile::currentRotatedImagePath);
+    ListWidget->addItem(item2);
 
     //---
 
@@ -329,7 +324,10 @@ void cDrawFilex::execRotateCCW90()
     }
     else
     {
-        qDebug() << "Invalid rotate operation:" << cIniFile::currentImagePath ;
+       //qDebug() << "Invalid rotate operation:" << cIniFile::currentImagePath ;
+        QListWidgetItem * item3 = new QListWidgetItem("Invalid rotate operation:" + cIniFile::currentRotatedImagePath);
+        item3->setForeground(Qt::red);
+        ListWidget->addItem(item3);
     }
     //---
 
