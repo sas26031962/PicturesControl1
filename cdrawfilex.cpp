@@ -181,6 +181,8 @@ void cDrawFilex::execRotateCW90()
             x1 = source.width() - y;
             x1 = x1 - iVerticalShift;
             y1 = x;
+            if(x1 < 0) x1 = -x1;//20250625
+            if(y1 < 0) y1 = -y1;//20250625
             if(rotatedImage.valid(x1,y1))
             {
                 rotatedImage.setPixel(x1, y1, qRgba(
@@ -192,7 +194,10 @@ void cDrawFilex::execRotateCW90()
             }
             else
             {
-                qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
+                //qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
+                QListWidgetItem * itemX = new QListWidgetItem("Invalid: x1=" + QString::number(x1) + " y1=" + QString::number(y1));
+                itemX->setForeground(Qt::red);
+                ListWidget->addItem(itemX);
                 if(errors++ > 10)
                 {
                     break;
@@ -205,7 +210,19 @@ void cDrawFilex::execRotateCW90()
 
     if(errors < 10)
     {
-        rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+        // Сохраняем повернутое изображение
+        if(rotatedImage.save(cIniFile::currentRotatedImagePath))
+        {
+            QListWidgetItem * itemX = new QListWidgetItem("Stored in file:" + cIniFile::currentRotatedImagePath);
+            itemX->setForeground(Qt::green);
+            ListWidget->addItem(itemX);
+        }
+        else
+        {
+            QListWidgetItem * itemX = new QListWidgetItem("!Error stored in file:" + cIniFile::currentRotatedImagePath);
+            itemX->setForeground(Qt::red);
+            ListWidget->addItem(itemX);
+        }
     }
     else
     {
@@ -296,6 +313,8 @@ void cDrawFilex::execRotateCCW90()
             x1 = y;
             x1 = x1 + iVerticalShift;
             y1 = source.width() - 1 - x;
+            if(x1 < 0) x1 = -x1;//20250625
+            if(y1 < 0) y1 = -y1;//20250625
             if(rotatedImage.valid(x1,y1))
             {
                 rotatedImage.setPixel(x1, y1, qRgba(
@@ -307,7 +326,10 @@ void cDrawFilex::execRotateCCW90()
             }
             else
             {
-                qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
+                QListWidgetItem * itemX = new QListWidgetItem("Invalid: x1=" + QString::number(x1) + " y1=" + QString::number(y1));
+                itemX->setForeground(Qt::red);
+                ListWidget->addItem(itemX);
+                //qDebug() << "Invalid: x1=" << x1 << " y1=" << y1;
                 if(errors++ > 10)
                 {
                     break;
@@ -320,7 +342,19 @@ void cDrawFilex::execRotateCCW90()
 
     if(errors < 10)
     {
-        rotatedImage.save(cIniFile::currentRotatedImagePath); // Сохраняем повернутое изображение
+        // Сохраняем повернутое изображение
+        if(rotatedImage.save(cIniFile::currentRotatedImagePath))
+        {
+            QListWidgetItem * itemX = new QListWidgetItem("Stored in file:" + cIniFile::currentRotatedImagePath);
+            itemX->setForeground(Qt::green);
+            ListWidget->addItem(itemX);
+        }
+        else
+        {
+            QListWidgetItem * itemX = new QListWidgetItem("!Error stored in file:" + cIniFile::currentRotatedImagePath);
+            itemX->setForeground(Qt::red);
+            ListWidget->addItem(itemX);
+        }
     }
     else
     {
@@ -355,7 +389,7 @@ void cDrawFilex::scaleImage(QString path, int width, int height)
 
     if (originalImage.isNull())
     {
-        QListWidgetItem * item3 = new QListWidgetItem("Error: Could not load image: " + path);
+        QListWidgetItem * item3 = new QListWidgetItem("ScaleImage Error: Original image is Null. Path= " + path);
         item3->setForeground(Qt::red);
         ListWidget->addItem(item3);
         return;
