@@ -1,0 +1,6 @@
+1-----------------------------------------------------------------------
+ScaleImage Error: Original image is Null. 
+Path= C:/Work/Ships/Torpedo-boat G-5/Внутреннее устройство катера Г-5_files/postmessageRelay_data/
+1240234406-postmessagerelay.js
+
+2-----------------------------------------------------------------------

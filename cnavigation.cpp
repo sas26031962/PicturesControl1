@@ -25,7 +25,7 @@ void cNavigation::install(
     ProgressBarNavigation = progress_bar;
 }
 
-void cNavigation::showCurrentIndexPicture()
+void cNavigation::execShowCurrentIndexPicture()
 {
 
     //ListWidget->clear();
@@ -173,7 +173,7 @@ void cNavigation::execActionGotoIndex()
     iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
     // Отобразить картинку
-    showCurrentIndexPicture();
+    execShowCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -199,7 +199,7 @@ void cNavigation::execActionSelectImageBegin()
     iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
     // Отобразить картинку
-    showCurrentIndexPicture();
+    execShowCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -229,7 +229,7 @@ void cNavigation::execActionSelectImageNext()
     int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
     // Отобразить картинку
-    showCurrentIndexPicture();
+    execShowCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -258,7 +258,7 @@ void cNavigation::execActionSelectImagePrevious()
     int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
     // Отобразить картинку
-    showCurrentIndexPicture();
+    execShowCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -284,7 +284,7 @@ void cNavigation::execActionSelectImageEnd()
     iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
 
     // Отобразить картинку
-    showCurrentIndexPicture();
+    execShowCurrentIndexPicture();
 
     int value  = index;
     if(value < 0)
@@ -332,6 +332,4 @@ void cNavigation::installNavigation()
 //=============================================================================
 
 
-
-//=============================================================================
 

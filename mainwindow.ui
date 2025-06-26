@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
+    <width>892</width>
     <height>640</height>
    </rect>
   </property>
@@ -302,7 +302,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="tab_Subject">
      <attribute name="title">
@@ -409,21 +409,6 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_5">
-     <attribute name="title">
-      <string>Other</string>
-     </attribute>
-     <widget class="QListWidget" name="listWidgetOther">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>261</width>
-        <height>291</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBoxPattern">
     <property name="geometry">
@@ -476,13 +461,36 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBoxLog">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>30</y>
+      <width>281</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Логи</string>
+    </property>
+    <widget class="QListWidget" name="listWidgetOther">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>261</width>
+       <height>521</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
+     <width>892</width>
      <height>21</height>
     </rect>
    </property>
@@ -499,6 +507,7 @@
     <addaction name="actionRemove3gp"/>
     <addaction name="actionGetGroupsList"/>
     <addaction name="actionGetKeysList"/>
+    <addaction name="actionLoadRemovedSectionsList"/>
     <addaction name="actionRemoveSection"/>
     <addaction name="actionShowNewFiles"/>
     <addaction name="actionEraseSection"/>
@@ -759,6 +768,11 @@
   <action name="actionEraseSection">
    <property name="text">
     <string>EraseSection</string>
+   </property>
+  </action>
+  <action name="actionLoadRemovedSectionsList">
+   <property name="text">
+    <string>GetRemovedSectionsList</string>
    </property>
   </action>
  </widget>

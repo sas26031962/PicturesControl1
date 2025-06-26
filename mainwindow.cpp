@@ -264,20 +264,22 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionGetGroupsList, SIGNAL(triggered()), this, SLOT( execActionGetGroupsList()));
     connect(ui->actionGetKeysList, SIGNAL(triggered()), this, SLOT( execActionGetKeysList()));
 
+    connect(ui->actionLoadRemovedSectionsList, SIGNAL(triggered()), NavigationInstance, SLOT( loadRemovedSectionsList()));
+
     connect(ui->actionLoad, SIGNAL(triggered()), this, SLOT( execActionLoad()));
 
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
     connect(ListWidgetPlace, &cListWidgetPlace::showExecStatus, this, &MainWindow::execShowExecStatus);
-    connect(ListWidgetPlace, &cListWidgetPlace::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+    connect(ListWidgetPlace, &cListWidgetPlace::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     connect(ListWidgetSubject, &cListWidgetSubject::showExecStatus, this, &MainWindow::execShowExecStatus);
-    connect(ListWidgetSubject, &cListWidgetSubject::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+    connect(ListWidgetSubject, &cListWidgetSubject::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     connect(ListWidgetProperty, &cListWidgetProperty::showExecStatus, this, &MainWindow::execShowExecStatus);
-    connect(ListWidgetProperty, &cListWidgetProperty::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+    connect(ListWidgetProperty, &cListWidgetProperty::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
-    connect(ListWidgetTheame, &cListWidgetTheame::showCurrentIndexPicture, this, &MainWindow::execShowCurrentIndexPicture);
+    connect(ListWidgetTheame, &cListWidgetTheame::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     fmViewPicture = new fmView(this);
     fmViewPicture->setWindowFlags(Qt::Window);//3 flags
@@ -877,7 +879,7 @@ void MainWindow::execTimerUpdate()
         qDebug() << "CurrentIndex=" << iCurrentIndexGlobal.load(std::memory_order_relaxed);
         execActionLoad();
 
-        NavigationInstance->loadRemovedSectionsList();
+        //NavigationInstance->loadRemovedSectionsList();
 
     }//End of if(iTimerUpdateCounter == 1)
 
@@ -1020,7 +1022,7 @@ void MainWindow::execActionMemo()
             s = "List is empty, exec Load function!!!";
         }
         // Отобразить картинку
-        NavigationInstance->showCurrentIndexPicture();
+        NavigationInstance->execShowCurrentIndexPicture();
     }
     else
     {
@@ -1086,31 +1088,7 @@ void MainWindow::execListWidgetSearchItemClicked()
 }
 
 //=============================================================================
-/*
-void MainWindow::installNavigation()
-{
-    iCurrentIndexGlobal.store(0, std::memory_order_relaxed);
 
-    //Настройка навигации
-    cImportFiles::MaxIndexValue = cIniFile::Groups->count();
-
-    // Установка текущего индекса
-    iCurrentIndexGlobal.store(0);
-
-    // Установка навигации
-    progressBarNavigation->setRange(0, cImportFiles::MaxIndexValue);
-    progressBarNavigation->setValue(0);
-
-    SpinBoxIndex->setRange(0, cImportFiles::MaxIndexValue);
-    SpinBoxIndex->setValue(0);
-
-    // Переход к начальному индексу
-    NavigationInstance->execActionSelectImageBegin();
-
-}
-
-//=============================================================================
-*/
 void MainWindow::execActionSearchRotated()
 {
     QString s = "execActionSearchRotated()";
@@ -1457,7 +1435,7 @@ void MainWindow::execListWidgetFoundedItemClicked()
     iCurrentIndexGlobal.store(FoundedIndex, std::memory_order_relaxed);
 
     // Отобразить картинку
-    NavigationInstance->showCurrentIndexPicture();
+    NavigationInstance->execShowCurrentIndexPicture();
 
     s += ": ";
     s += value;
@@ -1467,13 +1445,6 @@ void MainWindow::execListWidgetFoundedItemClicked()
 }
 
 
-
-//=============================================================================
-
-void MainWindow::execShowCurrentIndexPicture()
-{
-    NavigationInstance->showCurrentIndexPicture();
-}
 
 //=============================================================================
 

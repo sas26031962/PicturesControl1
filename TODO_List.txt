@@ -1,3 +1,8 @@
+#20250626
+
+[] Решить проблему пропадающих файлов
+[] Создать класс cSearch
+
 #20250625
 
 [x] Перенести слот execActionGotoIndex из MainWindow в класс cNavigation
@@ -5,7 +10,7 @@
 [x] Перенести слот execActionSelectImageNext из MainWindow в класс cNavigation
 [x] Перенести слот execActionSelectImagePrevious из MainWindow в класс cNavigation
 [x] Перенести слот execActionSelectImageEnd из MainWindow в класс cNavigation
-[] Перенести метод einstallNavigation из MainWindow в класс cNavigation
+[x] Перенести метод installNavigation из MainWindow в класс cNavigation
 
 #20250622
 

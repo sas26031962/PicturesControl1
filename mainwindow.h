@@ -143,7 +143,6 @@ public:
     ~MainWindow();
 
     //Методы
-    //void installNavigation();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;//keys
@@ -189,8 +188,6 @@ private slots:
 
     void execShiftXValueChanged();
     void execShiftYValueChanged();
-
-    void execShowCurrentIndexPicture();
 
 public slots:
 

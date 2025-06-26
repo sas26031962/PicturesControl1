@@ -33,7 +33,6 @@ public:
 
     //Методы
     void install(QListWidget* list_widget, QTableView* table_view, QSpinBox* spin_box, QProgressBar* progress_bar);
-    void showCurrentIndexPicture();
     void installNavigation();
 
 signals:
@@ -47,6 +46,8 @@ public slots:
     void execActionSelectImageNext();
     void execActionSelectImagePrevious();
     void execActionSelectImageEnd();
+
+    void execShowCurrentIndexPicture();
 
 };
 
