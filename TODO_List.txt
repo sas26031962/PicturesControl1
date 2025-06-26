@@ -1,10 +1,19 @@
+#20250625
+
+[x] Перенести слот execActionGotoIndex из MainWindow в класс cNavigation
+[x] Перенести слот execActionSelectImageBegin из MainWindow в класс cNavigation
+[x] Перенести слот execActionSelectImageNext из MainWindow в класс cNavigation
+[x] Перенести слот execActionSelectImagePrevious из MainWindow в класс cNavigation
+[x] Перенести слот execActionSelectImageEnd из MainWindow в класс cNavigation
+[] Перенести метод einstallNavigation из MainWindow в класс cNavigation
+
 #20250622
 
-[] Сделать функцию удаления файла в папку GarbageCollector
+[x] Сделать функцию удаления файла в папку GarbageCollector
 
 #20250617
 
-[x] Переместить указатель в ListWidgetOther в конец списка
+[?] Переместить указатель в ListWidgetOther в конец списка
 
 #20250611
 
@@ -20,7 +29,7 @@
 
 #20250603
 
-[] Разобраться с ошибками при повороте файлов
+[?] Разобраться с ошибками при повороте файлов
 [] Записывать имена файлов с ошибками при повороте в отдельный файл
 [] Сделать кнопку для добавления повёрнутых файлов в конфигурационный файл
 
@@ -38,7 +47,7 @@
 
 #20250522
 
-[] Добавить сохранение расширенного списка мест
+[x] Добавить сохранение расширенного списка мест
 
 #20250511
 
@@ -49,7 +58,7 @@
 
 #20250426
 
-[] При нажатии на кнопку В КОНЕЦ происходит ошибка переполнения list range
+[x] При нажатии на кнопку В КОНЕЦ происходит ошибка переполнения list range
 
 #20250413
 

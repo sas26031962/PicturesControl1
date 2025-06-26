@@ -186,7 +186,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     NavigationInstance = new cNavigation();
-    NavigationInstance->install(ui->listWidgetOther, ui->tableViewCurrent);
+    NavigationInstance->install(
+        ui->listWidgetOther,
+        ui->tableViewCurrent,
+        ui->spinBoxIndex,
+        ui->progressBarNavigation
+        );
 
     ActionsExec = new cActionsExec();
     ActionsExec->install(ui->listWidgetOther);
@@ -223,11 +228,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButtonLoad->setVisible(false);//РЕЖИМ АДМИНИСТРАТОРА
 
     connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
-    connect(ui->actionGotoIndex, SIGNAL(triggered()), this, SLOT( execActionGotoIndex()));
-    connect(ui->actionSelectImageBegin, SIGNAL(triggered()), this, SLOT( execActionSelectImageBegin()));
-    connect(ui->actionSelectImageNext, SIGNAL(triggered()), this, SLOT( execActionSelectImageNext()));
-    connect(ui->actionSelectImagePrevious, SIGNAL(triggered()), this, SLOT( execActionSelectImagePrevious()));
-    connect(ui->actionSelectImageEnd, SIGNAL(triggered()), this, SLOT( execActionSelectImageEnd()));
+    connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
+    connect(ui->actionSelectImageBegin, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageBegin()));
+    connect(ui->actionSelectImageNext, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageNext()));
+    connect(ui->actionSelectImagePrevious, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImagePrevious()));
+    connect(ui->actionSelectImageEnd, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageEnd()));
 
     connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
 
@@ -242,12 +247,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRotateCW, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
     connect(ui->actionRotateCCW, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
 
-    connect(ui->pushButtonGotoIndex, SIGNAL(pressed()), this, SLOT( execActionGotoIndex()));
+    connect(ui->pushButtonGotoIndex, SIGNAL(pressed()), NavigationInstance, SLOT( execActionGotoIndex()));
 
-    connect(ui->pushButtonBegin, SIGNAL(pressed()), this, SLOT( execActionSelectImageBegin()));
-    connect(ui->pushButtonNext, SIGNAL(pressed()), this, SLOT( execActionSelectImageNext()));
-    connect(ui->pushButtonPrevious, SIGNAL(pressed()), this, SLOT( execActionSelectImagePrevious()));
-    connect(ui->pushButtonEnd, SIGNAL(pressed()), this, SLOT( execActionSelectImageEnd()));
+    connect(ui->pushButtonBegin, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImageBegin()));
+    connect(ui->pushButtonNext, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImageNext()));
+    connect(ui->pushButtonPrevious, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImagePrevious()));
+    connect(ui->pushButtonEnd, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImageEnd()));
     connect(ui->pushButtonLoad, SIGNAL(pressed()), this, SLOT( execActionLoad()));
     connect(ui->pushButtonRotateCW, SIGNAL(pressed()), this, SLOT( execActionRotateCW()));
     connect(ui->pushButtonRotateCCW, SIGNAL(pressed()), this, SLOT( execActionRotateCCW()));
@@ -521,147 +526,6 @@ void MainWindow::saveRemovedSectionsList()
 }//End of void MainWindow::saveRemovedSectionsList()
 
 //=============================================================================
-void MainWindow::execActionGotoIndex()
-{
-
-    int index = SpinBoxIndex->value();
-
-    // Модификация индекса
-    iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
-
-    // Отобразить картинку
-    NavigationInstance->showCurrentIndexPicture();
-
-    int value  = index;
-    if(value < 0)
-    {
-        qDebug() << "execActionGotoIndex(): index < 0";
-    }
-    progressBarNavigation->setValue(value);
-    SpinBoxIndex->setValue(value);
-    //---
-    QString s = "execActionGotoIndex(), goto index:";
-    s += QString::number(index);
-    emit execShowExecStatus(s);
-    //---
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionSelectImageBegin()
-{
-    int index = 0;
-    // Модификация индекса
-    iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
-
-    // Отобразить картинку
-    NavigationInstance->showCurrentIndexPicture();
-
-    int value  = index;
-    if(value < 0)
-    {
-        qDebug() << "execActionSelectImageBegin: index < 0";
-    }
-    progressBarNavigation->setValue(value);
-    SpinBoxIndex->setValue(value);
-    //---
-    QString s = "execActionSelectImageBegin(), goto index:";
-    s += QString::number(index);
-    emit execShowExecStatus(s);
-    //---
-
-}//End of void MainWindow::execActionSelectImageBegin()
-
-//=============================================================================
-
-void MainWindow::execActionSelectImageNext()
-{
-    // Модификация индекса
-    if(iCurrentIndexGlobal.load(std::memory_order_relaxed) < cIniFile::Groups->count() - 1)
-    {
-        iCurrentIndexGlobal.fetch_add(1, std::memory_order_relaxed);
-    }
-    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-
-    // Отобразить картинку
-    NavigationInstance->showCurrentIndexPicture();
-
-    int value  = index;
-    if(value < 0)
-    {
-        qDebug() << "execActionSelectImageNext: index < 0";
-    }
-    progressBarNavigation->setValue(value);
-    SpinBoxIndex->setValue(value);
-    //---
-    QString s = "execActionSelectImageNext(), goto index:";
-    s += QString::number(index);
-    emit execShowExecStatus(s);
-    //---
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionSelectImagePrevious()
-{
-    // Модификация индекса
-    if(iCurrentIndexGlobal.load(std::memory_order_relaxed) > 0)
-    {
-        iCurrentIndexGlobal.fetch_sub(1, std::memory_order_relaxed);
-    }
-    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-
-    // Отобразить картинку
-    NavigationInstance->showCurrentIndexPicture();
-
-    int value  = index;
-    if(value < 0)
-    {
-        qDebug() << "execActionSelectImagePrevious: index < 0";
-    }
-    progressBarNavigation->setValue(value);
-    SpinBoxIndex->setValue(value);
-    //---
-    QString s = "execActionSelectImagePrevious(), goto index:";
-    s += QString::number(index);
-    emit execShowExecStatus(s);
-    //---
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionSelectImageEnd()
-{
-    int index = cIniFile::Groups->count() - 1;
-    // Модификация индекса
-    iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
-
-    // Отобразить картинку
-    NavigationInstance->showCurrentIndexPicture();
-
-    int value  = index;
-    if(value < 0)
-    {
-        qDebug() << "execActionSelectImageEnd(): index < 0";
-    }
-    else if(value > cIniFile::Groups->count() - 1)
-    {
-        value =  cIniFile::Groups->count() - 1;
-    }
-    progressBarNavigation->setValue(value);
-    SpinBoxIndex->setValue(value);
-    //---
-    QString s = "execActionSelectImageEnd(), goto index";
-    s += QString::number(index);
-    emit execShowExecStatus(s);
-    //---
-
-}
-
-//=============================================================================
 
 void MainWindow::execActionImportInitial()
 {
@@ -730,7 +594,7 @@ void MainWindow::execActionLoad()
     SpinBoxIndex->setValue(LoadedCurrentIndex);
 
     // Переход к следующему индексу
-    execActionSelectImageNext();
+    NavigationInstance->execActionSelectImageNext();
 
     //---
     QString s = "execActionLoad(), goto index:";
@@ -904,7 +768,7 @@ void MainWindow::execActionRemoveSection()
         ui->listWidgetOther->addItem(qsGroupName);
     }
 
-    execActionSelectImagePrevious();//Перерисовка изображения
+    NavigationInstance->execActionSelectImagePrevious();//Перерисовка изображения
 
     //===
     emit execShowExecStatus(s);
@@ -932,7 +796,7 @@ void MainWindow::execActionEraseSection()
         ui->listWidgetOther->addItem(qsGroupName);
     }
 
-    execActionSelectImagePrevious();//Перерисовка изображения
+    NavigationInstance->execActionSelectImagePrevious();//Перерисовка изображения
 
     //===
     emit execShowExecStatus(s);
@@ -1222,7 +1086,7 @@ void MainWindow::execListWidgetSearchItemClicked()
 }
 
 //=============================================================================
-
+/*
 void MainWindow::installNavigation()
 {
     iCurrentIndexGlobal.store(0, std::memory_order_relaxed);
@@ -1241,19 +1105,19 @@ void MainWindow::installNavigation()
     SpinBoxIndex->setValue(0);
 
     // Переход к начальному индексу
-    execActionSelectImageBegin();
+    NavigationInstance->execActionSelectImageBegin();
 
 }
 
 //=============================================================================
-
+*/
 void MainWindow::execActionSearchRotated()
 {
     QString s = "execActionSearchRotated()";
 
     LoadFilesInstance->execLoadFilesSignedIsRotated();
 
-    installNavigation();//Настройка навигации
+    NavigationInstance->installNavigation();//Настройка навигации
 
     s += ": find ";
     s += QString::number(cImportFiles::MaxIndexValue);
@@ -1273,7 +1137,7 @@ void MainWindow::execActionSearchOrYes()
     {
         LoadFilesInstance->execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
 
-        installNavigation();//Настройка навигации
+        NavigationInstance->installNavigation();//Настройка навигации
 
         s += ": find ";
         s += QString::number(cImportFiles::MaxIndexValue);

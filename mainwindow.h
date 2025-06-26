@@ -143,7 +143,7 @@ public:
     ~MainWindow();
 
     //Методы
-    void installNavigation();
+    //void installNavigation();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;//keys
@@ -153,10 +153,6 @@ private:
 
 private slots:
 
-    void execActionSelectImageBegin();
-    void execActionSelectImageNext();
-    void execActionSelectImagePrevious();
-    void execActionSelectImageEnd();
     void execActionImportInitial();
     void execActionLoad();
     void execActionFormViewPicture();
@@ -183,8 +179,6 @@ private slots:
 
     void execActionGetGroupsList();
     void execActionGetKeysList();
-
-    void execActionGotoIndex();
 
     void execActionOpenFoundRecord();
 

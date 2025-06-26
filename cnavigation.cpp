@@ -12,10 +12,17 @@ void cNavigation::appEndItem(QListWidgetItem * item)
     ListWidget->scrollToItem(item);
 }
 
-void cNavigation::install(QListWidget* list_widget, QTableView *table_view)
+void cNavigation::install(
+        QListWidget* list_widget,
+        QTableView *table_view,
+        QSpinBox *spin_box,
+        QProgressBar *progress_bar
+        )
 {
     ListWidget = list_widget;
     TableView = table_view;
+    SpinBoxIndex = spin_box;
+    ProgressBarNavigation = progress_bar;
 }
 
 void cNavigation::showCurrentIndexPicture()
@@ -154,3 +161,177 @@ void cNavigation::loadRemovedSectionsList()
     appEndItem(item2);
 
 }//End of void cNavigation::loadRemovedSectionsList()
+
+//=============================================================================
+
+void cNavigation::execActionGotoIndex()
+{
+
+    int index = SpinBoxIndex->value();
+
+    // Модификация индекса
+    iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
+
+    // Отобразить картинку
+    showCurrentIndexPicture();
+
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionGotoIndex(): index < 0";
+    }
+    ProgressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
+    //---
+    QString s = "execActionGotoIndex(), goto index:";
+    s += QString::number(index);
+    emit showExecStatus(s);
+    //---
+
+}
+
+//=============================================================================
+
+void cNavigation::execActionSelectImageBegin()
+{
+    int index = 0;
+    // Модификация индекса
+    iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
+
+    // Отобразить картинку
+    showCurrentIndexPicture();
+
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImageBegin: index < 0";
+    }
+    ProgressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
+    //---
+    QString s = "execActionSelectImageBegin(), goto index:";
+    s += QString::number(index);
+    emit showExecStatus(s);
+    //---
+
+}//End of void MainWindow::execActionSelectImageBegin()
+
+
+//=============================================================================
+
+void cNavigation::execActionSelectImageNext()
+{
+    // Модификация индекса
+    if(iCurrentIndexGlobal.load(std::memory_order_relaxed) < cIniFile::Groups->count() - 1)
+    {
+        iCurrentIndexGlobal.fetch_add(1, std::memory_order_relaxed);
+    }
+    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+
+    // Отобразить картинку
+    showCurrentIndexPicture();
+
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImageNext: index < 0";
+    }
+    ProgressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
+    //---
+    QString s = "execActionSelectImageNext(), goto index:";
+    s += QString::number(index);
+    emit showExecStatus(s);
+    //---
+
+}
+
+//=============================================================================
+
+void cNavigation::execActionSelectImagePrevious()
+{
+    // Модификация индекса
+    if(iCurrentIndexGlobal.load(std::memory_order_relaxed) > 0)
+    {
+        iCurrentIndexGlobal.fetch_sub(1, std::memory_order_relaxed);
+    }
+    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+
+    // Отобразить картинку
+    showCurrentIndexPicture();
+
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImagePrevious: index < 0";
+    }
+    ProgressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
+    //---
+    QString s = "execActionSelectImagePrevious(), goto index:";
+    s += QString::number(index);
+    emit showExecStatus(s);
+    //---
+
+}
+
+//=============================================================================
+
+void cNavigation::execActionSelectImageEnd()
+{
+    int index = cIniFile::Groups->count() - 1;
+    // Модификация индекса
+    iCurrentIndexGlobal.store(index, std::memory_order_relaxed);
+
+    // Отобразить картинку
+    showCurrentIndexPicture();
+
+    int value  = index;
+    if(value < 0)
+    {
+        qDebug() << "execActionSelectImageEnd(): index < 0";
+    }
+    else if(value > cIniFile::Groups->count() - 1)
+    {
+        value =  cIniFile::Groups->count() - 1;
+    }
+    ProgressBarNavigation->setValue(value);
+    SpinBoxIndex->setValue(value);
+    //---
+    QString s = "execActionSelectImageEnd(), goto index";
+    s += QString::number(index);
+    emit showExecStatus(s);
+    //---
+
+}
+
+//=============================================================================
+
+void cNavigation::installNavigation()
+{
+    iCurrentIndexGlobal.store(0, std::memory_order_relaxed);
+
+    //Настройка навигации
+    cImportFiles::MaxIndexValue = cIniFile::Groups->count();
+
+    // Установка текущего индекса
+    iCurrentIndexGlobal.store(0);
+
+    // Установка навигации
+    ProgressBarNavigation->setRange(0, cImportFiles::MaxIndexValue);
+    ProgressBarNavigation->setValue(0);
+
+    SpinBoxIndex->setRange(0, cImportFiles::MaxIndexValue);
+    SpinBoxIndex->setValue(0);
+
+    // Переход к начальному индексу
+    execActionSelectImageBegin();
+
+}
+
+//=============================================================================
+
+
+
+//=============================================================================
+
