@@ -202,6 +202,9 @@ MainWindow::MainWindow(QWidget *parent) :
     DrawFilesInstance = new cDrawFilex();
     DrawFilesInstance->install(ui->listWidgetOther);
 
+    SearchInstance = new cSearch();
+    SearchInstance->install(ui->listWidgetFounded);
+
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
 
@@ -374,7 +377,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //});
 
     connect(ui->actionOpenFoundRecord, &QAction::triggered, this, &MainWindow::execActionOpenFoundRecord);
-    connect(ui->listWidgetFounded, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(execListWidgetFoundedItemClicked()));
 
     //Подключение сигналов модуля Navigation
     connect(NavigationInstance, &cNavigation::showExecStatus, this, &MainWindow::execShowExecStatus);
@@ -383,6 +385,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::draw, fmViewPicture, &fmView::execDraw);
 
     connect(fmViewPicture->DrawFilesInstance, &cDrawFilex::foundMissingFile, this, &MainWindow::execFoundMissingFile);
+
+    //Подключение сигналов модуля Search
+    connect(SearchInstance, &cSearch::showExecStatus, this, &MainWindow::execShowExecStatus);
+    connect(SearchInstance, &cSearch::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     ListWidget = ui->listWidgetOther;
 
@@ -403,6 +409,7 @@ MainWindow::~MainWindow()
     delete NavigationInstance;
     delete LoadFilesInstance;
     delete DrawFilesInstance;
+    delete SearchInstance;
 
     delete progressBarProcess;
     delete labelExecStatus;
@@ -1419,34 +1426,6 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
     emit execShowExecStatus(s);
     //---
 }
-
-//=============================================================================
-void MainWindow::execListWidgetFoundedItemClicked()
-{
-    QString s = "execListWidgetFoundedItemClicked()";
-    QString value = ui->listWidgetFounded->currentItem()->text();
-
-    int FoundedIndex = -1;
-
-    if(cIniFile::Groups->contains(value))
-    {
-        FoundedIndex = cIniFile::Groups->indexOf(value);
-    }
-
-    // Модификация индекса
-    iCurrentIndexGlobal.store(FoundedIndex, std::memory_order_relaxed);
-
-    // Отобразить картинку
-    NavigationInstance->execShowCurrentIndexPicture();
-
-    s += ": ";
-    s += value;
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-
 
 //=============================================================================
 

@@ -42,6 +42,7 @@
 #include "clistwidgettheame.h"
 #include "cactionsexec.h"
 #include "cnavigation.h"
+#include "csearch.h"
 
 
 //-----------------------------------------------------------------------------
@@ -121,6 +122,7 @@ private:
     cNavigation * NavigationInstance;
     cLoadFiles * LoadFilesInstance;
     cDrawFilex * DrawFilesInstance;
+    cSearch * SearchInstance;
 
     //Методы
     bool deleteSection(QString s);
@@ -157,8 +159,6 @@ private slots:
     void execActionFormViewPicture();
     void execActionMemo();
     void execTimerUpdate();
-
-    void execListWidgetFoundedItemClicked();
 
     void execComboBoxCurrentIndexChanged(int x);
 

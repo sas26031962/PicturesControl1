@@ -17,7 +17,6 @@
 
 class cDrawFilex : public QObject
 {
-    //QPixmap qpmSmileMissing;
 
     Q_OBJECT
 
