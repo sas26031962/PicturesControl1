@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QPainter>
 #include <QListWidget>
+#include <QPixmap>
 
 #include "cinifile.h"
 
@@ -16,6 +17,8 @@
 
 class cDrawFilex : public QObject
 {
+    //QPixmap qpmSmileMissing;
+
     Q_OBJECT
 
     //Атрибуты
@@ -39,6 +42,7 @@ public:
 
 
 signals:
+    void foundMissingFile(QString s);
 
 public slots:
 };

@@ -7,6 +7,7 @@
 #include <QString>
 #include <QValidator>
 #include <QListWidget>
+#include <QPixmap>
 
 #include "cinifile.h"
 #include "cdrawfilex.h"

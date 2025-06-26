@@ -12,6 +12,7 @@ fmView::fmView(QWidget *parent) :
     ui->lineEditX->setValidator(validatorX);
     ui->lineEditY->setValidator(validatorY);
 
+
     DrawFilesInstance = new cDrawFilex();
 
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));

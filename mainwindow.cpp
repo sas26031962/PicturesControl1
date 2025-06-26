@@ -382,6 +382,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(this, &MainWindow::draw, fmViewPicture, &fmView::execDraw);
 
+    connect(fmViewPicture->DrawFilesInstance, &cDrawFilex::foundMissingFile, this, &MainWindow::execFoundMissingFile);
+
     ListWidget = ui->listWidgetOther;
 
 }//End of ctor
@@ -1447,6 +1449,11 @@ void MainWindow::execListWidgetFoundedItemClicked()
 
 
 //=============================================================================
+
+void MainWindow::execFoundMissingFile(QString path)
+{
+    qDebug() << "Found missing file:" << path;
+}
 
 //##############################################################################
 

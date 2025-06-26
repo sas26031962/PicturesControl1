@@ -5,7 +5,7 @@ qreal cDrawFilex::dy = INITIAL_SHIFT_Y;
 
 cDrawFilex::cDrawFilex(QObject *parent) : QObject(parent)
 {
-
+    //
 }
 
 //=============================================================================
@@ -392,7 +392,12 @@ void cDrawFilex::scaleImage(QString path, int width, int height)
         QListWidgetItem * item3 = new QListWidgetItem("ScaleImage Error: Original image is Null. Path= " + path);
         item3->setForeground(Qt::red);
         ListWidget->addItem(item3);
-        return;
+
+        emit foundMissingFile(path);
+
+        //Замена оригинального изображения мемом
+        originalImage = QImage(":/img/programm/img/tmp/SmileMissing.png");
+
     }
 
     int oldWidth = originalImage.width();

@@ -189,6 +189,8 @@ private slots:
     void execShiftXValueChanged();
     void execShiftYValueChanged();
 
+    void execFoundMissingFile(QString path);
+
 public slots:
 
 signals:
