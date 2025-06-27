@@ -13,6 +13,7 @@ INPUT(
 ./debug\clistwidgettheame.o
 ./debug\cactionsexec.o
 ./debug\cnavigation.o
+./debug\csearch.o
 ./debug\qrc_resourcedata.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fmview.o
@@ -23,4 +24,5 @@ INPUT(
 ./debug\moc_cactionsexec.o
 ./debug\moc_cnavigation.o
 ./debug\moc_cdrawfilex.o
+./debug\moc_csearch.o
 );

@@ -75,6 +75,7 @@ public:
     QAction *actionInsertTheame;
     QAction *actionShowNewFiles;
     QAction *actionEraseSection;
+    QAction *actionLoadRemovedSectionsList;
     QWidget *centralWidget;
     QGroupBox *groupBoxControl;
     QPushButton *pushButtonBegin;
@@ -109,12 +110,12 @@ public:
     QPushButton *pushButtonSearchOrYes;
     QWidget *tab_7;
     QListWidget *listWidgetFounded;
-    QWidget *tab_5;
-    QListWidget *listWidgetOther;
     QGroupBox *groupBoxPattern;
     QLineEdit *lineEditPattern;
     QPushButton *pushButtonSearchPatternX;
     QComboBox *comboBoxPatterns;
+    QGroupBox *groupBoxLog;
+    QListWidget *listWidgetOther;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuSelect_image;
@@ -127,8 +128,13 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
+<<<<<<< Updated upstream
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(601, 640);
+=======
+            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+        MainWindow->resize(892, 640);
+>>>>>>> Stashed changes
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         actionSelectImageBegin = new QAction(MainWindow);
@@ -210,7 +216,13 @@ public:
         actionShowNewFiles = new QAction(MainWindow);
         actionShowNewFiles->setObjectName(QString::fromUtf8("actionShowNewFiles"));
         actionEraseSection = new QAction(MainWindow);
+<<<<<<< Updated upstream
         actionEraseSection->setObjectName(QString::fromUtf8("actionEraseSection"));
+=======
+        actionEraseSection->setObjectName(QStringLiteral("actionEraseSection"));
+        actionLoadRemovedSectionsList = new QAction(MainWindow);
+        actionLoadRemovedSectionsList->setObjectName(QStringLiteral("actionLoadRemovedSectionsList"));
+>>>>>>> Stashed changes
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         groupBoxControl = new QGroupBox(centralWidget);
@@ -317,12 +329,15 @@ public:
         listWidgetFounded->setObjectName(QString::fromUtf8("listWidgetFounded"));
         listWidgetFounded->setGeometry(QRect(10, 10, 261, 291));
         tabWidget->addTab(tab_7, QString());
+<<<<<<< Updated upstream
         tab_5 = new QWidget();
         tab_5->setObjectName(QString::fromUtf8("tab_5"));
         listWidgetOther = new QListWidget(tab_5);
         listWidgetOther->setObjectName(QString::fromUtf8("listWidgetOther"));
         listWidgetOther->setGeometry(QRect(10, 10, 261, 291));
         tabWidget->addTab(tab_5, QString());
+=======
+>>>>>>> Stashed changes
         groupBoxPattern = new QGroupBox(centralWidget);
         groupBoxPattern->setObjectName(QString::fromUtf8("groupBoxPattern"));
         groupBoxPattern->setGeometry(QRect(290, 430, 301, 81));
@@ -338,10 +353,21 @@ public:
         comboBoxPatterns = new QComboBox(groupBoxPattern);
         comboBoxPatterns->setObjectName(QString::fromUtf8("comboBoxPatterns"));
         comboBoxPatterns->setGeometry(QRect(10, 50, 221, 22));
+        groupBoxLog = new QGroupBox(centralWidget);
+        groupBoxLog->setObjectName(QStringLiteral("groupBoxLog"));
+        groupBoxLog->setGeometry(QRect(600, 30, 281, 551));
+        listWidgetOther = new QListWidget(groupBoxLog);
+        listWidgetOther->setObjectName(QStringLiteral("listWidgetOther"));
+        listWidgetOther->setGeometry(QRect(10, 20, 261, 521));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
+<<<<<<< Updated upstream
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 601, 21));
+=======
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 892, 21));
+>>>>>>> Stashed changes
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuSelect_image = new QMenu(menuBar);
@@ -374,6 +400,7 @@ public:
         menuFile->addAction(actionRemove3gp);
         menuFile->addAction(actionGetGroupsList);
         menuFile->addAction(actionGetKeysList);
+        menuFile->addAction(actionLoadRemovedSectionsList);
         menuFile->addAction(actionRemoveSection);
         menuFile->addAction(actionShowNewFiles);
         menuFile->addAction(actionEraseSection);
@@ -398,7 +425,7 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -406,6 +433,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
+<<<<<<< Updated upstream
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "PicturesControl1 ", nullptr));
         actionExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
         actionSelectImageBegin->setText(QApplication::translate("MainWindow", "Begin", nullptr));
@@ -448,6 +476,51 @@ public:
         actionShowNewFiles->setText(QApplication::translate("MainWindow", "ShowNewFiles", nullptr));
         actionEraseSection->setText(QApplication::translate("MainWindow", "EraseSection", nullptr));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", nullptr));
+=======
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "PicturesControl1 ", 0));
+        actionExit->setText(QApplication::translate("MainWindow", "Exit", 0));
+        actionSelectImageBegin->setText(QApplication::translate("MainWindow", "Begin", 0));
+        actionSelectImageNext->setText(QApplication::translate("MainWindow", "Next", 0));
+        actionSelectImagePrevious->setText(QApplication::translate("MainWindow", "Previous", 0));
+        actionSelectImageEnd->setText(QApplication::translate("MainWindow", "End", 0));
+        actionImport->setText(QApplication::translate("MainWindow", "Import", 0));
+        actionLoad->setText(QApplication::translate("MainWindow", "Load", 0));
+        actionViewPicture->setText(QApplication::translate("MainWindow", "ViewPicture", 0));
+        actionLoaadHashTagListSubject->setText(QApplication::translate("MainWindow", "LoadSubject", 0));
+        actionLoadHashTagListPlace->setText(QApplication::translate("MainWindow", "LoadPlace", 0));
+        actionRemoveMovie->setText(QApplication::translate("MainWindow", "RemoveMovie", 0));
+        actionRotateCW->setText(QApplication::translate("MainWindow", "RotateCW", 0));
+        actionRotateCCW->setText(QApplication::translate("MainWindow", "RotateCCW", 0));
+        actionLoadHashTagListProperty->setText(QApplication::translate("MainWindow", "LoadProperty", 0));
+        actionImportFiles->setText(QApplication::translate("MainWindow", "ImportFiles", 0));
+        actionRotateCW_2->setText(QApplication::translate("MainWindow", "RotateCW", 0));
+        actionRotateCCW_2->setText(QApplication::translate("MainWindow", "RotateCCW", 0));
+        actionRemoveText->setText(QApplication::translate("MainWindow", "RemoveText", 0));
+        actionRemoveTif->setText(QApplication::translate("MainWindow", "RemoveTif", 0));
+        actionGetGroupsList->setText(QApplication::translate("MainWindow", "GetGroupsList", 0));
+        actionLoadHashTagListTheame->setText(QApplication::translate("MainWindow", "LoadTheame", 0));
+        actionRemoveSection->setText(QApplication::translate("MainWindow", "RemoveSection", 0));
+        actionGotoIndex->setText(QApplication::translate("MainWindow", "Goto index", 0));
+        actionRemoveBin->setText(QApplication::translate("MainWindow", "Remove Bin", 0));
+        actionRemove3gp->setText(QApplication::translate("MainWindow", "Remove 3gp", 0));
+        actionSearchRotated->setText(QApplication::translate("MainWindow", "SearchRotated", 0));
+        actionSearchOrYes->setText(QApplication::translate("MainWindow", "SearchOrYes", 0));
+        actionGetKeysList->setText(QApplication::translate("MainWindow", "GetKeysList", 0));
+        actionSearchNamePattern1->setText(QApplication::translate("MainWindow", "SearchNamePattern1", 0));
+        actionSearchNamePattern2->setText(QApplication::translate("MainWindow", "SearchNamePattern2", 0));
+        actionSearchNamePatterns12Intersection->setText(QApplication::translate("MainWindow", "SearchNamePatterns12Intersection", 0));
+        actionSearchNamePatternX->setText(QApplication::translate("MainWindow", "SearchNamePatternX", 0));
+        actionOpenFoundRecord->setText(QApplication::translate("MainWindow", "OpenFoundRecord", 0));
+        actionSearchNamePatterns1XIntersection->setText(QApplication::translate("MainWindow", "SearchNamePatterns1XIntersection", 0));
+        actionInsertSubject->setText(QApplication::translate("MainWindow", "InsertSubject", 0));
+        actionInsertPlace->setText(QApplication::translate("MainWindow", "InsertPlace", 0));
+        actionInsertProperty->setText(QApplication::translate("MainWindow", "InsertProperty", 0));
+        actionInsertTheame->setText(QApplication::translate("MainWindow", "InsertTheame", 0));
+        actionShowNewFiles->setText(QApplication::translate("MainWindow", "ShowNewFiles", 0));
+        actionEraseSection->setText(QApplication::translate("MainWindow", "EraseSection", 0));
+        actionLoadRemovedSectionsList->setText(QApplication::translate("MainWindow", "GetRemovedSectionsList", 0));
+        groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", 0));
+>>>>>>> Stashed changes
 #ifndef QT_NO_TOOLTIP
         pushButtonBegin->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
@@ -485,6 +558,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         pushButtonRotateCW->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
+<<<<<<< Updated upstream
         pushButtonRotateCW->setText(QApplication::translate("MainWindow", "Rotate CW", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\241\321\203\321\211\320\275\320\276\321\201\321\202\320\270", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_Place), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", nullptr));
@@ -503,6 +577,26 @@ public:
         menuForms->setTitle(QApplication::translate("MainWindow", "Forms", nullptr));
         menuTags->setTitle(QApplication::translate("MainWindow", "Tags", nullptr));
         menuSearch->setTitle(QApplication::translate("MainWindow", "Search", nullptr));
+=======
+        pushButtonRotateCW->setText(QApplication::translate("MainWindow", "Rotate CW", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Subject), QApplication::translate("MainWindow", "\320\241\321\203\321\211\320\275\320\276\321\201\321\202\320\270", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Place), QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\202\320\260", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Property), QApplication::translate("MainWindow", "\320\241\320\262\320\276\320\271\321\201\321\202\320\262\320\260", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_Theame), QApplication::translate("MainWindow", "\320\242\320\265\320\274\320\260", 0));
+        labelKeysCaption->setText(QApplication::translate("MainWindow", "All keys", 0));
+        labelSearchKeysCaption->setText(QApplication::translate("MainWindow", "Keys for search", 0));
+        pushButtonSearchOrYes->setText(QApplication::translate("MainWindow", "Search OR YES", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Search", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Founded", 0));
+        groupBoxPattern->setTitle(QApplication::translate("MainWindow", "Pattern", 0));
+        pushButtonSearchPatternX->setText(QApplication::translate("MainWindow", "Search", 0));
+        groupBoxLog->setTitle(QApplication::translate("MainWindow", "\320\233\320\276\320\263\320\270", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
+        menuSelect_image->setTitle(QApplication::translate("MainWindow", "Select image", 0));
+        menuForms->setTitle(QApplication::translate("MainWindow", "Forms", 0));
+        menuTags->setTitle(QApplication::translate("MainWindow", "Tags", 0));
+        menuSearch->setTitle(QApplication::translate("MainWindow", "Search", 0));
+>>>>>>> Stashed changes
     } // retranslateUi
 
 };
