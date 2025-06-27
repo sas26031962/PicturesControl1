@@ -9,6 +9,7 @@
 #include <QListWidget>
 
 #include "cinifile.h"
+#include "cloadfiles.h"
 
 class cSearch : public QObject
 {
@@ -16,13 +17,16 @@ class cSearch : public QObject
 
     //Атрибуты
     QListWidget * ListWidgetFounded;
+    QListWidget * ListWidgetOther;
 
 public:
     //Конструктор
     explicit cSearch(QObject *parent = 0);
 
     //Методы
-    void install(QListWidget * other);
+    void install(QListWidget * founded, QListWidget * other);
+    void showGroupsList();
+    bool searchNamePattern(const QString& pattern);
 
 
 signals:

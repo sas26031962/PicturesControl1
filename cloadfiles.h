@@ -29,7 +29,6 @@ public:
 
     void execLoadFilesSignedIsRotated();
     void execLoadFilesByConditionOrYes(QStringList yes);
-    bool searchNamePattern(const QString& pattern);
 
     static bool saveStringListToFile(const QString& fileName, const QStringList& list);
     static QStringList loadStringListFromFile(const QString& fileName);

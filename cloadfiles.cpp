@@ -188,69 +188,6 @@ void cLoadFiles::execLoadFilesByConditionOrYes(QStringList yes)
 
 //=============================================================================
 
-bool cLoadFiles::searchNamePattern(const QString& pattern)
-{
-    QRegularExpression re(pattern);
-
-    QListWidgetItem * item0 = new QListWidgetItem("==execLoadFilesByNamePattern==");
-    item0->setForeground(Qt::blue);
-    ListWidget->addItem(item0);
-
-    QListWidgetItem * item1 = new QListWidgetItem("<Pattern>=" + pattern);
-    ListWidget->addItem(item1);
-
-    //qDebug() << "Search pattern:" << pattern;
-
-    // Создаем объект QSettings с указанием формата INI и пути к файлу
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-
-    // Читаем значения из INI-файла
-
-    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
-
-    QListWidgetItem * item2 = new QListWidgetItem("TotalGroups length: " + QString::number(TotalGroups.count()));
-    ListWidget->addItem(item2);
-
-    cIniFile::Groups->clear();//Очистка результата
-
-    int iCount = 0;// Очистка счётчика найденных объектов
-    QListIterator<QString> readIt(TotalGroups);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-        //qDebug() << qsSection;
-        bool match = re.match(qsSection.toLower()).hasMatch();
-        if(match)
-        {
-            iCount++;
-            cIniFile::Groups->append(qsSection);
-            //qDebug() << "iterator: section=" << qsSection << " contain pattern:" << pattern << " count=" << iCount;
-        }
-    }
-
-    QString qsItem3;
-    if(iCount > 0)
-    {
-        qsItem3 = "<Pattern> in file names detected in ";
-        qsItem3 += QString::number(iCount);
-        qsItem3 += " files";
-    }
-    else
-    {
-        qsItem3 = "No <Pattern> in file names detected";
-    }
-
-    QListWidgetItem * item3 = new QListWidgetItem(qsItem3);
-    ListWidget->addItem(item3);
-
-    //---
-    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern1StringListFilePath, *cIniFile::Groups);
-    //---
-    return x;
-}
-
-//=============================================================================
-
 bool cLoadFiles::saveStringListToFile(const QString& fileName, const QStringList& list)
 {
     QFile file(fileName);

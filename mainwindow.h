@@ -129,7 +129,6 @@ private:
     bool eraseSection(QString s);
 
     void saveRemovedSectionsList();
-    void showGroupsList();
 
 public:
     //Атрибуты

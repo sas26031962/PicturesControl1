@@ -203,7 +203,7 @@ MainWindow::MainWindow(QWidget *parent) :
     DrawFilesInstance->install(ui->listWidgetOther);
 
     SearchInstance = new cSearch();
-    SearchInstance->install(ui->listWidgetFounded);
+    SearchInstance->install(ui->listWidgetFounded, ui->listWidgetOther);
 
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
@@ -1141,30 +1141,14 @@ void MainWindow::execActionSearchOrYes()
 
 //=============================================================================
 
-//
-// Отобразить содержимое списка cIniFile::Groups в элементе ui->listWidgetFounded
-//
-void MainWindow::showGroupsList()
-{
-    ui->listWidgetFounded->clear();
-    QListIterator<QString> readIt(*cIniFile::Groups);
-    while (readIt.hasNext())
-    {
-        QString qsSection = readIt.next();
-        ui->listWidgetFounded->addItem(qsSection);
-    }
-}
-
-//=============================================================================
-
 void MainWindow::execActionSearchNamePattern1()
 {
     QString s = "execActionSearchNamePattern1()";
     QString pattern = "^20[0-9]{6}_[0-9]{6}";
 
-    bool x = LoadFilesInstance->searchNamePattern(pattern);
+    bool x = SearchInstance->searchNamePattern(pattern);
 
-    showGroupsList();
+    SearchInstance->showGroupsList();
 
     //---
     s += ": iCount=";
@@ -1186,9 +1170,9 @@ void MainWindow::execActionSearchNamePattern2()
     QString s = "execActionSearchNamePattern2()";
     QString pattern = "^20[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}-[0-9]{2}-[0-9]{2}";
 
-    bool x = LoadFilesInstance->searchNamePattern(pattern);
+    bool x = SearchInstance->searchNamePattern(pattern);
 
-    showGroupsList();
+    SearchInstance->showGroupsList();
 
     //---
     s += ": iCount=";
@@ -1212,9 +1196,9 @@ void MainWindow::execActionSearchNamePattern()
     //QString pattern = "IMG_20[0-9]{6}_[0-9]{6}";
     QString pattern = ui->lineEditPattern->text();
 
-    LoadFilesInstance->searchNamePattern(pattern);
+    SearchInstance->searchNamePattern(pattern);
 
-    showGroupsList();
+    SearchInstance->showGroupsList();
 
     //---
     s += ": iCount=";
@@ -1435,5 +1419,4 @@ void MainWindow::execFoundMissingFile(QString path)
 }
 
 //##############################################################################
-
 

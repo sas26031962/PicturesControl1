@@ -3,6 +3,8 @@
 [] Решить проблему пропадающих файлов
 [x] Создать класс cSearch
 [x] Перенести метод execListWidgetFoundedItemClicked из главной формы в класс cSearch
+[x] Перенести метод showGroupsList() из главной формы в класс cSearch
+[x] Перенести метод searchNamePattern() из класса cLoadFile в класс cSearch
 
 #20250625
 
