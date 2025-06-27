@@ -65,7 +65,8 @@ SOURCES       = ../main.cpp \
 		../clistwidgetproperty.cpp \
 		../clistwidgettheame.cpp \
 		../cactionsexec.cpp \
-		../cnavigation.cpp qrc_resourcedata.cpp \
+		../cnavigation.cpp \
+		../csearch.cpp qrc_resourcedata.cpp \
 		moc_mainwindow.cpp \
 		moc_fmview.cpp \
 		moc_clistwidgetplace.cpp \
@@ -74,7 +75,8 @@ SOURCES       = ../main.cpp \
 		moc_clistwidgettheame.cpp \
 		moc_cactionsexec.cpp \
 		moc_cnavigation.cpp \
-		moc_cdrawfilex.cpp
+		moc_cdrawfilex.cpp \
+		moc_csearch.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		cinifile.o \
@@ -89,6 +91,7 @@ OBJECTS       = main.o \
 		clistwidgettheame.o \
 		cactionsexec.o \
 		cnavigation.o \
+		csearch.o \
 		qrc_resourcedata.o \
 		moc_mainwindow.o \
 		moc_fmview.o \
@@ -98,7 +101,8 @@ OBJECTS       = main.o \
 		moc_clistwidgettheame.o \
 		moc_cactionsexec.o \
 		moc_cnavigation.o \
-		moc_cdrawfilex.o
+		moc_cdrawfilex.o \
+		moc_csearch.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -188,7 +192,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../clistwidgettheame.h \
 		../cactionsexec.h \
 		../cnavigation.h \
-		../cdrawfilex.h ../main.cpp \
+		../cdrawfilex.h \
+		../csearch.h ../main.cpp \
 		../mainwindow.cpp \
 		../cinifile.cpp \
 		../crecord.cpp \
@@ -201,7 +206,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../clistwidgetproperty.cpp \
 		../clistwidgettheame.cpp \
 		../cactionsexec.cpp \
-		../cnavigation.cpp
+		../cnavigation.cpp \
+		../csearch.cpp
 QMAKE_TARGET  = PicturesControl1
 DESTDIR       = 
 TARGET        = PicturesControl1
@@ -386,8 +392,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resourcedata.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h ../clistwidgettheame.h ../cactionsexec.h ../cnavigation.h ../cdrawfilex.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfilex.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp ../clistwidgettheame.cpp ../cactionsexec.cpp ../cnavigation.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h ../clistwidgettheame.h ../cactionsexec.h ../cnavigation.h ../cdrawfilex.h ../csearch.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfilex.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp ../clistwidgettheame.cpp ../cactionsexec.cpp ../cnavigation.cpp ../csearch.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../mainwindow.ui ../fmview.ui $(DISTDIR)/
 
 
@@ -418,6 +424,7 @@ compiler_rcc_clean:
 qrc_resourcedata.cpp: ../resourcedata.qrc \
 		/usr/lib/qt5/bin/rcc \
 		settings.ini \
+		img/tmp/SmileMissing.png \
 		../TODO_List.txt
 	/usr/lib/qt5/bin/rcc -name resourcedata ../resourcedata.qrc -o qrc_resourcedata.cpp
 
@@ -427,9 +434,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1y -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp moc_clistwidgetsubject.cpp moc_clistwidgetproperty.cpp moc_clistwidgettheame.cpp moc_cactionsexec.cpp moc_cnavigation.cpp moc_cdrawfilex.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp moc_clistwidgetsubject.cpp moc_clistwidgetproperty.cpp moc_clistwidgettheame.cpp moc_cactionsexec.cpp moc_cnavigation.cpp moc_cdrawfilex.cpp moc_csearch.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp moc_clistwidgetsubject.cpp moc_clistwidgetproperty.cpp moc_clistwidgettheame.cpp moc_cactionsexec.cpp moc_cnavigation.cpp moc_cdrawfilex.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_fmview.cpp moc_clistwidgetplace.cpp moc_clistwidgetsubject.cpp moc_clistwidgetproperty.cpp moc_clistwidgettheame.cpp moc_cactionsexec.cpp moc_cnavigation.cpp moc_cdrawfilex.cpp moc_csearch.cpp
 moc_mainwindow.cpp: ../mainwindow.h \
 		../cinifile.h \
 		../crecord.h \
@@ -445,6 +452,7 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		../clistwidgettheame.h \
 		../cactionsexec.h \
 		../cnavigation.h \
+		../csearch.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../mainwindow.h -o moc_mainwindow.cpp
@@ -522,6 +530,13 @@ moc_cdrawfilex.cpp: ../cdrawfilex.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../cdrawfilex.h -o moc_cdrawfilex.cpp
 
+moc_csearch.cpp: ../csearch.h \
+		../cinifile.h \
+		../crecord.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../csearch.h -o moc_csearch.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -561,7 +576,8 @@ main.o: ../main.cpp ../mainwindow.h \
 		../clistwidgetproperty.h \
 		../clistwidgettheame.h \
 		../cactionsexec.h \
-		../cnavigation.h
+		../cnavigation.h \
+		../csearch.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
 
 mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
@@ -579,6 +595,7 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../clistwidgettheame.h \
 		../cactionsexec.h \
 		../cnavigation.h \
+		../csearch.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
@@ -659,6 +676,11 @@ cnavigation.o: ../cnavigation.cpp ../cnavigation.h \
 		../cloadfiles.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cnavigation.o ../cnavigation.cpp
 
+csearch.o: ../csearch.cpp ../csearch.h \
+		../cinifile.h \
+		../crecord.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csearch.o ../csearch.cpp
+
 qrc_resourcedata.o: qrc_resourcedata.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resourcedata.o qrc_resourcedata.cpp
 
@@ -688,6 +710,9 @@ moc_cnavigation.o: moc_cnavigation.cpp
 
 moc_cdrawfilex.o: moc_cdrawfilex.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_cdrawfilex.o moc_cdrawfilex.cpp
+
+moc_csearch.o: moc_csearch.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_csearch.o moc_csearch.cpp
 
 ####### Install
 

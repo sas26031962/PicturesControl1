@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_cNavigation_t {
-    QByteArrayData data[6];
-    char stringdata0[59];
+    QByteArrayData data[12];
+    char stringdata0[215];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,11 +36,22 @@ QT_MOC_LITERAL(1, 12, 4), // "draw"
 QT_MOC_LITERAL(2, 17, 0), // ""
 QT_MOC_LITERAL(3, 18, 1), // "s"
 QT_MOC_LITERAL(4, 20, 14), // "showExecStatus"
-QT_MOC_LITERAL(5, 35, 23) // "loadRemovedSectionsList"
+QT_MOC_LITERAL(5, 35, 23), // "loadRemovedSectionsList"
+QT_MOC_LITERAL(6, 59, 19), // "execActionGotoIndex"
+QT_MOC_LITERAL(7, 79, 26), // "execActionSelectImageBegin"
+QT_MOC_LITERAL(8, 106, 25), // "execActionSelectImageNext"
+QT_MOC_LITERAL(9, 132, 29), // "execActionSelectImagePrevious"
+QT_MOC_LITERAL(10, 162, 24), // "execActionSelectImageEnd"
+QT_MOC_LITERAL(11, 187, 27) // "execShowCurrentIndexPicture"
 
     },
     "cNavigation\0draw\0\0s\0showExecStatus\0"
-    "loadRemovedSectionsList"
+    "loadRemovedSectionsList\0execActionGotoIndex\0"
+    "execActionSelectImageBegin\0"
+    "execActionSelectImageNext\0"
+    "execActionSelectImagePrevious\0"
+    "execActionSelectImageEnd\0"
+    "execShowCurrentIndexPicture"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,7 +61,7 @@ static const uint qt_meta_data_cNavigation[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,17 +69,29 @@ static const uint qt_meta_data_cNavigation[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x06 /* Public */,
-       4,    1,   32,    2, 0x06 /* Public */,
+       1,    1,   59,    2, 0x06 /* Public */,
+       4,    1,   62,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   35,    2, 0x0a /* Public */,
+       5,    0,   65,    2, 0x0a /* Public */,
+       6,    0,   66,    2, 0x0a /* Public */,
+       7,    0,   67,    2, 0x0a /* Public */,
+       8,    0,   68,    2, 0x0a /* Public */,
+       9,    0,   69,    2, 0x0a /* Public */,
+      10,    0,   70,    2, 0x0a /* Public */,
+      11,    0,   71,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    3,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -83,6 +106,12 @@ void cNavigation::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: _t->draw((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->showExecStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->loadRemovedSectionsList(); break;
+        case 3: _t->execActionGotoIndex(); break;
+        case 4: _t->execActionSelectImageBegin(); break;
+        case 5: _t->execActionSelectImageNext(); break;
+        case 6: _t->execActionSelectImagePrevious(); break;
+        case 7: _t->execActionSelectImageEnd(); break;
+        case 8: _t->execShowCurrentIndexPicture(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -133,13 +162,13 @@ int cNavigation::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 9;
     }
     return _id;
 }

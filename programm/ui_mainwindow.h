@@ -130,9 +130,13 @@ public:
         if (MainWindow->objectName().isEmpty())
 <<<<<<< Updated upstream
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+<<<<<<< Updated upstream
         MainWindow->resize(601, 640);
 =======
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
+        MainWindow->resize(892, 640);
+>>>>>>> Stashed changes
+=======
         MainWindow->resize(892, 640);
 >>>>>>> Stashed changes
         actionExit = new QAction(MainWindow);
@@ -218,10 +222,15 @@ public:
         actionEraseSection = new QAction(MainWindow);
 <<<<<<< Updated upstream
         actionEraseSection->setObjectName(QString::fromUtf8("actionEraseSection"));
+<<<<<<< Updated upstream
 =======
         actionEraseSection->setObjectName(QStringLiteral("actionEraseSection"));
         actionLoadRemovedSectionsList = new QAction(MainWindow);
         actionLoadRemovedSectionsList->setObjectName(QStringLiteral("actionLoadRemovedSectionsList"));
+>>>>>>> Stashed changes
+=======
+        actionLoadRemovedSectionsList = new QAction(MainWindow);
+        actionLoadRemovedSectionsList->setObjectName(QString::fromUtf8("actionLoadRemovedSectionsList"));
 >>>>>>> Stashed changes
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
@@ -330,12 +339,15 @@ public:
         listWidgetFounded->setGeometry(QRect(10, 10, 261, 291));
         tabWidget->addTab(tab_7, QString());
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         tab_5 = new QWidget();
         tab_5->setObjectName(QString::fromUtf8("tab_5"));
         listWidgetOther = new QListWidget(tab_5);
         listWidgetOther->setObjectName(QString::fromUtf8("listWidgetOther"));
         listWidgetOther->setGeometry(QRect(10, 10, 261, 291));
         tabWidget->addTab(tab_5, QString());
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         groupBoxPattern = new QGroupBox(centralWidget);
@@ -354,18 +366,29 @@ public:
         comboBoxPatterns->setObjectName(QString::fromUtf8("comboBoxPatterns"));
         comboBoxPatterns->setGeometry(QRect(10, 50, 221, 22));
         groupBoxLog = new QGroupBox(centralWidget);
+<<<<<<< Updated upstream
         groupBoxLog->setObjectName(QStringLiteral("groupBoxLog"));
         groupBoxLog->setGeometry(QRect(600, 30, 281, 551));
         listWidgetOther = new QListWidget(groupBoxLog);
         listWidgetOther->setObjectName(QStringLiteral("listWidgetOther"));
+=======
+        groupBoxLog->setObjectName(QString::fromUtf8("groupBoxLog"));
+        groupBoxLog->setGeometry(QRect(600, 30, 281, 551));
+        listWidgetOther = new QListWidget(groupBoxLog);
+        listWidgetOther->setObjectName(QString::fromUtf8("listWidgetOther"));
+>>>>>>> Stashed changes
         listWidgetOther->setGeometry(QRect(10, 20, 261, 521));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
 <<<<<<< Updated upstream
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
+<<<<<<< Updated upstream
         menuBar->setGeometry(QRect(0, 0, 601, 21));
 =======
         menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 892, 21));
+>>>>>>> Stashed changes
+=======
         menuBar->setGeometry(QRect(0, 0, 892, 21));
 >>>>>>> Stashed changes
         menuFile = new QMenu(menuBar);
@@ -475,6 +498,7 @@ public:
         actionInsertTheame->setText(QApplication::translate("MainWindow", "InsertTheame", nullptr));
         actionShowNewFiles->setText(QApplication::translate("MainWindow", "ShowNewFiles", nullptr));
         actionEraseSection->setText(QApplication::translate("MainWindow", "EraseSection", nullptr));
+        actionLoadRemovedSectionsList->setText(QApplication::translate("MainWindow", "GetRemovedSectionsList", nullptr));
         groupBoxControl->setTitle(QApplication::translate("MainWindow", "Navigation", nullptr));
 =======
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "PicturesControl1 ", 0));
@@ -569,9 +593,9 @@ public:
         pushButtonSearchOrYes->setText(QApplication::translate("MainWindow", "Search OR YES", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Search", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Founded", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Other", nullptr));
         groupBoxPattern->setTitle(QApplication::translate("MainWindow", "Pattern", nullptr));
         pushButtonSearchPatternX->setText(QApplication::translate("MainWindow", "Search", nullptr));
+        groupBoxLog->setTitle(QApplication::translate("MainWindow", "\320\233\320\276\320\263\320\270", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuSelect_image->setTitle(QApplication::translate("MainWindow", "Select image", nullptr));
         menuForms->setTitle(QApplication::translate("MainWindow", "Forms", nullptr));
