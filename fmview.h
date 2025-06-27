@@ -43,19 +43,11 @@ private slots:
     void execShowExecStatus(QString s);
     void execHorizontalSliderValueChanged(int x);
 
-    void execXChanged();
-    void execYChanged();
-
-    void execXRejected();
-    void execYRejected();
-
 public slots:
     void execDraw(QString s);
 
 signals:
     void showExecStatus(QString s);
-    void shiftXValueChanged();
-    void shiftYValueChanged();
 
 };
 

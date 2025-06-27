@@ -7,19 +7,10 @@ fmView::fmView(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QIntValidator *validatorX = new QIntValidator(0, INT_VALIDATOR_VALUE, this);
-    QIntValidator *validatorY = new QIntValidator(0, INT_VALIDATOR_VALUE, this);
-    ui->lineEditX->setValidator(validatorX);
-    ui->lineEditY->setValidator(validatorY);
-
-
     DrawFilesInstance = new cDrawFilex();
 
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
     connect(this->ui->horizontalSliderScale, SIGNAL(valueChanged(int)), this, SLOT( execHorizontalSliderValueChanged(int)));
-
-    connect(this->ui->lineEditX, SIGNAL(editingFinished()), this, SLOT( execXChanged()));
-    connect(this->ui->lineEditY, SIGNAL(editingFinished()), this, SLOT(execYChanged()));
 
 }
 
@@ -51,32 +42,3 @@ void fmView::execHorizontalSliderValueChanged(int x)
     execDraw(currentImagePath);
 }
 
-void fmView::execXChanged()
-{
-    QString s = ui->lineEditX->text();
-    cDrawFilex::dx = INITIAL_SHIFT_X;
-    cDrawFilex::dx += s.toInt();
-    qDebug() << "X=" << s << " Value=" << cDrawFilex::dx;
-    emit shiftXValueChanged();
-}
-
-void fmView::execYChanged()
-{
-    QString s = ui->lineEditY->text();
-    cDrawFilex::dy = INITIAL_SHIFT_Y;
-    cDrawFilex::dy += s.toInt();
-    qDebug() << "Y=" << s << " Value=" << cDrawFilex::dy;
-    emit shiftYValueChanged();
-}
-
-void fmView::execXRejected()
-{
-    QString s = ui->lineEditX->text();
-    qDebug() << "X value Rejected: " << s;
-}
-
-void fmView::execYRejected()
-{
-    QString s = ui->lineEditY->text();
-    qDebug() << "Y value Rejected: " << s;
-}

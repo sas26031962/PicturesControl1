@@ -341,9 +341,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    connect(fmViewPicture, SIGNAL(shiftXValueChanged()), this, SLOT( execShiftXValueChanged()));
-    connect(fmViewPicture, SIGNAL(shiftYValueChanged()), this, SLOT( execShiftYValueChanged()));
-
     connect(ui->actionSearchRotated, SIGNAL(triggered()), this, SLOT( execActionSearchRotated()));
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
@@ -1216,34 +1213,6 @@ void MainWindow::execActionSearchNamePattern()
 }
 
 //=============================================================================
-
-void MainWindow::execShiftXValueChanged()
-{
-    QString s = "ShiftXValueChanged:";
-    s += QString::number(cDrawFilex::dx);
-
-    DrawFilesInstance->execRotate(0);
-
-    emit draw(cIniFile::currentRotatedImagePath);
-
-    emit showExecStatus(s);
-
-}
-
-void MainWindow::execShiftYValueChanged()
-{
-    QString s = "ShiftYValueChanged:";
-    s += QString::number(cDrawFilex::dy);
-
-    DrawFilesInstance->execRotate(0);
-
-    emit draw(cIniFile::currentRotatedImagePath);
-
-    emit showExecStatus(s);
-}
-
-//=============================================================================
-
 void MainWindow::execActionOpenFoundRecord()
 {
     QString s = "execActionOpenFoundRecord()";
