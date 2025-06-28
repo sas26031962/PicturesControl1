@@ -177,7 +177,6 @@ private slots:
     void execActionGetGroupsList();
     void execActionGetKeysList();
     void execActionSearchOrYes();
-    void execActionOpenFoundRecord();
 
     void execActionRotateCW();
     void execActionRotateCCW();

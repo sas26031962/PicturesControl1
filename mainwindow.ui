@@ -491,7 +491,7 @@
      <x>0</x>
      <y>0</y>
      <width>892</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -547,7 +547,6 @@
     <addaction name="actionSearchNamePatternX"/>
     <addaction name="actionSearchNamePatterns12Intersection"/>
     <addaction name="actionSearchNamePatterns1XIntersection"/>
-    <addaction name="actionOpenFoundRecord"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSelect_image"/>

@@ -373,8 +373,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //    qDebug() << "Current text=" << text;
     //});
 
-    connect(ui->actionOpenFoundRecord, &QAction::triggered, this, &MainWindow::execActionOpenFoundRecord);
-
     //Подключение сигналов модуля Navigation
     connect(NavigationInstance, &cNavigation::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(NavigationInstance, &cNavigation::draw, fmViewPicture, &fmView::execDraw);
@@ -1213,14 +1211,6 @@ void MainWindow::execActionSearchNamePattern()
 }
 
 //=============================================================================
-void MainWindow::execActionOpenFoundRecord()
-{
-    QString s = "execActionOpenFoundRecord()";
-
-    emit showExecStatus(s);
-}
-
-//=============================================================================
 
 void MainWindow::execComboBoxCurrentIndexChanged(int x)
 {
@@ -1382,6 +1372,9 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
 
 //=============================================================================
 
+//
+// Слот для обработки сигнала, возникающего при ошибке проведения операции с файлом
+//
 void MainWindow::execFoundMissingFile(QString path)
 {
     qDebug() << "Found missing file:" << path;
