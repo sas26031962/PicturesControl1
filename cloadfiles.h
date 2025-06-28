@@ -28,7 +28,6 @@ public:
     void install(QListWidget * other);
 
     void execLoadFilesSignedIsRotated();
-    void execLoadFilesByConditionOrYes(QStringList yes);
 
     static bool saveStringListToFile(const QString& fileName, const QStringList& list);
     static QStringList loadStringListFromFile(const QString& fileName);

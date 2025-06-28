@@ -165,7 +165,6 @@ private slots:
     void execListWidgetSearchItemClicked();
 
     void execActionSearchRotated();
-    void execActionSearchOrYes();
     void execActionSearchNamePattern1();
     void execActionSearchNamePattern2();
     void execActionSearchNamePattern();
@@ -177,7 +176,7 @@ private slots:
 
     void execActionGetGroupsList();
     void execActionGetKeysList();
-
+    void execActionSearchOrYes();
     void execActionOpenFoundRecord();
 
     void execActionRotateCW();

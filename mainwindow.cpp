@@ -1119,7 +1119,7 @@ void MainWindow::execActionSearchOrYes()
 
     if(cIniFile::SearchKeys->count() > 0)
     {
-        LoadFilesInstance->execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
+        SearchInstance->execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
 
         NavigationInstance->installNavigation();//Настройка навигации
 

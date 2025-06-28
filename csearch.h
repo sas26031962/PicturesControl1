@@ -27,7 +27,7 @@ public:
     void install(QListWidget * founded, QListWidget * other);
     void showGroupsList();
     bool searchNamePattern(const QString& pattern);
-
+    void execLoadFilesByConditionOrYes(QStringList yes);
 
 signals:
     void showExecStatus(QString s);
