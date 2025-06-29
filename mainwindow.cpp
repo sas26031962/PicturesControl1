@@ -356,6 +356,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
+    connect(ui->actionSearchFreshRecords, SIGNAL(triggered()), this, SLOT( execActionSearchFreshRecords()));
 
     connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);
     connect(ui->actionRemoveText, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveText);
@@ -1217,6 +1218,26 @@ void MainWindow::execComboBoxCurrentIndexChanged(int x)
     QString value = ui->comboBoxPatterns->currentText();
     qDebug() << "ComboBoxCurrentIndexChanged(): index=" << x << " Text= " << value;
     ui->lineEditPattern->setText(value);
+}
+
+//=============================================================================
+
+void MainWindow::execActionSearchFreshRecords()
+{
+    QString s = "execActionSearchFreshRecords()";
+
+    bool x = SearchInstance->searchFreshRecords();
+    if(x)
+    {
+        s += ": successfull write result to file";
+    }
+    else
+    {
+        s += ": fault write result to file";
+    }
+    //---
+    emit execShowExecStatus(s);
+    //---
 }
 
 //=============================================================================

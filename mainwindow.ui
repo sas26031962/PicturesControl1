@@ -547,6 +547,7 @@
     <addaction name="actionSearchNamePatternX"/>
     <addaction name="actionSearchNamePatterns12Intersection"/>
     <addaction name="actionSearchNamePatterns1XIntersection"/>
+    <addaction name="actionSearchFreshRecords"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSelect_image"/>
@@ -772,6 +773,11 @@
   <action name="actionLoadRemovedSectionsList">
    <property name="text">
     <string>GetRemovedSectionsList</string>
+   </property>
+  </action>
+  <action name="actionSearchFreshRecords">
+   <property name="text">
+    <string>SearchFreshRecords</string>
    </property>
   </action>
  </widget>

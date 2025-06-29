@@ -28,6 +28,7 @@ public:
     void showGroupsList();
     bool searchNamePattern(const QString& pattern);
     void execLoadFilesByConditionOrYes(QStringList yes);
+    bool searchFreshRecords();
 
 signals:
     void showExecStatus(QString s);

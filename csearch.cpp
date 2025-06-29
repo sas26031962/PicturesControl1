@@ -57,6 +57,70 @@ void cSearch::execListWidgetFoundedItemClicked()
 
 //=============================================================================
 
+bool cSearch::searchFreshRecords()
+{
+    QListWidgetItem * item0 = new QListWidgetItem("==execSearchFreshRecords==");
+    item0->setForeground(Qt::blue);
+    ListWidgetOther->addItem(item0);
+
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    // Читаем значения из INI-файла
+
+    QStringList TotalGroups = settings.childGroups();//Загрузка полного списка групп
+
+    QListWidgetItem * item1 = new QListWidgetItem("TotalGroups length: " + QString::number(TotalGroups.count()));
+    ListWidgetOther->addItem(item1);
+
+    cIniFile::Groups->clear();//Очистка результата
+
+    int iCountYes = 0;// Очистка счётчика найденных объектов
+    int iCountNo = 0;
+    QListIterator<QString> readIt(TotalGroups);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+        //qDebug() << qsSection;
+        //Проверка условия
+        bool match = true;
+
+        //Запись результата в список
+        if(match)
+        {
+            iCountYes++;//Подсчёт удачных попыток
+            cIniFile::Groups->append(qsSection);
+        }
+        else
+        {
+            iCountNo++;//Подсчёт неудачных попыток
+        }
+    }
+
+    QString qsItem2;
+    qsItem2 = "Count NO in ";
+    qsItem2 += QString::number(iCountNo);
+    qsItem2 += " files";
+
+    QString qsItem3;
+    qsItem3 = "Count YES in ";
+    qsItem3 += QString::number(iCountYes);
+    qsItem3 += " files";
+
+    QListWidgetItem * item2 = new QListWidgetItem(qsItem2);
+    ListWidgetOther->addItem(item2);
+
+    QListWidgetItem * item3 = new QListWidgetItem(qsItem3);
+    ListWidgetOther->addItem(item3);
+
+    //---
+    bool x = cLoadFiles::saveStringListToFile(cIniFile::pattern1StringListFilePath, *cIniFile::Groups);
+    //---
+    return x;
+}
+
+//=============================================================================
+
 bool cSearch::searchNamePattern(const QString& pattern)
 {
     QRegularExpression re(pattern);

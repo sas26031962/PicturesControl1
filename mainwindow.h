@@ -170,6 +170,7 @@ private slots:
     void execActionSearchNamePattern();
     void execActionSearchNamePatterns12Intersection();
     void execActionSearchNamePatterns1XIntersection();
+    void execActionSearchFreshRecords();
 
     void execActionRemoveSection();
     void execActionEraseSection();
