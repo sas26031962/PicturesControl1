@@ -83,7 +83,11 @@ bool cSearch::searchFreshRecords()
         QString qsSection = readIt.next();
         //qDebug() << qsSection;
         //Проверка условия
-        bool match = true;
+        settings.beginGroup(qsSection);
+        QStringList keys = settings.childKeys();
+        settings.endGroup();
+
+        bool match = (keys.count() <= 7);//true;
 
         //Запись результата в список
         if(match)
