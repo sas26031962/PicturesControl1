@@ -87,7 +87,7 @@ bool cSearch::searchFreshRecords()
         QStringList keys = settings.childKeys();
         settings.endGroup();
 
-        bool match = (keys.count() <= 7);//true;
+        bool match = (keys.count() <= 6);//true;
 
         //Запись результата в список
         if(match)
