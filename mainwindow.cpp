@@ -228,7 +228,7 @@ MainWindow::MainWindow(QWidget *parent) :
     SpinBoxIndex = ui->spinBoxIndex;
 
     ui->pushButtonGotoIndex->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
-    ui->pushButtonLoad->setVisible(false);//РЕЖИМ АДМИНИСТРАТОРА
+    ui->pushButtonLoad->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
 
     connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
     connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
@@ -351,8 +351,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonSearchPatternX, &QPushButton::pressed, this, &MainWindow::execActionSearchNamePattern);
 
     connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
-    //connect(ui->pushButtonSearchOrYes, SIGNAL(pressed()), this, SLOT( execActionSearchOrYes()));
     connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, this, &MainWindow::execActionSearchOrYes);
+
+    connect(ui->actionSearchYesYes, SIGNAL(triggered()), this, SLOT( execActionSearchYesYes()));
+    connect(ui->pushButtonSearchYesYes, &QPushButton::pressed, this, &MainWindow::execActionSearchYesYes);
 
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
@@ -1119,6 +1121,31 @@ void MainWindow::execActionSearchOrYes()
     if(cIniFile::SearchKeys->count() > 0)
     {
         SearchInstance->execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
+
+        NavigationInstance->installNavigation();//Настройка навигации
+
+        s += ": find ";
+        s += QString::number(cImportFiles::MaxIndexValue);
+        s += " records";
+    }
+    else
+    {
+        s += ": empy search task, nothing to do!!!";
+    }
+    //---
+    emit execShowExecStatus(s);
+    //---
+}
+
+//=============================================================================
+
+void MainWindow::execActionSearchYesYes()
+{
+    QString s = "execActionSearchYesYes()";
+
+    if(cIniFile::SearchKeys->count() > 0)
+    {
+        SearchInstance->execLoadFilesByConditionYesYes(*cIniFile::SearchKeys);
 
         NavigationInstance->installNavigation();//Настройка навигации
 

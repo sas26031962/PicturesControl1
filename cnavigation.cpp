@@ -141,6 +141,8 @@ void cNavigation::execShowCurrentIndexPicture()
         item->setForeground(Qt::yellow);
         appEndItem(item);
 
+        ProgressBarNavigation->setValue(0);
+
         emit showExecStatus(s);
     }
 
