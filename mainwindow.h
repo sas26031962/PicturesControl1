@@ -96,8 +96,6 @@ private:
     QLabel * labelOsType;
 
     QProgressBar * progressBarProcess;
-    QProgressBar * progressBarNavigation;
-    QSpinBox * SpinBoxIndex;
 
     QTimer * timerUpdate;
     int iTimerUpdateCounter = 0;

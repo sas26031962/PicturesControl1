@@ -189,8 +189,7 @@ MainWindow::MainWindow(QWidget *parent) :
     NavigationInstance->install(
         ui->listWidgetOther,
         ui->tableViewCurrent,
-        ui->spinBoxIndex,
-        ui->progressBarNavigation
+        ui->groupBoxNavigation
         );
 
     ActionsExec = new cActionsExec();
@@ -224,11 +223,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBoxPatterns->addItem("^[Mm][Aa][Ii][Ll]");
     ui->comboBoxPatterns->addItem("^.+_1$");
 
-    progressBarNavigation = ui->progressBarNavigation;
-    SpinBoxIndex = ui->spinBoxIndex;
-
-    ui->pushButtonGotoIndex->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
-    ui->pushButtonLoad->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
+    NavigationInstance->pbGoTo->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
+    NavigationInstance->pbReload->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
 
     connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
     connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
@@ -242,21 +238,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRemoveSection, SIGNAL(triggered()), this, SLOT( execActionRemoveSection()));
     connect(ui->actionEraseSection, SIGNAL(triggered()), this, SLOT( execActionEraseSection()));
 
-    connect(ui->pushButtonRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
-    connect(ui->pushButtonErase, SIGNAL(pressed()), this, SLOT( execActionEraseSection()));
+    connect(NavigationInstance->pbRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
+    connect(NavigationInstance->pbErase, SIGNAL(pressed()), this, SLOT( execActionEraseSection()));
 
     connect(ui->actionRotateCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
     connect(ui->actionRotateCCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
     connect(ui->actionRotateCW, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
     connect(ui->actionRotateCCW, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
 
-    connect(ui->pushButtonGotoIndex, SIGNAL(pressed()), NavigationInstance, SLOT( execActionGotoIndex()));
+    connect(NavigationInstance->pbReload, SIGNAL(pressed()), this, SLOT( execActionLoad()));
 
-    connect(ui->pushButtonBegin, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImageBegin()));
-    connect(ui->pushButtonNext, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImageNext()));
-    connect(ui->pushButtonPrevious, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImagePrevious()));
-    connect(ui->pushButtonEnd, SIGNAL(pressed()), NavigationInstance, SLOT( execActionSelectImageEnd()));
-    connect(ui->pushButtonLoad, SIGNAL(pressed()), this, SLOT( execActionLoad()));
     connect(ui->pushButtonRotateCW, SIGNAL(pressed()), this, SLOT( execActionRotateCW()));
     connect(ui->pushButtonRotateCCW, SIGNAL(pressed()), this, SLOT( execActionRotateCCW()));
     connect(ui->pushButtonMemo, SIGNAL(pressed()), this, SLOT( execActionMemo()));
@@ -586,6 +577,9 @@ void MainWindow::execActionLoad()
     cImportFiles::getGroupsList();
     cImportFiles::MaxIndexValue = cIniFile::Groups->count();
 
+    NavigationInstance->installNavigation();//20250709 Настройка навигации
+    //NavigationInstance->SpinBoxIndex->setMaximum(cImportFiles::MaxIndexValue);
+
     qDebug() << "execActionLoad(): load" << cImportFiles::MaxIndexValue << " records in cIniFile::Groups list";
 
 
@@ -594,13 +588,6 @@ void MainWindow::execActionLoad()
 
     // Установка текущего индекса
     iCurrentIndexGlobal.store(LoadedCurrentIndex);
-
-    // Установка навигации
-    progressBarNavigation->setRange(0, cImportFiles::MaxIndexValue);
-    progressBarNavigation->setValue(LoadedCurrentIndex);
-
-    SpinBoxIndex->setRange(0, cImportFiles::MaxIndexValue);
-    SpinBoxIndex->setValue(LoadedCurrentIndex);
 
     // Переход к следующему индексу
     NavigationInstance->execActionSelectImageNext();

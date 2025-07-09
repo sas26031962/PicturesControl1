@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>892</width>
+    <width>890</width>
     <height>640</height>
    </rect>
   </property>
@@ -14,158 +14,6 @@
    <string>PicturesControl1 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="groupBoxControl">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>380</y>
-      <width>271</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Navigation</string>
-    </property>
-    <widget class="QPushButton" name="pushButtonBegin">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>23</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="text">
-      <string>|&lt;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonNext">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>20</y>
-       <width>23</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="text">
-      <string>&gt;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonPrevious">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>20</y>
-       <width>23</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="text">
-      <string>&lt;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonEnd">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>20</y>
-       <width>23</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string/>
-     </property>
-     <property name="text">
-      <string>&gt;|</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBarNavigation">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>20</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="spinBoxIndex">
-     <property name="geometry">
-      <rect>
-       <x>82</x>
-       <y>50</y>
-       <width>111</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonGotoIndex">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Goto</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonRemove">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>50</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Remove</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonErase">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>80</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Erase</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButtonLoad">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>80</y>
-       <width>55</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Reload</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QLabel" name="labelIncomingListCaption">
     <property name="geometry">
      <rect>
@@ -497,13 +345,26 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBoxNavigation">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>271</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Navigation</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>892</width>
+     <width>890</width>
      <height>21</height>
     </rect>
    </property>
