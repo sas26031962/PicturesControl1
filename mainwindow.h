@@ -95,8 +95,6 @@ private:
     QLabel * labelFileName;
     QLabel * labelOsType;
 
-    QProgressBar * progressBarProcess;
-
     QTimer * timerUpdate;
     int iTimerUpdateCounter = 0;
 
@@ -118,6 +116,7 @@ private:
     //20250606
     cActionsExec * ActionsExec;
     cNavigation * NavigationInstance;
+    cImportFiles * ImportFilesInstance;
     cLoadFiles * LoadFilesInstance;
     cDrawFilex * DrawFilesInstance;
     cSearch * SearchInstance;
@@ -151,8 +150,6 @@ private:
 
 private slots:
 
-    void execActionImportInitial();
-    void execActionLoad();
     void execActionFormViewPicture();
     void execActionMemo();
     void execTimerUpdate();
@@ -173,8 +170,6 @@ private slots:
     void execActionRemoveSection();
     void execActionEraseSection();
 
-    void execActionGetGroupsList();
-    void execActionGetKeysList();
     void execActionSearchOrYes();
     void execActionSearchYesYes();
 

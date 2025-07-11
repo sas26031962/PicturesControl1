@@ -1,6 +1,9 @@
 #ifndef CIMPORTFILES_H
 #define CIMPORTFILES_H
 
+//20250710
+#include <QObject>
+
 #include <memory>
 #include <QLabel>
 
@@ -9,8 +12,10 @@
 #include <QStringList>
 #include <QDebug>
 #include <atomic>
-
+#include <QListWidget>
+#include <QListWidgetItem>
 #include <QProgressBar>
+
 #include "crecord.h"
 #include "cinifile.h"
 #include "cloadfiles.h"
@@ -24,10 +29,15 @@
 
 extern std::atomic<int> iCurrentIndexGlobal;
 
-class cImportFiles
+class cImportFiles : public QObject
 {
+    Q_OBJECT
+
+    //Методы
+    void appEndItem(QListWidgetItem * item);
 
 public:
+    //Атрибуты
     static int MaxIndexValue;
     static QString labelExecStatusText;
     static bool IslabelExecStatusTextChanged;
@@ -36,12 +46,31 @@ public:
     static QString labelFileNameText;
     static bool IslabelFileNameTextChanged;
 
-    cImportFiles();
+    QListWidget * ListWidgetOther;
+    QListWidget * ListWidgetFounded;
+    QListWidget * ListWidgetKeys;
 
-    static void execImport(QProgressBar * bar);
+    //Конструкторы и деструкторы
+    explicit cImportFiles(QObject *parent = 0);
+    ~cImportFiles();
+
+    //Методы
     static void execSearchNewFiles();
-    static bool getGroupsList();
-    static bool getKeysList();
+
+    void install(QListWidget * other, QListWidget * founded, QListWidget * keys);
+    void execImport();
+    bool getKeysList();
+    void getGroupsList();
+
+signals:
+    void showExecStatus(QString s);
+    void resetNavigation();
+
+public slots:
+    void execActionImportInitial();
+    void execActionGetGroupsList();
+    void execActionGetKeysList();
+    void execActionLoad();
 
 };
 

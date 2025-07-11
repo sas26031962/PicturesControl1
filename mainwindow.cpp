@@ -185,6 +185,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    ImportFilesInstance = new cImportFiles();
+    ImportFilesInstance->install(
+        ui->listWidgetOther,
+        ui->listWidgetFounded,
+        ui->listWidgetKeys
+        );
+
     NavigationInstance = new cNavigation();
     NavigationInstance->install(
         ui->listWidgetOther,
@@ -246,23 +253,26 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRotateCW, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
     connect(ui->actionRotateCCW, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
 
-    connect(NavigationInstance->pbReload, SIGNAL(pressed()), this, SLOT( execActionLoad()));
+    connect(ImportFilesInstance, SIGNAL(resetNavigation()), NavigationInstance, SLOT( execResetNavigation()));
+    connect(NavigationInstance->pbReload, SIGNAL(pressed()), ImportFilesInstance, SLOT( execActionLoad()));
 
     connect(ui->pushButtonRotateCW, SIGNAL(pressed()), this, SLOT( execActionRotateCW()));
     connect(ui->pushButtonRotateCCW, SIGNAL(pressed()), this, SLOT( execActionRotateCCW()));
     connect(ui->pushButtonMemo, SIGNAL(pressed()), this, SLOT( execActionMemo()));
     connect(ui->spinBoxAngle, SIGNAL(valueChanged(int)), this, SLOT( execSpinBoxAngle(int)));
 
-    connect(ui->actionImport, SIGNAL(triggered()), this, SLOT( execActionImportInitial()));
+    connect(ui->actionGetGroupsList, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionGetGroupsList()));
 
-    connect(ui->actionGetGroupsList, SIGNAL(triggered()), this, SLOT( execActionGetGroupsList()));
-    connect(ui->actionGetKeysList, SIGNAL(triggered()), this, SLOT( execActionGetKeysList()));
+    connect(ui->actionGetKeysList, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionGetKeysList()));
 
     connect(ui->actionLoadRemovedSectionsList, SIGNAL(triggered()), NavigationInstance, SLOT( loadRemovedSectionsList()));
 
-    connect(ui->actionLoad, SIGNAL(triggered()), this, SLOT( execActionLoad()));
+    connect(ui->actionLoad, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionLoad()));
 
     connect(this, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
+
+    connect(ImportFilesInstance, SIGNAL(showExecStatus(QString)), this, SLOT( execShowExecStatus(QString)));
+
     connect(ListWidgetPlace, &cListWidgetPlace::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(ListWidgetPlace, &cListWidgetPlace::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
@@ -298,11 +308,6 @@ MainWindow::MainWindow(QWidget *parent) :
     timerUpdate = new QTimer(this);
     connect(timerUpdate, SIGNAL(timeout()), this, SLOT( execTimerUpdate()));
     timerUpdate->start(100);
-
-    progressBarProcess = new QProgressBar();
-    progressBarProcess->setOrientation(Qt::Horizontal);
-    progressBarProcess->setRange(0, cImportFiles::MaxIndexValue);
-    ui->statusBar->addWidget(progressBarProcess);
 
     labelExecStatus = new QLabel("ExecStatus");
     ui->statusBar->addWidget(labelExecStatus);
@@ -379,6 +384,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(SearchInstance, &cSearch::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(SearchInstance, &cSearch::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
+    connect(ui->actionImport, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionImportInitial()));
+
     ListWidget = ui->listWidgetOther;
 
 }//End of ctor
@@ -395,12 +402,12 @@ MainWindow::~MainWindow()
     delete ListWidgetTheame;
 
     delete ActionsExec;
+    delete ImportFilesInstance;
     delete NavigationInstance;
     delete LoadFilesInstance;
     delete DrawFilesInstance;
     delete SearchInstance;
 
-    delete progressBarProcess;
     delete labelExecStatus;
     delete labelFileName;
     delete labelOsType;
@@ -577,9 +584,6 @@ void MainWindow::execActionLoad()
     cImportFiles::getGroupsList();
     cImportFiles::MaxIndexValue = cIniFile::Groups->count();
 
-    NavigationInstance->installNavigation();//20250709 Настройка навигации
-    //NavigationInstance->SpinBoxIndex->setMaximum(cImportFiles::MaxIndexValue);
-
     qDebug() << "execActionLoad(): load" << cImportFiles::MaxIndexValue << " records in cIniFile::Groups list";
 
 
@@ -588,6 +592,13 @@ void MainWindow::execActionLoad()
 
     // Установка текущего индекса
     iCurrentIndexGlobal.store(LoadedCurrentIndex);
+
+    // Установка навигации
+    progressBarNavigation->setRange(0, cImportFiles::MaxIndexValue);
+    progressBarNavigation->setValue(LoadedCurrentIndex);
+
+    SpinBoxIndex->setRange(0, cImportFiles::MaxIndexValue);
+    SpinBoxIndex->setValue(LoadedCurrentIndex);
 
     // Переход к следующему индексу
     NavigationInstance->execActionSelectImageNext();
@@ -871,15 +882,11 @@ void MainWindow::execTimerUpdate()
         ui->actionViewPicture->setChecked(true);
 
         qDebug() << "CurrentIndex=" << iCurrentIndexGlobal.load(std::memory_order_relaxed);
-        execActionLoad();
+        ImportFilesInstance->execActionLoad();
 
         //NavigationInstance->loadRemovedSectionsList();
 
     }//End of if(iTimerUpdateCounter == 1)
-
-//    progressBarProcess->setRange(0, cImportFiles::MaxIndexValue);
-//    int x = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-//    progressBarProcess->setValue(x);
 
     if(cImportFiles::IslabelExecStatusTextChanged)
     {
@@ -901,81 +908,6 @@ void MainWindow::execShowExecStatus(QString s)
 {
     cImportFiles::labelExecStatusText = s;
     cImportFiles::IslabelExecStatusTextChanged = true;
-}
-
-//=============================================================================
-
-void MainWindow::execActionGetGroupsList()
-{
-    QString s = "execActionGetGroupsList()";
-
-    ui->listWidgetFounded->clear();
-    bool x = cImportFiles::getGroupsList();
-    if(x)
-    {
-        s += ": error detected!";
-    }
-    else
-    {
-        s += ": sucsess!";
-
-        ui->listWidgetFounded->addItems(*cIniFile::Groups);
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execActionGetKeysList()
-{
-    QString s = "execActionGetKeysList()";
-
-    ui->listWidgetKeys->clear();
-    bool x = cImportFiles::getKeysList();
-    if(x)
-    {
-        s += ": error detected!";
-    }
-    else
-    {
-        s += ": sucsess!";
-
-        //Удаление имени секции
-        for(QList<QString>::iterator it = cIniFile::Keys->begin(); it != cIniFile::Keys->end(); ++it)
-        {
-            QString s = *it;
-            int pos = s.lastIndexOf('/');
-            if(pos > 0)
-            {
-                *it = s.mid(pos + 1);
-            }
-        }
-
-        //---Удаление повторяющихся значений с сохранением порядка
-
-        QSet<QString> seen;
-        QStringList result;
-        for(const QString &str : *cIniFile::Keys)
-        {
-            if(!seen.contains(str))
-            {
-                seen.insert(str);
-                result.append(str);
-            }
-        }
-        *cIniFile::Keys = result;
-
-        //---
-        ui->listWidgetKeys->addItems(*cIniFile::Keys);
-        ui->labelKeysCaption->setText("All keys:" + QString::number(cIniFile::Keys->count()));
-    }
-
-    //---
-    emit execShowExecStatus(s);
-    //---
 }
 
 //=============================================================================

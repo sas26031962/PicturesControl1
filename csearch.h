@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QString>
 #include <QDebug>
-//#include <QImage>
-//#include <QPainter>
 #include <QListWidget>
 
 #include "cinifile.h"

@@ -1,6 +1,26 @@
+#20250711
+
+[] Выполнить рефакторинг класса cNavigation: перенести действия, связанные
+с одноимёнными функциями этого класса из MainWindow в экземпляр этого класса
+- execActionRemoveSection()
+- execActionEraseSection(),
+а также функции:
+- eraseSection(qsGroupName)
+- deleteSection(qsGroupName)
+
+#20250710
+
+[] Выполнить рефакторинг класса cImportFiles: создать экземпляр этого класса и
+перенести действия, связанные с одноимёнными функциями этого класса из MainWindow
+в экземпляр этого класса
++ execActionImportInitial()
++ execActionGetGroupsList()
++ execActionGetKeysList()
++ execActionLoad()
+
 #20250628
 
-[] После выполнения поиска, если элементы не найдены, progressBar отображает 100%
+[x] После выполнения поиска, если элементы не найдены, progressBar отображает 100%
 
 #20250626
 
@@ -55,7 +75,7 @@
 [x] Удалить функцию AddOrRemoveTheameItemToRecord() в классе MainWindow
 [x] Удалить функцию execActionLoadHashTagListTheame() в классе MainWindow
 [x] Удалить функцию execActionInsertTheame() в классе MainWindow
-[] После завершения поиска, если число найденных объектов равно нулю, индикатор progress bar ведёт себя неадекватно (должен быть 0)
+[x] После завершения поиска, если число найденных объектов равно нулю, индикатор progress bar ведёт себя неадекватно (должен быть 0)
 
 #20250522
 

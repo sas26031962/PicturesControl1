@@ -72,8 +72,10 @@ public slots:
     void execActionSelectImageNext();
     void execActionSelectImagePrevious();
     void execActionSelectImageEnd();
+    void execResetNavigation();
 
     void execShowCurrentIndexPicture();
+
 
 };
 

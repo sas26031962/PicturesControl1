@@ -16,3 +16,8 @@ IsRotated
 Чертёж(3_вида)
 new
 Разрез
+<<<<<<< Updated upstream
+=======
+Детали
+Фрагмент
+>>>>>>> Stashed changes
