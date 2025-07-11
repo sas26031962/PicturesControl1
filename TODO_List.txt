@@ -1,13 +1,3 @@
-#20250711
-
-[] Выполнить рефакторинг класса cNavigation: перенести действия, связанные
-с одноимёнными функциями этого класса из MainWindow в экземпляр этого класса
-- execActionRemoveSection()
-- execActionEraseSection(),
-а также функции:
-- eraseSection(qsGroupName)
-- deleteSection(qsGroupName)
-
 #20250710
 
 [] Выполнить рефакторинг класса cImportFiles: создать экземпляр этого класса и
