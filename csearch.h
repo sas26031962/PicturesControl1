@@ -17,6 +17,9 @@ class cSearch : public QObject
     QListWidget * ListWidgetFounded;
     QListWidget * ListWidgetOther;
 
+    //Методы
+    void execLoadFilesSignedIsRotated();
+
 public:
     //Конструктор
     explicit cSearch(QObject *parent = 0);
@@ -29,12 +32,20 @@ public:
     void execLoadFilesByConditionYesYes(QStringList yes);
     bool searchFreshRecords();
 
+
 signals:
     void showExecStatus(QString s);
     void showCurrentIndexPicture();
+    void gotoInstallNavigation();
 
 public slots:
     void execListWidgetFoundedItemClicked();
+
+    void execActionSearchRotated();
+    void execActionSearchYesYes();
+    void execActionSearchOrYes();
+    void execActionSearchFreshRecords();
+
 };
 
 #endif // CSEARCH_H

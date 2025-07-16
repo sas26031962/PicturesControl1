@@ -233,6 +233,8 @@ MainWindow::MainWindow(QWidget *parent) :
     NavigationInstance->pbGoTo->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
     NavigationInstance->pbReload->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
 
+    connect(SearchInstance, SIGNAL(gotoInstallNavigation()), NavigationInstance, SLOT(installNavigation()));
+
     connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
     connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
     connect(ui->actionSelectImageBegin, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageBegin()));
@@ -242,24 +244,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ListWidgetTheame, &cListWidgetTheame::showExecStatus, this, &MainWindow::execShowExecStatus);
 
-    connect(ui->actionRemoveSection, SIGNAL(triggered()), this, SLOT( execActionRemoveSection()));
-    connect(ui->actionEraseSection, SIGNAL(triggered()), this, SLOT( execActionEraseSection()));
+    connect(ui->actionRemoveSection, SIGNAL(triggered()), NavigationInstance, SLOT( execActionRemoveSection()));
 
-    connect(NavigationInstance->pbRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
-    connect(NavigationInstance->pbErase, SIGNAL(pressed()), this, SLOT( execActionEraseSection()));
+    connect(ui->actionEraseSection, SIGNAL(triggered()), NavigationInstance, SLOT( execActionEraseSection()));
 
-    connect(ui->actionRotateCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
-    connect(ui->actionRotateCCW_2, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
-    connect(ui->actionRotateCW, SIGNAL(triggered()), this, SLOT( execActionRotateCW()));
-    connect(ui->actionRotateCCW, SIGNAL(triggered()), this, SLOT( execActionRotateCCW()));
+    connect(NavigationInstance->pbErase, SIGNAL(pressed()), NavigationInstance, SLOT( execActionEraseSection()));
 
-    connect(ImportFilesInstance, SIGNAL(resetNavigation()), NavigationInstance, SLOT( execResetNavigation()));
+    connect(ui->actionRotateCW, SIGNAL(triggered()), DrawFilesInstance, SLOT( execActionRotateCW()));
+
+    connect(ui->actionRotateCCW, SIGNAL(triggered()), DrawFilesInstance, SLOT( execActionRotateCCW()));
+
+    connect(ImportFilesInstance, SIGNAL(gotoInstallNavigation()), NavigationInstance, SLOT( installNavigation()));
     connect(NavigationInstance->pbReload, SIGNAL(pressed()), ImportFilesInstance, SLOT( execActionLoad()));
 
-    connect(ui->pushButtonRotateCW, SIGNAL(pressed()), this, SLOT( execActionRotateCW()));
-    connect(ui->pushButtonRotateCCW, SIGNAL(pressed()), this, SLOT( execActionRotateCCW()));
+    connect(ui->pushButtonRotateCW, SIGNAL(pressed()), DrawFilesInstance, SLOT( execActionRotateCW()));
+    connect(ui->pushButtonRotateCCW, SIGNAL(pressed()), DrawFilesInstance, SLOT( execActionRotateCCW()));
+
     connect(ui->pushButtonMemo, SIGNAL(pressed()), this, SLOT( execActionMemo()));
-    connect(ui->spinBoxAngle, SIGNAL(valueChanged(int)), this, SLOT( execSpinBoxAngle(int)));
+
+    connect(ui->spinBoxAngle, SIGNAL(valueChanged(int)), DrawFilesInstance, SLOT( execSpinBoxAngle(int)));
 
     connect(ui->actionGetGroupsList, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionGetGroupsList()));
 
@@ -337,7 +340,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    connect(ui->actionSearchRotated, SIGNAL(triggered()), this, SLOT( execActionSearchRotated()));
+    connect(ui->actionSearchRotated, SIGNAL(triggered()), SearchInstance, SLOT( execActionSearchRotated()));
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
 
@@ -346,15 +349,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSearchNamePatternX, &QAction::triggered, this, &MainWindow::execActionSearchNamePattern);
     connect(ui->pushButtonSearchPatternX, &QPushButton::pressed, this, &MainWindow::execActionSearchNamePattern);
 
-    connect(ui->actionSearchOrYes, SIGNAL(triggered()), this, SLOT( execActionSearchOrYes()));
-    connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, this, &MainWindow::execActionSearchOrYes);
+    connect(ui->actionSearchOrYes, &QAction::triggered, SearchInstance, &cSearch::execActionSearchOrYes);
+    connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, SearchInstance, &cSearch::execActionSearchOrYes);
 
-    connect(ui->actionSearchYesYes, SIGNAL(triggered()), this, SLOT( execActionSearchYesYes()));
-    connect(ui->pushButtonSearchYesYes, &QPushButton::pressed, this, &MainWindow::execActionSearchYesYes);
+    connect(ui->actionSearchYesYes, SIGNAL(triggered()), SearchInstance, SLOT( execActionSearchYesYes()));
+    connect(ui->pushButtonSearchYesYes, &QPushButton::pressed, SearchInstance, &cSearch::execActionSearchYesYes);
 
     connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns12Intersection()));
     connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), this, SLOT( execActionSearchNamePatterns1XIntersection()));
-    connect(ui->actionSearchFreshRecords, SIGNAL(triggered()), this, SLOT( execActionSearchFreshRecords()));
+
+    connect(ui->actionSearchFreshRecords, &QAction::triggered, SearchInstance, &cSearch::execActionSearchFreshRecords);
 
     connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);
     connect(ui->actionRemoveText, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveText);
@@ -376,7 +380,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(NavigationInstance, &cNavigation::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(NavigationInstance, &cNavigation::draw, fmViewPicture, &fmView::execDraw);
 
-    connect(this, &MainWindow::draw, fmViewPicture, &fmView::execDraw);
+    //Подключение сигналов модуля DrawFilesxInstance
+    connect(DrawFilesInstance, &cDrawFilex::draw, fmViewPicture, &fmView::execDraw);
+    connect(DrawFilesInstance, &cDrawFilex::showExecStatus, this, &MainWindow::execShowExecStatus);
 
     connect(fmViewPicture->DrawFilesInstance, &cDrawFilex::foundMissingFile, this, &MainWindow::execFoundMissingFile);
 
@@ -385,8 +391,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(SearchInstance, &cSearch::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     connect(ui->actionImport, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionImportInitial()));
-
-    ListWidget = ui->listWidgetOther;
 
 }//End of ctor
 
@@ -500,7 +504,7 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
              if(KeyPressed.Previous == 16777249)
              {
                  qDebug() << "CTRL+R pressed";
-                 execActionRotateCW();
+                 DrawFilesInstance->execActionRotateCW();
              }
        break;
 
@@ -512,7 +516,7 @@ void MainWindow::keyPressEvent(QKeyEvent * e)
              if(KeyPressed.Previous == 16777249)
              {
                  qDebug() << "CTRL+L pressed";
-                 execActionRotateCCW();
+                 DrawFilesInstance->execActionRotateCCW();
              }
        break;
 
@@ -548,232 +552,6 @@ void MainWindow::execActionFormViewPicture()
     QString s = "execActionFormViewPicture()";
     emit execShowExecStatus(s);
    //---
-}
-
-//=============================================================================
-
-//
-// Удалить секцию из ini файла и отправить исходный файл в GarbageCollector
-//
-bool MainWindow::eraseSection(QString s)
-{
-    bool Error = false;
-
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    settings.beginGroup(s);
-    QList<QString> keys = settings.childKeys();
-    int iKeysCount = keys.count();
-
-    QString qsName = settings.value("name", "noName").toString();
-    QString qsPath = settings.value("path", "noPath").toString();
-    QString qsWay = qsPath + "/" + qsName;
-
-    if(iKeysCount > 0)
-    {
-        // Перебор всей ключей в секции
-        QListIterator<QString> readKeyIt(keys);
-        while (readKeyIt.hasNext())
-        {
-            QString qsKey = readKeyIt.next();
-            qDebug() << qsKey;
-            settings.remove(qsKey);
-        }
-        qDebug() << "All keys in section " << s << " removed!";
-
-    }
-    else
-    {
-        qDebug() << "No keys in section " << s << " found!";
-    }
-    settings.endGroup();
-
-    settings.remove(s);
-    settings.sync();
-
-    qDebug() << "Section " << s << " removed!";
-
-    //--- Перемещение файла в папку GargbageCollector
-
-    QFile file(qsWay);
-    if(file.exists())
-    {
-        qDebug() << "GarbageCollector: " << cIniFile::GarbageCollectorPath;
-        //if(file.copy(cIniFile::GarbageCollectorPath + qsName))
-        if(file.rename(cIniFile::GarbageCollectorPath + qsName))
-        {
-            qDebug() << "File " << qsWay << " moved to GarbageCollector successfully";
-
-            if(file.exists())
-            {
-                qDebug() << "!!!File " << qsWay << " yet exist";
-            }
-        }
-        else
-        {
-            qDebug() << "!!!File " << qsWay << " moving to GarbageCollector error: " << file.errorString();
-
-            Error = true;
-        }
-    }
-    else
-    {
-        qDebug() << "File " << qsWay << " not exist";
-        Error = true;
-    }
-
-    //---
-    //Добавление секции в список - результат
-    cIniFile::qslDeletedSections.append(qsWay);//#@
-
-    return Error;
-}
-
-//=============================================================================
-
-//
-// Удалить секцию из ini файла
-//
-bool MainWindow::deleteSection(QString s)
-{
-    bool Error = false;
-
-    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
-    settings.beginGroup(s);
-    QList<QString> keys = settings.childKeys();
-    int iKeysCount = keys.count();
-
-    QString qsName = settings.value("name", "noName").toString();
-    QString qsPath = settings.value("path", "noPath").toString();
-    QString qsWay = qsPath + "/" + qsName;
-
-    if(iKeysCount > 0)
-    {
-        // Перебор всей ключей в секции
-        QListIterator<QString> readKeyIt(keys);
-        while (readKeyIt.hasNext())
-        {
-            QString qsKey = readKeyIt.next();
-            qDebug() << qsKey;
-            settings.remove(qsKey);
-        }
-        qDebug() << "All keys in section " << s << " removed!";
-
-    }
-    else
-    {
-        qDebug() << "No keys in section " << s << " found!";
-    }
-    settings.endGroup();
-
-    settings.remove(s);
-    settings.sync();
-
-    qDebug() << "Section " << s << " removed!";
-
-    //Добавление секции в список - результат
-    cIniFile::qslDeletedSections.append(qsWay);//#@
-
-    return Error;
-}
-
-//=============================================================================
-
-void MainWindow::execActionRemoveSection()
-{
-    QString s = "ActionRemoveSection()";
-
-    // Читаем имя текущей секции
-    QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-
-    bool x = deleteSection(qsGroupName);
-    // Выводим значения удалённых секций
-    if(!x)
-    {
-        cIniFile::Groups->removeAt(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-
-        ui->listWidgetOther->clear();
-        ui->listWidgetOther->addItem("==ActionRemoveSection==");
-        ui->listWidgetOther->addItem(qsGroupName);
-    }
-
-    NavigationInstance->execActionSelectImagePrevious();//Перерисовка изображения
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionEraseSection()
-{
-    QString s = "ActionEraseeSection()";
-
-    // Читаем имя текущей секции
-    QString qsGroupName = cIniFile::Groups->at(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-
-    bool x = eraseSection(qsGroupName);
-    // Выводим значения удалённых секций
-    if(!x)
-    {
-        cIniFile::Groups->removeAt(iCurrentIndexGlobal.load(std::memory_order_relaxed));
-
-        ui->listWidgetOther->clear();
-        ui->listWidgetOther->addItem("==ActionEraseeSection==");
-        ui->listWidgetOther->addItem(qsGroupName);
-    }
-
-    NavigationInstance->execActionSelectImagePrevious();//Перерисовка изображения
-
-    //===
-    emit execShowExecStatus(s);
-   //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionRotateCW()
-{
-    QString s = "ActionRotateCW()";
-
-    DrawFilesInstance->execRotateCW90();
-
-    emit draw(cIniFile::currentRotatedImagePath);
-
-    //===
-    emit execShowExecStatus(s);
-    //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execActionRotateCCW()
-{
-    QString s = "ActionRotateCCW()";
-
-    DrawFilesInstance->execRotateCCW90();
-
-    emit draw(cIniFile::currentRotatedImagePath);
-
-    //===
-    emit execShowExecStatus(s);
-    //===
-
-}
-
-//=============================================================================
-
-void MainWindow::execSpinBoxAngle(int angle)
-{
-    qDebug() << "Angle:" << angle;
-    iAngle = angle;
-    DrawFilesInstance->execRotate(iAngle);
-
-    emit draw(cIniFile::currentRotatedImagePath);
-
 }
 
 //=============================================================================
@@ -936,74 +714,6 @@ void MainWindow::execListWidgetSearchItemClicked()
 
 //=============================================================================
 
-void MainWindow::execActionSearchRotated()
-{
-    QString s = "execActionSearchRotated()";
-
-    LoadFilesInstance->execLoadFilesSignedIsRotated();
-
-    NavigationInstance->installNavigation();//Настройка навигации
-
-    s += ": find ";
-    s += QString::number(cImportFiles::MaxIndexValue);
-    s += " records";
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execActionSearchOrYes()
-{
-    QString s = "execActionSearchOrYes()";
-
-    if(cIniFile::SearchKeys->count() > 0)
-    {
-        SearchInstance->execLoadFilesByConditionOrYes(*cIniFile::SearchKeys);
-
-        NavigationInstance->installNavigation();//Настройка навигации
-
-        s += ": find ";
-        s += QString::number(cImportFiles::MaxIndexValue);
-        s += " records";
-    }
-    else
-    {
-        s += ": empy search task, nothing to do!!!";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
-void MainWindow::execActionSearchYesYes()
-{
-    QString s = "execActionSearchYesYes()";
-
-    if(cIniFile::SearchKeys->count() > 0)
-    {
-        SearchInstance->execLoadFilesByConditionYesYes(*cIniFile::SearchKeys);
-
-        NavigationInstance->installNavigation();//Настройка навигации
-
-        s += ": find ";
-        s += QString::number(cImportFiles::MaxIndexValue);
-        s += " records";
-    }
-    else
-    {
-        s += ": empy search task, nothing to do!!!";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execActionSearchNamePattern1()
 {
     QString s = "execActionSearchNamePattern1()";
@@ -1089,26 +799,6 @@ void MainWindow::execComboBoxCurrentIndexChanged(int x)
 
 //=============================================================================
 
-void MainWindow::execActionSearchFreshRecords()
-{
-    QString s = "execActionSearchFreshRecords()";
-
-    bool x = SearchInstance->searchFreshRecords();
-    if(x)
-    {
-        s += ": successfull write result to file";
-    }
-    else
-    {
-        s += ": fault write result to file";
-    }
-    //---
-    emit execShowExecStatus(s);
-    //---
-}
-
-//=============================================================================
-
 void MainWindow::execActionSearchNamePatterns1XIntersection()
 {
     QString s = "execActionSearchNamePattens1XIntersection()";
@@ -1161,7 +851,7 @@ void MainWindow::execActionSearchNamePatterns1XIntersection()
                 qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
                 ui->listWidgetFounded->addItem(qsSection);
 
-                deleteSection(qsMirror);//!!!
+                NavigationInstance->deleteSection(qsMirror);//!!!
             }
         }
     }
@@ -1247,7 +937,7 @@ void MainWindow::execActionSearchNamePatterns12Intersection()
                 ui->listWidgetFounded->addItem(qsSection);
 
                 //Удаление найденной строки из конфигурационного файла
-                deleteSection(qsMirror);//!!!
+                NavigationInstance->deleteSection(qsMirror);//!!!
             }
         }
     }

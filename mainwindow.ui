@@ -395,8 +395,6 @@
     <addaction name="actionSelectImageNext"/>
     <addaction name="actionSelectImagePrevious"/>
     <addaction name="actionSelectImageEnd"/>
-    <addaction name="actionRotateCW_2"/>
-    <addaction name="actionRotateCCW_2"/>
     <addaction name="actionGotoIndex"/>
    </widget>
    <widget class="QMenu" name="menuForms">
@@ -424,11 +422,19 @@
     <addaction name="actionSearchNamePatterns1XIntersection"/>
     <addaction name="actionSearchFreshRecords"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionRotateCW"/>
+    <addaction name="actionRotateCCW"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSelect_image"/>
    <addaction name="menuForms"/>
    <addaction name="menuTags"/>
    <addaction name="menuSearch"/>
+   <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -500,16 +506,6 @@
     <string>RemoveMovie</string>
    </property>
   </action>
-  <action name="actionRotateCW">
-   <property name="text">
-    <string>RotateCW</string>
-   </property>
-  </action>
-  <action name="actionRotateCCW">
-   <property name="text">
-    <string>RotateCCW</string>
-   </property>
-  </action>
   <action name="actionLoadHashTagListProperty">
    <property name="text">
     <string>LoadProperty</string>
@@ -518,16 +514,6 @@
   <action name="actionImportFiles">
    <property name="text">
     <string>ImportFiles</string>
-   </property>
-  </action>
-  <action name="actionRotateCW_2">
-   <property name="text">
-    <string>RotateCW</string>
-   </property>
-  </action>
-  <action name="actionRotateCCW_2">
-   <property name="text">
-    <string>RotateCCW</string>
    </property>
   </action>
   <action name="actionRemoveText">
@@ -658,6 +644,16 @@
   <action name="actionSearchYesYes">
    <property name="text">
     <string>SearchYesYes</string>
+   </property>
+  </action>
+  <action name="actionRotateCW">
+   <property name="text">
+    <string>RotateCW</string>
+   </property>
+  </action>
+  <action name="actionRotateCCW">
+   <property name="text">
+    <string>RotateCCW</string>
    </property>
   </action>
  </widget>

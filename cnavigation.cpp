@@ -7,9 +7,9 @@ cNavigation::cNavigation(QObject *parent) : QObject(parent)
 
 void cNavigation::appEndItem(QListWidgetItem * item)
 {
-    ListWidget->addItem(item);
-    ListWidget->setCurrentItem(item);
-    ListWidget->scrollToItem(item);
+    ListWidgetOther->addItem(item);
+    ListWidgetOther->setCurrentItem(item);
+    ListWidgetOther->scrollToItem(item);
 }
 
 void cNavigation::execNavigationCurrentIndex()
@@ -121,7 +121,7 @@ void cNavigation::install(QListWidget* list_widget,
     layout2->setContentsMargins(1,1,1,1);
     layout2->addWidget(pbReload);
 
-    ListWidget = list_widget;
+    ListWidgetOther = list_widget;
     TableView = table_view;
 
     connect(pbGoTo, SIGNAL(pressed()), this, SLOT( execActionGotoIndex()));//***
@@ -129,6 +129,7 @@ void cNavigation::install(QListWidget* list_widget,
     connect(pbNext, SIGNAL(pressed()), this, SLOT( execActionSelectImageNext()));//***
     connect(pbPrevious, SIGNAL(pressed()), this, SLOT( execActionSelectImagePrevious()));//***
     connect(pbEnd, SIGNAL(pressed()), this, SLOT( execActionSelectImageEnd()));//***
+    connect(pbRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
 
 }
 
@@ -139,7 +140,7 @@ void cNavigation::execShowCurrentIndexPicture()
 
     QListWidgetItem * item0 = new QListWidgetItem("==ShowCurrentIndexPicture==");
     item0->setForeground(Qt::blue);
-    ListWidget->addItem(item0);
+    ListWidgetOther->addItem(item0);
     QListWidgetItem * item1 = new QListWidgetItem("GroupsCount=" + QString::number(iGroupsCount));
     appEndItem(item1);
 
@@ -267,7 +268,7 @@ void cNavigation::loadRemovedSectionsList()
     appEndItem(item0);
     QListWidgetItem * item1 = new QListWidgetItem("RemovedSectionsListCount=" + QString::number(cIniFile::qslDeletedSections.count()));
     appEndItem(item1);
-    ListWidget->addItems(cIniFile::qslDeletedSections);
+    ListWidgetOther->addItems(cIniFile::qslDeletedSections);
     QListWidgetItem * item2 = new QListWidgetItem("=RemovedSectionsList tail=");
     item2->setForeground(Qt::darkGreen);
     appEndItem(item2);
@@ -445,11 +446,206 @@ void cNavigation::installNavigation()
 
 //=============================================================================
 
-void cNavigation::execResetNavigation()
+bool cNavigation::deleteSection(QString s)
 {
-    installNavigation();
+    bool Error = false;
+
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    settings.beginGroup(s);
+    QList<QString> keys = settings.childKeys();
+    int iKeysCount = keys.count();
+
+    QString qsName = settings.value("name", "noName").toString();
+    QString qsPath = settings.value("path", "noPath").toString();
+    QString qsWay = qsPath + "/" + qsName;
+
+    if(iKeysCount > 0)
+    {
+        // Перебор всей ключей в секции
+        QListIterator<QString> readKeyIt(keys);
+        while (readKeyIt.hasNext())
+        {
+            QString qsKey = readKeyIt.next();
+            qDebug() << qsKey;
+            settings.remove(qsKey);
+        }
+        qDebug() << "All keys in section " << s << " removed!";
+
+    }
+    else
+    {
+        qDebug() << "No keys in section " << s << " found!";
+    }
+    settings.endGroup();
+
+    settings.remove(s);
+    settings.sync();
+
+    qDebug() << "Section " << s << " removed!";
+
+    //Добавление секции в список - результат
+    cIniFile::qslDeletedSections.append(qsWay);//#@
+
+    return Error;
 }
 
 //=============================================================================
+
+void cNavigation::execActionRemoveSection()
+{
+    QString s = "ActionRemoveSection()";
+
+    QListWidgetItem * item0 = new QListWidgetItem("==ActionRemoveSection==");
+    item0->setForeground(Qt::blue);
+    appEndItem(item0);
+
+    // Читаем имя текущей секции
+    int iPlaceNumber = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+    QString qsGroupName = cIniFile::Groups->at(iPlaceNumber);
+
+    bool x = deleteSection(qsGroupName);
+    // Выводим значения удалённых секций
+    if(!x)
+    {
+        cIniFile::Groups->removeAt(iPlaceNumber);
+
+        QListWidgetItem * item1 = new QListWidgetItem("RemoveSectionSuccess:" + qsGroupName);
+        appEndItem(item1);
+    }
+    else
+    {
+        QListWidgetItem * item2 = new QListWidgetItem("RemoveSectionError:" + qsGroupName);
+        item2->setForeground(Qt::red);
+        appEndItem(item2);
+    }
+
+    execActionSelectImagePrevious();//Перерисовка изображения
+
+    //===
+    emit showExecStatus(s);
+   //===
+
+}
+
+
+//=============================================================================
+
+//
+// Удалить секцию из ini файла и отправить исходный файл в GarbageCollector
+//
+bool cNavigation::eraseSection(QString s)
+{
+    bool Error = false;
+
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    settings.beginGroup(s);
+    QList<QString> keys = settings.childKeys();
+    int iKeysCount = keys.count();
+
+    QString qsName = settings.value("name", "noName").toString();
+    QString qsPath = settings.value("path", "noPath").toString();
+    QString qsWay = qsPath + "/" + qsName;
+
+    if(iKeysCount > 0)
+    {
+        // Перебор всей ключей в секции
+        QListIterator<QString> readKeyIt(keys);
+        while (readKeyIt.hasNext())
+        {
+            QString qsKey = readKeyIt.next();
+            qDebug() << qsKey;
+            settings.remove(qsKey);
+        }
+        qDebug() << "All keys in section " << s << " removed!";
+
+    }
+    else
+    {
+        qDebug() << "No keys in section " << s << " found!";
+    }
+    settings.endGroup();
+
+    settings.remove(s);
+    settings.sync();
+
+    qDebug() << "Section " << s << " removed!";
+
+    //--- Перемещение файла в папку GargbageCollector
+
+    QFile file(qsWay);
+    if(file.exists())
+    {
+        qDebug() << "GarbageCollector: " << cIniFile::GarbageCollectorPath;
+        //if(file.copy(cIniFile::GarbageCollectorPath + qsName))
+        if(file.rename(cIniFile::GarbageCollectorPath + qsName))
+        {
+            qDebug() << "File " << qsWay << " moved to GarbageCollector successfully";
+
+            if(file.exists())
+            {
+                qDebug() << "!!!File " << qsWay << " yet exist";
+            }
+        }
+        else
+        {
+            qDebug() << "!!!File " << qsWay << " moving to GarbageCollector error: " << file.errorString();
+
+            Error = true;
+        }
+    }
+    else
+    {
+        qDebug() << "File " << qsWay << " not exist";
+        Error = true;
+    }
+
+    //---
+    //Добавление секции в список - результат
+    cIniFile::qslDeletedSections.append(qsWay);//#@
+
+    return Error;
+}
+
+
+//=============================================================================
+
+void cNavigation::execActionEraseSection()
+{
+    QString s = "ActionEraseSection()";
+
+    QListWidgetItem * item0 = new QListWidgetItem("==ActionEraseSection==");
+    item0->setForeground(Qt::blue);
+    appEndItem(item0);
+
+    // Читаем имя текущей секции
+    int iPlaceNumber = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+    QString qsGroupName = cIniFile::Groups->at(iPlaceNumber);
+
+    bool x = eraseSection(qsGroupName);
+    // Выводим значения удалённых секций
+    if(!x)
+    {
+        cIniFile::Groups->removeAt(iPlaceNumber);
+
+        QListWidgetItem * item1 = new QListWidgetItem("EraseSectionSuccess:" + qsGroupName);
+        appEndItem(item1);
+    }
+    else
+    {
+        QListWidgetItem * item2 = new QListWidgetItem("EraseeSectionError:" + qsGroupName);
+        item2->setForeground(Qt::red);
+        appEndItem(item2);
+    }
+
+    execActionSelectImagePrevious();//Перерисовка изображения
+
+    //===
+    emit showExecStatus(s);
+   //===
+
+}
+
+//=============================================================================
+
 
 

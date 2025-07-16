@@ -1,3 +1,42 @@
+#20250715
+
+[] Выполнить рефакторинг класса cSearch: перенести действия, связанные
+с одноимёнными функциями этого класса из MainWindow в экземпляр этого класса
++ execActionSearchRotated()
+- execActionSearchNamePattern1()
+- execActionSearchNamePattern2()
+- execActionSearchNamePattern()
+- execActionSearchNamePatterns12Intersection()
+- execActionSearchNamePatterns1XIntersection()
++ execActionSearchFreshRecords()
++ execActionSearchOrYes()
++ execActionSearchYesYes()
+
+[x] Выполнить рефакторинг класса cDrawFilex: в экземпляре класса выполнить
+программную генерацию кнопок и SpinBox, с помощью которых выполняются
+действия по вращению изображения
+- pushButton RotateCW
+- pushButton RotateCCW
+- spinBox SpinBoxAngle
+
+#20250714
+
+[] Выполнить рефакторинг класса cDrawFilex: перенести действия, связанные
+с одноимёнными функциями этого класса из MainWindow в экземпляр этого класса
++ execActionRotateCW(),
++ execActionRotateCCW(),
++ execSpinBoxAngle(int angle)
+
+#20250711
+
+[] Выполнить рефакторинг класса cNavigation: перенести действия, связанные
+с одноимёнными функциями этого класса из MainWindow в экземпляр этого класса
++ execActionRemoveSection()
++ execActionEraseSection(),
+а также функции:
++ eraseSection(qsGroupName)
++ deleteSection(qsGroupName)
+
 #20250710
 
 [] Выполнить рефакторинг класса cImportFiles: создать экземпляр этого класса и

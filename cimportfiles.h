@@ -64,7 +64,7 @@ public:
 
 signals:
     void showExecStatus(QString s);
-    void resetNavigation();
+    void gotoInstallNavigation();
 
 public slots:
     void execActionImportInitial();

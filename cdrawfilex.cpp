@@ -449,3 +449,48 @@ void cDrawFilex::scaleImage(QString path, int width, int height)
 
 //=============================================================================
 
+void cDrawFilex::execActionRotateCW()
+{
+    QString s = "DrawFilesInstance::ActionRotateCW()";
+
+    execRotateCW90();
+
+    emit draw(cIniFile::currentRotatedImagePath);
+
+    //===
+    emit showExecStatus(s);
+    //===
+}
+
+//=============================================================================
+
+void cDrawFilex::execActionRotateCCW()
+{
+    QString s = "DrawFilesInstance::ActionRotateCCW()";
+
+    execRotateCCW90();
+
+    emit draw(cIniFile::currentRotatedImagePath);
+
+    //===
+    emit showExecStatus(s);
+    //===
+
+}
+
+//=============================================================================
+
+void cDrawFilex::execSpinBoxAngle(int angle)
+{
+    qDebug() << "Angle:" << angle;
+    iAngle = angle;
+
+    execRotate(iAngle);
+
+    emit draw(cIniFile::currentRotatedImagePath);
+
+}
+
+
+//=============================================================================
+

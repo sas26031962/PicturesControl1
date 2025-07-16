@@ -49,7 +49,7 @@ public:
     QPushButton * pbErase;
     QPushButton * pbRemove;
 
-    QListWidget * ListWidget;
+    QListWidget * ListWidgetOther;
     QTableView * TableView;
     QSpinBox * SpinBoxIndex;
     QProgressBar * ProgressBarNavigation;
@@ -59,20 +59,25 @@ public:
 
     //Методы
     void install(QListWidget* list_widget, QTableView* table_view, QGroupBox* box);
-    void installNavigation();
+    bool deleteSection(QString s);
+    bool eraseSection(QString s);
 
 signals:
     void draw(QString s);
     void showExecStatus(QString s);
 
 public slots:
+    void installNavigation();
+
     void loadRemovedSectionsList();
     void execActionGotoIndex();
     void execActionSelectImageBegin();
     void execActionSelectImageNext();
     void execActionSelectImagePrevious();
     void execActionSelectImageEnd();
-    void execResetNavigation();
+
+    void execActionRemoveSection();
+    void execActionEraseSection();
 
     void execShowCurrentIndexPicture();
 

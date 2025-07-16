@@ -100,8 +100,6 @@ private:
 
     fmView * fmViewPicture;
 
-    int iAngle = 90;
-
     QStringList * qslHashTagList;
 
     //Тип списка для работы с кнотекстными меню
@@ -122,15 +120,10 @@ private:
     cSearch * SearchInstance;
 
     //Методы
-    bool deleteSection(QString s);
-    bool eraseSection(QString s);
-
     void saveRemovedSectionsList();
 
 public:
     //Атрибуты
-
-    QListWidget * ListWidget;//20250616
 
     QString fileNameHashTag;// Имя файла для загрузки параметров
 
@@ -159,31 +152,23 @@ private slots:
     void execListWidgetKeysItemClicked();
     void execListWidgetSearchItemClicked();
 
-    void execActionSearchRotated();
+
     void execActionSearchNamePattern1();
     void execActionSearchNamePattern2();
     void execActionSearchNamePattern();
     void execActionSearchNamePatterns12Intersection();
     void execActionSearchNamePatterns1XIntersection();
-    void execActionSearchFreshRecords();
 
-    void execActionRemoveSection();
-    void execActionEraseSection();
-
-    void execActionSearchOrYes();
-    void execActionSearchYesYes();
-
-    void execActionRotateCW();
-    void execActionRotateCCW();
-    void execSpinBoxAngle(int angle);
     void execShowExecStatus(QString s);
 
+    //
+    // Слот для обработки сигнала, возникающего при ошибке проведения операции с файлом
+    //
     void execFoundMissingFile(QString path);
 
 public slots:
 
 signals:
-    void draw(QString s);
     void showExecStatus(QString s);
 };
 

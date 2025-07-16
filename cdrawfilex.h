@@ -22,6 +22,7 @@ class cDrawFilex : public QObject
 
     //Атрибуты
     QListWidget * ListWidget;
+    int iAngle = 90;
 
 public:
     static qreal dx;// = 0;
@@ -38,12 +39,17 @@ public:
 
     void scaleImage(QString, int width, int height);
 
-
-
 signals:
     void foundMissingFile(QString s);
 
+    void draw(QString s);
+    void showExecStatus(QString s);
+
 public slots:
+    void execActionRotateCW();
+    void execActionRotateCCW();
+    void execSpinBoxAngle(int angle);
+
 };
 
 #endif // CDRAWFILEX_H

@@ -424,7 +424,7 @@ void cImportFiles::execActionLoad()
 
     // Переход к следующему индексу
     //NavigationInstance->installNavigation();//20250709 Настройка навигации
-    emit resetNavigation();
+    emit gotoInstallNavigation();
 
     //---
     QString s = "execActionLoad(), goto index:";
