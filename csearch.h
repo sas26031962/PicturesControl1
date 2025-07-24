@@ -5,6 +5,7 @@
 #include <QString>
 #include <QDebug>
 #include <QListWidget>
+#include <QLineEdit>
 
 #include "cinifile.h"
 #include "cloadfiles.h"
@@ -16,6 +17,7 @@ class cSearch : public QObject
     //Атрибуты
     QListWidget * ListWidgetFounded;
     QListWidget * ListWidgetOther;
+    QLineEdit * LineEditPattern;
 
     //Методы
     void execLoadFilesSignedIsRotated();
@@ -25,7 +27,7 @@ public:
     explicit cSearch(QObject *parent = 0);
 
     //Методы
-    void install(QListWidget * founded, QListWidget * other);
+    void install(QListWidget * founded, QListWidget * other, QLineEdit * pattern);
     void showGroupsList();
     bool searchNamePattern(const QString& pattern);
     void execLoadFilesByConditionOrYes(QStringList yes);
@@ -45,6 +47,11 @@ public slots:
     void execActionSearchYesYes();
     void execActionSearchOrYes();
     void execActionSearchFreshRecords();
+    void execActionSearchNamePattern1();
+    void execActionSearchNamePattern2();
+    void execActionSearchNamePattern();
+    void execActionSearchNamePatterns12Intersection();
+    void execActionSearchNamePatterns1XIntersection();
 
 };
 

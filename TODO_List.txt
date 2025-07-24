@@ -3,11 +3,11 @@
 [] Выполнить рефакторинг класса cSearch: перенести действия, связанные
 с одноимёнными функциями этого класса из MainWindow в экземпляр этого класса
 + execActionSearchRotated()
-- execActionSearchNamePattern1()
-- execActionSearchNamePattern2()
-- execActionSearchNamePattern()
-- execActionSearchNamePatterns12Intersection()
-- execActionSearchNamePatterns1XIntersection()
++ execActionSearchNamePattern1()
++ execActionSearchNamePattern2()
++ execActionSearchNamePattern()
++ execActionSearchNamePatterns12Intersection()
++ execActionSearchNamePatterns1XIntersection()
 + execActionSearchFreshRecords()
 + execActionSearchOrYes()
 + execActionSearchYesYes()
