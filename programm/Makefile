@@ -295,6 +295,7 @@ DIST          = /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/qt_config.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_post.prf \
+		../.qmake.stash \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/toolchain.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -545,6 +546,7 @@ Makefile: ../PicturesControl1.pro /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mksp
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/qt_config.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/toolchain.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -758,6 +760,7 @@ Makefile: ../PicturesControl1.pro /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mksp
 /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/qt_config.prf:
 /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/toolchain.prf:
 /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -2609,6 +2612,12 @@ moc_csearch.cpp: ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtabbar.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qrubberband.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLineEdit \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlineedit.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextcursor.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextformat.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpen.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextoption.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
@@ -4991,6 +5000,12 @@ csearch.o: ../csearch.cpp ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtabbar.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qrubberband.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLineEdit \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlineedit.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextcursor.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextformat.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpen.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextoption.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \

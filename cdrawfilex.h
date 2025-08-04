@@ -11,10 +11,6 @@
 
 #include "cinifile.h"
 
-#define VERTICAL_SHIFT_AFTER_ROTATION 880
-#define INITIAL_SHIFT_X -200
-#define INITIAL_SHIFT_Y -200
-
 class cDrawFilex : public QObject
 {
 
@@ -25,8 +21,8 @@ class cDrawFilex : public QObject
     int iAngle = 90;
 
 public:
-    static qreal dx;// = 0;
-    static qreal dy;// = VERTICAL_SHIFT_AFTER_ROtATION;//880
+    static qreal dx;
+    static qreal dy;
 
     explicit cDrawFilex(QObject *parent = 0);
 

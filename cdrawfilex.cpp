@@ -1,11 +1,11 @@
 #include "cdrawfilex.h"
 
-qreal cDrawFilex::dx = INITIAL_SHIFT_X;
-qreal cDrawFilex::dy = INITIAL_SHIFT_Y;
+qreal cDrawFilex::dx = 0;//-200;
+qreal cDrawFilex::dy = 0;//-200;
 
 cDrawFilex::cDrawFilex(QObject *parent) : QObject(parent)
 {
-    //
+    //...
 }
 
 //=============================================================================
@@ -82,9 +82,6 @@ QString cDrawFilex::execRotate(int angle)
     transform.translate(center.x(), center.y());    // Перемещаем систему координат в центр изображения
     transform.rotate(angle);                        // Выполняем поворот
     transform.translate(-center.x(), -center.y());  // Возвращаем систему координат
-
-    //qreal dx = 0;
-    //qreal dy = VERTICAL_SHIFT_AFTER_ROtATION;//880
 
     painter.setTransform(transform);
     painter.drawImage(cDrawFilex::dy, cDrawFilex::dx, originalImage); // Рисуем исходное изображение на повернутом

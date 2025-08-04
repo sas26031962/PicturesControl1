@@ -233,7 +233,7 @@ MainWindow::MainWindow(QWidget *parent) :
     NavigationInstance->pbGoTo->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
     NavigationInstance->pbReload->setVisible(true);//РЕЖИМ АДМИНИСТРАТОРА
 
-    connect(SearchInstance, SIGNAL(gotoInstallNavigation()), NavigationInstance, SLOT(installNavigation()));
+    connect(SearchInstance, &cSearch::gotoInstallNavigation, NavigationInstance, &cNavigation::installNavigation);
 
     connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
     connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
@@ -309,7 +309,7 @@ MainWindow::MainWindow(QWidget *parent) :
     cRecord::RecordList = ptrRecordList.get();
 
     timerUpdate = new QTimer(this);
-    connect(timerUpdate, SIGNAL(timeout()), this, SLOT( execTimerUpdate()));
+    connect(timerUpdate, &QTimer::timeout, this, &MainWindow::execTimerUpdate);
     timerUpdate->start(100);
 
     labelExecStatus = new QLabel("ExecStatus");
@@ -340,7 +340,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    connect(ui->actionSearchRotated, SIGNAL(triggered()), SearchInstance, SLOT( execActionSearchRotated()));
+    connect(ui->actionSearchRotated, &QAction::triggered, SearchInstance, &cSearch::execActionSearchRotated);
 
     ui->lineEditPattern->setText("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");//20250425
 
@@ -352,11 +352,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionSearchOrYes, &QAction::triggered, SearchInstance, &cSearch::execActionSearchOrYes);
     connect(ui->pushButtonSearchOrYes, &QPushButton::pressed, SearchInstance, &cSearch::execActionSearchOrYes);
 
-    connect(ui->actionSearchYesYes, SIGNAL(triggered()), SearchInstance, SLOT( execActionSearchYesYes()));
+    connect(ui->actionSearchYesYes, &QAction::triggered, SearchInstance, &cSearch::execActionSearchYesYes);
     connect(ui->pushButtonSearchYesYes, &QPushButton::pressed, SearchInstance, &cSearch::execActionSearchYesYes);
 
-    connect(ui->actionSearchNamePatterns12Intersection, SIGNAL(triggered()), SearchInstance, SLOT( execActionSearchNamePatterns12Intersection()));
-    connect(ui->actionSearchNamePatterns1XIntersection, SIGNAL(triggered()), SearchInstance, SLOT( execActionSearchNamePatterns1XIntersection()));
+    connect(ui->actionSearchNamePatterns12Intersection, &QAction::triggered, SearchInstance, &cSearch::execActionSearchNamePatterns12Intersection);
+
+    connect(ui->actionSearchNamePatterns1XIntersection, &QAction::triggered, SearchInstance, &cSearch::execActionSearchNamePatterns1XIntersection);
 
     connect(ui->actionSearchFreshRecords, &QAction::triggered, SearchInstance, &cSearch::execActionSearchFreshRecords);
 
@@ -390,7 +391,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(SearchInstance, &cSearch::showExecStatus, this, &MainWindow::execShowExecStatus);
     connect(SearchInstance, &cSearch::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
-    connect(ui->actionImport, SIGNAL(triggered()), ImportFilesInstance, SLOT( execActionImportInitial()));
+    connect(ui->actionImport, &QAction::triggered, ImportFilesInstance, &cImportFiles::execActionImportInitial);
 
 }//End of ctor
 
