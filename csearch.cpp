@@ -640,6 +640,14 @@ void cSearch::execActionSearchNamePattern1()
 
     showGroupsList();
 
+    //Здесь нужно записать массив cIniFile::Groups в файл с именем,
+    //хранящимся в cIniFile::pattern1StringListFilePath
+
+    cLoadFiles::saveStringListToFile(
+        cIniFile::pattern1StringListFilePath,
+        *cIniFile::Groups
+        );
+
     //---
     s += ": iCount=";
     s += QString::number(cIniFile::Groups->count());
@@ -663,6 +671,13 @@ void cSearch::execActionSearchNamePattern2()
     bool x = searchNamePattern(pattern);
 
     showGroupsList();
+
+    //Здесь нужно записать массив cIniFile::Groups в файл с именем,
+    //хранящимся в cIniFile::pattern2StringListFilePath
+    cLoadFiles::saveStringListToFile(
+        cIniFile::pattern2StringListFilePath,
+        *cIniFile::Groups
+        );
 
     //---
     s += ": iCount=";

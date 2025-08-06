@@ -3102,26 +3102,7 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../csearch.h \
-		ui_mainwindow.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QVariant \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QAction \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QApplication \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qapplication.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qguiapplication.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qinputmethod.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QButtonGroup \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qbuttongroup.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QComboBox \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qcombobox.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QHeaderView \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qheaderview.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMenuBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmenubar.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QTabWidget \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QToolBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtoolbar.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QWidget
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
 cinifile.o: ../cinifile.cpp ../cinifile.h \
@@ -3448,25 +3429,7 @@ fmview.o: ../fmview.cpp ../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpainter.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextoption.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpen.h \
-		ui_fmview.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QVariant \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QAction \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qaction.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qactiongroup.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QApplication \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qapplication.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcoreapplication.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qeventloop.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qguiapplication.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qinputmethod.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QButtonGroup \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qbuttongroup.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QHeaderView \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qheaderview.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QSlider
+		ui_fmview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fmview.o ../fmview.cpp
 
 cimportfiles.o: ../cimportfiles.cpp ../cimportfiles.h \
