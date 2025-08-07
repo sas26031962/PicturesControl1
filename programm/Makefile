@@ -2618,6 +2618,7 @@ moc_csearch.cpp: ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextformat.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpen.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextoption.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
@@ -2637,7 +2638,6 @@ moc_csearch.cpp: ../csearch.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
 		moc_predefs.h \
@@ -4969,6 +4969,7 @@ csearch.o: ../csearch.cpp ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextformat.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpen.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtextoption.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
@@ -4988,7 +4989,6 @@ csearch.o: ../csearch.cpp ../csearch.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csearch.o ../csearch.cpp

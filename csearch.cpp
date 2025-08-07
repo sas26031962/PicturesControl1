@@ -13,6 +13,14 @@ void cSearch::install(QListWidget * founded, QListWidget *other, QLineEdit *patt
     connect(ListWidgetFounded, &QListWidget::itemClicked, this, &cSearch::execListWidgetFoundedItemClicked);
 }
 
+void cSearch::appEndItem(QListWidgetItem * item)
+{
+    ListWidgetOther->addItem(item);
+    ListWidgetOther->setCurrentItem(item);
+    ListWidgetOther->scrollToItem(item);
+}
+
+
 //=============================================================================
 
 //
@@ -643,10 +651,17 @@ void cSearch::execActionSearchNamePattern1()
     //Здесь нужно записать массив cIniFile::Groups в файл с именем,
     //хранящимся в cIniFile::pattern1StringListFilePath
 
-    cLoadFiles::saveStringListToFile(
+    qDebug() << "Pattern1 file path=" << cIniFile::pattern1StringListFilePath;
+
+    bool y = cLoadFiles::saveStringListToFile(
         cIniFile::pattern1StringListFilePath,
         *cIniFile::Groups
         );
+
+    if(y)
+        qDebug() << "Save to file: " << cIniFile::pattern1StringListFilePath << " success";
+    else
+        qDebug() << "Save to file: " << cIniFile::pattern1StringListFilePath << " error!!!";
 
     //---
     s += ": iCount=";
@@ -674,10 +689,16 @@ void cSearch::execActionSearchNamePattern2()
 
     //Здесь нужно записать массив cIniFile::Groups в файл с именем,
     //хранящимся в cIniFile::pattern2StringListFilePath
-    cLoadFiles::saveStringListToFile(
+    qDebug() << "Pattern2 file path=" << cIniFile::pattern2StringListFilePath;
+     bool y = cLoadFiles::saveStringListToFile(
         cIniFile::pattern2StringListFilePath,
         *cIniFile::Groups
         );
+
+     if(y)
+         qDebug() << "Save to file: " << cIniFile::pattern2StringListFilePath << " success";
+     else
+         qDebug() << "Save to file: " << cIniFile::pattern2StringListFilePath << " error!!!";
 
     //---
     s += ": iCount=";
@@ -734,15 +755,38 @@ void cSearch::execActionSearchNamePatterns12Intersection()
 {
     QString s = "SearchInstance::execActionSearchNamePattens12Intersection()";
 
+    QListWidgetItem * item0 = new QListWidgetItem("==ActionSearchNamePatterns12Intersection==");
+    item0->setForeground(Qt::blue);
+    appEndItem(item0);
+
+    QListWidgetItem * item1 = new QListWidgetItem("Pattern1Path=" + cIniFile::pattern1StringListFilePath);
+    appEndItem(item1);
+
+    QListWidgetItem * item2 = new QListWidgetItem("Pattern2Path=" + cIniFile::pattern2StringListFilePath);
+    appEndItem(item2);
 
     QStringList qslPattern1 = cLoadFiles::loadStringListFromFile(cIniFile::pattern1StringListFilePath);
     QStringList qslPattern2 = cLoadFiles::loadStringListFromFile(cIniFile::pattern2StringListFilePath);
 
-    qDebug() << "ListPattern1 count=" << qslPattern1.count() << " ListPattern2 count=" << qslPattern2.count();
+    QListWidgetItem * item3 = new QListWidgetItem("Pattern1_ItemsCount=" + QString::number(qslPattern1.count()));
+    appEndItem(item3);
+
+    QListWidgetItem * item4 = new QListWidgetItem("Pattern2_ItemsCount=" + QString::number(qslPattern2.count()));
+    appEndItem(item4);
+
 
     // Очистка результата
     int iCount = 0;
     ListWidgetFounded->clear();
+
+    int Year = 1900;
+    int Month = 1;
+    int Day = 1;
+    int Hour = 0;
+    int Min = 0;
+    int Sec = 0;
+    QString qsMirror = "1900-00-00 00-00-00";
+    QString sX;
 
     QListIterator<QString> readIt(qslPattern1);
     while (readIt.hasNext())
@@ -754,8 +798,6 @@ void cSearch::execActionSearchNamePatterns12Intersection()
         QString pattern1 = "^20[0-9]{6}_[0-9]{6}";
         QRegularExpression re(pattern1);
         bool match = re.match(qsSection.toLower()).hasMatch();
-        int Year, Month, Day, Hour, Min, Sec;
-        QString qsMirror;
         if (match)
         {
             //Извлечение даты
@@ -766,6 +808,24 @@ void cSearch::execActionSearchNamePatterns12Intersection()
             Min = qsSection.mid(11, 2).toInt();
             Sec = qsSection.mid(13, 2).toInt();
             //qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Year=" << Year << " Month=" << Month << " Day=" << Day << " Hour=" << Hour << " Min=" << Min << " Sec=" << Sec;
+
+            sX = "Pattern1_Item=";
+            sX += qsSection;
+            sX += " Data=";
+            sX += QString::number(Year);
+            sX += ".";
+            sX += QString::number(Month);
+            sX += ".";
+            sX += QString::number(Day);
+            sX += "_";
+            sX += QString::number(Hour);
+            sX += ":";
+            sX += QString::number(Min);
+            sX += ":";
+            sX += QString::number(Sec);
+
+//            QListWidgetItem * itemX = new QListWidgetItem(sX);
+//            appEndItem(itemX);
 
             //Формирование строки данных по стандарту шаблона 2
             qsMirror = QString::number(Year);
@@ -784,20 +844,32 @@ void cSearch::execActionSearchNamePatterns12Intersection()
             qsMirror += "-";
             if(Sec < 10)qsMirror += "0";
             qsMirror += QString::number(Sec);
-            qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Mirror=" << qsMirror;
+
+            //qDebug() << "Строка " << qsSection << " is Ok for:" << pattern1 << ": Mirror=" << qsMirror;
 
             //Поиск сформированной строки в списке 2
             if(qslPattern2.contains(qsMirror))
             {
                 //Подсчёт совпадений
                 iCount++;
-                qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
+                //qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
+
+                sX += " has mirror";
+                sX += qsMirror;
+
                 ListWidgetFounded->addItem(qsSection);
 
                 //Удаление найденной строки из конфигурационного файла
                 //NavigationInstance->deleteSection(qsMirror);//!!!
             }
         }
+        else
+        {
+            sX = "Pattern1 not match for " + qsSection + " Mirror=" + qsMirror;
+        }
+
+        QListWidgetItem * itemX = new QListWidgetItem(sX);
+        appEndItem(itemX);
     }
     s += ": mirrors count=";
     s += QString::number(iCount);

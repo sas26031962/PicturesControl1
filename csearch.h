@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QListWidget>
 #include <QLineEdit>
+#include <QListWidgetItem>
 
 #include "cinifile.h"
 #include "cloadfiles.h"
@@ -21,6 +22,8 @@ class cSearch : public QObject
 
     //Методы
     void execLoadFilesSignedIsRotated();
+    void appEndItem(QListWidgetItem * item);
+
 
 public:
     //Конструктор
