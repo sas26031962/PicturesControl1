@@ -2,7 +2,8 @@
 
 cSearch::cSearch(QObject *parent) : QObject(parent)
 {
-    //
+    QChar qcFill = QChar('-');
+    qsFoundedDelimiter = QString(20, qcFill);
 }
 
 void cSearch::install(QListWidget * founded, QListWidget *other, QLineEdit *pattern)
@@ -44,21 +45,35 @@ void cSearch::execListWidgetFoundedItemClicked()
     QString s = "execListWidgetFoundedItemClicked()";
     QString value = ListWidgetFounded->currentItem()->text();
 
-    int FoundedIndex = -1;
-
-    if(cIniFile::Groups->contains(value))
+    if(value != qsFoundedDelimiter)
     {
-        FoundedIndex = cIniFile::Groups->indexOf(value);
+        int FoundedIndex = -1;
+
+        if(cIniFile::Groups->contains(value))
+        {
+            FoundedIndex = cIniFile::Groups->indexOf(value);
+
+
+            // Модификация индекса
+            iCurrentIndexGlobal.store(FoundedIndex, std::memory_order_relaxed);
+            // Отобразить картинку
+            emit showCurrentIndexPicture();
+
+        }
+        else
+        {
+            QListWidgetItem * item0 = new QListWidgetItem("!!!Item:" + value + " not found!!!");
+            item0->setForeground(Qt::red);
+            ListWidgetOther->addItem(item0);
+        }
+
+        s += ": ";
+        s += value;
     }
-
-    // Модификация индекса
-    iCurrentIndexGlobal.store(FoundedIndex, std::memory_order_relaxed);
-
-    // Отобразить картинку
-    emit showCurrentIndexPicture();
-
-    s += ": ";
-    s += value;
+    else
+    {
+        s += ": delimiter >> nothing to show";
+    }
     //---
     emit showExecStatus(s);
     //---
@@ -857,7 +872,9 @@ void cSearch::execActionSearchNamePatterns12Intersection()
                 sX += " has mirror";
                 sX += qsMirror;
 
+                ListWidgetFounded->addItem(qsFoundedDelimiter);
                 ListWidgetFounded->addItem(qsSection);
+                ListWidgetFounded->addItem(qsMirror);
 
                 //Удаление найденной строки из конфигурационного файла
                 //NavigationInstance->deleteSection(qsMirror);//!!!

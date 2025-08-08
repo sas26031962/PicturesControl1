@@ -20,6 +20,8 @@ class cSearch : public QObject
     QListWidget * ListWidgetOther;
     QLineEdit * LineEditPattern;
 
+    QString qsFoundedDelimiter;
+
     //Методы
     void execLoadFilesSignedIsRotated();
     void appEndItem(QListWidgetItem * item);
