@@ -869,7 +869,7 @@ void cSearch::execActionSearchNamePatterns12Intersection()
                 iCount++;
                 //qDebug() << "String " << qsSection << " has mirror:" << qsMirror;
 
-                sX += " has mirror";
+                sX += " has mirror: ";
                 sX += qsMirror;
 
                 ListWidgetFounded->addItem(qsFoundedDelimiter);
