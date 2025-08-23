@@ -105,22 +105,26 @@ void cLoadFiles::execLoadFilesSignedIsRotated()
 bool cLoadFiles::saveStringListToFile(const QString& fileName, const QStringList& list)
 {
     QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
         return false;
     }
-    // Установка кодировки
-    QTextStream out(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
-        out.setCodec("Windows-1251");
     else
-        out.setCodec("UTF-8");
+    {
+        // Установка кодировки
+        QTextStream out(&file);
+        if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
+            out.setCodec("Windows-1251");
+        else
+            out.setCodec("UTF-8");
 
-    for (const QString& str : list) {
-        out << str << "\n";
+        for (const QString& str : list) {
+            out << str << "\n";
+        }
+
+        file.close();
+        return true;
     }
-
-    file.close();
-    return true;
 }
 
 //=============================================================================

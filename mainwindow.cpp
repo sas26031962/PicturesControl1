@@ -151,8 +151,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     cIniFile::iniFilePath = qsProjectPath + qsProjectName + "/programm/data/FilesConfig" + qsHashTagFileNameSuffix + ".ini";
 
-    cIniFile::pattern1StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern1StringListFile" + qsDataFileNameExtension;
-    cIniFile::pattern2StringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern2StringListFile" + qsDataFileNameExtension;
+    cIniFile::pattern1StringListFilePath = "./data/StringListPattern1.txt";//qsProjectPath + qsProjectName + "/programm/data/pattern1StringListFile" + qsDataFileNameExtension;
+    cIniFile::pattern2StringListFilePath = "./data/StringListPattern2.txt";//qsProjectPath + qsProjectName + "/programm/data/pattern2StringListFile" + qsDataFileNameExtension;
     cIniFile::patternXStringListFilePath = qsProjectPath + qsProjectName + "/programm/data/pattern3StringListFile" + qsDataFileNameExtension;
     cIniFile::scaledImagePath = qsProjectPath + qsProjectName + "/programm/img/tmp/scaled_image.png";
     cIniFile::filePathRemovedSectionList = qsProjectPath + qsProjectName + "/programm/data/RemovedSectionList" + qsHashTagFileNameSuffix + qsDataFileNameExtension;
@@ -185,6 +185,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    //20250821
+    ui->listWidgetOther->clear();
+    connect(this, &MainWindow::infoMessage, this, &MainWindow::execInfoMessage);
+    connect(this, &MainWindow::beginMessage, this, &MainWindow::execBeginMessage);
+    connect(this, &MainWindow::endMessage, this, &MainWindow::execEndMessage);
+
+    //---20250820 Настройка пула потоков
+    int iIdealThreadCount = QThread::idealThreadCount();
+
+    qDebug() << "ctor: ideal thread count=" << iIdealThreadCount;
+
+    emit infoMessage("Ideal thread count=" + QString::number(iIdealThreadCount));
+
+    threadPool.setMaxThreadCount(iIdealThreadCount);
+    //---
+
     ImportFilesInstance = new cImportFiles();
     ImportFilesInstance->install(
         ui->listWidgetOther,
@@ -209,7 +225,7 @@ MainWindow::MainWindow(QWidget *parent) :
     DrawFilesInstance->install(ui->listWidgetOther);
 
     SearchInstance = new cSearch();
-    SearchInstance->install(ui->listWidgetFounded, ui->listWidgetOther, ui->lineEditPattern);
+    SearchInstance->install(ui->listWidgetFounded, ui->listWidgetOther, ui->listWidgetKeys, ui->lineEditPattern, ui->lineEditSearchAllKeys);
 
     ListWidgetPlace = new cListWidgetPlace();
     ListWidgetPlace->install(ui->tab_Place);
@@ -312,6 +328,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timerUpdate, &QTimer::timeout, this, &MainWindow::execTimerUpdate);
     timerUpdate->start(100);
 
+    ProgressBarTasks = new QProgressBar();
+    ProgressBarTasks->setRange(0, 100);
+    ProgressBarTasks->setValue(0);
+    ProgressBarTasks->setToolTip("ThreadPoolTasks progress");
+    ui->statusBar->addWidget(ProgressBarTasks);
+
     labelExecStatus = new QLabel("ExecStatus");
     ui->statusBar->addWidget(labelExecStatus);
 
@@ -361,6 +383,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionSearchFreshRecords, &QAction::triggered, SearchInstance, &cSearch::execActionSearchFreshRecords);
 
+    connect(ui->actionRemove_Js, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemove_Js);
+    connect(ui->actionRemove_Html, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemove_Html);
     connect(ui->actionRemoveMovie, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveMovie);
     connect(ui->actionRemoveText, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveText);
     connect(ui->actionRemoveTif, &QAction::triggered, ActionsExec, &cActionsExec::execActionRemoveTif);
@@ -392,6 +416,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(SearchInstance, &cSearch::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     connect(ui->actionImport, &QAction::triggered, ImportFilesInstance, &cImportFiles::execActionImportInitial);
+    //20250820
+    connect(ui->actionStart_Threads, &QAction::triggered, this, &MainWindow::execActionStartThreads);
+    //20250822
+    connect(ui->actionImportTaskProcess, &QAction::triggered, this, &MainWindow::execActionImportTaskProcess);
 
 }//End of ctor
 
@@ -424,6 +452,9 @@ MainWindow::~MainWindow()
     if(cIniFile::Groups != nullptr) delete cIniFile::Groups;
     if(cIniFile::Keys != nullptr) delete cIniFile::Keys;
     if(cIniFile::SearchKeys != nullptr) delete cIniFile::SearchKeys;
+
+    //20250820
+    threadPool.waitForDone(); // Ожидаем завершения всех задач
 
     delete ui;
 }
@@ -578,8 +609,8 @@ void MainWindow::execTimerUpdate()
         QRect windowPlace = QRect(windowX, windowY, windowWidth, windowHeight);
         fmViewPicture->setGeometry(windowPlace);
 
-        fmViewPicture->show();
-        ui->actionViewPicture->setChecked(true);
+        //fmViewPicture->show();
+        //ui->actionViewPicture->setChecked(true);
 
         qDebug() << "CurrentIndex=" << iCurrentIndexGlobal.load(std::memory_order_relaxed);
         ImportFilesInstance->execActionLoad();
@@ -734,3 +765,105 @@ void MainWindow::execFoundMissingFile(QString path)
 
 //##############################################################################
 
+void MainWindow::execActionStartThreads()
+{
+    qDebug() << "execActionStartThreads";
+
+    ui->actionStart_Threads->setEnabled(false);
+    emit beginMessage("==ActionStartThreads begin==");
+    tasksCompleted = 0;
+    totalTasks = 10; // Количество задач
+
+    // Создаем и запускаем задачи
+    for (int i = 0; i < totalTasks; ++i)
+    {
+        threadPool.start(new ProcessingTask(i, this));
+    }
+
+}
+
+void MainWindow::execActionImportTaskProcess()
+{
+    ui->actionImportTaskProcess->setEnabled(false);
+    emit beginMessage("==ActionImportTaskProcess begin==");
+
+    threadPool.start(new processImportTask(PROCESS_IMPORT_TASK_ID, this));
+}
+
+/*
+    Слот, который вызывается из потока задачи
+*/
+void MainWindow::updateProgress(int value)
+{
+    tasksCompleted += value;
+    int progress = static_cast<int>((tasksCompleted * 100.0) / totalTasks);
+    ProgressBarTasks->setValue(progress);
+
+    if (tasksCompleted == totalTasks)
+    {
+        emit infoMessage("All tasks completed");
+        ui->actionStart_Threads->setEnabled(true);
+        ui->actionStart_Threads->setChecked(false);
+
+        QMessageBox msgBox;
+        msgBox.setText("Task pool execution");
+        msgBox.setInformativeText("Ready");
+        msgBox.exec();
+    }
+}
+
+void MainWindow::updateProgressImportTask(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit infoMessage("Import task completed");
+            ui->actionImportTaskProcess->setEnabled(true);
+            ui->actionImportTaskProcess->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("ImportTask");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+/*
+    Слот, который выводит сообщение в ListWidgetOther
+    Может вызываться из потока задачи
+*/
+void MainWindow::appEndItem(QListWidgetItem * item)
+{
+    ui->listWidgetOther->addItem(item);
+    ui->listWidgetOther->setCurrentItem(item);
+    ui->listWidgetOther->scrollToItem(item);
+}
+
+void MainWindow::execInfoMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+
+    appEndItem(item);
+}
+
+void MainWindow::execBeginMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+    item->setForeground(Qt::blue);
+    appEndItem(item);
+}
+
+void MainWindow::execEndMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+    item->setForeground(Qt::green);
+    appEndItem(item);
+}

@@ -171,7 +171,7 @@ void cNavigation::execShowCurrentIndexPicture()
             qsGroupName = cIniFile::Groups->at(index);
 
             QListWidgetItem * item = new QListWidgetItem("Skip 'RecordList' group");
-            item->setForeground(Qt::yellow);
+            item->setForeground(Qt::darkMagenta);
             appEndItem(item);
         }
 
@@ -244,7 +244,7 @@ void cNavigation::execShowCurrentIndexPicture()
     {
         QString s = "Groups is empty!";
         QListWidgetItem * item = new QListWidgetItem(s);
-        item->setForeground(Qt::yellow);
+        item->setForeground(Qt::darkMagenta);
         appEndItem(item);
 
         //Очистка средства отображения

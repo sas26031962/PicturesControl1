@@ -308,6 +308,12 @@ void cImportFiles::execActionImportInitial()
     QListWidgetItem * item1 = new QListWidgetItem("FileImport complete. Read " + QString::number(cRecord::RecordList->count()) + " files");
     appEndItem(item1);
 
+    QMessageBox msgBox;
+    msgBox.setText("execActionImportInitial");
+    msgBox.setInformativeText("Ready");
+    msgBox.exec();
+    //QMessageBox::information(this, "Ready", "Import task completed");
+
     //---
     QString s = "ImportFilesInstance: execActionImportInitial()";
     emit showExecStatus(s);

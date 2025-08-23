@@ -66,7 +66,9 @@ SOURCES       = ../main.cpp \
 		../clistwidgettheame.cpp \
 		../cactionsexec.cpp \
 		../cnavigation.cpp \
-		../csearch.cpp qrc_resourcedata.cpp \
+		../csearch.cpp \
+		../ThreadPool/processingtask.cpp \
+		../processimporttask.cpp qrc_resourcedata.cpp \
 		moc_mainwindow.cpp \
 		moc_fmview.cpp \
 		moc_cimportfiles.cpp \
@@ -93,6 +95,8 @@ OBJECTS       = main.o \
 		cactionsexec.o \
 		cnavigation.o \
 		csearch.o \
+		processingtask.o \
+		processimporttask.o \
 		qrc_resourcedata.o \
 		moc_mainwindow.o \
 		moc_fmview.o \
@@ -330,7 +334,9 @@ DIST          = /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_
 		../cactionsexec.h \
 		../cnavigation.h \
 		../cdrawfilex.h \
-		../csearch.h ../main.cpp \
+		../csearch.h \
+		../ThreadPool/processingtask.h \
+		../processimporttask.h ../main.cpp \
 		../mainwindow.cpp \
 		../cinifile.cpp \
 		../crecord.cpp \
@@ -344,7 +350,9 @@ DIST          = /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_
 		../clistwidgettheame.cpp \
 		../cactionsexec.cpp \
 		../cnavigation.cpp \
-		../csearch.cpp
+		../csearch.cpp \
+		../ThreadPool/processingtask.cpp \
+		../processimporttask.cpp
 QMAKE_TARGET  = PicturesControl1
 DESTDIR       = 
 TARGET        = PicturesControl1
@@ -799,8 +807,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resourcedata.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h ../clistwidgettheame.h ../cactionsexec.h ../cnavigation.h ../cdrawfilex.h ../csearch.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfilex.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp ../clistwidgettheame.cpp ../cactionsexec.cpp ../cnavigation.cpp ../csearch.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h ../clistwidgettheame.h ../cactionsexec.h ../cnavigation.h ../cdrawfilex.h ../csearch.h ../ThreadPool/processingtask.h ../processimporttask.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfilex.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp ../clistwidgettheame.cpp ../cactionsexec.cpp ../cnavigation.cpp ../csearch.cpp ../ThreadPool/processingtask.cpp ../processimporttask.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../mainwindow.ui ../fmview.ui $(DISTDIR)/
 
 
@@ -1004,6 +1012,16 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidget \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistwidget.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThreadPool \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthreadpool.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthread.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrunnable.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRunnable \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
@@ -1017,7 +1035,6 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
 		../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QDialog \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QStatusBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qstatusbar.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QValidator \
@@ -1057,6 +1074,9 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../csearch.h \
+		../ThreadPool/processingtask.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThread \
+		../processimporttask.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../mainwindow.h -o moc_mainwindow.cpp
@@ -1346,6 +1366,9 @@ moc_cimportfiles.cpp: ../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -1524,6 +1547,9 @@ moc_clistwidgetplace.cpp: ../clistwidgetplace.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgetplace.h -o moc_clistwidgetplace.cpp
@@ -1687,6 +1713,9 @@ moc_clistwidgetsubject.cpp: ../clistwidgetsubject.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgetsubject.h -o moc_clistwidgetsubject.cpp
@@ -1850,6 +1879,9 @@ moc_clistwidgetproperty.cpp: ../clistwidgetproperty.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgetproperty.h -o moc_clistwidgetproperty.cpp
@@ -2013,6 +2045,9 @@ moc_clistwidgettheame.cpp: ../clistwidgettheame.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../clistwidgettheame.h -o moc_clistwidgettheame.cpp
@@ -2163,6 +2198,9 @@ moc_cactionsexec.cpp: ../cactionsexec.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		moc_predefs.h \
@@ -2334,6 +2372,9 @@ moc_cnavigation.cpp: ../cnavigation.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QTextStream \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QStringList \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		moc_predefs.h \
@@ -2640,6 +2681,9 @@ moc_csearch.cpp: ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../csearch.h -o moc_csearch.cpp
@@ -2829,6 +2873,16 @@ main.o: ../main.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidget \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistwidget.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThreadPool \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthreadpool.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthread.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrunnable.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRunnable \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
@@ -2842,7 +2896,6 @@ main.o: ../main.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
 		../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QDialog \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QStatusBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qstatusbar.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QValidator \
@@ -2882,6 +2935,9 @@ main.o: ../main.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../csearch.h \
+		../ThreadPool/processingtask.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThread \
+		../processimporttask.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QApplication \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qapplication.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
@@ -3049,6 +3105,16 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidget \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistwidget.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThreadPool \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthreadpool.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthread.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrunnable.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRunnable \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
@@ -3062,7 +3128,6 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
 		../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QDialog \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QStatusBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qstatusbar.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QValidator \
@@ -3102,6 +3167,9 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qpushbutton.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../csearch.h \
+		../ThreadPool/processingtask.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThread \
+		../processimporttask.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
@@ -3565,6 +3633,9 @@ cimportfiles.o: ../cimportfiles.cpp ../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -3862,6 +3933,9 @@ cloadfiles.o: ../cloadfiles.cpp ../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4032,7 +4106,10 @@ clistwidgetplace.o: ../clistwidgetplace.cpp ../clistwidgetplace.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgetplace.o ../clistwidgetplace.cpp
 
 clistwidgetsubject.o: ../clistwidgetsubject.cpp ../clistwidgetsubject.h \
@@ -4193,7 +4270,10 @@ clistwidgetsubject.o: ../clistwidgetsubject.cpp ../clistwidgetsubject.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgetsubject.o ../clistwidgetsubject.cpp
 
 clistwidgetproperty.o: ../clistwidgetproperty.cpp ../clistwidgetproperty.h \
@@ -4354,7 +4434,10 @@ clistwidgetproperty.o: ../clistwidgetproperty.cpp ../clistwidgetproperty.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgetproperty.o ../clistwidgetproperty.cpp
 
 clistwidgettheame.o: ../clistwidgettheame.cpp ../clistwidgettheame.h \
@@ -4515,7 +4598,10 @@ clistwidgettheame.o: ../clistwidgettheame.cpp ../clistwidgettheame.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clistwidgettheame.o ../clistwidgettheame.cpp
 
 cactionsexec.o: ../cactionsexec.cpp ../cactionsexec.h \
@@ -4664,6 +4750,9 @@ cactionsexec.o: ../cactionsexec.cpp ../cactionsexec.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cactionsexec.o ../cactionsexec.cpp
@@ -4833,6 +4922,9 @@ cnavigation.o: ../cnavigation.cpp ../cnavigation.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QTextStream \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QStringList \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cnavigation.o ../cnavigation.cpp
@@ -4990,8 +5082,245 @@ csearch.o: ../csearch.cpp ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csearch.o ../csearch.cpp
+
+processingtask.o: ../ThreadPool/processingtask.cpp ../ThreadPool/processingtask.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRunnable \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrunnable.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobal.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtcore-config.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsysinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlogging.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qflags.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmutex.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnumeric.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qversiontagging.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThread \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthread.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnamespace.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstring.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qchar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrefcount.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qarraydata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringliteral.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiterator.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhashfunctions.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpair.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvector.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpoint.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearraylist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qregexp.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringmatcher.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcoreevent.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qscopedpointer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmetatype.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QObject \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdebug.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhash.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtextstream.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiodevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlocale.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvariant.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qshareddata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qset.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processingtask.o ../ThreadPool/processingtask.cpp
+
+processimporttask.o: ../processimporttask.cpp ../processimporttask.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRunnable \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrunnable.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobal.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtcore-config.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsysinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlogging.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qflags.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmutex.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnumeric.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qversiontagging.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QThread \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qthread.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnamespace.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstring.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qchar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrefcount.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qarraydata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringliteral.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiterator.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhashfunctions.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpair.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvector.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpoint.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearraylist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qregexp.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringmatcher.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcoreevent.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qscopedpointer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmetatype.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QObject \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdebug.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhash.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtextstream.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiodevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlocale.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvariant.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qshareddata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qset.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
+		../cinifile.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qimage.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtguiglobal.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtgui-config.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qcolor.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qrgb.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qrgba64.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrect.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmargins.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsize.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpixelformat.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtransform.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qmatrix.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpolygon.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qregion.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdatastream.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qline.h \
+		../crecord.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfileinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfile.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfiledevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../cimportfiles.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qframe.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qwidget.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpalette.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qbrush.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpixmap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qfont.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qfontmetrics.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qfontinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qcursor.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qkeysequence.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qevent.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qurl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qurlquery.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qvector2d.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtouchdevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFile \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QTextStream \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QStringList \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidget \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistwidget.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlistview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qvalidator.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qregularexpression.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qicon.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qslider.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qstyle.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtabbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qtabwidget.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qrubberband.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QListWidgetItem \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QProgressBar \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qprogressbar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMessageBox \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qdialog.h \
+		../cloadfiles.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o processimporttask.o ../processimporttask.cpp
 
 qrc_resourcedata.o: qrc_resourcedata.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resourcedata.o qrc_resourcedata.cpp

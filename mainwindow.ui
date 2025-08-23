@@ -182,7 +182,7 @@
         <x>10</x>
         <y>30</y>
         <width>150</width>
-        <height>241</height>
+        <height>221</height>
        </rect>
       </property>
      </widget>
@@ -192,7 +192,7 @@
         <x>175</x>
         <y>30</y>
         <width>150</width>
-        <height>241</height>
+        <height>221</height>
        </rect>
       </property>
      </widget>
@@ -232,7 +232,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>280</y>
+        <y>290</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -245,13 +245,26 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>280</y>
+        <y>290</y>
         <width>91</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Search YES YES</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditSearchAllKeys">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Поиск в списке всех ключей</string>
       </property>
      </widget>
     </widget>
@@ -365,7 +378,7 @@
      <x>0</x>
      <y>0</y>
      <width>890</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -379,6 +392,8 @@
     <addaction name="actionRemoveTif"/>
     <addaction name="actionRemoveBin"/>
     <addaction name="actionRemove3gp"/>
+    <addaction name="actionRemove_Html"/>
+    <addaction name="actionRemove_Js"/>
     <addaction name="actionGetGroupsList"/>
     <addaction name="actionGetKeysList"/>
     <addaction name="actionLoadRemovedSectionsList"/>
@@ -429,12 +444,20 @@
     <addaction name="actionRotateCW"/>
     <addaction name="actionRotateCCW"/>
    </widget>
+   <widget class="QMenu" name="menuTest">
+    <property name="title">
+     <string>Test</string>
+    </property>
+    <addaction name="actionStart_Threads"/>
+    <addaction name="actionImportTaskProcess"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSelect_image"/>
    <addaction name="menuForms"/>
    <addaction name="menuTags"/>
    <addaction name="menuSearch"/>
    <addaction name="menuView"/>
+   <addaction name="menuTest"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -654,6 +677,32 @@
   <action name="actionRotateCCW">
    <property name="text">
     <string>RotateCCW</string>
+   </property>
+  </action>
+  <action name="actionRemove_Js">
+   <property name="text">
+    <string>Remove Js</string>
+   </property>
+  </action>
+  <action name="actionRemove_Html">
+   <property name="text">
+    <string>Remove Html</string>
+   </property>
+  </action>
+  <action name="actionStart_Threads">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Start Threads</string>
+   </property>
+  </action>
+  <action name="actionImportTaskProcess">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ImportTaskProcess</string>
    </property>
   </action>
  </widget>

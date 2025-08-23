@@ -28,6 +28,10 @@
 #include <QProcess>
 #include <QCoreApplication>
 #include <QListWidget>
+#include <QThreadPool>
+#include <QRunnable>
+#include <QProgressBar>
+#include <QMessageBox>
 
 #include "cinifile.h"
 #include "fmview.h"
@@ -43,6 +47,9 @@
 #include "cactionsexec.h"
 #include "cnavigation.h"
 #include "csearch.h"
+
+#include "ThreadPool/processingtask.h"
+#include "processimporttask.h"
 
 
 //-----------------------------------------------------------------------------
@@ -61,8 +68,6 @@
 // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
 //-----------------------------------------------------------------------------
 
-//QString qsApplicationName = "NoName";
-
 extern QString qsApplicationName;
 
 
@@ -76,8 +81,6 @@ class MainWindow : public QMainWindow
 
 private:
     //Атрибуты
-
-//    int iSystemType = 0;
 
     QString qsProjectPath;
     QString qsProjectName;
@@ -94,6 +97,7 @@ private:
     QLabel * labelExecStatus;
     QLabel * labelFileName;
     QLabel * labelOsType;
+    QProgressBar * ProgressBarTasks;
 
     QTimer * timerUpdate;
     int iTimerUpdateCounter = 0;
@@ -121,6 +125,7 @@ private:
 
     //Методы
     void saveRemovedSectionsList();
+    void appEndItem(QListWidgetItem * item);
 
 public:
     //Атрибуты
@@ -140,6 +145,10 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    //20250820
+    QThreadPool threadPool;
+    int tasksCompleted = 0;
+    int totalTasks = 0;
 
 private slots:
 
@@ -159,10 +168,24 @@ private slots:
     //
     void execFoundMissingFile(QString path);
 
+    //20250820
+    void execActionStartThreads();
+    void execInfoMessage(QString s);
+    void execBeginMessage(QString s);
+    void execEndMessage(QString s);
+    void updateProgress(int value);
+
+    //20250822
+    void updateProgressImportTask(int value);
+    void execActionImportTaskProcess();
+
 public slots:
 
 signals:
     void showExecStatus(QString s);
+    void infoMessage(QString s);
+    void beginMessage(QString s);
+    void endMessage(QString s);
 };
 
 #endif // MAINWINDOW_H

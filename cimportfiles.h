@@ -15,6 +15,7 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QProgressBar>
+#include <QMessageBox>
 
 #include "crecord.h"
 #include "cinifile.h"

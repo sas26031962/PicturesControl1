@@ -611,4 +611,198 @@ void cActionsExec::execActionShowNewFiles(bool x)
 
 //=============================================================================
 
+void cActionsExec::execActionRemove_Js(bool x)
+{
+    QString s = "ActionRemove_Js()";
+    s += QString::number(x);
+
+    QListWidgetItem * item0 = new QListWidgetItem("==ActionRemove_Js==");
+    item0->setForeground(Qt::blue);
+    appEndItem(item0);
+
+    //===
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    QStringList GroupsLocal = settings.childGroups();
+
+    QListWidgetItem * item1 = new QListWidgetItem("childGroupsList length: " + QString::number(GroupsLocal.count()));
+    appEndItem(item1);
+    //qDebug() << "childGroupsList length: " << GroupsLocal.count();
+    //qDebug() << "----------------------------";
+    //---
+
+    int iCount = 0;
+
+    QStringList GroupsResult;//Список - результат
+    GroupsResult.clear();
+
+    QListIterator<QString> readIt(GroupsLocal);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+
+        //---
+        bool IsSign = false;
+
+        settings.beginGroup(qsSection);
+        QList<QString> keys = settings.childKeys();
+
+        QString qsName = settings.value("name", "noName").toString();
+        QString qsPath = settings.value("path", "noPath").toString();
+        QString qsWay = qsPath + "/" + qsName;
+
+        if(qsName.toLower().indexOf(".js") >= 0)
+        {
+            iCount++;
+
+            IsSign = true;
+
+            GroupsResult.append(qsSection);//Добавление секции в список - результат
+
+            //qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
+            // Перебор всей ключей в секции
+            QListIterator<QString> readKeyIt(keys);
+            while (readKeyIt.hasNext())
+            {
+                QString qsKey = readKeyIt.next();
+                qDebug() << qsKey;
+
+                settings.remove(qsKey);
+            }
+            //qDebug() << "All keys in section " << qsSection << " removed!";
+            QListWidgetItem * item2 = new QListWidgetItem("All keys in section " + qsSection + " removed!");
+            appEndItem(item2);
+        }
+
+        settings.endGroup();
+
+        //--- Удаление секции совсем ---
+        if(IsSign)
+        {
+            settings.remove(qsSection);
+            cIniFile::Groups->removeOne(qsSection);
+            cIniFile::qslDeletedSections.append(qsWay);//#@
+            //qDebug() << "Section " << qsSection << " removed!";
+            QListWidgetItem * item3 = new QListWidgetItem("Section " + qsSection + " removed!");
+            appEndItem(item3);
+        }
+        //---
+    }//End of while (readIt.hasNext())
+
+    // Выводим имена обрабатываемых файлов
+    QListWidgetItem * item5 = new QListWidgetItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    appEndItem(item5);
+    QListWidgetItem * item6 = new QListWidgetItem("=RemovedItemsList=");
+    appEndItem(item6);
+    ListWidget->addItems(GroupsResult);
+    QListWidgetItem * item7 = new QListWidgetItem("=RemovedItemsList tail=");
+    item7->setForeground(Qt::darkGreen);
+    appEndItem(item7);
+
+    //===
+    emit execShowExecStatus(s);
+   //===
+
+}//End of void cActionsExec::execActionRemove_Js()
+
+//=============================================================================
+
+void cActionsExec::execActionRemove_Html(bool x)
+{
+    QString s = "ActionRemove_Html()";
+    s += QString::number(x);
+
+    QListWidgetItem * item0 = new QListWidgetItem("==ActionRemove_Html==");
+    item0->setForeground(Qt::blue);
+    appEndItem(item0);
+
+    //===
+    // Создаем объект QSettings с указанием формата INI и пути к файлу
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+
+    QStringList GroupsLocal = settings.childGroups();
+
+    QListWidgetItem * item1 = new QListWidgetItem("childGroupsList length: " + QString::number(GroupsLocal.count()));
+    appEndItem(item1);
+    //qDebug() << "childGroupsList length: " << GroupsLocal.count();
+    //qDebug() << "----------------------------";
+    //---
+
+    int iCount = 0;
+
+    QStringList GroupsResult;//Список - результат
+    GroupsResult.clear();
+
+    QListIterator<QString> readIt(GroupsLocal);
+    while (readIt.hasNext())
+    {
+        QString qsSection = readIt.next();
+
+        //---
+        bool IsSign = false;
+
+        settings.beginGroup(qsSection);
+        QList<QString> keys = settings.childKeys();
+
+        QString qsName = settings.value("name", "noName").toString();
+        QString qsPath = settings.value("path", "noPath").toString();
+        QString qsWay = qsPath + "/" + qsName;
+
+        if(qsName.toLower().indexOf(".html") >= 0)
+        {
+            iCount++;
+
+            IsSign = true;
+
+            GroupsResult.append(qsSection);//Добавление секции в список - результат
+
+            //qDebug() << "Name=" << qsName << " iCount=" << iCount << " Keys count=" << iKeysCount;
+            // Перебор всей ключей в секции
+            QListIterator<QString> readKeyIt(keys);
+            while (readKeyIt.hasNext())
+            {
+                QString qsKey = readKeyIt.next();
+                qDebug() << qsKey;
+
+                settings.remove(qsKey);
+            }
+            //qDebug() << "All keys in section " << qsSection << " removed!";
+            QListWidgetItem * item2 = new QListWidgetItem("All keys in section " + qsSection + " removed!");
+            appEndItem(item2);
+        }
+
+        settings.endGroup();
+
+        //--- Удаление секции совсем ---
+        if(IsSign)
+        {
+            settings.remove(qsSection);
+            cIniFile::Groups->removeOne(qsSection);
+            cIniFile::qslDeletedSections.append(qsWay);//#@
+            //qDebug() << "Section " << qsSection << " removed!";
+            QListWidgetItem * item3 = new QListWidgetItem("Section " + qsSection + " removed!");
+            appEndItem(item3);
+        }
+        //---
+    }//End of while (readIt.hasNext())
+
+    // Выводим имена обрабатываемых файлов
+    QListWidgetItem * item5 = new QListWidgetItem("RemovedItemsCount=" + QString::number(GroupsResult.count()));
+    appEndItem(item5);
+    QListWidgetItem * item6 = new QListWidgetItem("=RemovedItemsList=");
+    appEndItem(item6);
+    ListWidget->addItems(GroupsResult);
+    QListWidgetItem * item7 = new QListWidgetItem("=RemovedItemsList tail=");
+    item7->setForeground(Qt::darkGreen);
+    appEndItem(item7);
+
+    //===
+    emit execShowExecStatus(s);
+   //===
+
+}//End of void cActionsExec::execActionRemove_Html()
+
+//=============================================================================
+
 

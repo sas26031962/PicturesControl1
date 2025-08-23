@@ -38,6 +38,7 @@ void cListWidgetProperty::install(QWidget * qwidget)
         listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(listWidget, &QListWidget::customContextMenuRequested, this, &cListWidgetProperty::execRequest);
         connect(listWidget, &QListWidget::itemClicked, this, &cListWidgetProperty::execListWidgetItemClicked);
+        connect(qleAddItem, &QLineEdit::textChanged, this, &cListWidgetProperty::execLineEditSearchAllKeysTextChanched);
     }
 }
 
@@ -263,5 +264,38 @@ void cListWidgetProperty::execListWidgetItemClicked()
     //---
     emit showExecStatus(s);
     //---
+}
+
+void cListWidgetProperty::execLineEditSearchAllKeysTextChanched(QString s)
+{
+    QString result = "ListWidgetPropertyInstance: LineEditSearchAllKeysTextChanged=";
+    result += s;
+    int length = listWidget->count();
+    if(length > 0)
+    {
+        int iKeys = 0;
+        QListWidgetItem * qlswLine;
+        QString qsLine;
+
+        for(int i = 0; i < length; i++)
+        {
+            qlswLine = listWidget->item(i);
+            qsLine = qlswLine->text();
+
+            if(qsLine.contains(s))
+            {
+                iKeys++;
+                listWidget->setCurrentRow(i);
+            }
+        }
+        result += ">>>";
+        result += QString::number(iKeys);
+        result += " records";
+    }
+    else
+    {
+        result += ">>>nothing to do";
+    }
+    qDebug() << result;
 }
 

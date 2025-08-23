@@ -6,12 +6,17 @@ cSearch::cSearch(QObject *parent) : QObject(parent)
     qsFoundedDelimiter = QString(20, qcFill);
 }
 
-void cSearch::install(QListWidget * founded, QListWidget *other, QLineEdit *pattern)
+void cSearch::install(QListWidget * founded, QListWidget *other, QListWidget *keys, QLineEdit *pattern, QLineEdit *search_all_keys)
 {
     ListWidgetFounded = founded;
     ListWidgetOther = other;
+    ListWidgetKeys = keys;
     LineEditPattern = pattern;
+    LineEditSearchAllKeys = search_all_keys;
+
     connect(ListWidgetFounded, &QListWidget::itemClicked, this, &cSearch::execListWidgetFoundedItemClicked);
+    connect(LineEditSearchAllKeys, &QLineEdit::textChanged, this, &cSearch::execLineEditSearchAllKeysTextChanched);
+
 }
 
 void cSearch::appEndItem(QListWidgetItem * item)
@@ -223,7 +228,6 @@ void cSearch::execLoadFilesByConditionOrYes(QStringList yes)
 
     QListWidgetItem * item0 = new QListWidgetItem("==execLoadFilesByConditionOrYes==");
     item0->setForeground(Qt::blue);
-    //item0->setForeground(Qt::yellow);
     ListWidgetOther->addItem(item0);
 
     // Создаем объект QSettings с указанием формата INI и пути к файлу
@@ -323,7 +327,6 @@ void cSearch::execLoadFilesByConditionYesYes(QStringList yes)
 
     QListWidgetItem * item0 = new QListWidgetItem("==execLoadFilesByConditionYesYes==");
     item0->setForeground(Qt::blue);
-    //item0->setForeground(Qt::yellow);
     ListWidgetOther->addItem(item0);
 
     // Создаем объект QSettings с указанием формата INI и пути к файлу
@@ -663,20 +666,18 @@ void cSearch::execActionSearchNamePattern1()
 
     showGroupsList();
 
-    //Здесь нужно записать массив cIniFile::Groups в файл с именем,
-    //хранящимся в cIniFile::pattern1StringListFilePath
-
-    qDebug() << "Pattern1 file path=" << cIniFile::pattern1StringListFilePath;
+    QString qsFileName = "./data/StringListPattern1.txt";//cIniFile::pattern1StringListFilePath;
+    qDebug() << "Pattern1 file path=" << qsFileName;
 
     bool y = cLoadFiles::saveStringListToFile(
-        cIniFile::pattern1StringListFilePath,
+        qsFileName,
         *cIniFile::Groups
         );
 
     if(y)
-        qDebug() << "Save to file: " << cIniFile::pattern1StringListFilePath << " success";
+        qDebug() << "Save to file: " << qsFileName << " success";
     else
-        qDebug() << "Save to file: " << cIniFile::pattern1StringListFilePath << " error!!!";
+        qDebug() << "Save to file: " << qsFileName << " error!!!";
 
     //---
     s += ": iCount=";
@@ -702,18 +703,18 @@ void cSearch::execActionSearchNamePattern2()
 
     showGroupsList();
 
-    //Здесь нужно записать массив cIniFile::Groups в файл с именем,
-    //хранящимся в cIniFile::pattern2StringListFilePath
-    qDebug() << "Pattern2 file path=" << cIniFile::pattern2StringListFilePath;
-     bool y = cLoadFiles::saveStringListToFile(
-        cIniFile::pattern2StringListFilePath,
+    QString qsFileName = "./data/StringListPattern2.txt";//cIniFile::pattern2StringListFilePath;
+    qDebug() << "Pattern1 file path=" << qsFileName;
+
+    bool y = cLoadFiles::saveStringListToFile(
+        qsFileName,
         *cIniFile::Groups
         );
 
-     if(y)
-         qDebug() << "Save to file: " << cIniFile::pattern2StringListFilePath << " success";
-     else
-         qDebug() << "Save to file: " << cIniFile::pattern2StringListFilePath << " error!!!";
+    if(y)
+        qDebug() << "Save to file: " << qsFileName << " success";
+    else
+        qDebug() << "Can't open file: " << qsFileName << ", save to this file error!!!";
 
     //---
     s += ": iCount=";
@@ -872,9 +873,9 @@ void cSearch::execActionSearchNamePatterns12Intersection()
                 sX += " has mirror: ";
                 sX += qsMirror;
 
-                ListWidgetFounded->addItem(qsFoundedDelimiter);
+                //ListWidgetFounded->addItem(qsFoundedDelimiter);
                 ListWidgetFounded->addItem(qsSection);
-                ListWidgetFounded->addItem(qsMirror);
+                //ListWidgetFounded->addItem(qsMirror);
 
                 //Удаление найденной строки из конфигурационного файла
                 //NavigationInstance->deleteSection(qsMirror);//!!!
@@ -961,3 +962,38 @@ void cSearch::execActionSearchNamePatterns1XIntersection()
 }
 
 //=============================================================================
+
+void cSearch::execLineEditSearchAllKeysTextChanched(QString s)
+{
+    QString result = "SearchInstance: LineEditSearchAllKeysTextChanged=";
+    result += s;
+    if(ListWidgetKeys->count() > 0)
+    {
+        int iKeys = 0;
+        QListWidgetItem * qlswLine;
+        QString qsLine;
+
+        for(int i = 0; i < ListWidgetKeys->count(); i++)
+        {
+            qlswLine = ListWidgetKeys->item(i);
+            qsLine = qlswLine->text();
+
+            if(qsLine.contains(s))
+            {
+                iKeys++;
+                ListWidgetKeys->setCurrentRow(i);
+            }
+        }
+        result += ">>>";
+        result += QString::number(iKeys);
+        result += " records";
+    }
+    else
+    {
+        result += ">>>nothing to do";
+    }
+    qDebug() << result;
+}
+
+//=============================================================================
+

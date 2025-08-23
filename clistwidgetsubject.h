@@ -54,6 +54,8 @@ signals:
 public slots:
     void execRequest(const QPoint &pos);
     void execListWidgetItemClicked();
+    void execLineEditSearchAllKeysTextChanched(QString s);
+
 };
 
 #endif // CLISTWIDGETSUBJECT_H

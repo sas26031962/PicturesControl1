@@ -29,7 +29,9 @@ SOURCES += main.cpp\
     clistwidgettheame.cpp \
     cactionsexec.cpp \
     cnavigation.cpp \
-    csearch.cpp
+    csearch.cpp \
+    ThreadPool/processingtask.cpp \
+    processimporttask.cpp
 
 HEADERS  += mainwindow.h \
     cinifile.h \
@@ -47,7 +49,9 @@ HEADERS  += mainwindow.h \
     cactionsexec.h \
     cnavigation.h \
     cdrawfilex.h \
-    csearch.h
+    csearch.h \
+    ThreadPool/processingtask.h \
+    processimporttask.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

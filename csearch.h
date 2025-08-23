@@ -18,7 +18,9 @@ class cSearch : public QObject
     //Атрибуты
     QListWidget * ListWidgetFounded;
     QListWidget * ListWidgetOther;
+    QListWidget * ListWidgetKeys;
     QLineEdit * LineEditPattern;
+    QLineEdit * LineEditSearchAllKeys;
 
     QString qsFoundedDelimiter;
 
@@ -32,7 +34,7 @@ public:
     explicit cSearch(QObject *parent = 0);
 
     //Методы
-    void install(QListWidget * founded, QListWidget * other, QLineEdit * pattern);
+    void install(QListWidget * founded, QListWidget * other, QListWidget * keys, QLineEdit * pattern, QLineEdit * search_all_keys);
     void showGroupsList();
     bool searchNamePattern(const QString& pattern);
     void execLoadFilesByConditionOrYes(QStringList yes);
@@ -57,6 +59,7 @@ public slots:
     void execActionSearchNamePattern();
     void execActionSearchNamePatterns12Intersection();
     void execActionSearchNamePatterns1XIntersection();
+    void execLineEditSearchAllKeysTextChanched(QString s);
 
 };
 

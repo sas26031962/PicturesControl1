@@ -31,6 +31,8 @@ signals:
     void execShowExecStatus(QString s);
 
 public slots:
+    void execActionRemove_Js(bool x);
+    void execActionRemove_Html(bool x);
     void execActionRemoveMovie(bool x);
     void execActionRemoveText(bool x);
     void execActionRemoveTif(bool x);
