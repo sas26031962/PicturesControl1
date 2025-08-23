@@ -19,21 +19,38 @@ void processImportTask::run()
                               Qt::QueuedConnection,
                               Q_ARG(QString, qsStartMessage));
 
-    // Имитация длительной обработки
-    for (int i = 0; i < 100; ++i)
-    {
-        QThread::msleep(30); // Задержка 30 мс
+//    // Имитация длительной обработки
+//    for (int i = 0; i < 100; ++i)
+//    {
+//        QThread::msleep(30); // Задержка 30 мс
 
-        QMetaObject::invokeMethod(m_receiver, "updateProgressImportTask",
-                                      Qt::QueuedConnection,
-                                      Q_ARG(int, i));
-    }
+//        QMetaObject::invokeMethod(m_receiver, "updateProgressImportTask",
+//                                      Qt::QueuedConnection,
+//                                      Q_ARG(int, i));
+//    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/*
+    //
+    //Чтение исходного каталога
+    //
+    int ReadRecordsResult, RecordsCount;
+    try
+    {
+        ReadRecordsResult = cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah());
+
+        if(ReadRecordsResult > 0) RecordsCount = -1; else RecordsCount = cRecord::RecordList->count();
+    }
+    catch (const std::bad_alloc& e)
+    {
+        qWarning() << "Memory allocation failed:" << e.what();
+        // Можно emit signal с ошибкой или сохранить код ошибки
+    }
+
+    qDebug() << "ReadRecordsResult=" << ReadRecordsResult << " RecordsCount=" << RecordsCount;
+
 //    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
 
 //    QStringList Groups = settings.childGroups();//Загрузка полного списка групп
-
+/*
     //ListWidgetOther->addItem("Initial groups count=" + QString::number(Groups.count()));
     //Информационное сообщение
     QString qsInfoMessage = "ImportTask:Initial groups count=";
