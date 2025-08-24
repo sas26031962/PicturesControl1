@@ -1,5 +1,7 @@
 #include "crecord.h"
 
+int cRecord::RecordsCount = 0;
+
 cRecord::cRecord()
 {
     //qDebug() << "#cRecrod created";

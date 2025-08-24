@@ -24,6 +24,7 @@ fmView::~fmView()
 void fmView::execDraw(QString s)
 {
     currentImagePath = s;
+    qDebug() << "fmView:currentImagePath=" << s;
     emit showExecStatus(s + " Size=" + QString::number(iSize));
     DrawFilesInstance->scaleImage(s, iSize, iSize);
     QPixmap pmMain(cIniFile::scaledImagePath);//

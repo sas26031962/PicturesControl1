@@ -13,6 +13,7 @@ public:
     //Атрибуты
 
     static QList<cRecord> * RecordList;
+    static int RecordsCount;
 
     QString qsName = "NoName";
     QString qsPath = "";

@@ -32,6 +32,7 @@ void processImportTask::run()
     //
     //Чтение исходного каталога
     //
+/*
     int ReadRecordsResult, RecordsCount;
     try
     {
@@ -46,39 +47,76 @@ void processImportTask::run()
     }
 
     qDebug() << "ReadRecordsResult=" << ReadRecordsResult << " RecordsCount=" << RecordsCount;
+*/
+    //cRecord::RecordsCount = cRecord::RecordList->count();
+    qDebug() << "ProcessImportTask:RecordsCount=" << cRecord::RecordsCount;
 
-//    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    QSettings settings(cIniFile::iniFilePath, QSettings::IniFormat);
+    QStringList Groups = settings.childGroups();//Загрузка полного списка групп
+    qDebug() << "ProcessImportTask:GroupsCount=" << Groups.count();
 
-//    QStringList Groups = settings.childGroups();//Загрузка полного списка групп
-/*
     //ListWidgetOther->addItem("Initial groups count=" + QString::number(Groups.count()));
     //Информационное сообщение
     QString qsInfoMessage = "ImportTask:Initial groups count=";
-    qsInfoMessage += QString::number(cRecord::RecordList->count());
+    qsInfoMessage += QString::number(cRecord::RecordsCount);
 
     QMetaObject::invokeMethod(m_receiver, "execInfoMessage",
                               Qt::QueuedConnection,
                               Q_ARG(QString, qsInfoMessage));
 
 
-//    //---Добавление идентификационной секции
-    cImportFiles::MaxIndexValue = cRecord::RecordList->count();
-//    cIniFile::IniFile.addInitalSection(cImportFiles::MaxIndexValue);
+    //---Добавление идентификационной секции
+    cImportFiles::MaxIndexValue = cRecord::RecordsCount;
+    cIniFile::IniFile.addInitalSection(cImportFiles::MaxIndexValue);
 
-//    //---Подготовка к обработке файла данных
-//    iCurrentIndexGlobal.store(0);
 
-//    int iAddedFilesCounter = 0;
-//    int iSkippedFilesCounter = 0;
-//    int iErrorFilesCounter = 0;
+    //---Подготовка к обработке файла данных
+    iCurrentIndexGlobal.store(0);
+
+    int iAddedFilesCounter = 0;
+    int iSkippedFilesCounter = 0;
+    int iErrorFilesCounter = 0;
 
     int iCounter = 0;
     float fProgressWeight = cImportFiles::MaxIndexValue / 100.0;
+    qDebug() << "ProcessImportTask:fProgressWeight=" << fProgressWeight;
+
 
     //---Начало обработки файла данных
-    for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+    try
     {
+        //QList<cRecord>::iterator it = cRecord::RecordList->begin();
+        //const cRecord rec = *it;
+        cRecord rec;// = cRecord::RecordList->at(0);
+        rec.IsDir = false;
+        rec.iSize = 0;
+        rec.qsPath = "/home/andy/From Smartfone/2013/2013-04/FirstFlowers/";
+        rec.qsName = "2013-04-28 16-17-34.JPG";
+        int id = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
+        qDebug() << "Path=" << rec.qsPath << " Name=" << rec.qsName << " id=" << id;;
+
+        bool IsError;
+        int width, height;
+
+        QString path = rec.qsPath + rec.qsName;
+        QImage image(path);//name
+        if(image.isNull())
+        {
+            IsError = true;
+            iErrorFilesCounter++;
+            qDebug() << "File " << path << " is not image";
+        }
+        else
+        {
+            width = image.width();
+            height = image.height();
+            qDebug() << "File " << path << " >> width=" << width << " height=" << height;
+            iAddedFilesCounter++;
+        }
+        //        for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+//        {
+/*
         iCurrentIndexGlobal.fetch_add(1, std::memory_order_relaxed);
         int id = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
@@ -168,22 +206,32 @@ void processImportTask::run()
 
             qDebug() << "Skip existing section:" << groupName;
         }
+*/
+//            //---индикация процесса импорта
+//            iCounter++;
+//            qDebug() << "ProcessImportTask:iCounter=" << iCounter;
 
-        //---индикация процесса импорта
-        iCounter++;
-        int Progress = (int)(fProgressWeight * iCounter);
-        QMetaObject::invokeMethod(
-            m_receiver, "updateProgressImportTask",
-            Qt::QueuedConnection,
-            Q_ARG(int, Progress));
-        //---
+//            //        int Progress = (int)(fProgressWeight * iCounter);
+//            //        QMetaObject::invokeMethod(
+//            //            m_receiver, "updateProgressImportTask",
+//            //            Qt::QueuedConnection,
+//            //            Q_ARG(int, Progress));
+//            //---
 
-    }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+//        }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+    }
+    catch (const std::bad_alloc& e)
+    {
+        qWarning() << "Memory allocation failed:" << e.what();
+        // Можно emit signal с ошибкой или сохранить код ошибки
+    }
+
+    qDebug() << "ProcessImportTask:final of iCounter=" << iCounter;
 
     //---Конец обработки файла данных
 
     //settings.sync();
-*/
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     //--- Уведомление о завершении задачи ---

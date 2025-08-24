@@ -493,6 +493,8 @@ void cActionsExec::execActionShowNewFiles(bool x)
     QString s = "execActionShowNewFiles()";
     s += QString::number(x);
 
+    qDebug() << s;
+
     //---Создание рабочего списка
     std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
     cRecord::RecordList = ptrRecordList.get();
@@ -519,6 +521,9 @@ void cActionsExec::execActionShowNewFiles(bool x)
     }
 
     //---
+
+    cRecord::RecordsCount = cRecord::RecordList->count();
+    qDebug() << "execActionShowNewFiles:RecordsCount=" << cRecord::RecordsCount;
 
     QListWidgetItem * item0 = new QListWidgetItem("==ActionShowNewFiles==");
     item0->setForeground(Qt::blue);
