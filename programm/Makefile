@@ -53,6 +53,8 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../main.cpp \
+		../cenvironment.cpp \
+		../crecorditem.cpp \
 		../mainwindow.cpp \
 		../cinifile.cpp \
 		../crecord.cpp \
@@ -81,6 +83,8 @@ SOURCES       = ../main.cpp \
 		moc_cdrawfilex.cpp \
 		moc_csearch.cpp
 OBJECTS       = main.o \
+		cenvironment.o \
+		crecorditem.o \
 		mainwindow.o \
 		cinifile.o \
 		crecord.o \
@@ -321,8 +325,10 @@ DIST          = /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/yacc.prf \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/lex.prf \
 		../../PicturesControl1.pro ../mainwindow.h \
+		../cenvironment.h \
 		../cinifile.h \
 		../crecord.h \
+		../crecorditem.h \
 		../fmview.h \
 		../cimportfiles.h \
 		../cloadfiles.h \
@@ -337,6 +343,8 @@ DIST          = /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/spec_
 		../csearch.h \
 		../ThreadPool/processingtask.h \
 		../processimporttask.h ../main.cpp \
+		../cenvironment.cpp \
+		../crecorditem.cpp \
 		../mainwindow.cpp \
 		../cinifile.cpp \
 		../crecord.cpp \
@@ -807,8 +815,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../resourcedata.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../mainwindow.h ../cinifile.h ../crecord.h ../fmview.h ../cimportfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h ../clistwidgettheame.h ../cactionsexec.h ../cnavigation.h ../cdrawfilex.h ../csearch.h ../ThreadPool/processingtask.h ../processimporttask.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfilex.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp ../clistwidgettheame.cpp ../cactionsexec.cpp ../cnavigation.cpp ../csearch.cpp ../ThreadPool/processingtask.cpp ../processimporttask.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../mainwindow.h ../cenvironment.h ../cinifile.h ../crecord.h ../crecorditem.h ../fmview.h ../cimportfiles.h ../cloadfiles.h ../clistwidgettype.h ../clistwidgetplace.h ../clistwidgetsubject.h ../clistwidgetproperty.h ../clistwidgettheame.h ../cactionsexec.h ../cnavigation.h ../cdrawfilex.h ../csearch.h ../ThreadPool/processingtask.h ../processimporttask.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../cenvironment.cpp ../crecorditem.cpp ../mainwindow.cpp ../cinifile.cpp ../crecord.cpp ../fmview.cpp ../cimportfiles.cpp ../cdrawfilex.cpp ../cloadfiles.cpp ../clistwidgetplace.cpp ../clistwidgetsubject.cpp ../clistwidgetproperty.cpp ../clistwidgettheame.cpp ../cactionsexec.cpp ../cnavigation.cpp ../csearch.cpp ../ThreadPool/processingtask.cpp ../processimporttask.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../mainwindow.ui ../fmview.ui $(DISTDIR)/
 
 
@@ -1026,6 +1034,7 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -1033,6 +1042,7 @@ moc_mainwindow.cpp: ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QDialog \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QStatusBar \
@@ -1216,6 +1226,7 @@ moc_fmview.cpp: ../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -1223,6 +1234,7 @@ moc_fmview.cpp: ../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cdrawfilex.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QObject \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QPainter \
@@ -1376,11 +1388,13 @@ moc_cimportfiles.cpp: ../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
-		../cinifile.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
+		../crecorditem.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
+		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -1533,6 +1547,7 @@ moc_clistwidgetplace.cpp: ../clistwidgetplace.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -1540,6 +1555,7 @@ moc_clistwidgetplace.cpp: ../clistwidgetplace.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -1699,6 +1715,7 @@ moc_clistwidgetsubject.cpp: ../clistwidgetsubject.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -1706,6 +1723,7 @@ moc_clistwidgetsubject.cpp: ../clistwidgetsubject.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -1865,6 +1883,7 @@ moc_clistwidgetproperty.cpp: ../clistwidgetproperty.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -1872,6 +1891,7 @@ moc_clistwidgetproperty.cpp: ../clistwidgetproperty.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -2031,6 +2051,7 @@ moc_clistwidgettheame.cpp: ../clistwidgettheame.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -2038,6 +2059,7 @@ moc_clistwidgettheame.cpp: ../clistwidgettheame.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -2183,6 +2205,7 @@ moc_cactionsexec.cpp: ../cactionsexec.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -2190,6 +2213,7 @@ moc_cactionsexec.cpp: ../cactionsexec.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
@@ -2360,6 +2384,7 @@ moc_cnavigation.cpp: ../cnavigation.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -2367,6 +2392,7 @@ moc_cnavigation.cpp: ../cnavigation.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFile \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QTextStream \
@@ -2516,6 +2542,7 @@ moc_cdrawfilex.cpp: ../cdrawfilex.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -2523,6 +2550,7 @@ moc_cdrawfilex.cpp: ../cdrawfilex.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		moc_predefs.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc
 	/media/user/m2data/Linux/Qt/5.15.1/gcc_64/bin/moc $(DEFINES) --include /home/andy/MyQtProjects/PicturesControl1/programm/moc_predefs.h -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/mkspecs/linux-g++ -I/home/andy/MyQtProjects/PicturesControl1 -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui -I/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../cdrawfilex.h -o moc_cdrawfilex.cpp
@@ -2664,6 +2692,7 @@ moc_csearch.cpp: ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -2671,6 +2700,7 @@ moc_csearch.cpp: ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QStringList \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFile \
@@ -2887,6 +2917,7 @@ main.o: ../main.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -2894,6 +2925,7 @@ main.o: ../main.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QDialog \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QStatusBar \
@@ -2944,6 +2976,78 @@ main.o: ../main.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qguiapplication.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
+
+cenvironment.o: ../cenvironment.cpp ../cenvironment.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cenvironment.o ../cenvironment.cpp
+
+crecorditem.o: ../crecorditem.cpp ../crecorditem.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstring.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qchar.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobal.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtcore-config.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsysinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlogging.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qflags.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmutex.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnumeric.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qversiontagging.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrefcount.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnamespace.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qarraydata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringliteral.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringview.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdebug.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhash.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiterator.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhashfunctions.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpair.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvector.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpoint.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearraylist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qregexp.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringmatcher.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtextstream.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiodevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcoreevent.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qscopedpointer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmetatype.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlocale.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvariant.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qshareddata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qset.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o crecorditem.o ../crecorditem.cpp
 
 mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QMainWindow \
@@ -3119,6 +3223,7 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -3126,6 +3231,7 @@ mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QDialog \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QStatusBar \
@@ -3262,6 +3368,7 @@ cinifile.o: ../cinifile.cpp ../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qregion.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdatastream.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qline.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -3270,13 +3377,15 @@ cinifile.o: ../cinifile.cpp ../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfiledevice.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cinifile.o ../cinifile.cpp
 
 crecord.o: ../crecord.cpp ../crecord.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdebug.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstring.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qchar.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qglobal.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qconfig.h \
@@ -3298,20 +3407,25 @@ crecord.o: ../crecord.cpp ../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmutex.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnumeric.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qversiontagging.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhash.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qchar.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiterator.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlist.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrefcount.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qarraydata.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhashfunctions.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstring.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qbytearray.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrefcount.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qnamespace.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qarraydata.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringliteral.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringalgorithms.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringbuilder.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfileinfo.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfile.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfiledevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiodevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlist.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qalgorithms.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiterator.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhashfunctions.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qpair.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvector.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainertools_impl.h \
@@ -3320,33 +3434,50 @@ crecord.o: ../crecord.cpp ../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringlist.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qregexp.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qstringmatcher.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmap.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtextstream.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qiodevice.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcoreevent.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qscopedpointer.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmetatype.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvarlengtharray.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontainerfwd.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qobject_impl.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qshareddata.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qhash.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qimage.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtguiglobal.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtgui-config.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qcolor.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qrgb.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qrgba64.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qrect.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmargins.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsize.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpixelformat.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qtransform.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qmatrix.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qpolygon.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qregion.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdatastream.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qline.h \
+		../cenvironment.h \
+		../crecorditem.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdebug.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qmap.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qtextstream.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qlocale.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qvariant.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qshareddata.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qset.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfileinfo.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfile.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfiledevice.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o crecord.o ../crecord.cpp
 
 fmview.o: ../fmview.cpp ../fmview.h \
@@ -3484,6 +3615,7 @@ fmview.o: ../fmview.cpp ../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -3491,6 +3623,7 @@ fmview.o: ../fmview.cpp ../fmview.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cdrawfilex.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QObject \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QPainter \
@@ -3643,11 +3776,13 @@ cimportfiles.o: ../cimportfiles.cpp ../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
-		../cinifile.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
+		../crecorditem.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
+		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cimportfiles.o ../cimportfiles.cpp
@@ -3787,13 +3922,15 @@ cdrawfilex.o: ../cdrawfilex.cpp ../cdrawfilex.h \
 		../cinifile.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qfileinfo.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cdrawfilex.o ../cdrawfilex.cpp
 
 cloadfiles.o: ../cloadfiles.cpp ../cloadfiles.h \
@@ -3943,9 +4080,11 @@ cloadfiles.o: ../cloadfiles.cpp ../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
-		../cinifile.h \
+		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
+		../crecorditem.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
-		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage
+		../cinifile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cloadfiles.o ../cloadfiles.cpp
 
 clistwidgetplace.o: ../clistwidgetplace.cpp ../clistwidgetplace.h \
@@ -4093,6 +4232,7 @@ clistwidgetplace.o: ../clistwidgetplace.cpp ../clistwidgetplace.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4100,6 +4240,7 @@ clistwidgetplace.o: ../clistwidgetplace.cpp ../clistwidgetplace.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -4257,6 +4398,7 @@ clistwidgetsubject.o: ../clistwidgetsubject.cpp ../clistwidgetsubject.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4264,6 +4406,7 @@ clistwidgetsubject.o: ../clistwidgetsubject.cpp ../clistwidgetsubject.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -4421,6 +4564,7 @@ clistwidgetproperty.o: ../clistwidgetproperty.cpp ../clistwidgetproperty.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4428,6 +4572,7 @@ clistwidgetproperty.o: ../clistwidgetproperty.cpp ../clistwidgetproperty.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -4585,6 +4730,7 @@ clistwidgettheame.o: ../clistwidgettheame.cpp ../clistwidgettheame.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4592,6 +4738,7 @@ clistwidgettheame.o: ../clistwidgettheame.cpp ../clistwidgettheame.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QRegularExpression \
 		../cimportfiles.h \
@@ -4735,6 +4882,7 @@ cactionsexec.o: ../cactionsexec.cpp ../cactionsexec.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4742,6 +4890,7 @@ cactionsexec.o: ../cactionsexec.cpp ../cactionsexec.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \
@@ -4910,6 +5059,7 @@ cnavigation.o: ../cnavigation.cpp ../cnavigation.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QString \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDebug \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -4917,6 +5067,7 @@ cnavigation.o: ../cnavigation.cpp ../cnavigation.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFile \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QTextStream \
@@ -5066,6 +5217,7 @@ csearch.o: ../csearch.cpp ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QSettings \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qsettings.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/QImage \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -5073,6 +5225,7 @@ csearch.o: ../csearch.cpp ../csearch.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cloadfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QStringList \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFile \
@@ -5260,6 +5413,7 @@ processimporttask.o: ../processimporttask.cpp ../processimporttask.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtGui/qregion.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdatastream.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qline.h \
+		../cenvironment.h \
 		../crecord.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDir \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdir.h \
@@ -5269,6 +5423,7 @@ processimporttask.o: ../processimporttask.cpp ../processimporttask.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QFileInfo \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/QDirIterator \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtCore/qdiriterator.h \
+		../crecorditem.h \
 		../cimportfiles.h \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/QLabel \
 		/media/user/m2data/Linux/Qt/5.15.1/gcc_64/include/QtWidgets/qlabel.h \

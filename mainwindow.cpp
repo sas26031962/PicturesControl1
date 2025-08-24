@@ -35,13 +35,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // Определение конкретной ОС
     #if defined(Q_OS_WIN)
         qDebug() << "Running on Windows";
-        cIniFile::iSystemType = WINDOWS_SYSTEM_TYPE;
+        cEnvironment::iSystemType = WINDOWS_SYSTEM_TYPE;
     #elif defined(Q_OS_LINUX)
         qDebug() << "Running on Linux";
-        cIniFile::iSystemType = LINUX_SYSTEM_TYPE;
+        cEnvironment::iSystemType = LINUX_SYSTEM_TYPE;
     #else
         qDebug() << "Running on unknown OS";
-        cIniFile::iSystemType = 0;
+        cEnvironment::iSystemType = 0;
     #endif
 
     //--- Определение имён файлов
@@ -123,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qsProjectNameImgSuffix = "/programm/img/tmp";
     qsDataFileNameExtension = ".txt";
 
-    if(cIniFile::iSystemType == LINUX_SYSTEM_TYPE)
+    if(cEnvironment::iSystemType == LINUX_SYSTEM_TYPE)
     {
 
         qsProjectPath = qsProjectPathLinux;
@@ -324,6 +324,7 @@ MainWindow::MainWindow(QWidget *parent) :
     std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
     cRecord::RecordList = ptrRecordList.get();
 
+
     timerUpdate = new QTimer(this);
     connect(timerUpdate, &QTimer::timeout, this, &MainWindow::execTimerUpdate);
     timerUpdate->start(100);
@@ -343,7 +344,7 @@ MainWindow::MainWindow(QWidget *parent) :
     labelOsType = new QLabel();
     ui->statusBar->addWidget(labelOsType);
 
-    switch(cIniFile::iSystemType)
+    switch(cEnvironment::iSystemType)
     {
         case WINDOWS_SYSTEM_TYPE:
             labelOsType->setText("Windows OS");
@@ -420,6 +421,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionStart_Threads, &QAction::triggered, this, &MainWindow::execActionStartThreads);
     //20250822
     connect(ui->actionImportTaskProcess, &QAction::triggered, this, &MainWindow::execActionImportTaskProcess);
+    //20250824
+    connect(ui->actionStoreRecordsList, &QAction::triggered, this, &MainWindow::execActionStoreRecordsList);
 
 }//End of ctor
 
@@ -866,4 +869,39 @@ void MainWindow::execEndMessage(QString s)
     QListWidgetItem * item = new QListWidgetItem(s);
     item->setForeground(Qt::green);
     appEndItem(item);
+}
+
+void MainWindow::execActionStoreRecordsList()
+{
+    qDebug() << "execActionStoreRecordsList()";
+    //---Создание рабочего списка
+
+    std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
+    cRecord::RecordList = ptrRecordList.get();
+
+    if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
+    {
+        QString path = cIniFile::iniFilePath;
+        QListWidgetItem * itemX = new QListWidgetItem("Directory not found: " + path);
+        itemX->setForeground(Qt::red);
+        ui->listWidgetOther->addItem(itemX);
+        return;
+    }
+    else
+    {
+        int count = cRecord::RecordList->count();
+        qDebug() << "execActionStoreRecordsList: RecourdList count=" << count;
+        if((count > 10000)||(count < 0))
+        {
+            qDebug() << "execActionStoreRecordsList: Wrong RecourdList count=" << count;
+            return;
+        }
+
+        cRecord::storeRecords();
+
+        QListWidgetItem * itemX = new QListWidgetItem("RecordsList stored fo file:'../RecordsList.txt'");
+        itemX->setForeground(Qt::green);
+        ui->listWidgetOther->addItem(itemX);
+    }
+
 }

@@ -173,7 +173,7 @@ bool cListWidgetPlace::loadHashTagList()
     }
 
     QTextStream in(&file);
-    if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
+    if(cEnvironment::iSystemType == WINDOWS_SYSTEM_TYPE)
     {
         in.setCodec("Windows-1251");
         qDebug() << "Select Windows-1251 codec in loading case";

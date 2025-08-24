@@ -178,6 +178,8 @@ private slots:
     //20250822
     void updateProgressImportTask(int value);
     void execActionImportTaskProcess();
+    //20250824
+    void execActionStoreRecordsList();
 
 public slots:
 

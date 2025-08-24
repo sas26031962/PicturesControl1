@@ -1,12 +1,16 @@
 #ifndef CRECORD_H
 #define CRECORD_H
 
-#include <QDebug>
+//#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QDirIterator>
+#include <QImage>
 
-class cRecord
+#include "cenvironment.h"
+#include "crecorditem.h"
+
+class cRecord : public cRecordItem
 {
 
 public:
@@ -15,18 +19,13 @@ public:
     static QList<cRecord> * RecordList;
     static int RecordsCount;
 
-    QString qsName = "NoName";
-    QString qsPath = "";
-    size_t iSize = 0;
-    bool IsDir = false;
-
     //Конструктор
     cRecord();
 
     //Методы
     static void showList();
     static int readDirectory(QString directoryPath);
-    void show() const;
+    static int storeRecords();
 
 };
 

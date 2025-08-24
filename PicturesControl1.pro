@@ -14,6 +14,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    cenvironment.cpp \
+    crecorditem.cpp \
         mainwindow.cpp \
     cinifile.cpp \
     crecord.cpp \
@@ -34,10 +36,12 @@ SOURCES += main.cpp\
     processimporttask.cpp
 
 HEADERS  += mainwindow.h \
+    cenvironment.h \
     cinifile.h \
     crecord.h \
     #programm/moc_predefs.h \
     #programm/ui_mainwindow.h
+    crecorditem.h \
     fmview.h \
     cimportfiles.h \
     cloadfiles.h \

@@ -73,8 +73,6 @@ void processImportTask::run()
     //---Подготовка к обработке файла данных
     iCurrentIndexGlobal.store(0);
 
-    int iAddedFilesCounter = 0;
-    int iSkippedFilesCounter = 0;
     int iErrorFilesCounter = 0;
 
     int iCounter = 0;
@@ -87,24 +85,21 @@ void processImportTask::run()
     {
         //QList<cRecord>::iterator it = cRecord::RecordList->begin();
         //const cRecord rec = *it;
-        cRecord rec;// = cRecord::RecordList->at(0);
+        cRecordItem rec;// = cRecord::RecordList->at(0);
         rec.IsDir = false;
         rec.iSize = 0;
         rec.qsPath = "/home/andy/From Smartfone/2013/2013-04/FirstFlowers/";
         rec.qsName = "2013-04-28 16-17-34.JPG";
-        int id = iCurrentIndexGlobal.load(std::memory_order_relaxed);
 
-        qDebug() << "Path=" << rec.qsPath << " Name=" << rec.qsName << " id=" << id;;
+        rec.show();
 
-        bool IsError;
         int width, height;
 
         QString path = rec.qsPath + rec.qsName;
         QImage image(path);//name
         if(image.isNull())
         {
-            IsError = true;
-            iErrorFilesCounter++;
+           iErrorFilesCounter++;
             qDebug() << "File " << path << " is not image";
         }
         else
@@ -112,7 +107,6 @@ void processImportTask::run()
             width = image.width();
             height = image.height();
             qDebug() << "File " << path << " >> width=" << width << " height=" << height;
-            iAddedFilesCounter++;
         }
         //        for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
 //        {

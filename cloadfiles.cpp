@@ -113,7 +113,7 @@ bool cLoadFiles::saveStringListToFile(const QString& fileName, const QStringList
     {
         // Установка кодировки
         QTextStream out(&file);
-        if(cIniFile::iSystemType == WINDOWS_SYSTEM_TYPE)
+        if(cEnvironment::iSystemType == WINDOWS_SYSTEM_TYPE)
             out.setCodec("Windows-1251");
         else
             out.setCodec("UTF-8");

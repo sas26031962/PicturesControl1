@@ -4,8 +4,6 @@
 //Глобальные переменные
 //=============================================================================
 
-    int cIniFile::iSystemType = 0;
-
     // Путь к INI-файлу
     QString cIniFile::iniFilePath;
     QString cIniFile::pattern1StringListFilePath;

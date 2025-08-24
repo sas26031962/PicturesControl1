@@ -400,6 +400,7 @@
     <addaction name="actionRemoveSection"/>
     <addaction name="actionShowNewFiles"/>
     <addaction name="actionEraseSection"/>
+    <addaction name="actionStoreRecordsList"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuSelect_image">
@@ -703,6 +704,14 @@
    </property>
    <property name="text">
     <string>ImportTaskProcess</string>
+   </property>
+  </action>
+  <action name="actionStoreRecordsList">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>StoreRecordsList</string>
    </property>
   </action>
  </widget>

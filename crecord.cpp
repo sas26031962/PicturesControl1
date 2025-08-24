@@ -2,7 +2,7 @@
 
 int cRecord::RecordsCount = 0;
 
-cRecord::cRecord()
+cRecord::cRecord() : cRecordItem()
 {
     //qDebug() << "#cRecrod created";
 }
@@ -18,16 +18,6 @@ void cRecord::showList()
         qDebug() << "Index=" << i;
         cRecord::RecordList->at(i).show();
     }
-}
-
-void cRecord::show() const
-{
-    qDebug() << "Name: " << qsName;
-    qDebug() << "Path: " << qsPath;
-    qDebug() << "Size: " << iSize;
-    //qDebug() << "Is Directory: " << IsDir;
-    //qDebug() << ">>Record size=" << sizeof (this);
-    qDebug() << "--------------------";
 }
 
 int cRecord::readDirectory(QString directoryPath)
@@ -89,5 +79,101 @@ int cRecord::readDirectory(QString directoryPath)
     }
     qDebug() << ">>>readDirectory from " << directoryPath << " complete";
 
+    return result;
+}
+
+int cRecord::storeRecords()
+{
+    int result = 0;
+    QString fileName = "../RecordsList.txt";
+    QStringList List;
+    List.clear();
+    //-------------------------------------------------------------------------
+
+    for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+    {
+        const cRecord rec = *it;
+
+        QString name = rec.qsName;
+        int iDotPosition = name.indexOf('.');
+        QString groupName = name.mid(0, iDotPosition);
+
+        QString path = rec.qsPath;
+        int iNamePosition = path.indexOf(name);
+        QString PathWithoutName = path.mid(0, iNamePosition - 1);
+
+        int size = rec.iSize;
+
+        int iExtensionPosition = path.indexOf('.');
+        QString qsExtension = path.mid(iExtensionPosition + 1);
+
+        bool IsError = false;
+        int width = 0;
+        int height = 0;
+        {
+            QImage image(path);
+            if(image.isNull())
+            {
+                IsError = true;
+            }
+            else
+            {
+                width = image.width();
+                height = image.height();
+            }
+        }
+
+        //Добавление записи в список
+        if(!IsError)
+        {
+            if((width > 0) && (height > 0))
+            {
+                QString s = path + ":" + QString::number(size);
+                List.append(s);
+                //qDebug() << s;
+            }
+        }
+        else
+        {
+            qDebug() << "File " << path << " is not image!!!";
+        }
+
+    }//End of for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+
+    qDebug() << "RecordsList count=" << List.count();
+
+    //-------------------------------------------------------------------------
+
+    long FileLength = 0;
+    for(int i = 0; i < List.count() - 1; i++)
+    {
+        FileLength += List.at(i).count();
+    }
+
+    qDebug() << "storeRecords():FileLength=" << FileLength;
+/*
+    QFile file(fileName);
+
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        return false;
+    }
+    else
+    {
+        // Установка кодировки
+        QTextStream out(&file);
+        if(cEnvironment::iSystemType == WINDOWS_SYSTEM_TYPE)
+            out.setCodec("Windows-1251");
+        else
+            out.setCodec("UTF-8");
+
+        for (const QString& str : List) {
+            out << str << "\n";
+        }
+
+        file.close();
+        return true;
+    }
+*/
     return result;
 }
