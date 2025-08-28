@@ -378,7 +378,7 @@
      <x>0</x>
      <y>0</y>
      <width>890</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -445,12 +445,12 @@
     <addaction name="actionRotateCW"/>
     <addaction name="actionRotateCCW"/>
    </widget>
-   <widget class="QMenu" name="menuTest">
+   <widget class="QMenu" name="menuProcesses">
     <property name="title">
-     <string>Test</string>
+     <string>Processes</string>
     </property>
-    <addaction name="actionStart_Threads"/>
     <addaction name="actionImportTaskProcess"/>
+    <addaction name="actionStoreRecordListProcess"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSelect_image"/>
@@ -458,7 +458,7 @@
    <addaction name="menuTags"/>
    <addaction name="menuSearch"/>
    <addaction name="menuView"/>
-   <addaction name="menuTest"/>
+   <addaction name="menuProcesses"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -712,6 +712,14 @@
    </property>
    <property name="text">
     <string>StoreRecordsList</string>
+   </property>
+  </action>
+  <action name="actionStoreRecordListProcess">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>StoreRecordListProcess</string>
    </property>
   </action>
  </widget>

@@ -190,6 +190,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::infoMessage, this, &MainWindow::execInfoMessage);
     connect(this, &MainWindow::beginMessage, this, &MainWindow::execBeginMessage);
     connect(this, &MainWindow::endMessage, this, &MainWindow::execEndMessage);
+    connect(this, &MainWindow::errorMessage, this, &MainWindow::execErrorMessage);
 
     //---20250820 Настройка пула потоков
     int iIdealThreadCount = QThread::idealThreadCount();
@@ -417,12 +418,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(SearchInstance, &cSearch::showCurrentIndexPicture, NavigationInstance, &cNavigation::execShowCurrentIndexPicture);
 
     connect(ui->actionImport, &QAction::triggered, ImportFilesInstance, &cImportFiles::execActionImportInitial);
-    //20250820
-    connect(ui->actionStart_Threads, &QAction::triggered, this, &MainWindow::execActionStartThreads);
     //20250822
     connect(ui->actionImportTaskProcess, &QAction::triggered, this, &MainWindow::execActionImportTaskProcess);
     //20250824
     connect(ui->actionStoreRecordsList, &QAction::triggered, this, &MainWindow::execActionStoreRecordsList);
+    //20250826
+    connect(ui->actionStoreRecordListProcess, &QAction::triggered, this, &MainWindow::execActionStoreRecordListProcess);
 
 }//End of ctor
 
@@ -766,25 +767,133 @@ void MainWindow::execFoundMissingFile(QString path)
     qDebug() << "Found missing file:" << path;
 }
 
-//##############################################################################
-
-void MainWindow::execActionStartThreads()
+void MainWindow::execActionStoreRecordsList()
 {
-    qDebug() << "execActionStartThreads";
+    qDebug() << "execActionStoreRecordsList()";
 
-    ui->actionStart_Threads->setEnabled(false);
-    emit beginMessage("==ActionStartThreads begin==");
-    tasksCompleted = 0;
-    totalTasks = 10; // Количество задач
+    QListWidgetItem * itemX0 = new QListWidgetItem("==ActionStoreRecordsList==");
+    itemX0->setForeground(Qt::blue);
+    ui->listWidgetOther->addItem(itemX0);
 
-    // Создаем и запускаем задачи
-    for (int i = 0; i < totalTasks; ++i)
+    //---Создание рабочего списка
+
+    std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
+    cRecord::RecordList = ptrRecordList.get();
+
+    if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
     {
-        threadPool.start(new ProcessingTask(i, this));
+        QString path = cIniFile::iniFilePath;
+        QListWidgetItem * itemX = new QListWidgetItem("Directory not found: " + path);
+        itemX->setForeground(Qt::red);
+        ui->listWidgetOther->addItem(itemX);
+        return;
+    }
+    else
+    {
+        int count = cRecord::RecordList->count();
+        qDebug() << "execActionStoreRecordsList: RecourdList count=" << count;
+        if((count > 10000)||(count < 0))
+        {
+            qDebug() << "execActionStoreRecordsList: Wrong RecourdList count=" << count;
+            return;
+        }
+
+        QListWidgetItem * itemX1 = new QListWidgetItem("Begin to create RecordsList");
+        itemX1->setForeground(Qt::magenta);
+        ui->listWidgetOther->addItem(itemX1);
+
+        cRecord::storeRecords();
+
+        QListWidgetItem * itemX2 = new QListWidgetItem("RecordsList stored fo file:'../RecordsList.txt'");
+        itemX2->setForeground(Qt::green);
+        ui->listWidgetOther->addItem(itemX2);
     }
 
 }
 
+//-----------------------------------------------------------------------------
+// Процедура отображения состояния процесса
+// Если value = 0, процедура не активна
+// Если 0 < value < 100, то отображение величины value на ProgressBarTasks
+// Если value < 100, то это сигнал о завершении задачи
+//-----------------------------------------------------------------------------
+void MainWindow::updateProgressStoreRecordListTask(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit infoMessage("StoreRecordList task completed");
+            ui->actionStoreRecordListProcess->setEnabled(true);
+            ui->actionStoreRecordListProcess->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("StoreRecordListTask");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+//#############################################################################
+
+//#############################################################################
+// СЛОТЫ ДЛЯ ОБРАБОТКИ СООБЩЕНИЕНИЙ ИЗ ПРОЦЕССОВ
+//#############################################################################
+
+/*
+    Слот, который выводит сообщение в ListWidgetOther
+    Может вызываться из потока задачи
+*/
+void MainWindow::appEndItem(QListWidgetItem * item)
+{
+    ui->listWidgetOther->addItem(item);
+    ui->listWidgetOther->setCurrentItem(item);
+    ui->listWidgetOther->scrollToItem(item);
+}
+
+void MainWindow::execErrorMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+    item->setForeground(Qt::red);
+    appEndItem(item);
+}
+
+void MainWindow::execInfoMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+
+    appEndItem(item);
+}
+
+void MainWindow::execBeginMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+    item->setForeground(Qt::blue);
+    appEndItem(item);
+}
+
+void MainWindow::execEndMessage(QString s)
+{
+    QListWidgetItem * item = new QListWidgetItem(s);
+    item->setForeground(Qt::green);
+    appEndItem(item);
+}
+
+
+//#############################################################################
+// IMPORT PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
 void MainWindow::execActionImportTaskProcess()
 {
     ui->actionImportTaskProcess->setEnabled(false);
@@ -793,28 +902,12 @@ void MainWindow::execActionImportTaskProcess()
     threadPool.start(new processImportTask(PROCESS_IMPORT_TASK_ID, this));
 }
 
-/*
-    Слот, который вызывается из потока задачи
-*/
-void MainWindow::updateProgress(int value)
-{
-    tasksCompleted += value;
-    int progress = static_cast<int>((tasksCompleted * 100.0) / totalTasks);
-    ProgressBarTasks->setValue(progress);
-
-    if (tasksCompleted == totalTasks)
-    {
-        emit infoMessage("All tasks completed");
-        ui->actionStart_Threads->setEnabled(true);
-        ui->actionStart_Threads->setChecked(false);
-
-        QMessageBox msgBox;
-        msgBox.setText("Task pool execution");
-        msgBox.setInformativeText("Ready");
-        msgBox.exec();
-    }
-}
-
+//-----------------------------------------------------------------------------
+// Процедура отображения состояния
+// Если value = 0, процедура не активна
+// Если 0 < value < 100, то отображение величины value на ProgressBarTasks
+// Если value < 100, то это сигнал о завершении задачи
+//-----------------------------------------------------------------------------
 void MainWindow::updateProgressImportTask(int value)
 {
     if(value > 0)
@@ -839,69 +932,46 @@ void MainWindow::updateProgressImportTask(int value)
     }
 }
 
-/*
-    Слот, который выводит сообщение в ListWidgetOther
-    Может вызываться из потока задачи
-*/
-void MainWindow::appEndItem(QListWidgetItem * item)
+//#############################################################################
+// STORE RECORD LIST PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
+void MainWindow::execActionStoreRecordListProcess()
 {
-    ui->listWidgetOther->addItem(item);
-    ui->listWidgetOther->setCurrentItem(item);
-    ui->listWidgetOther->scrollToItem(item);
+    qDebug() << "execActionStoreRecordListProcess()";
+
+    ui->actionStoreRecordListProcess->setEnabled(false);
+    emit beginMessage("==ActionStoreRecordListProcess begin==");
+
+    threadPool.start(new ProcessStoreRecordListTask(PROCESS_STORE_RECORD_LIST_TASK_ID, this));
+
 }
 
-void MainWindow::execInfoMessage(QString s)
+
+void MainWindow::updateProgressStoreRecordListTaskProcess(int value)
 {
-    QListWidgetItem * item = new QListWidgetItem(s);
-
-    appEndItem(item);
-}
-
-void MainWindow::execBeginMessage(QString s)
-{
-    QListWidgetItem * item = new QListWidgetItem(s);
-    item->setForeground(Qt::blue);
-    appEndItem(item);
-}
-
-void MainWindow::execEndMessage(QString s)
-{
-    QListWidgetItem * item = new QListWidgetItem(s);
-    item->setForeground(Qt::green);
-    appEndItem(item);
-}
-
-void MainWindow::execActionStoreRecordsList()
-{
-    qDebug() << "execActionStoreRecordsList()";
-    //---Создание рабочего списка
-
-    std::unique_ptr<QList<cRecord> > ptrRecordList(new QList<cRecord>());
-    cRecord::RecordList = ptrRecordList.get();
-
-    if(cRecord::readDirectory(cIniFile::IniFile.getDirectoryPah()) > 0)
+    if(value > 0)
     {
-        QString path = cIniFile::iniFilePath;
-        QListWidgetItem * itemX = new QListWidgetItem("Directory not found: " + path);
-        itemX->setForeground(Qt::red);
-        ui->listWidgetOther->addItem(itemX);
-        return;
-    }
-    else
-    {
-        int count = cRecord::RecordList->count();
-        qDebug() << "execActionStoreRecordsList: RecourdList count=" << count;
-        if((count > 10000)||(count < 0))
+        if(value < 100)
         {
-            qDebug() << "execActionStoreRecordsList: Wrong RecourdList count=" << count;
-            return;
+            ProgressBarTasks->setValue(value);
         }
+        else
+        {
+            ProgressBarTasks->setValue(0);
 
-        cRecord::storeRecords();
+            emit infoMessage("StoreRecordList task completed");
+            ui->actionStoreRecordListProcess->setEnabled(true);
+            ui->actionStoreRecordListProcess->setChecked(false);
 
-        QListWidgetItem * itemX = new QListWidgetItem("RecordsList stored fo file:'../RecordsList.txt'");
-        itemX->setForeground(Qt::green);
-        ui->listWidgetOther->addItem(itemX);
+            QMessageBox msgBox;
+            msgBox.setText("StoreRecordListTask");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
     }
-
 }
+

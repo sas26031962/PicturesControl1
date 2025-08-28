@@ -90,7 +90,8 @@ int cRecord::storeRecords()
     List.clear();
     //-------------------------------------------------------------------------
 
-    for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+    //for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
+    for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->begin() + 100; ++it)
     {
         const cRecord rec = *it;
 
@@ -151,7 +152,7 @@ int cRecord::storeRecords()
     }
 
     qDebug() << "storeRecords():FileLength=" << FileLength;
-/*
+
     QFile file(fileName);
 
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -174,6 +175,6 @@ int cRecord::storeRecords()
         file.close();
         return true;
     }
-*/
+
     return result;
 }

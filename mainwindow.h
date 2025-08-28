@@ -49,7 +49,8 @@
 #include "csearch.h"
 
 #include "ThreadPool/processingtask.h"
-#include "processimporttask.h"
+#include "ThreadPool/processimporttask.h"
+#include "ThreadPool/processstorerecordlisttask.h"
 
 
 //-----------------------------------------------------------------------------
@@ -169,17 +170,20 @@ private slots:
     void execFoundMissingFile(QString path);
 
     //20250820
-    void execActionStartThreads();
     void execInfoMessage(QString s);
     void execBeginMessage(QString s);
     void execEndMessage(QString s);
-    void updateProgress(int value);
+    void execErrorMessage(QString s);
 
     //20250822
     void updateProgressImportTask(int value);
     void execActionImportTaskProcess();
     //20250824
     void execActionStoreRecordsList();
+    //20250826
+    void execActionStoreRecordListProcess();
+    void updateProgressStoreRecordListTaskProcess(int value);
+    void updateProgressStoreRecordListTask(int value);
 
 public slots:
 
@@ -188,6 +192,7 @@ signals:
     void infoMessage(QString s);
     void beginMessage(QString s);
     void endMessage(QString s);
+    void errorMessage(QString s);
 };
 
 #endif // MAINWINDOW_H

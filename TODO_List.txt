@@ -1,3 +1,7 @@
+#20250826
+
+[] Перенести функциональность cRecord::storeRecords() в ProcessStoreRecordListTask::run()
+
 #20250815
 
 [] Сделать предпросмотр результатов поиска

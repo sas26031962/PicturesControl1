@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     cnavigation.cpp \
     csearch.cpp \
     ThreadPool/processingtask.cpp \
-    processimporttask.cpp
+    ThreadPool/processimporttask.cpp \
+    ThreadPool/processstorerecordlisttask.cpp
 
 HEADERS  += mainwindow.h \
     cenvironment.h \
@@ -55,7 +56,8 @@ HEADERS  += mainwindow.h \
     cdrawfilex.h \
     csearch.h \
     ThreadPool/processingtask.h \
-    processimporttask.h
+    ThreadPool/processimporttask.h \
+    ThreadPool/processstorerecordlisttask.h
 
 FORMS    += mainwindow.ui \
     fmview.ui
