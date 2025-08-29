@@ -77,7 +77,7 @@ void ProcessStoreRecordListTask::run()
         List.clear();
 
         int iCounter = 0;
-        float fProgressWeight = cRecord::RecordList->count() / 1000.0;
+        float fProgressWeight = 100.0 / cRecord::RecordList->count();
         int Progress = 0;
 
         for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)

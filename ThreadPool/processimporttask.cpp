@@ -82,7 +82,7 @@ void processImportTask::run()
     int iAddedFilesCounter = 0;
 
     int iCounter = 0;
-    float fProgressWeight = cImportFiles::MaxIndexValue / 1000.0;
+    float fProgressWeight = 100.0 / cImportFiles::MaxIndexValue;
     int Progress = 0;
 
     qDebug() << "ProcessImportTask:fProgressWeight=" << fProgressWeight;
