@@ -51,6 +51,11 @@
 #include "ThreadPool/processingtask.h"
 #include "ThreadPool/processimporttask.h"
 #include "ThreadPool/processstorerecordlisttask.h"
+#include "ThreadPool/processsearchpattern1task.h"
+#include "ThreadPool/processsearchpattern2task.h"
+#include "ThreadPool/processsearchpattern12intersectiontask.h"
+#include "ThreadPool/processrotatecw90task.h"
+#include "ThreadPool/processrotateccw90task.h"
 
 
 //-----------------------------------------------------------------------------
@@ -184,6 +189,23 @@ private slots:
     void execActionStoreRecordListProcess();
     void updateProgressStoreRecordListTaskProcess(int value);
     void updateProgressStoreRecordListTask(int value);
+    //20250829
+    void updateProgressSearchPattern1Task(int value);
+    void execActionSearchPattern1Process();
+    //20250901
+    void updateProgressSearchPattern2Task(int value);
+    void execActionSearchPattern2Process();
+
+    void updateProgressSearchPattern12IntersectionTask(int value);
+    void execActionSearchPattern12IntersectionProcess();
+
+    //20250903
+    void updateProgressRotateCW90Task(int value);
+    void execActionRotateCW90Process();
+
+    //20250904
+    void updateProgressRotateCCW90Task(int value);
+    void execActionRotateCCW90Process();
 
 public slots:
 

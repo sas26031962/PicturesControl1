@@ -451,6 +451,13 @@
     </property>
     <addaction name="actionImportTaskProcess"/>
     <addaction name="actionStoreRecordListProcess"/>
+    <addaction name="separator"/>
+    <addaction name="actionSearchPattern1Process"/>
+    <addaction name="actionSearchPattern2Process"/>
+    <addaction name="actionSearchPattern12IntersectionProcess"/>
+    <addaction name="separator"/>
+    <addaction name="actionRotateCW90Process"/>
+    <addaction name="actionRotateCCW90Process"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSelect_image"/>
@@ -720,6 +727,37 @@
    </property>
    <property name="text">
     <string>StoreRecordListProcess</string>
+   </property>
+  </action>
+  <action name="actionSearchPattern1Process">
+   <property name="text">
+    <string>SearchPattern1Process</string>
+   </property>
+  </action>
+  <action name="actionSearchPattern2Process">
+   <property name="text">
+    <string>SearchPattern2Process</string>
+   </property>
+  </action>
+  <action name="actionSearchPattern12IntersectionProcess">
+   <property name="text">
+    <string>SearchPattern12IntersectionProcess</string>
+   </property>
+  </action>
+  <action name="actionRotateCW90Process">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>RotateCW90Process</string>
+   </property>
+  </action>
+  <action name="actionRotateCCW90Process">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>RotateCCW90Process</string>
    </property>
   </action>
  </widget>

@@ -34,7 +34,12 @@ SOURCES += main.cpp\
     csearch.cpp \
     ThreadPool/processingtask.cpp \
     ThreadPool/processimporttask.cpp \
-    ThreadPool/processstorerecordlisttask.cpp
+    ThreadPool/processstorerecordlisttask.cpp \
+    ThreadPool/processsearchpattern1task.cpp \
+    ThreadPool/processsearchpattern2task.cpp \
+    ThreadPool/processsearchpattern12intersectiontask.cpp \
+    ThreadPool/processrotatecw90task.cpp \
+    ThreadPool/processrotateccw90task.cpp
 
 HEADERS  += mainwindow.h \
     cenvironment.h \
@@ -57,7 +62,12 @@ HEADERS  += mainwindow.h \
     csearch.h \
     ThreadPool/processingtask.h \
     ThreadPool/processimporttask.h \
-    ThreadPool/processstorerecordlisttask.h
+    ThreadPool/processstorerecordlisttask.h \
+    ThreadPool/processsearchpattern1task.h \
+    ThreadPool/processsearchpattern2task.h \
+    ThreadPool/processsearchpattern12intersectiontask.h \
+    ThreadPool/processrotatecw90task.h \
+    ThreadPool/processrotateccw90task.h
 
 FORMS    += mainwindow.ui \
     fmview.ui

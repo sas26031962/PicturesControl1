@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QSettings>
+#include <atomic>
 
 #include "cinifile.h"
 #include "crecord.h"
@@ -15,6 +16,7 @@
 
 class processImportTask : public QRunnable
 {
+
 public:
     processImportTask(int taskId, QObject* receiver);
     void run() override;

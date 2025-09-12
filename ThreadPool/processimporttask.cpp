@@ -1,5 +1,7 @@
 #include "processimporttask.h"
 
+std::atomic<int> iCurrentIndexImportLocal(0); //Индекс для импорта файлов
+
 processImportTask::processImportTask(int taskId, QObject *receiver)
     : m_taskId(taskId), m_receiver(receiver)
 {
@@ -75,14 +77,14 @@ void processImportTask::run()
     //---
 
     //---Подготовка к обработке файла данных
-    iCurrentIndexGlobal.store(0);
+    iCurrentIndexImportLocal.store(0);
 
     int iErrorFilesCounter = 0;
     int iSkippedFilesCounter= 0;
     int iAddedFilesCounter = 0;
 
     int iCounter = 0;
-    float fProgressWeight = 100.0 / cImportFiles::MaxIndexValue;
+    float fProgressWeight = cImportFiles::MaxIndexValue / 1000.0;
     int Progress = 0;
 
     qDebug() << "ProcessImportTask:fProgressWeight=" << fProgressWeight;
@@ -93,8 +95,8 @@ void processImportTask::run()
     for(QList<cRecord>::iterator it = cRecord::RecordList->begin(); it != cRecord::RecordList->end(); ++it)
     {
 
-        iCurrentIndexGlobal.fetch_add(1, std::memory_order_relaxed);
-        int id = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+        iCurrentIndexImportLocal.fetch_add(1, std::memory_order_relaxed);
+        int id = iCurrentIndexImportLocal.load(std::memory_order_relaxed);
 
         const cRecord rec = *it;
 
@@ -117,19 +119,19 @@ void processImportTask::run()
 
         if(qsExtension.toLower() == "mp4")
         {
-            qDebug() << "Id=" << iCurrentIndexGlobal.load(std::memory_order_relaxed) << "Extension: mp4" " Weight=" << Progress;
+            qDebug() << "Id=" << iCurrentIndexImportLocal.load(std::memory_order_relaxed) << "Extension: mp4" " Weight=" << Progress;
             IsError = true;
             iErrorFilesCounter++;
         }
         else if(qsExtension.toLower() == "tif")
         {
-            qDebug() << "Id=" << iCurrentIndexGlobal.load(std::memory_order_relaxed) << "Extension: tif" " Weight=" << Progress;
+            qDebug() << "Id=" << iCurrentIndexImportLocal.load(std::memory_order_relaxed) << "Extension: tif" " Weight=" << Progress;
             IsError = true;
             iErrorFilesCounter++;
         }
         else if(qsExtension.toLower() == "txt")
         {
-            qDebug() << "Id=" << iCurrentIndexGlobal.load(std::memory_order_relaxed) << "Extension: txt" " Weight=" << Progress;
+            qDebug() << "Id=" << iCurrentIndexImportLocal.load(std::memory_order_relaxed) << "Extension: txt" " Weight=" << Progress;
             IsError = true;
             iErrorFilesCounter++;
         }

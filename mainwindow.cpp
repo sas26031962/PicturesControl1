@@ -424,6 +424,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionStoreRecordsList, &QAction::triggered, this, &MainWindow::execActionStoreRecordsList);
     //20250826
     connect(ui->actionStoreRecordListProcess, &QAction::triggered, this, &MainWindow::execActionStoreRecordListProcess);
+    //20250829
+    connect(ui->actionSearchPattern1Process, &QAction::triggered, this, &MainWindow::execActionSearchPattern1Process);
+    //20250901
+    connect(ui->actionSearchPattern2Process, &QAction::triggered, this, &MainWindow::execActionSearchPattern2Process);
+    connect(ui->actionSearchPattern12IntersectionProcess, &QAction::triggered, this, &MainWindow::execActionSearchPattern12IntersectionProcess);
+    //20250903
+    connect(ui->actionRotateCW90Process, &QAction::triggered, this, &MainWindow::execActionRotateCW90Process);
+    //20250904
+    connect(ui->actionRotateCCW90Process, &QAction::triggered, this, &MainWindow::execActionRotateCCW90Process);
 
 }//End of ctor
 
@@ -969,6 +978,221 @@ void MainWindow::updateProgressStoreRecordListTaskProcess(int value)
 
             QMessageBox msgBox;
             msgBox.setText("StoreRecordListTask");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+
+//#############################################################################
+// SEARCH PATTERN1 PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
+void MainWindow::execActionSearchPattern1Process()
+{
+    qDebug() << "execActionSearchPattern1Process()";
+
+    ui->actionSearchNamePattern1->setEnabled(false);
+    emit beginMessage("==ActionSearchNamePattern1Process begin==");
+
+    threadPool.start(new ProcessSearchPattern1Task(PROCESS_SEARCH_PATTERN1_TASK_ID, this));
+
+}
+
+void MainWindow::updateProgressSearchPattern1Task(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit infoMessage("Search pattern1 task completed");
+            ui->actionSearchNamePattern1->setEnabled(true);
+            ui->actionSearchNamePattern1->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("SearchNamePattern1Task");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+//#############################################################################
+// SEARCH PATTERN2 PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
+void MainWindow::execActionSearchPattern2Process()
+{
+    qDebug() << "execActionSearchPattern2Process()";
+
+    ui->actionSearchPattern2Process->setEnabled(false);
+    emit beginMessage("==ActionSearchNamePattern2 begin==");
+
+    threadPool.start(new ProcessSearchPattern2Task(PROCESS_SEARCH_PATTERN2_TASK_ID, this));
+
+}
+
+void MainWindow::updateProgressSearchPattern2Task(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit infoMessage("Search pattern2 task completed");
+            ui->actionSearchNamePattern2->setEnabled(true);
+            ui->actionSearchNamePattern2->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("SearchNamePattern2Task");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+//#############################################################################
+// SEARCH PATTERN12 INTERSECTION PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
+void MainWindow::execActionSearchPattern12IntersectionProcess()
+{
+    qDebug() << "execActionSearchPattern12IntersectionProcess()";
+
+    ui->actionSearchPattern12IntersectionProcess->setEnabled(false);
+    emit beginMessage("==ActionSearchPattern12Intersection begin==");
+
+    threadPool.start(new ProcessSearchPattern12IntersectionTask(PROCESS_SEARCH_PATTERN12_INTERSECTION_TASK_ID, this));
+
+}
+
+void MainWindow::updateProgressSearchPattern12IntersectionTask(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit infoMessage("Search pattern2 task completed");
+            ui->actionSearchPattern12IntersectionProcess->setEnabled(true);
+            ui->actionSearchPattern12IntersectionProcess->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("SearchPattern12IntersectionTask");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+//#############################################################################
+// ROTATE CW90 PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
+void MainWindow::execActionRotateCW90Process()
+{
+    qDebug() << "execActionRotateCW90Process()";
+
+    ui->actionRotateCW90Process->setEnabled(false);
+    emit beginMessage("==ActionRotateCW90 begin==");
+
+    threadPool.start(new ProcessRotateCW90Task(PROCESS_ROTATE_CW90_TASK_ID, this));
+
+}
+
+void MainWindow::updateProgressRotateCW90Task(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit DrawFilesInstance->draw(cIniFile::currentRotatedImagePath);
+
+            emit infoMessage("Rotate CW90 task completed");
+            ui->actionRotateCW90Process->setEnabled(true);
+            ui->actionRotateCW90Process->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("RotateCW90Task");
+            msgBox.setInformativeText("Completed");
+            msgBox.exec();
+        }
+    }
+}
+
+//#############################################################################
+// ROTATE CCW90 PROCESS
+//#############################################################################
+
+//
+// Запуск процесса
+//
+void MainWindow::execActionRotateCCW90Process()
+{
+    qDebug() << "execActionRotateCCW90Process()";
+
+    ui->actionRotateCCW90Process->setEnabled(false);
+    emit beginMessage("==ActionRotateCCW90 begin==");
+
+    threadPool.start(new ProcessRotateCCW90Task(PROCESS_ROTATE_CCW90_TASK_ID, this));
+
+}
+
+void MainWindow::updateProgressRotateCCW90Task(int value)
+{
+    if(value > 0)
+    {
+        if(value < 100)
+        {
+            ProgressBarTasks->setValue(value);
+        }
+        else
+        {
+            ProgressBarTasks->setValue(0);
+
+            emit DrawFilesInstance->draw(cIniFile::currentRotatedImagePath);
+
+            emit infoMessage("Rotate CCW90 task completed");
+            ui->actionRotateCCW90Process->setEnabled(true);
+            ui->actionRotateCCW90Process->setChecked(false);
+
+            QMessageBox msgBox;
+            msgBox.setText("RotateCCW90Task");
             msgBox.setInformativeText("Completed");
             msgBox.exec();
         }
