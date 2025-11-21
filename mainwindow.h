@@ -32,6 +32,7 @@
 #include <QRunnable>
 #include <QProgressBar>
 #include <QMessageBox>
+#include <QFileDialog>
 
 #include "cinifile.h"
 #include "fmview.h"

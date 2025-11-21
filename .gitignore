@@ -56,3 +56,7 @@ programm/moc_clistwidgetsubject.cpp
 programm/moc_clistwidgettheame.cpp
 
 programm/object_script.PicturesControl1.Release
+
+*.autosave
+
+PicturesControl1.pro.user.72ae61c

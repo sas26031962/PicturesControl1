@@ -55,7 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "ApplicationDirPath=" << qsApplicationDirPath << " LastIndexOfSlash=" << iLastSlashIndex << " ApplicationDirProgrammPath=" << qsApplicationDirProgrammPath;
 
     //QString qsSettingsFileName = "C:/WORK/PicturesControl/PicturesControl1/programm/settings.ini";
-    QString qsSettingsFileName = qsApplicationDirProgrammPath + "/settings.ini";
+    //QString qsSettingsFileName = qsApplicationDirProgrammPath + "/settings.ini";//20251118
+    QString qsSettingsFileName = ":/config/programm/settings.ini";//20251118 Использование файла settings.ini как файла ресурсов
 
     QSettings settings(qsSettingsFileName, QSettings::IniFormat);
 /*
@@ -107,6 +108,15 @@ MainWindow::MainWindow(QWidget *parent) :
     settings.beginGroup("Files");
 
     QString qsIniFileNameWindows = settings.value("IniFileNameWindows","1").toString();//"C:/Work/Ships";
+    if(qsIniFileNameWindows == "1")
+    {
+        qsIniFileNameWindows = QFileDialog::getExistingDirectory(
+            this,
+            tr("Select directory"),
+            QDir::currentPath(),//Каталог по умолчанию
+            QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+            );
+    }
     QString qsIniFileNameLinux = settings.value("IniFileNameLinux","2").toString();//"/home/andy/From Smartfone";
 
     QString qsProjectPathWindows = settings.value("ProjectPathWindows","3").toString();//"C:/WORK/PicturesControl";
