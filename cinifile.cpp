@@ -15,7 +15,8 @@
     QString cIniFile::filePlaceHashTag;
     QString cIniFile::filePropertyHashTag;
     QString cIniFile::fileTheameHashTag;
-    cIniFile cIniFile::IniFile("/home/andy/From Smartfone");
+
+    cIniFile cIniFile::IniFile = cIniFile();
 
     QString cIniFile::currentImagePath = "";
     QString cIniFile::currentRotatedImagePath = "";
@@ -35,18 +36,16 @@
     QList<cRecord> * cRecord::RecordList;
 
 
-cIniFile::cIniFile(QString sourcePath)
+
+cIniFile::cIniFile()
 {
-    directoryPath = sourcePath;
-    qDebug() << "INI file created at: " << sourcePath;//cIniFile::iniFilePath;
+    qDebug() << "cIniFile ctor";
 }
 
 void cIniFile::setDirectoryPaht(QString sourcePath)
 {
     directoryPath = sourcePath;
-
 }
-
 
 QString cIniFile::getDirectoryPah()
 {

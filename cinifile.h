@@ -55,7 +55,7 @@ public:
     int iRecordListLength = 0;  //Полное число записей
 
     //Конструктор
-    cIniFile(QString sourcePath);
+    cIniFile();
 
     //Методы
     QString getDirectoryPah();

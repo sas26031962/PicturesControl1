@@ -106,13 +106,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // Читаем значения из INI-файла
 
     settings.beginGroup("Files");
-
+    //Чтение пути к исходному каталогу - источнику данных
     QString qsIniFileNameWindows = settings.value("IniFileNameWindows","1").toString();//"C:/Work/Ships";
     if(qsIniFileNameWindows == "1")
     {
         qsIniFileNameWindows = QFileDialog::getExistingDirectory(
             this,
-            tr("Select directory"),
+            tr("Select source directory"),
             QDir::currentPath(),//Каталог по умолчанию
             QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
             );
