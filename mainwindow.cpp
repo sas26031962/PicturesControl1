@@ -232,8 +232,8 @@ MainWindow::MainWindow(QWidget *parent) :
     LoadFilesInstance = new cLoadFiles();
     LoadFilesInstance->install(ui->listWidgetOther);
 
-    DrawFilesInstance = new cDrawFilex();
-    DrawFilesInstance->install(ui->listWidgetOther);
+    DrawFilesInstance = new cDrawFilex(ui->listWidgetOther);
+    //DrawFilesInstance->install(ui->listWidgetOther);
 
     SearchInstance = new cSearch(
                 ui->listWidgetFounded,

@@ -3,7 +3,9 @@
 [x] Рефакторинг: удаление метода install из класса cListWidgetSubject
 [x] Рефакторинг: удаление метода install из класса cListWidgetPlace
 [x] Рефакторинг: удаление метода install из класса cListWidgetProperty
-[] Рефакторинг: удаление метода install из класса cListWidgetTheame
+[x] Рефакторинг: удаление метода install из класса cListWidgetTheame
+[x] Рефакторинг: удаление метода install из класса cSearch
+[] Рефакторинг: удаление метода install из класса cDrawFilesInstance
 
 #20250829
 
