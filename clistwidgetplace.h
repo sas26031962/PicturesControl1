@@ -38,14 +38,13 @@ public:
     QLineEdit * qleAddItem;                                 //Поле для ввода нового значения элемента
 
     //Конструктор
-    explicit cListWidgetPlace(QObject *parent = 0);
+    explicit cListWidgetPlace(QWidget * qwidget, QObject *parent = 0);
     ~cListWidgetPlace();
 
     //Методы
     void addOrRemoveItemToRecord();
     bool loadHashTagList();
     bool addItemToList();
-    void install(QWidget * qwidget);
 
 signals:
     void showExecStatus(QString s);

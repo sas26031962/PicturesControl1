@@ -1,23 +1,13 @@
 #include "clistwidgetplace.h"
 
-cListWidgetPlace::cListWidgetPlace(QObject *parent) : QObject(parent)
+cListWidgetPlace::cListWidgetPlace(QWidget * qwidget, QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
     //Задание типа меню
     lwtListType = ListWidgetType::PLACE_TYPE;
 
     qsFileNameHashTag = cIniFile::filePlaceHashTag;
-}
 
-cListWidgetPlace::~cListWidgetPlace()
-{
-    delete qslHashTagList;
-    delete listWidget;
-    delete qleAddItem;
-}
-
-void cListWidgetPlace::install(QWidget * qwidget)
-{
     QRect qrListWidget = QRect(10, 10, 261, 261);
     listWidget = new QListWidget(qwidget);
     listWidget->setGeometry(qrListWidget);
@@ -40,6 +30,13 @@ void cListWidgetPlace::install(QWidget * qwidget)
         connect(qleAddItem, &QLineEdit::textChanged, this, &cListWidgetPlace::execLineEditSearchAllKeysTextChanched);
     }
 
+}//End of ctor
+
+cListWidgetPlace::~cListWidgetPlace()
+{
+    delete qslHashTagList;
+    delete listWidget;
+    delete qleAddItem;
 }
 
 void cListWidgetPlace::execRequest(const QPoint &pos)

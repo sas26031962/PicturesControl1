@@ -106,13 +106,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // Читаем значения из INI-файла
 
     settings.beginGroup("Files");
-    //Чтение пути к исходному каталогу - источнику данных
+
     QString qsIniFileNameWindows = settings.value("IniFileNameWindows","1").toString();//"C:/Work/Ships";
     if(qsIniFileNameWindows == "1")
     {
         qsIniFileNameWindows = QFileDialog::getExistingDirectory(
             this,
-            tr("Select source directory"),
+            tr("Select directory"),
             QDir::currentPath(),//Каталог по умолчанию
             QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
             );
@@ -159,8 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //cIniFile::iniFilePath = "/home/andy/MyQtProjects/PicturesControl1/programm/data/FilesConfigPhotos.ini";//Linux version
     //cIniFile::iniFilePath = "C:/WORK/PicturesControl/PicturesControl1/programm/data/FilesConfigShips.ini";//Windows version
 
-    //cIniFile::iniFilePath = qsProjectPath + qsProjectName + "/programm/data/FilesConfig" + qsHashTagFileNameSuffix + ".ini";
-    cIniFile::iniFilePath = ":/config/programm/data/FilesConfigShips.ini";//20251123
+    cIniFile::iniFilePath = qsProjectPath + qsProjectName + "/programm/data/FilesConfig" + qsHashTagFileNameSuffix + ".ini";
 
     cIniFile::pattern1StringListFilePath = "./data/StringListPattern1.txt";//qsProjectPath + qsProjectName + "/programm/data/pattern1StringListFile" + qsDataFileNameExtension;
     cIniFile::pattern2StringListFilePath = "./data/StringListPattern2.txt";//qsProjectPath + qsProjectName + "/programm/data/pattern2StringListFile" + qsDataFileNameExtension;
@@ -239,17 +238,10 @@ MainWindow::MainWindow(QWidget *parent) :
     SearchInstance = new cSearch();
     SearchInstance->install(ui->listWidgetFounded, ui->listWidgetOther, ui->listWidgetKeys, ui->lineEditPattern, ui->lineEditSearchAllKeys);
 
-    ListWidgetPlace = new cListWidgetPlace();
-    ListWidgetPlace->install(ui->tab_Place);
-
-    ListWidgetSubject = new cListWidgetSubject();
-    ListWidgetSubject->install(ui->tab_Subject);
-
-    ListWidgetProperty = new cListWidgetProperty();
-    ListWidgetProperty->install(ui->tab_Property);
-
-    ListWidgetTheame = new cListWidgetTheame();
-    ListWidgetTheame->install(ui->tab_Theame);
+    ListWidgetPlace = new cListWidgetPlace(ui->tab_Place);
+    ListWidgetSubject = new cListWidgetSubject(ui->tab_Subject);
+    ListWidgetProperty = new cListWidgetProperty(ui->tab_Property);
+    ListWidgetTheame = new cListWidgetTheame(ui->tab_Theame);
 
     ui->comboBoxPatterns->clear();
     ui->comboBoxPatterns->addItem("^[Ii][Mm][Gg]_20[0-9]{6}_[0-9]{6}");

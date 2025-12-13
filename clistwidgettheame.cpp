@@ -1,6 +1,6 @@
 #include "clistwidgettheame.h"
 
-cListWidgetTheame::cListWidgetTheame(QObject *parent) : QObject(parent)
+cListWidgetTheame::cListWidgetTheame(QWidget * qwidget, QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
     //Задание типа меню
@@ -8,17 +8,6 @@ cListWidgetTheame::cListWidgetTheame(QObject *parent) : QObject(parent)
 
     qsFileNameHashTag = cIniFile::fileTheameHashTag;
 
-}
-
-cListWidgetTheame::~cListWidgetTheame()
-{
-    delete qslHashTagList;
-    delete listWidget;
-    delete qleAddItem;
-}
-
-void cListWidgetTheame::install(QWidget * qwidget)
-{
     QRect qrListWidget = QRect(10, 10, 261, 261);
     listWidget = new QListWidget(qwidget);
     listWidget->setGeometry(qrListWidget);
@@ -40,6 +29,13 @@ void cListWidgetTheame::install(QWidget * qwidget)
         connect(listWidget, &QListWidget::itemClicked, this, &cListWidgetTheame::execListWidgetItemClicked);
         connect(qleAddItem, &QLineEdit::textChanged, this, &cListWidgetTheame::execLineEditSearchAllKeysTextChanched);
     }
+}
+
+cListWidgetTheame::~cListWidgetTheame()
+{
+    delete qslHashTagList;
+    delete listWidget;
+    delete qleAddItem;
 }
 
 void cListWidgetTheame::execRequest(const QPoint &pos)

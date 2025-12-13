@@ -1,6 +1,6 @@
 #include "clistwidgetproperty.h"
 
-cListWidgetProperty::cListWidgetProperty(QObject *parent) : QObject(parent)
+cListWidgetProperty::cListWidgetProperty(QWidget * qwidget, QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
 
@@ -8,17 +8,7 @@ cListWidgetProperty::cListWidgetProperty(QObject *parent) : QObject(parent)
     lwtListType = ListWidgetType::PROPERTY_TYPE;
 
     qsFileNameHashTag = cIniFile::filePropertyHashTag;
-}
 
-cListWidgetProperty::~cListWidgetProperty()
-{
-    delete qslHashTagList;
-    delete listWidget;
-    delete qleAddItem;
-}
-
-void cListWidgetProperty::install(QWidget * qwidget)
-{
     QRect qrListWidget = QRect(10, 10, 261, 261);
     listWidget = new QListWidget(qwidget);
     listWidget->setGeometry(qrListWidget);
@@ -33,13 +23,19 @@ void cListWidgetProperty::install(QWidget * qwidget)
     if(loadHashTagList())
     {
         listWidget->addItems(*qslHashTagList);
-
-        // Настройка контекстного меню
+       // Настройка контекстного меню
         listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(listWidget, &QListWidget::customContextMenuRequested, this, &cListWidgetProperty::execRequest);
         connect(listWidget, &QListWidget::itemClicked, this, &cListWidgetProperty::execListWidgetItemClicked);
         connect(qleAddItem, &QLineEdit::textChanged, this, &cListWidgetProperty::execLineEditSearchAllKeysTextChanched);
     }
+}
+
+cListWidgetProperty::~cListWidgetProperty()
+{
+    delete qslHashTagList;
+    delete listWidget;
+    delete qleAddItem;
 }
 
 void cListWidgetProperty::execRequest(const QPoint &pos)

@@ -1,3 +1,10 @@
+#20251213
+
+[x] Рефакторинг: удаление метода install из класса cListWidgetSubject
+[x] Рефакторинг: удаление метода install из класса cListWidgetPlace
+[x] Рефакторинг: удаление метода install из класса cListWidgetProperty
+[] Рефакторинг: удаление метода install из класса cListWidgetTheame
+
 #20250829
 
 [] Перенести функциональность cDrawFilex::RotateCW90() в ProcessRotateCW90Task::run()

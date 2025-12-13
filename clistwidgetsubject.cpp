@@ -1,6 +1,6 @@
 #include "clistwidgetsubject.h"
 
-cListWidgetSubject::cListWidgetSubject(QObject *parent) : QObject(parent)
+cListWidgetSubject::cListWidgetSubject(QWidget * qwidget, QObject *parent) : QObject(parent)
 {
     qslHashTagList = new QStringList;
 
@@ -8,17 +8,7 @@ cListWidgetSubject::cListWidgetSubject(QObject *parent) : QObject(parent)
     lwtListType = ListWidgetType::SUBJECT_TYPE;
 
     qsFileNameHashTag = cIniFile::fileSubjectHashTag;
-}
 
-cListWidgetSubject::~cListWidgetSubject()
-{
-    delete qslHashTagList;
-    delete listWidget;
-    delete qleAddItem;
-}
-
-void cListWidgetSubject::install(QWidget * qwidget)
-{
     QRect qrListWidget = QRect(10, 10, 261, 261);
     listWidget = new QListWidget(qwidget);
     listWidget->setGeometry(qrListWidget);
@@ -42,6 +32,12 @@ void cListWidgetSubject::install(QWidget * qwidget)
     }
 }
 
+cListWidgetSubject::~cListWidgetSubject()
+{
+    delete qslHashTagList;
+    delete listWidget;
+    delete qleAddItem;
+}
 
 void cListWidgetSubject::execRequest(const QPoint &pos)
 {
