@@ -31,10 +31,9 @@ class cSearch : public QObject
 
 public:
     //Конструктор
-    explicit cSearch(QObject *parent = 0);
+    explicit cSearch(QListWidget * founded, QListWidget * other, QListWidget * keys, QLineEdit * pattern, QLineEdit * search_all_keys, QObject *parent = 0);
 
     //Методы
-    void install(QListWidget * founded, QListWidget * other, QListWidget * keys, QLineEdit * pattern, QLineEdit * search_all_keys);
     void showGroupsList();
     bool searchNamePattern(const QString& pattern);
     void execLoadFilesByConditionOrYes(QStringList yes);

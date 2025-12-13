@@ -235,9 +235,13 @@ MainWindow::MainWindow(QWidget *parent) :
     DrawFilesInstance = new cDrawFilex();
     DrawFilesInstance->install(ui->listWidgetOther);
 
-    SearchInstance = new cSearch();
-    SearchInstance->install(ui->listWidgetFounded, ui->listWidgetOther, ui->listWidgetKeys, ui->lineEditPattern, ui->lineEditSearchAllKeys);
-
+    SearchInstance = new cSearch(
+                ui->listWidgetFounded,
+                ui->listWidgetOther,
+                ui->listWidgetKeys,
+                ui->lineEditPattern,
+                ui->lineEditSearchAllKeys
+                );
     ListWidgetPlace = new cListWidgetPlace(ui->tab_Place);
     ListWidgetSubject = new cListWidgetSubject(ui->tab_Subject);
     ListWidgetProperty = new cListWidgetProperty(ui->tab_Property);

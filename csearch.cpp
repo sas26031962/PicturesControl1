@@ -1,13 +1,10 @@
 #include "csearch.h"
 
-cSearch::cSearch(QObject *parent) : QObject(parent)
+cSearch::cSearch(QListWidget * founded, QListWidget * other, QListWidget * keys, QLineEdit * pattern, QLineEdit * search_all_keys, QObject *parent) : QObject(parent)
 {
     QChar qcFill = QChar('-');
     qsFoundedDelimiter = QString(20, qcFill);
-}
 
-void cSearch::install(QListWidget * founded, QListWidget *other, QListWidget *keys, QLineEdit *pattern, QLineEdit *search_all_keys)
-{
     ListWidgetFounded = founded;
     ListWidgetOther = other;
     ListWidgetKeys = keys;
