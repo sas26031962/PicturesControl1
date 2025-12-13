@@ -1,6 +1,7 @@
 #ifndef FMVIEW_H
 #define FMVIEW_H
 
+#include <QObject>
 #include <QDialog>
 #include <QDebug>
 #include <QStatusBar>

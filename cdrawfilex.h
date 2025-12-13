@@ -24,6 +24,7 @@ public:
     static qreal dx;
     static qreal dy;
 
+    explicit cDrawFilex(QListWidget * other, QObject *parent = 0);
     explicit cDrawFilex(QObject *parent = 0);
 
     //Методы

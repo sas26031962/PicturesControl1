@@ -3,6 +3,11 @@
 qreal cDrawFilex::dx = 0;//-200;
 qreal cDrawFilex::dy = 0;//-200;
 
+cDrawFilex::cDrawFilex(QListWidget * other, QObject *parent) : QObject(parent)
+{
+    ListWidget = other;
+}
+
 cDrawFilex::cDrawFilex(QObject *parent) : QObject(parent)
 {
     //...
