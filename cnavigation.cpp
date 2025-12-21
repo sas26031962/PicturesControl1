@@ -1,33 +1,11 @@
 #include "cnavigation.h"
 
-cNavigation::cNavigation(QObject *parent) : QObject(parent)
-{
-
-}
-
-void cNavigation::appEndItem(QListWidgetItem * item)
-{
-    ListWidgetOther->addItem(item);
-    ListWidgetOther->setCurrentItem(item);
-    ListWidgetOther->scrollToItem(item);
-}
-
-void cNavigation::execNavigationCurrentIndex()
-{
-    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
-
-    // Отобразить картинку
-    execShowCurrentIndexPicture();
-
-    ProgressBarNavigation->setValue(index);
-    SpinBoxIndex->setValue(index);
-
-}
-
-void cNavigation::install(QListWidget* list_widget,
-    QTableView *table_view,
-    QGroupBox *box
-    )
+cNavigation::cNavigation(
+    QListWidget* list_widget,
+    QTableView* table_view,
+    QGroupBox* box,
+    QObject *parent
+    ) : QObject(parent)
 {
     int iMaxHeight = 23;
     int iMaxButtonNavigationWidth = 23;
@@ -132,6 +110,135 @@ void cNavigation::install(QListWidget* list_widget,
     connect(pbRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
 
 }
+
+void cNavigation::appEndItem(QListWidgetItem * item)
+{
+    ListWidgetOther->addItem(item);
+    ListWidgetOther->setCurrentItem(item);
+    ListWidgetOther->scrollToItem(item);
+}
+
+void cNavigation::execNavigationCurrentIndex()
+{
+    int index = iCurrentIndexGlobal.load(std::memory_order_relaxed);
+
+    // Отобразить картинку
+    execShowCurrentIndexPicture();
+
+    ProgressBarNavigation->setValue(index);
+    SpinBoxIndex->setValue(index);
+
+}
+/*
+void cNavigation::install(QListWidget* list_widget,
+    QTableView *table_view,
+    QGroupBox *box
+    )
+{
+    int iMaxHeight = 23;
+    int iMaxButtonNavigationWidth = 23;
+    int iMaxButtonActionWidth = 55;
+    QString qsLabelStyle = "background-color: rgb(244, 255, 255);";
+
+    Parent = box;
+    QVBoxLayout * layout = new QVBoxLayout(Parent);
+
+    lbRow0 = new QLabel();
+    lbRow0->setMaximumHeight(iMaxHeight + 4);
+    lbRow0->setStyleSheet("");
+
+    lbRow1 = new QLabel();
+    lbRow1->setMaximumHeight(iMaxHeight + 4);
+    lbRow1->setStyleSheet("");
+
+    lbRow2 = new QLabel();
+    lbRow2->setMaximumHeight(iMaxHeight + 4);
+    lbRow2->setStyleSheet("");
+
+
+    layout->addWidget(lbRow0,0);
+    layout->addWidget(lbRow1,1);
+    layout->addWidget(lbRow2,2);
+
+    pbBegin = new QPushButton();
+    pbBegin->setMaximumHeight(iMaxHeight);
+    pbBegin->setMaximumWidth(iMaxButtonNavigationWidth);
+    pbBegin->setText("|<");
+
+    pbPrevious = new QPushButton();
+    pbPrevious->setMaximumHeight(iMaxHeight);
+    pbPrevious->setMaximumWidth(iMaxButtonNavigationWidth);
+    pbPrevious->setText("<");
+
+    pbNext = new QPushButton();
+    pbNext->setMaximumHeight(iMaxHeight);
+    pbNext->setMaximumWidth(iMaxButtonNavigationWidth);
+    pbNext->setText(">");
+
+    pbEnd = new QPushButton();
+    pbEnd->setMaximumHeight(iMaxHeight);
+    pbEnd->setMaximumWidth(iMaxButtonNavigationWidth);
+    pbEnd->setText(">|");
+
+    ProgressBarNavigation = new QProgressBar();
+    ProgressBarNavigation->setMaximumHeight(iMaxHeight);
+
+    QHBoxLayout *layout0 = new QHBoxLayout(lbRow0);
+    layout0->setContentsMargins(1,1,1,1);
+
+    layout0->addWidget(pbBegin);
+    layout0->addWidget(pbPrevious);
+    layout0->addWidget(pbNext);
+    layout0->addWidget(pbEnd);
+    layout0->addWidget(ProgressBarNavigation);
+
+    QHBoxLayout *layout1 = new QHBoxLayout(lbRow1);
+    layout1->setContentsMargins(1,1,1,1);
+
+    pbGoTo = new QPushButton();
+    pbGoTo->setMaximumHeight(iMaxHeight);
+    pbGoTo->setMaximumWidth(iMaxButtonActionWidth);
+    pbGoTo->setText("Go to");
+
+    pbRemove = new QPushButton();
+    pbRemove->setMaximumHeight(iMaxHeight);
+    pbRemove->setMaximumWidth(iMaxButtonActionWidth);
+    pbRemove->setText("Remove");
+
+    SpinBoxIndex = new QSpinBox();
+    SpinBoxIndex->setMaximumHeight(iMaxHeight);
+
+    pbErase = new QPushButton();
+    pbErase->setMaximumHeight(iMaxHeight);
+    pbErase->setMaximumWidth(iMaxButtonActionWidth);
+    pbErase->setText("Erase");
+
+    layout1->addWidget(pbGoTo);
+    layout1->addWidget(SpinBoxIndex);
+    layout1->addWidget(pbRemove);
+    layout1->addWidget(pbErase);
+
+    pbReload = new QPushButton();
+    pbReload->setMaximumHeight(iMaxHeight);
+    pbReload->setMaximumWidth(iMaxButtonActionWidth);
+    pbReload->setText("Reload");
+
+    QHBoxLayout *layout2 = new QHBoxLayout(lbRow2);
+    layout2->setContentsMargins(1,1,1,1);
+    layout2->addWidget(pbReload);
+
+    ListWidgetOther = list_widget;
+    TableView = table_view;
+
+    connect(pbGoTo, SIGNAL(pressed()), this, SLOT( execActionGotoIndex()));//
+    connect(pbBegin, SIGNAL(pressed()), this, SLOT( execActionSelectImageBegin()));//
+    connect(pbNext, SIGNAL(pressed()), this, SLOT( execActionSelectImageNext()));//
+    connect(pbPrevious, SIGNAL(pressed()), this, SLOT( execActionSelectImagePrevious()));//
+    connect(pbEnd, SIGNAL(pressed()), this, SLOT( execActionSelectImageEnd()));//
+    connect(pbRemove, SIGNAL(pressed()), this, SLOT( execActionRemoveSection()));
+
+}
+*/
 
 void cNavigation::execShowCurrentIndexPicture()
 {

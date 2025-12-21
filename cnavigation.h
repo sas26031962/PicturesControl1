@@ -55,10 +55,15 @@ public:
     QProgressBar * ProgressBarNavigation;
 
     //Конструкторы
-    explicit cNavigation(QObject *parent = 0);
+    explicit cNavigation(
+        QListWidget* list_widget,
+        QTableView* table_view,
+        QGroupBox* box,
+        QObject *parent = 0
+        );
 
     //Методы
-    void install(QListWidget* list_widget, QTableView* table_view, QGroupBox* box);
+    //void install(QListWidget* list_widget, QTableView* table_view, QGroupBox* box);
     bool deleteSection(QString s);
     bool eraseSection(QString s);
 

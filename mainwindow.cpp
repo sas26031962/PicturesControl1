@@ -218,12 +218,16 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->listWidgetKeys
         );
 
-    NavigationInstance = new cNavigation();
-    NavigationInstance->install(
+    NavigationInstance = new cNavigation(
         ui->listWidgetOther,
         ui->tableViewCurrent,
         ui->groupBoxNavigation
         );
+//    NavigationInstance->install(
+//        ui->listWidgetOther,
+//        ui->tableViewCurrent,
+//        ui->groupBoxNavigation
+//        );
 
     ActionsExec = new cActionsExec();
     ActionsExec->install(ui->listWidgetOther);

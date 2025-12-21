@@ -4,8 +4,6 @@ IsModifyedByRotation
 Document
 Archive
 ForDeleting
-new
 Unknown
-
-
-
+new
+ex
