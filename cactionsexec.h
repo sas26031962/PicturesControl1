@@ -22,10 +22,9 @@ public:
     QListWidget * ListWidget;
 
     //Конструкторы
-    explicit cActionsExec(QObject *parent = 0);
+    explicit cActionsExec(QListWidget * other, QObject *parent = 0);
 
     //Методы
-    void install(QListWidget * other);
 
 signals:
     void execShowExecStatus(QString s);

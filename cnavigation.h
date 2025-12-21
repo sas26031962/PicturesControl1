@@ -63,7 +63,6 @@ public:
         );
 
     //Методы
-    //void install(QListWidget* list_widget, QTableView* table_view, QGroupBox* box);
     bool deleteSection(QString s);
     bool eraseSection(QString s);
 

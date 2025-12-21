@@ -1,14 +1,14 @@
 #include "cloadfiles.h"
 
-cLoadFiles::cLoadFiles()
-{
-
-}
-
-void cLoadFiles::install(QListWidget * other)
+cLoadFiles::cLoadFiles(QListWidget *other)
 {
     ListWidget = other;
 }
+
+//void cLoadFiles::install(QListWidget * other)
+//{
+//    ListWidget = other;
+//}
 
 //=============================================================================
 

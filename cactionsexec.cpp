@@ -1,12 +1,8 @@
 #include "cactionsexec.h"
 
-cActionsExec::cActionsExec(QObject *parent) : QObject(parent)
+cActionsExec::cActionsExec(QListWidget * other, QObject *parent) : QObject(parent)
 {
     cIniFile::qslDeletedSections.clear();
-}
-
-void cActionsExec::install(QListWidget * other)
-{
     ListWidget = other;
 }
 

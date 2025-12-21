@@ -22,11 +22,9 @@ class cLoadFiles
 
 public:
     //Конструкторы
-    cLoadFiles();
+    cLoadFiles(QListWidget * other);
 
     //Методы
-    void install(QListWidget * other);
-
     void execLoadFilesSignedIsRotated();
 
     static bool saveStringListToFile(const QString& fileName, const QStringList& list);

@@ -223,17 +223,10 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->tableViewCurrent,
         ui->groupBoxNavigation
         );
-//    NavigationInstance->install(
-//        ui->listWidgetOther,
-//        ui->tableViewCurrent,
-//        ui->groupBoxNavigation
-//        );
 
-    ActionsExec = new cActionsExec();
-    ActionsExec->install(ui->listWidgetOther);
+    ActionsExec = new cActionsExec(ui->listWidgetOther);
 
-    LoadFilesInstance = new cLoadFiles();
-    LoadFilesInstance->install(ui->listWidgetOther);
+    LoadFilesInstance = new cLoadFiles(ui->listWidgetOther);
 
     DrawFilesInstance = new cDrawFilex(ui->listWidgetOther);
     DrawFilesInstance = new cDrawFilex(ui->listWidgetOther);
