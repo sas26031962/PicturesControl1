@@ -212,8 +212,7 @@ MainWindow::MainWindow(QWidget *parent) :
     threadPool.setMaxThreadCount(iIdealThreadCount);
     //---
 
-    ImportFilesInstance = new cImportFiles();
-    ImportFilesInstance->install(
+    ImportFilesInstance = new cImportFiles(
         ui->listWidgetOther,
         ui->listWidgetFounded,
         ui->listWidgetKeys

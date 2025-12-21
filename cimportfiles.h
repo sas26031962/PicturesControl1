@@ -52,13 +52,12 @@ public:
     QListWidget * ListWidgetKeys;
 
     //Конструкторы и деструкторы
-    explicit cImportFiles(QObject *parent = 0);
+    explicit cImportFiles(QListWidget * other, QListWidget * founded, QListWidget * keys, QObject *parent = 0);
     ~cImportFiles();
 
     //Методы
     static void execSearchNewFiles();
 
-    void install(QListWidget * other, QListWidget * founded, QListWidget * keys);
     void execImport();
     bool getKeysList();
     void getGroupsList();

@@ -11,21 +11,21 @@ QString cImportFiles::labelFileNameText = "";
 bool cImportFiles::IslabelFileNameTextChanged = false;
 
 
-cImportFiles::cImportFiles(QObject *parent) : QObject(parent)
+cImportFiles::cImportFiles(
+        QListWidget * other,
+        QListWidget * founded,
+        QListWidget * keys,
+        QObject *parent
+        ) : QObject(parent)
 {
-
+    ListWidgetOther = other;
+    ListWidgetFounded = founded;
+    ListWidgetKeys = keys;
 }
 
 cImportFiles::~cImportFiles()
 {
 
-}
-
-void cImportFiles::install(QListWidget * other, QListWidget * founded, QListWidget * keys)
-{
-    ListWidgetOther = other;
-    ListWidgetFounded = founded;
-    ListWidgetKeys = keys;
 }
 
 void cImportFiles::appEndItem(QListWidgetItem * item)
