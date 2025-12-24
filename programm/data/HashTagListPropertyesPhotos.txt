@@ -5,5 +5,5 @@ Document
 Archive
 ForDeleting
 Unknown
-new
 ex
+new

@@ -254,7 +254,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(SearchInstance, &cSearch::gotoInstallNavigation, NavigationInstance, &cNavigation::installNavigation);
 
-    connect(ui->actionViewPicture, SIGNAL(triggered()), this, SLOT( execActionFormViewPicture()));
+    connect(ui->actionViewPicture, &QAction::triggered, this, &MainWindow::execActionFormViewPicture);
+
     connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
     connect(ui->actionSelectImageBegin, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageBegin()));
     connect(ui->actionSelectImageNext, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageNext()));
