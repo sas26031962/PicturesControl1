@@ -256,7 +256,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionViewPicture, &QAction::triggered, this, &MainWindow::execActionFormViewPicture);
 
-    connect(ui->actionGotoIndex, SIGNAL(triggered()), NavigationInstance, SLOT( execActionGotoIndex()));
+    connect(ui->actionGotoIndex, &QAction::triggered, NavigationInstance, &cNavigation::execActionGotoIndex);
+
     connect(ui->actionSelectImageBegin, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageBegin()));
     connect(ui->actionSelectImageNext, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImageNext()));
     connect(ui->actionSelectImagePrevious, SIGNAL(triggered()), NavigationInstance, SLOT( execActionSelectImagePrevious()));
